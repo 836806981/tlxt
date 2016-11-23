@@ -61,7 +61,6 @@ class IndexController extends CommonController {
 
     }
 
-    //待定
     public function index(){
 
         echo "<script>window.location.href='".__MODULE__."/User/userInfo/id/".$_SESSION[C('USER_AUTH_KEY')]['id'].".html'</script>";
