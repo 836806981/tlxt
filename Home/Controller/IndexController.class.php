@@ -7,12 +7,6 @@ class IndexController extends CommonController {
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Admin/login.html';</script>";
         }
     }
-    public function per_test(){
-//        $admin_user = M('permission')->where('employee_id='. $_SESSION[C('USER_AUTH_KEY')]['id'].'')->find();
-        if($_SESSION[C('USER_AUTH_KEY')]['permission']!=1){
-            echo "<script>alert('你没有权限！');window.location.href='" . __MODULE__ . "/Admin/info.html';</script>";
-        }
-    }
 
     //登录功能及页面
     public function  login(){

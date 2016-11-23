@@ -16,16 +16,6 @@
 <!--left-->
 
 
-<?php
-    $count1 = M('order')->where('is_read=0 and status=1')->count();//新增未读派单
-    if($_SESSION[C('USER_AUTH_KEY')]['permission'] == 2){
-        $count2 = M('order')->where('is_read=0 and status=1 and employee_id = '.$_SESSION[C('USER_AUTH_KEY')]['id'].'')->count();
-    }else{
-        $count2 = M('order')->where('is_read=0 and status=1')->count();//新增未读接单
-    }
-
-
-?>
 
 
 
