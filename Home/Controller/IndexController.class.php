@@ -60,7 +60,7 @@ class IndexController extends CommonController {
         }
 
     }
-    
+
     //待定
     public function index(){
 
