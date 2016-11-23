@@ -1,0 +1,1574 @@
+[ 2016-11-22T16:03:13+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000046s ]
+INFO: [ app_init ] --END-- [ RunTime:0.045583s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.014260s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.014430s ]
+NOTIC: [8] Undefined index: authId D:\WWW\xt\Home\Controller\IndexController.class.php 第 72 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.006072s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006158s ]
+
+[ 2016-11-22T16:03:13+08:00 ] 127.0.0.1 /index.php/User/userInfo/id/.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000038s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000818s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000993s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001092s ]
+NOTIC: [8] Undefined index: authId D:\WWW\xt\Home\Controller\UserController.class.php 第 8 行.
+
+[ 2016-11-22T16:03:15+08:00 ] 127.0.0.1 /index.php/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000229s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000335s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000367s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000151s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000382s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.256976s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.257090s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.035360s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.035493s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001600s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001723s ]
+
+[ 2016-11-22T16:03:20+08:00 ] 127.0.0.1 /index.php/Index/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000241s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000364s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.2287s ]
+SQL: SELECT * FROM `employee` WHERE `username` = 'admin' AND `pwd` = '40efe07321bd4971f9e8c1c2d9e77e5c' LIMIT 1   [ RunTime:0.0168s ]
+SQL: SHOW COLUMNS FROM `login_log` [ RunTime:0.0508s ]
+SQL: INSERT INTO `login_log` (`sessionid`,`login_ip`,`employee_id`,`login_time`,`mac`,`status`) VALUES ('v8kkn4ac88dplqe9ptfdqdqs32','127.0.0.1','1','1479801799','1C-87-2C-D0-B4-76','1') [ RunTime:0.0041s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001653s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001789s ]
+
+[ 2016-11-22T16:03:21+08:00 ] 127.0.0.1 /index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000231s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000349s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000379s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000392s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000441s ]
+
+[ 2016-11-22T16:03:21+08:00 ] 127.0.0.1 /index.php/User/userInfo/id/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000226s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000359s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000392s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `employee` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `login_log` [ RunTime:0.0031s ]
+SQL: SELECT `login_time` FROM `login_log` WHERE ( employee_id=1 ) ORDER BY login_time desc LIMIT 2   [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 1 D:\WWW\xt\Home\Controller\UserController.class.php 第 146 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000167s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000260s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0663s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0459s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.223655s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.223722s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000346s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000392s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000640s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000687s ]
+
+[ 2016-11-22T16:03:23+08:00 ] 127.0.0.1 /index.php/Order/fileList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000244s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000383s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000416s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000281s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000443s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0102s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.162348s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.162407s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000496s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000550s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000835s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000893s ]
+
+[ 2016-11-22T16:03:23+08:00 ] 127.0.0.1 /index.php/Order/getFileList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000265s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000318s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000347s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000418s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000455s ]
+
+[ 2016-11-22T16:03:29+08:00 ] 127.0.0.1 /index.php/OrderShow/orderList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000040s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001061s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001527s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001680s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000346s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000489s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0079s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.096774s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.096873s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000332s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000375s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000578s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000624s ]
+
+[ 2016-11-22T16:03:29+08:00 ] 127.0.0.1 /index.php/OrderShow/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000261s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000491s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000531s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `order` WHERE ( status >1 and status<5  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status >1 and status<5  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000413s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000442s ]
+
+[ 2016-11-22T16:03:31+08:00 ] 127.0.0.1 /index.php/Order/fileList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000226s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000335s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000367s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000068s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000097s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0048s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011375s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011403s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000195s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000219s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000320s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000345s ]
+
+[ 2016-11-22T16:03:31+08:00 ] 127.0.0.1 /index.php/Order/getFileList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000207s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000306s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000334s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000385s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000412s ]
+
+[ 2016-11-22T16:03:32+08:00 ] 127.0.0.1 /index.php/Order/orderList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000224s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000330s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000362s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000402s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000572s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0140s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.158533s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.158685s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000592s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000686s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000852s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000930s ]
+
+[ 2016-11-22T16:03:32+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000211s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000417s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000451s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000398s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000426s ]
+
+[ 2016-11-22T16:03:32+08:00 ] 127.0.0.1 /index.php/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000316s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000342s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000375s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000453s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000494s ]
+
+[ 2016-11-22T16:03:32+08:00 ] 127.0.0.1 /index.php/User/userInfo/id/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000210s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000335s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000365s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `employee` WHERE ( id=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `login_log` [ RunTime:0.0035s ]
+SQL: SELECT `login_time` FROM `login_log` WHERE ( employee_id=1 ) ORDER BY login_time desc LIMIT 2   [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 1 D:\WWW\xt\Home\Controller\UserController.class.php 第 146 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000054s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000082s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0356s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.041537s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.041568s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000313s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000340s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000350s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000376s ]
+
+[ 2016-11-22T16:03:34+08:00 ] 127.0.0.1 /index.php/User/userList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000229s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000364s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000102s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0063s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.048641s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.048675s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000207s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000232s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000336s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000365s ]
+
+[ 2016-11-22T16:03:34+08:00 ] 127.0.0.1 /index.php/User/getUserList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000236s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000334s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000364s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `employee` ORDER BY status desc ,add_time desc LIMIT 0,20   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `employee` LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000405s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000433s ]
+
+[ 2016-11-22T16:03:35+08:00 ] 127.0.0.1 /index.php/Finance/press.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000267s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000453s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000493s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000148s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000196s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0054s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( press_status=1 and status>1 and status<10 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( press_status=2 and status>1 and status<10 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `order_nurse` [ RunTime:0.0516s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order_nurse` WHERE ( is_through=1  and true_s_time!="" and order_id!=0 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order_nurse` WHERE ( is_through=0  and true_s_time!="" and order_id!=0 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.106326s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.106365s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000222s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000246s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000345s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000373s ]
+
+[ 2016-11-22T16:03:35+08:00 ] 127.0.0.1 /index.php/Finance/getFinanceList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000042s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000730s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000356s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000388s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `order` WHERE ( 1 and status>1 and status<10  and  press_status in(1,2)   ) ORDER BY press_status asc,IF(true_s_time!="",true_s_time,true_b_time) desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( 1 and status>1 and status<10  and  press_status in(1,2)   ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000445s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000473s ]
+
+[ 2016-11-22T16:03:36+08:00 ] 127.0.0.1 /index.php/Insurance/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000230s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000331s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000099s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0125s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.045579s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.045636s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000481s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000544s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000857s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000924s ]
+
+[ 2016-11-22T16:03:36+08:00 ] 127.0.0.1 /index.php/Insurance/getInsuranceList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000214s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000329s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000358s ]
+SQL: SHOW COLUMNS FROM `order_nurse` [ RunTime:0.0073s ]
+SQL: SELECT * FROM `order_nurse` WHERE ( 1   ) ORDER BY is_safe asc,   IF(true_b_time!="",true_b_time,b_time) desc LIMIT 0,20   [ RunTime:0.0008s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order_nurse` WHERE ( 1   ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001239s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001314s ]
+
+[ 2016-11-22T16:03:37+08:00 ] 127.0.0.1 /index.php/Nurse/nurseList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000226s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000333s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000366s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000064s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000105s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0056s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046867s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046905s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000206s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000232s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000339s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000365s ]
+
+[ 2016-11-22T16:03:37+08:00 ] 127.0.0.1 /index.php/Nurse/getNurseList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000386s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000827s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000896s ]
+SQL: SHOW COLUMNS FROM `nurse` [ RunTime:0.0507s ]
+SQL: SELECT * FROM `nurse` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `nurse` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000398s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000422s ]
+
+[ 2016-11-22T16:03:37+08:00 ] 127.0.0.1 /index.php/OrderShow/orderList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000226s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000352s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000389s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000077s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000122s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0050s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022072s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022100s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000345s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000389s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000578s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000618s ]
+
+[ 2016-11-22T16:03:37+08:00 ] 127.0.0.1 /index.php/OrderShow/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000419s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000991s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001083s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `order` WHERE ( status >1 and status<5  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status >1 and status<5  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000436s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000463s ]
+
+[ 2016-11-22T16:03:38+08:00 ] 127.0.0.1 /index.php/Order/fileList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000228s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000335s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000366s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000091s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0075s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014096s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014124s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000236s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000342s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000368s ]
+
+[ 2016-11-22T16:03:38+08:00 ] 127.0.0.1 /index.php/Order/getFileList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000482s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000718s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000788s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0088s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000417s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000446s ]
+
+[ 2016-11-22T16:03:39+08:00 ] 127.0.0.1 /index.php/Order/fileList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000228s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000338s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000091s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0052s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011670s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011699s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000214s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000238s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000315s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000339s ]
+
+[ 2016-11-22T16:03:40+08:00 ] 127.0.0.1 /index.php/Order/getFileList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000225s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000343s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000676s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000709s ]
+
+[ 2016-11-22T16:03:40+08:00 ] 127.0.0.1 /index.php/Order/orderList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000224s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000338s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000370s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000112s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000155s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0051s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023243s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023273s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000212s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000236s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000336s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000361s ]
+
+[ 2016-11-22T16:03:40+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000228s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000329s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000359s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000409s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000435s ]
+
+[ 2016-11-22T16:03:42+08:00 ] 127.0.0.1 /index.php/Order/addOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000224s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000092s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0051s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.054330s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.054359s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000214s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000243s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000360s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000385s ]
+
+[ 2016-11-22T16:03:49+08:00 ] 127.0.0.1 /index.php/Order/addOrder
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000318s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000456s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000509s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0043s ]
+NOTIC: [8] Undefined index: employee_id D:\WWW\xt\Home\Controller\OrderController.class.php 第 23 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') LIMIT 1' at line 1
+
+[ 2016-11-22T16:03:53+08:00 ] 127.0.0.1 /index.php/User/userList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000273s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000451s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000486s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000059s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000093s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0060s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019647s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019688s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000212s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000236s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000343s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000370s ]
+
+[ 2016-11-22T16:03:53+08:00 ] 127.0.0.1 /index.php/User/getUserList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000499s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000443s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000475s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0071s ]
+SQL: SELECT * FROM `employee` ORDER BY status desc ,add_time desc LIMIT 0,20   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `employee` LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000412s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000440s ]
+
+[ 2016-11-22T16:03:54+08:00 ] 127.0.0.1 /index.php/User/addUser.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000242s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000333s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000364s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000099s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0055s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.043885s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.043924s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000219s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000243s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000330s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000356s ]
+
+[ 2016-11-22T16:04:02+08:00 ] 127.0.0.1 /index.php/User/addUser
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000294s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000395s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000431s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0094s ]
+SQL: INSERT INTO `employee` (`username`,`real_name`,`permission`,`pwd`,`add_time`,`status`) VALUES ('123123','asd ','2','968c47150390a2d5b833b2abfdde0bd4','1479801842','1') [ RunTime:0.0169s ]
+
+[ 2016-11-22T16:04:03+08:00 ] 127.0.0.1 /index.php/User/userList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000232s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000365s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000058s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000091s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0054s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017971s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018007s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000444s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000473s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000401s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000430s ]
+
+[ 2016-11-22T16:04:03+08:00 ] 127.0.0.1 /index.php/User/getUserList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000407s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000482s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000513s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0085s ]
+SQL: SELECT * FROM `employee` ORDER BY status desc ,add_time desc LIMIT 0,20   [ RunTime:0.0349s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `employee` LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000444s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000472s ]
+
+[ 2016-11-22T16:04:04+08:00 ] 127.0.0.1 /index.php/Order/orderList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000243s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000341s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000374s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000095s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0048s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021765s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021794s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000196s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000220s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000335s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000361s ]
+
+[ 2016-11-22T16:04:04+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000324s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000326s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000359s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000405s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000431s ]
+
+[ 2016-11-22T16:04:05+08:00 ] 127.0.0.1 /index.php/Order/addOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000233s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000339s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000064s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000098s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0048s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011563s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011600s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000445s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000476s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000501s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000535s ]
+
+[ 2016-11-22T16:04:10+08:00 ] 127.0.0.1 /index.php/Order/addOrder
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000227s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000330s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0051s ]
+SQL: SELECT `real_name` FROM `employee` WHERE ( id=4 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0052s ]
+SQL: INSERT INTO `order` (`name`,`phone`,`other`,`ask`,`employee_id`,`add_time`,`status`,`add_mac`,`employee_name`) VALUES ('123','123','月嫂','123','4','1479801849','1','1C-87-2C-D0-B4-76','asd ') [ RunTime:0.0002s ]
+SQL: UPDATE `order` SET `number`='TLAYHT-000101' WHERE ( id=101 ) [ RunTime:0.1555s ]
+
+[ 2016-11-22T16:04:11+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000268s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000364s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000071s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000102s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0052s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0166s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.038771s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.038803s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000264s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000296s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000677s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000710s ]
+
+[ 2016-11-22T16:04:11+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000363s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000305s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000333s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0062s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000454s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000480s ]
+
+[ 2016-11-22T16:04:12+08:00 ] 127.0.0.1 /index.php/Order/fileList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000255s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000388s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000421s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000197s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000390s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0062s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014291s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014322s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000287s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000313s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000391s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000417s ]
+
+[ 2016-11-22T16:04:13+08:00 ] 127.0.0.1 /index.php/Order/getFileList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000233s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000396s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000429s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0074s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000998s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001046s ]
+
+[ 2016-11-22T16:04:15+08:00 ] 127.0.0.1 /index.php/Order/orderList.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000293s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000458s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000503s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000091s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0048s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.020308s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.020347s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000360s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000388s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000346s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000372s ]
+
+[ 2016-11-22T16:04:15+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000211s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000304s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000332s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000418s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000445s ]
+
+[ 2016-11-22T16:04:16+08:00 ] 127.0.0.1 /index.php/Order/addOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000245s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000342s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000375s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000091s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0049s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011171s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011201s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000209s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000235s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000362s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000390s ]
+
+[ 2016-11-22T16:04:20+08:00 ] 127.0.0.1 /index.php/Order/addOrder
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000313s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000345s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000390s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0042s ]
+SQL: SELECT `real_name` FROM `employee` WHERE ( id=4 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0050s ]
+SQL: INSERT INTO `order` (`name`,`phone`,`other`,`ask`,`employee_id`,`add_time`,`status`,`add_mac`,`employee_name`) VALUES ('asd ','asd ','月嫂','asd ','4','1479801859','1','1C-87-2C-D0-B4-76','asd ') [ RunTime:0.0002s ]
+SQL: UPDATE `order` SET `number`='TLAYHT-000102' WHERE ( id=102 ) [ RunTime:0.0002s ]
+
+[ 2016-11-22T16:04:21+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000244s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000413s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000458s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000108s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000215s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0049s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.027597s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.027630s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000264s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000298s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000347s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000374s ]
+
+[ 2016-11-22T16:04:21+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000266s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000413s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000447s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000668s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000715s ]
+
+[ 2016-11-22T16:04:23+08:00 ] 127.0.0.1 /index.php/Order/addOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000229s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000405s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000439s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000066s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000101s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0058s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013089s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013124s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000214s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000238s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000350s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000376s ]
+
+[ 2016-11-22T16:04:26+08:00 ] 127.0.0.1 /index.php/Order/addOrder
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000230s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000352s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000402s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0042s ]
+SQL: SELECT `real_name` FROM `employee` WHERE ( id=4 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0066s ]
+SQL: INSERT INTO `order` (`name`,`phone`,`other`,`ask`,`employee_id`,`add_time`,`status`,`add_mac`,`employee_name`) VALUES ('asd ','asd ','月嫂','asd ','4','1479801866','1','1C-87-2C-D0-B4-76','asd ') [ RunTime:0.0002s ]
+SQL: UPDATE `order` SET `number`='TLAYHT-000103' WHERE ( id=103 ) [ RunTime:0.0002s ]
+
+[ 2016-11-22T16:04:27+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000291s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000436s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000499s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000066s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000099s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.1481s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.164441s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.164472s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000214s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000239s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000335s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000361s ]
+
+[ 2016-11-22T16:04:27+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000250s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000320s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000347s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000986s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001028s ]
+
+[ 2016-11-22T16:06:54+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000504s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001581s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001731s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000066s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000098s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0052s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021553s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021584s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000271s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000399s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000424s ]
+
+[ 2016-11-22T16:06:55+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000294s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000733s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000817s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0103s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000503s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000531s ]
+
+[ 2016-11-22T16:08:57+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000624s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000468s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000508s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000082s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000118s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0060s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.025857s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.025893s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000305s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000335s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000449s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000480s ]
+
+[ 2016-11-22T16:08:57+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000307s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000491s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000532s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000466s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000501s ]
+
+[ 2016-11-22T16:09:26+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000232s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000333s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000365s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000071s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000101s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0047s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021193s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021222s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000296s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000322s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000331s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000356s ]
+
+[ 2016-11-22T16:09:26+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000337s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000464s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000493s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0087s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000471s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000499s ]
+
+[ 2016-11-22T16:10:13+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000232s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000433s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000471s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000072s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000106s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0046s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023895s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023935s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000260s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000284s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000334s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000359s ]
+
+[ 2016-11-22T16:10:14+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000401s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000393s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000428s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0084s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000479s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000506s ]
+
+[ 2016-11-22T16:12:08+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000500s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000706s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000788s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0343s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000090s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0054s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021476s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021505s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000273s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000298s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000337s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000362s ]
+
+[ 2016-11-22T16:12:08+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000344s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000505s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000554s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000513s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000543s ]
+
+[ 2016-11-22T16:13:11+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000669s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001062s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001160s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0083s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000161s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000243s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0080s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.039522s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.039565s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000293s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000321s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000378s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000407s ]
+
+[ 2016-11-22T16:13:11+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000573s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000614s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0066s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000727s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000765s ]
+
+[ 2016-11-22T16:15:54+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000250s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000385s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000418s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000068s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000095s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0049s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023439s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023477s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000757s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000789s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000530s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000573s ]
+
+[ 2016-11-22T16:15:54+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000243s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000370s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000400s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000466s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000495s ]
+
+[ 2016-11-22T16:17:19+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000046s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001004s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000820s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000895s ]
+
+[ 2016-11-22T16:17:26+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000346s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000491s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000538s ]
+
+[ 2016-11-22T16:17:39+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000584s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000836s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000918s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0066s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000117s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000173s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0080s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035265s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035322s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000424s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000464s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000555s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000603s ]
+
+[ 2016-11-22T16:17:39+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000446s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000636s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000673s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0014s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000832s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000874s ]
+
+[ 2016-11-22T16:17:59+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000313s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000640s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000745s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000121s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000252s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0049s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022573s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022637s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000816s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000859s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000420s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000447s ]
+
+[ 2016-11-22T16:17:59+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000043s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000980s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000991s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001112s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0009s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001306s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001349s ]
+
+[ 2016-11-22T16:22:17+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000402s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000701s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000792s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000096s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0049s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022333s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022362s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000284s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000311s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000390s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000416s ]
+
+[ 2016-11-22T16:22:17+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000305s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000356s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000383s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0062s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000468s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000497s ]
+
+[ 2016-11-22T16:23:01+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000250s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000364s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0346s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000164s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000245s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0106s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.047238s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.047302s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000505s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000560s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000779s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000838s ]
+
+[ 2016-11-22T16:23:01+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000265s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000570s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000669s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0083s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0011s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000590s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000624s ]
+
+[ 2016-11-22T16:26:11+08:00 ] 127.0.0.1 /index.php/Order/orderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000598s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000911s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000987s ]
+SQL: SHOW COLUMNS FROM `employee` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `employee` WHERE ( permission = 2 )  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000144s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0049s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( is_read=0 and status=1 ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.026936s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026976s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000259s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000284s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000392s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000419s ]
+
+[ 2016-11-22T16:26:11+08:00 ] 127.0.0.1 /index.php/Order/getOrderList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000543s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000775s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000870s ]
+SQL: SHOW COLUMNS FROM `order` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `order` WHERE ( status = 1  ) ORDER BY add_time desc LIMIT 0,20   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `order` WHERE ( status = 1  ) LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000452s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000479s ]
+

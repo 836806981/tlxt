@@ -1,0 +1,29 @@
+[ 2016-11-10T11:10:58+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005091s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003245s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003284s ]
+NOTIC: [8] Undefined index: authId D:\WWW\xt\Home\Controller\IndexController.class.php 第 72 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002474s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002509s ]
+
+[ 2016-11-10T11:10:58+08:00 ] 127.0.0.1 /index.php/User/userInfo/id/.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000591s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001111s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001214s ]
+NOTIC: [8] Undefined index: authId D:\WWW\xt\Home\Controller\UserController.class.php 第 8 行.
+
+[ 2016-11-10T11:11:09+08:00 ] 127.0.0.1 /index.php/Common/test
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000208s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000336s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000367s ]
+

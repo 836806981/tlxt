@@ -1,0 +1,61 @@
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.7.1.min.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/layer/layer.js" ></script>
+<script src="__PUBLIC__/js/common.js"></script>
+<script src="__PUBLIC__/js/jquery.longyuJs.js"></script>
+
+
+<div class="page-header">
+    <div class="top_right">
+        <a href="__MODULE__/Index/login_out"><button type="button" class="out">退出系统</button></a>
+    </div>
+</div>
+<!--top end-->
+<!--left-->
+
+
+<?php
+    $count1 = M('order')->where('is_read=0 and status=1')->count();//新增未读派单
+    if($_SESSION[C('USER_AUTH_KEY')]['permission'] == 2){
+        $count2 = M('order')->where('is_read=0 and status=1 and employee_id = '.$_SESSION[C('USER_AUTH_KEY')]['id'].'')->count();
+    }else{
+        $count2 = M('order')->where('is_read=0 and status=1')->count();//新增未读接单
+    }
+
+
+?>
+
+
+
+<div class="col-md-2 column mune">
+    <div class="head_img">
+        <a href="__MODULE__/User/userInfo/id/{$_SESSION[C('USER_AUTH_KEY')]['id']}.html"><img src="__PUBLIC__/img/user_img.jpg" /></a>
+    </div>
+    <div class="user_info">
+        <p class="name">{$_SESSION[C('USER_AUTH_KEY')]['real_name']}</p>
+        <p class="job">{$_SESSION[C('USER_AUTH_KEY')]['permission_name']}</p>
+    </div>
+    <ul class="left_menu">
+        <li><a href="__MODULE__/"><span class="dingdan">首<i></i>页</span></a></li>
+
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11,1))){echo 'display:none;';}?>"><a href="__MODULE__/Order/orderList.html"><span class="dingdan">派单列表 <if condition="$count1 gt 0"> <em class="new"></em></if></span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11,2))){echo 'display:none;';}?>"><a href="__MODULE__/Order/fileList.html"><span class="dingdan">接单列表<if condition="$count2 gt 0"><em class="new"></em></if></span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11,2,3))){echo 'display:none;';}?>"><a href="__MODULE__/OrderShow/orderList.html"><span class="dingdan">订单管理</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11,2,3))){echo 'display:none;';}?>"><a href="__MODULE__/Nurse/nurseList.html"><span class="dingdan">阿姨管理</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11,3))){echo 'display:none;';}?>"><a href="__MODULE__/Insurance/index.html"><span class="dingdan">保险列表</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11,2,4))){echo 'display:none;';}?>"><a href="__MODULE__/Finance/press.html"><span class="dingdan">财务统计</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11))){echo 'display:none;';}?>"><a href="__MODULE__/User/userList.html"><span class="dingdan">员工管理</span></a></li>
+        <li style="display:none;<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11,5))){echo 'display:none;';}?>"><a href="__MODULE__/Student/studentList.html"><span class="dingdan">学员管理</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(11))){echo 'display:none;';}?>"><a href="__MODULE__/Nurse/nurseUpList.html"><span class="dingdan">阿姨升级</span></a></li>
+    </ul>
+</div>
+
+
+<script>
+    var MODULE  =  '__MODULE__';
+    var ROOT  =  '__ROOT__';
+    var UPLOADS  =  '__UPLOADS__';
+
+</script>
