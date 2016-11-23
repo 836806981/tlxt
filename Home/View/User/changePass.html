@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(7).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle">
+					<span class="int_s"></span>修改密码
+				</div>
+				<div class="filesInfo form">
+					<div class="form-group">
+						 <label>用户名：</label>{$info.username}
+						<input type="hidden" name="id" id="id" value="{$info.id}"/>
+					</div>
+					<div class="form-group">
+						 <label>原密码：</label><input type="password" class="form-control" value=""  id="old"/>
+					</div>
+
+					<div class="form-group">
+						<label>新密码：</label><input type="password" class="form-control" value="" id="new_p"/>
+					</div>
+
+					<div class="form-group">
+						<label style="margin-left: 4px;">确认密码：</label><input type="password" class="form-control" value="" id="new_re_p"/>
+					</div>
+				</div>
+				<div class="form-group" style="margin-left: 19px;">
+					<button type="button" class="default_btn magrin0" id="sub">提交</button>
+					<button type="button" class="default_btn" onclick="javascript:history.go(-1);">返回</button>
+				</div>
+				
+			</div>
+
+
+			<script>
+				$("#sub").live('click',function(){
+					var old = $.trim($("#old").val());
+					var new_p = $.trim($("#new_p").val());
+					var new_re_p = $.trim($("#new_re_p").val());
+					var id = $.trim($("#id").val());
+					if(old==''||new_p==''||new_re_p==''){
+						layer.msg("密码不能为空");
+						return false;
+					}else if(new_p!=new_re_p){
+						layer.msg("两次密码不一致");
+						return false;
+					}else if(new_p.length<6||new_p.length>18){
+						layer.msg("请使用6-18位密码");
+						return false;
+					}
+					$.AjaxPost(MODULE+"/User/changePassC", {old:old,new:new_p,newre:new_re_p,id:id}, function (backdata) {
+						if (backdata.code == 1000) {
+							layer.msg('修改成功')
+							setTimeout(function(){
+								window.location.href=MODULE+"/User/userList.html";
+							},500);
+
+
+						}else if(backdata.code == 1001){
+							layer.msg('密码不能为空');
+						}else if(backdata.code == 1002){
+							layer.msg('请使用6-18位密码');
+						}else if(backdata.code == 1003){
+							layer.msg("原密码错误");
+						}else if(backdata.code == 1004){
+							layer.msg('修改失败');
+						}
+					}, true);
+				})
+			</script>
+			<!--main end-->
+</body>
+
+</html>

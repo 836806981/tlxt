@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+			<!--top-->
+			<include  file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(2).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle">
+					<span class="int_s"></span>维系状态表   <span style="margin: 0 15px;">{$order_info.name}</span>
+					<button type="button" class="default_btn m_left_20" onclick="window.location.href='__MODULE__/Order/clientFile/id/{$order_info.id}.html'">返回</button>
+				</div>
+
+
+				<table class="tab_info" style="margin-top: 40px;">
+					<tbody>
+						<tr class="info_name">
+							<td width="10%">维系次数</td>
+							<td width="10%">时间</td>
+							<td width="10%">沟通结果</td>
+							<td width="10%">主管判定</td>
+							<td width="10%">维系人</td>
+							<td width="10%">维系模式</td>
+							<td width="10%">面试对象</td>
+							<td width="10%">操作</td>
+						</tr>
+
+						<volist name="contact" id="vo" k="key">
+							<tr>
+								<td>{$key+1}</td>
+								<td>{$vo.contact_time}</td>
+								<td>{$vo.result}</td>
+								<td>{$vo.check}</td>
+								<td>{$vo.contact_people}</td>
+								<td>{$vo.contact_mode}</td>
+								<td nurse_id="{$vo.nurse_id}" nurse_number="{$vo.nurse_number}" nurse_name="{$vo.nurse_name}" contact_id="{$vo.id}">
+									<a href="__MODULE__/Nurse/nurseInfo/id/{$vo.nurse_id}">{$vo.nurse_name}</a></td>
+								<td><a class="edit" >修改</a></td>
+							</tr>
+						</volist>
+
+						<!--<tr>-->
+							<!--<td>1</td>-->
+							<!--<td>2016-7-21</td>-->
+							<!--<td>222</td>-->
+							<!--<td>22</td>-->
+							<!--<td>22</td>-->
+							<!--<td>2</td>-->
+							<!--<td>22</td>-->
+							<!--<td><a class="edit" >修改</a><a href="#">删除</a></td>-->
+						<!--</tr>-->
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+
+								<div class="btn_modular">
+									<button type="button" class="btnform" onclick="addRecord()">添加记录</button>
+								</div>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--main end-->
+			<script>
+
+				var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+//					添加联系记录 弹窗
+					function addRecord(){
+						var submit = "javascript:return window.confirm('确定添加维系记录么？')";
+						layer.open({
+						  	type: 1,
+						  	title: '添加维系记录',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+									+   '<form action="__MODULE__/Order/addContact" method="post" id="form_add" class="form" onsubmit="'+submit+'"  enctype="multipart/form-data">'
+									+	'<div class="opn_div clear">'
+									+		'<label>维系时间：</label><input type="text" class="form-control" value="" name="contact_time" id="contact_time"/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>沟通结果：</label><input type="text" class="form-control" value="" name="result" id="result"/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>主管判定：</label><input type="text" class="form-control" value="" name="check" id="check"/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>维<i></i>系<i></i>人：</label><input type="text" class="form-control" value="" name="contact_people" id="contact_people"/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>维系模式：</label><input type="text" class="form-control" name="contact_mode" id="contact_mode"/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>阿姨编号：</label><input type="text" class="form-control" value="" style="width: 60%;"   name="nurse_number" id="nurse_number"/><button type="button" style="vertical-align: middle;float:right;" class="check_number btnform magrin0">核查</button>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>阿姨姓名：</label><input type="text" class="form-control" value=""  name="nurse_name" id="nurse_name" readonly/>'
+									+ 			'<input type="hidden" name="nurse_id" id="nurse_id" readonly/>'
+									+ 			'<input type="hidden" name="order_id" value="{$order_info.id}" readonly/>'
+									+	'</div>'
+									+	'<div class="btn_div clear">'
+									+		'<button type="button" class="default_btn" id="sub_add">添加</button>'
+									+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+									+	'</div>'
+									+	'</form>'
+									+'</div>'
+						});
+					}
+//					修改维系记录 弹窗
+
+					$('#sub_add').live('click',function(){
+						if($('#contact_time').val()==''|| $('#result').val()=='' ||$('#check').val()=='' ||$('#contact_people').val()==''|| $('#contact_mode').val()==''){
+							layer.msg('请完善信息！');
+							return false;
+						}
+						$('#form_add').submit();
+					});
+
+				$('#sub_edit').live('click',function(){
+					if($('#contact_time').val()==''|| $('#result').val()=='' ||$('#check').val()=='' ||$('#contact_people').val()==''|| $('#contact_mode').val()==''){
+						layer.msg('请完善信息！');
+						return false;
+					}
+					$('#form_edit').submit();
+				});
+
+					$('.check_number').live('click',function(){
+						var nurse_number = $(this).parent().find('input').val();
+						$.AjaxPost(MODULE+"/order/getNurseInfo", {number:nurse_number}, function (backdata) {
+							if (backdata.code == 1003) {
+								layer.msg('请输入编号！');
+							}else if (backdata.code == 1002) {
+								layer.msg('未找到阿姨！');
+							}else if (backdata.code == 1000) {
+								layer.msg('成功！');
+								backdata.data.number;
+								$('#nurse_name').val(backdata.data.name);
+								$('#nurse_id').val(backdata.data.id);
+							}
+						});
+
+					});
+
+					$('.edit').live('click',function(){
+
+						var data = $(this).parent().siblings();
+						var submit = "javascript:return window.confirm('确定修改维系记录么？')";
+
+						layer.open({
+							type: 1,
+							title: '修改维系记录',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+							+   '<form action="__MODULE__/Order/editContact" method="post" id="form_edit" class="form" onsubmit="'+submit+'"  enctype="multipart/form-data">'
+							+	'<div class="opn_div clear">'
+							+		'<label>维系时间：</label><input type="text" class="form-control" value="'+data.eq(1).html()+'" name="contact_time" id="contact_time"/>'
+							+	'</div>'
+							+	'<div class="opn_div clear">'
+							+		'<label>沟通结果：</label><input type="text" class="form-control" value="'+data.eq(2).html()+'" name="result" id="result"/>'
+							+	'</div>'
+							+	'<div class="opn_div clear">'
+							+		'<label>主管判定：</label><input type="text" class="form-control" value="'+data.eq(3).html()+'" name="check" id="check"/>'
+							+	'</div>'
+							+	'<div class="opn_div clear">'
+							+		'<label>维<i></i>系<i></i>人：</label><input type="text" class="form-control" value="'+data.eq(4).html()+'" name="contact_people" id="contact_people"/>'
+							+	'</div>'
+							+	'<div class="opn_div clear">'
+							+		'<label>维系模式：</label><input type="text" class="form-control" value="'+data.eq(5).html()+'" name="contact_mode" id="contact_mode"/>'
+							+	'</div>'
+							+	'<div class="opn_div clear">'
+							+		'<label>阿姨编号：</label><input type="text" class="form-control" value="'+data.eq(6).attr('nurse_number')+'" style="width: 60%;"   name="nurse_number" id="nurse_number"/><button type="button" style="vertical-align: middle;float:right;" class="check_number btnform magrin0">核查</button>'
+							+	'</div>'
+							+	'<div class="opn_div clear">'
+							+		'<label>阿姨姓名：</label><input type="text" class="form-control" value="'+data.eq(6).attr('nurse_name')+'" name="nurse_name" id="nurse_name" readonly/>'
+							+ 		'<input type="hidden" name="nurse_id" id="nurse_id" value="'+data.eq(6).attr('nurse_id')+'" readonly/>'
+							+ 		'<input type="hidden" name="contact_id" id="contact_id" value="'+data.eq(6).attr('contact_id')+'" readonly/>'
+							+ 			'<input type="hidden" name="order_id" value="{$order_info.id}" readonly/>'
+							+	'</div>'
+							+	'<div class="btn_div clear">'
+							+		'<button type="button" class="default_btn" id="sub_edit">修改</button>'
+							+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+							+	'</div>'
+							+	'</form>'
+							+'</div>'
+						});
+
+					});
+
+					function close_lay(){
+						layer.closeAll();
+					}	
+			</script>
+</body>
+
+</html>
