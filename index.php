@@ -18,3 +18,6 @@ header("Content-type: text/html; charset=utf-8");
 
 
 include "/ThinkPHP/ThinkPHP.php";//132
+
+
+// asd 
