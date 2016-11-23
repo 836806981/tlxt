@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(7).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle">
+					<span class="int_s"></span>员工管理
+				</div>
+				<table class="tab_info magrintop20">
+					<tbody id="">
+						<tr class="info_name">
+							<td width="8%">ID</td>
+							<td width="8%">用户名</td>
+							<td width="8%">昵称</td>
+							<td width="8%">权限</td>
+							<td width="8%">状态</td>
+							<td width="8%">操作</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td>001</td>-->
+							<!--<td>5122312323</td>-->
+							<!--<td>sdfa</td>-->
+							<!--<td>-->
+								<!--<span class="spa_cek"><input type="checkbox" checked="checked"/>权限1</span>-->
+								<!--<span class="spa_cek"><input type="checkbox" checked="checked"/>权限2</span>-->
+								<!--<span class="spa_cek"><input type="checkbox" checked="checked"/>权限3</span>-->
+							<!--</td>-->
+							<!--<td><a href="changeInfo.html">修改</a><a href="userInfo.html">查看</a><a href="#">停用</a><a href="#">删除</a></td>-->
+						<!--</tr>-->
+
+
+
+
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+
+								<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+								</div>
+
+								<div class="btn_modular">
+									<button type="button" class="btnform" onclick="location.href='addUser.html'">添加员工</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--main end-->
+
+
+			<script src="__PUBLIC__/js/user.js"></script>
+
+</body>
+
+</html>

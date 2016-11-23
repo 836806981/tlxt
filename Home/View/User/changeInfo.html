@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(7).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle">
+					<span class="int_s"></span>修改信息
+				</div>
+				<form action="__MODULE__/User/changeInfo" method="post" id="form" onsubmit="javascript:return window.confirm('确定添加么？')"  enctype="multipart/form-data">
+					<div class="filesInfo form">
+						<div class="form-group">
+							<label>用户名：</label><input type="text" class="form-control" name="username" value="{$info.username}"/>
+							<input type="hidden" name="id" value="{$info.id}"/>
+						</div>
+						<div class="form-group">
+							<label>昵&emsp;称：</label><input type="text" class="form-control" name="real_name" value="{$info.real_name}"/>
+						</div>
+
+						<?php if($info['permission']!=11&& $_SESSION[C('USER_AUTH_KEY')]['permission']==11){?>
+						<div class="form-group">
+							<label>权&emsp;限：</label>
+							<span class="spa_cek"><input type="radio"  name="permission" <?php if($info['permission']==1){echo 'checked';}?>   value="1"/>客服</span>
+							<span class="spa_cek"><input type="radio"  name="permission" <?php if($info['permission']==2){echo 'checked';}?>  value="2"/>顾问</span>
+							<span class="spa_cek"><input type="radio"  name="permission" <?php if($info['permission']==3){echo 'checked';}?> value="3"/>内勤管理</span>
+							<span class="spa_cek"><input type="radio"  name="permission" <?php if($info['permission']==4){echo 'checked';}?> value="4"/>财务</span>
+							<span class="spa_cek"><input type="radio"  name="permission" <?php if($info['permission']==5){echo 'checked';}?> value="5"/>学员管理</span>
+						</div>
+						<?php }?>
+					</div>
+					<div class="form-group" style="margin-left: 19px;">
+						<button type="button" class="default_btn magrin0" id="sub">提交</button>
+						<button type="button" class="default_btn" onclick="javascript:history.go(-1);">返回</button>
+					</div>
+				</form>
+
+			</div>
+
+
+			<script>
+				$('#sub').live('click',function(){
+					if($('input[name=username]').val() == ''){
+						layer.msg('请输入用户名！');
+						return false;
+					}else if($('input[name=real_name]').val() == ''){
+						layer.msg('请输入昵称！');
+						return false;
+					}
+
+					$('#form').submit();
+				});
+
+
+
+			</script>
+			<!--main end-->
+</body>
+
+</html>

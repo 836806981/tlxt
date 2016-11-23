@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+			<!--top-->
+			<include  file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(4).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle">
+					<span class="int_s"></span>阿姨详情
+
+					<span style="color:red;">
+					<?php if($info['status']==2){echo '已删除';}?>
+					</span>
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td rowspan="5" width="160px">
+								<div class="aunt_img">
+									<img src="__UPLOADS__/{$info.title_img}" />
+								</div>
+							</td>
+							<td class="txt_right">阿姨姓名：</td>
+							<td>{$info.name}</td>
+							<td class="txt_right">阿姨编号：</td>
+							<td>{$info.number}</td>
+						</tr>
+						<tr>
+							<td class="txt_right">阿姨年龄：</td>
+							<td>{$info.age}</td>
+							<td class="txt_right">阿姨籍贯：</td>
+							<td>{$info.origin}</td>
+							
+						</tr>
+						<tr>
+							<td class="txt_right">阿姨属相：</td>
+							<td>{$info.zodiac}</td>
+							<td class="txt_right">上户状态：</td>
+							<td>{$info.status_sh_name}</td>
+						</tr>
+						<tr>
+							<td class="txt_right">阿姨类型：</td>
+							<td colspan="3">
+								<input type="checkbox" disabled  <?php if($info['other'][0]=='月嫂'){ echo 'checked';}?>/>月嫂&nbsp;
+								<input type="checkbox" disabled  <?php if($info['other'][1]=='育儿嫂'){ echo 'checked';}?>/>育儿嫂&nbsp;
+								<input type="checkbox" disabled  <?php if($info['other'][2]=='保姆'){ echo 'checked';}?>/>保姆&nbsp;
+								<input type="checkbox" disabled  <?php if($info['other'][3]=='钟点工'){ echo 'checked';}?>/>钟点工&nbsp;
+							</td>
+						</tr>
+						<tr>
+							<td class="txt_right">体检日期：</td>
+							<td>{$info.test_time}</td>
+							<td class="txt_right">阿姨电话：</td>
+							<td>{$info.phone}</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="auntTab magrin0">
+					<tbody>
+						<tr>
+							<td class="txt_right">是否学员：</td>
+							<td>
+								<if condition="$info.student_id neq 0">
+									<a href="__MODULE__/Student/studentInfo/id/{$info.student_id}.html">{$info.is_student}</a>
+									<else />
+									{$info.is_student}
+								</if>
+
+							</td>
+						</tr>
+						<tr>
+							<td class="txt_right">身份证号：</td>
+							<td>{$info.id_card}</td>
+						</tr>
+
+						<tr>
+							<td class="txt_right">银行卡信息：</td>
+							<td>{$info.bank_card}</td>
+						</tr>
+						<tr>
+							<td class="txt_right">阿姨技能：</td>
+							<td>
+								<span class="spa_cek"><input type="checkbox" name="skill1" value="技能1" disabled <?php if($info['skill'][0]=='技能1'){ echo 'checked';}?> />技能1</span>
+								<span class="spa_cek"><input type="checkbox" name="skill2"  value="技能2" disabled <?php if($info['skill'][1]=='技能2'){ echo 'checked';}?>/>技能2</span>
+								<span class="spa_cek"><input type="checkbox" name="skill3"  value="技能3" disabled <?php if($info['skill'][2]=='技能3'){ echo 'checked';}?>/>技能3</span>
+								<span class="spa_cek"><input type="checkbox" name="skill4"  value="技能4" disabled <?php if($info['skill'][3]=='技能4'){ echo 'checked';}?>/>技能4</span>
+								<span class="spa_cek"><input type="checkbox" name="skill5"  value="技能5" disabled <?php if($info['skill'][4]=='技能5'){ echo 'checked';}?>/>技能5</span>
+								<span class="spa_cek"><input type="checkbox" name="skill6"  value="技能6" disabled <?php if($info['skill'][5]=='技能6'){ echo 'checked';}?>/>技能6</span>
+								<span class="spa_cek"><input type="checkbox" name="skill7"  value="技能7" disabled <?php if($info['skill'][6]=='技能7'){ echo 'checked';}?>/>技能7</span>
+								<span class="spa_cek"><input type="checkbox" name="skill8"  value="技能8" disabled <?php if($info['skill'][7]=='技能8'){ echo 'checked';}?>/>技能8</span>
+								<span class="spa_cek"><input type="checkbox" name="skill9"  value="技能9" disabled <?php if($info['skill'][8]=='技能9'){ echo 'checked';}?>/>技能9</span>
+								<span class="spa_cek"><input type="checkbox" name="skill10"  value="技能10" disabled <?php if($info['skill'][9]=='技能10'){ echo 'checked';}?>/>技能10</span>
+								<span class="spa_cek"><input type="checkbox" name="skill11"  value="技能11" disabled <?php if($info['skill'][10]=='技能11'){ echo 'checked';}?>/>技能11</span>
+								<span class="spa_cek"><input type="checkbox" name="skill12"  value="技能12" disabled <?php if($info['skill'][11]=='技能12'){ echo 'checked';}?>/>技能12</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="txt_right">阿姨等级：</td>
+							<td>{$info.level_name}
+							<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(5,11))">
+								<if condition="$info.level lt 16">
+									<button id="level_up">升-级</button>
+								</if>
+								</if>
+
+							</td>
+						</tr>
+						<tr>
+							<td class="txt_right">体检情况：</td>
+							<td>{$info.test_detail}</td>
+						</tr>
+						<tr>
+							<td class="txt_right">家庭情况：</td>
+							<td>{$info.family_detail}</td>
+						</tr>
+						<tr>
+							<td class="txt_right">行业经验：</td>
+							<td>{$info.experience}</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td class="txt_right">核查评价：</td>-->
+							<!--<td>{$info.test_detail}</td>-->
+						<!--</tr>-->
+						<tr>
+							<td class="txt_right">特殊备注：</td>
+							<td>{$info.remark}</td>
+						</tr>
+						<tr>
+							<td class="txt_right">面试记录：</td>
+							<td>
+								<table class="tab_info face_tab_2">
+									<tbody>
+										<tr class="info_name">
+											<td width="25%">面试时间</td>
+											<td width="25%">面试情况</td>
+											<td width="25%">面试顾问</td>
+											<td width="25%">操作</td>
+										</tr>
+										<volist name="contact" id="vo">
+											<tr>
+												<td>{$vo.contact_time}</td>
+												<td>{$vo.result}</td>
+												<td>{$vo.contact_people}</td>
+												<td><a href="__MODULE__/OrderShow/OrderInfo/id/{$vo.order_id}.html" >查看订单</a></td>
+											</tr>
+										</volist>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+
+
+							<td class="txt_right">上户档期：</td>
+
+
+							<td style="clear:both;">
+								<div class="timer"></div>
+								<button id="add_order_nurse" class="btnform add_btn add_dangqi">添加档期</button>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="txt_right">上户记录：</td>
+							<td>
+								<table class="tab_info face_tab_2" >
+									<tbody>
+									<tr class="info_name">
+										<td>客户</td>
+										<td>上单时长</td>
+										<td>是否售后</td>
+										<td>上户日期</td>
+										<td>上户日期</td>
+									</tr>
+									<volist name="order_nurse" id="vo">
+										<tr>
+											<td><a href="__MODULE__/OrderShow/OrderInfo/id/{$vo.order_id}.html"></a>{$vo.order_name}</td>
+											<td>{$vo.do_time}</td>
+											<td>{$vo.is_service_name}</td>
+											<td>{$vo.b_time_show}</td>
+											<td>{$vo.s_time_show}</td>
+										</tr>
+									</volist>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="txt_right">身<i></i>份<i></i>证：</td>
+							<td>
+								<ul class="certificate clear">
+									<volist name="info.id_card_img_arr" id="vo">
+										<if condition="$vo neq ''">
+											<li><img src="__UPLOADS__/{$vo}"/></li>
+										</if>
+									</volist>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td class="txt_right">证书照片：</td>
+							<td>
+								<ul class="certificate clear">
+									<volist name="info.certificate_img_arr" id="vo">
+										<if condition="$vo neq ''">
+										<li><img src="__UPLOADS__/{$vo}"/></li>
+											</if>
+									</volist>
+
+								</ul>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="txt_right">体检照片：</td>
+							<td>
+								<ul class="certificate clear">
+									<volist name="info.test_img_arr" id="vo">
+										<if condition="$vo neq ''">
+										<li><img src="__UPLOADS__/{$vo}"/></li>
+											</if>
+									</volist>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="form-group">
+					<button type="button" class="default_btn magrin0 m_left_20" onclick="location.href='__MODULE__/Nurse/changeNurseInfo/id/{$info.id}'">修改</button>
+
+					<if condition="$info.status eq 1">
+						<button type="button" class="default_btn magrin0" onclick="javascript:if(window.confirm('确定删除么？')){location.href='__MODULE__/Nurse/deleteNurse/id/{$info.id}.html';}" >删除</button>
+						<else />
+						<button type="button" class="default_btn magrin0" onclick="javascript:if(window.confirm('确定恢复么？')){location.href='__MODULE__/Nurse/backNurse/id/{$info.id}.html';}" >恢复</button>
+					</if>
+
+
+
+					<button type="button" class="default_btn" onclick="javascript:history.go(-1);">返回</button>
+				</div>
+			</div> 
+			<!--main end-->
+			<script>
+				var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+
+
+
+				//升级阿姨等级
+				$('#level_up').live('click',function(){
+					var submit = "javascript:return window.confirm('确认升级？')";
+					layer.open({
+						type: 1,
+						title: '阿姨等级提升',
+						area: ['auto', 'auto'], //宽高
+						content: '<div class="lay_cnt">'
+						+   '<form action="__MODULE__/Nurse/add_nurse_level" method="post" id="form_up" class="form" onsubmit="'+submit+'"  enctype="multipart/form-data">'
+						+	'<div class="opn_div clear">'
+						+    '<input type="hidden" value="{$info.id}" name="id" />'
+						+		'<label>阿姨姓名：</label><input type="text" class="form-control" value="{$info.name}" name="name" id="name" readonly/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>当前等级：</label><input type="text" class="form-control" value="{$info.level_name}" readonly/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>升级过后：</label><input type="text" class="form-control" value="{$info.next_level_name}" readonly/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>是否确认：</label><input type="text" class="form-control" value="" id="sure" placeholder="请输入确认" />'
+						+	'</div>'
+						+	'<div class="btn_div clear">'
+						+		'<button type="button" class="default_btn" id="sub_up">确认</button>'
+						+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+						+	'</div>'
+						+	'</form>'
+						+'</div>'
+					});
+				});
+				$('#sub_up').live('click',function(){
+					if($('#sure').val().trim()!='确认'){
+						layer.msg('请在是否确认框里输入确认！');
+						return false;
+					}
+
+					$('#form_up').submit();
+				});
+
+
+
+
+				$('#add_order_nurse').live('click',function(){
+					var submit = "javascript:return window.confirm('确认新增阿姨档期？')";
+					layer.open({
+						type: 1,
+						title: '添加档期',
+						area: ['auto', 'auto'], //宽高
+						content: '<div class="lay_cnt">'
+						+   '<form action="__MODULE__/Nurse/add_order_nurse" method="post" id="form_add" class="form" onsubmit="'+submit+'"  enctype="multipart/form-data">'
+						+	'<div class="opn_div clear">'
+						+    '<input type="hidden" value="{$info.id}" name="nurse_id" />'
+						+		'<label>上户日期：</label><input type="text" class="form-control" value="" name="true_b_time" id="true_b_time" placeholder="2016-01-01"/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>下户日期：</label><input type="text" class="form-control" value="" name="true_s_time" id="true_s_time"  placeholder="2016-01-01"/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>备<i></i><i></i><i></i><i></i>注：</label><input type="text" class="form-control" value="" name="remark" id="remark" />'
+						+	'</div>'
+						+	'<div class="btn_div clear">'
+						+		'<button type="button" class="default_btn" id="sub_add">添加</button>'
+						+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+						+	'</div>'
+						+	'</form>'
+						+'</div>'
+					});
+				});
+				$('#sub_add').live('click',function(){
+					if(!reg.test($('#true_b_time').val()) || $('#true_b_time').val()=='') {
+						layer.msg('请填写正确的上户日期！');
+						return false;
+					}
+					if(!reg.test($('#true_s_time').val()) || $('#true_s_time').val()=='') {
+						layer.msg('请填写正确的下户日期！');
+						return false;
+					}
+					if(duibi($('#true_b_time').val(),$('#true_s_time').val())  == 1){
+						layer.msg('下户时间比上户时间小！');
+						return false;
+					}
+
+					if($('#remark').val()==''){
+						layer.msg('请填写备注！');
+						return false;
+					}
+
+					$('#form_add').submit();
+				});
+
+				$(".certificate li").click(function(){
+					var imgs = $(this).html();
+					layer.open({
+					  type: 1,
+					  title: false,
+					  area: ['auto', 'auto'],
+					  content: imgs
+					});
+				});
+				function close_lay(){
+					layer.closeAll();
+				}
+
+				function duibi(a, b) {
+					var arr = a.split("-");
+					var starttime = new Date(arr[0], arr[1], arr[2]);
+					var starttimes = starttime.getTime();
+
+					var arrs = b.split("-");
+					var lktime = new Date(arrs[0], arrs[1], arrs[2]);
+					var lktimes = lktime.getTime();
+					if (starttimes >= lktimes) {
+						return 1;
+					}else{
+						return 2;
+					}
+				}
+			</script>
+			<script>
+				var num = 0;
+				var total = 0;
+//				var afterTime=0,beforeTime=1,customer_name=2;
+				var time=new Array();
+				for(var i=0;i<4;i++){
+					time[i]=new Array();
+					for(var j=0;j<4;j++){
+						time[i][j]=1;
+					}
+				}
+				time = <?php echo json_encode($order_nurse_after);?>;
+
+				total = time.length;
+
+				if(total>4){
+					total = 4;
+				}
+
+				while(num<total){
+					$(".timer").append(
+							'<div class="blank">'
+							+	'<span class="afterTime">'+time[num]['after_time']+'</span>'
+							+	'<span class="beforeTime">'+time[num]['before_time']+'</span>'
+							+	'<span class="customer_name"><a href="#">'+time[num]['customer_name']+'</a></span>'
+							+'</div>'
+					)
+					num++;
+				}
+			</script>
+</body>
+
+</html>

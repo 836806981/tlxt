@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+
+
+			<!--left end-->
+			<if condition="$_SESSION[C('USER_AUTH_KEY')]['id'] eq $info['id']">
+				<script>
+					$('.left_menu li').eq(0).addClass('called');
+				</script>
+			<else />
+				<script>
+					$('.left_menu li').eq(7).addClass('called');
+				</script>
+			</if>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle">
+					<span class="int_s"></span>员工信息
+				</div>
+				<div class="filesInfo form">
+					<div class="form-group">
+						 <label>用户名：</label><input type="text" class="form-control" value="{$info.permission_name}" readonly/>
+					</div>
+					<div class="form-group">
+						 <label>昵&emsp;称：</label><input type="text" class="form-control" value="{$info.real_name}" readonly/>
+					</div>
+
+					<div class="form-group">
+						<label>上次登录：</label>{$info.log_time}
+						<if condition="$info.change_per eq 1">
+							疑问?
+						<a href="__MODULE__/User/changePass/id/{$info.id}">修改密码</a>
+						</if>
+
+					</div>
+					<div class="form-group">
+						 <label>权&emsp;限：</label>
+						 <span class="spa_cek">{$info.permission_name}</span>
+					</div>
+				</div>
+				<div class="form-group" style="margin-left: 19px;">
+					<button type="button" class="default_btn" onclick="javascript:history.go(-1);">返回</button>
+				</div>
+				
+			</div>
+			<!--main end-->
+</body>
+
+</html>

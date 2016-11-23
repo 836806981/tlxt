@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+<!--top-->
+<include  file="Nav/header"/>
+<!--left end-->
+<script>
+	$('.left_menu li').eq(4).addClass('called');
+</script>
+<!--main-->
+<div class="col-md-10 main">
+	<div class="tab_tle">
+		<span class="int_s"></span>新增阿姨
+	</div>
+	<form action="__MODULE__/Nurse/changeNurseInfo" method="post" id="form" onsubmit="javascript:return window.confirm('确定修改么？')"  enctype="multipart/form-data">
+		<table class="auntTab magrin0 magrintop20">
+
+			<tbody>
+			<tr>
+				<td class="txt_right">阿姨头像：</td>
+
+				<td><img src="__UPLOADS__/{$info.title_img}" alt="" style="max-height: 150px;max-width: 150px;"/><input type="file" class="filesbtn" value="上传头像" name="title_img" id="title_img"></td>
+				<input type="hidden" name="old_title_img" value="{$info.title_img}"/>
+				<input type="hidden" name="id" value="{$info.id}"/>
+			</tr>
+			<tr>
+				<td class="txt_right">阿姨姓名：</td>
+				<td><input type="text" class="form-control" value="{$info.name}" name="name" id="name"/></td>
+				<!--<td class="txt_right">阿姨编号：</td>-->
+				<!--<td><input type="text" class="form-control" value=""/></td>-->
+			</tr>
+			<tr>
+				<td class="txt_right">银行卡信息：</td>
+				<td><input type="text" class="form-control" value="{$info.bank_card}" name="bank_card" id="bank_card"/></td>
+				<!--<td class="txt_right">阿姨编号：</td>-->
+				<!--<td><input type="text" class="form-control" value=""/></td>-->
+			</tr>
+			<tr>
+				<td class="txt_right">阿姨年龄：</td>
+				<td><input type="number" class="form-control" value="{$info.age}" name="age" id="age"/></td>
+				<td class="txt_right">阿姨籍贯：</td>
+				<td><input type="text" class="form-control" value="{$info.origin}" name="origin" id="origin"/></td>
+			</tr>
+			<tr>
+				<td class="txt_right">阿姨属相：</td>
+				<td><input type="text" class="form-control" value="{$info.zodiac}" name="zodiac" id="zodiac"/></td>
+				<td class="txt_right">上户状态：</td>
+				<td>
+					<select class="form-control" name="title_img" id="status_sh">
+						<option value="1" <if condition="info.status_sh eq 1">selected</if>>已上户</option>
+						<option value="2" <if condition="info.status_sh eq 2">selected</if>>未上户</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="txt_right">阿姨类型：</td>
+				<td colspan="3">
+					<input type="checkbox" name="other1" value="月嫂"  <?php if($info['other'][0]=='月嫂'){ echo 'checked';}?>/>月嫂&nbsp;
+					<input type="checkbox" name="other2" value="育儿嫂"  <?php if($info['other'][1]=='育儿嫂'){ echo 'checked';}?>/>育儿嫂&nbsp;
+					<input type="checkbox" name="other3" value="保姆"  <?php if($info['other'][2]=='保姆'){ echo 'checked';}?>/>保姆&nbsp;
+					<input type="checkbox" name="other4" value="钟点工"  <?php if($info['other'][3]=='钟点工'){ echo 'checked';}?>/>钟点工&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="txt_right">体检日期：</td>
+				<td><input type="text" class="form-control" value="{$info.test_time}" name="test_time" id="test_time" /></td>
+				<td class="txt_right">阿姨电话：</td>
+				<td><input type="text" class="form-control" value="{$info.phone}" name="phone" id="phone"/></td>
+			</tr>
+			<tr>
+				<td class="txt_right">阿姨等级：</td>
+				<td>
+
+					<select class="form-control" name="level" id="level" <if condition="$_SESSION[C('USER_AUTH_KEY')]['permission'] neq 11">disabled</if>>
+						<option value="1" <if condition="$info.level eq 1">selected</if>>小田螺1.1</option>
+						<option value="2"  <if condition="$info.level eq 2">selected</if>>小田螺1.2</option>
+						<option value="3"  <if condition="$info.level eq 3">selected</if>>小田螺1.3</option>
+						<option value="4"  <if condition="$info.level eq 4">selected</if>>小田螺1.4</option>
+						<option value="5"  <if condition="$info.level eq 5">selected</if>>小田螺1.5</option>
+						<option value="6"  <if condition="$info.level eq 6">selected</if>>大田螺1.1</option>
+						<option value="7"  <if condition="$info.level eq 7">selected</if>>大田螺1.2</option>
+						<option value="8"  <if condition="$info.level eq 8">selected</if>>大田螺1.3</option>
+						<option value="9"  <if condition="$info.level eq 9">selected</if>>大田螺1.4</option>
+						<option value="10"  <if condition="$info.level eq 10">selected</if>>大田螺1.5</option>
+						<option value="11"  <if condition="$info.level eq 11">selected</if>>超级田螺1.1</option>
+						<option value="12"  <if condition="$info.level eq 12">selected</if>>超级田螺1.2</option>
+						<option value="13"  <if condition="$info.level eq 13">selected</if>>超级田螺1.3</option>
+						<option value="14"  <if condition="$info.level eq 14">selected</if>>超级田螺1.4</option>
+						<option value="15"  <if condition="$info.level eq 15">selected</if>>超级田螺1.5</option>
+						<option value="16"  <if condition="$info.level eq 16">selected</if>>金牌田螺</option>
+					</select>
+
+				<!--<td class="txt_right">是否学员：</td>-->
+				<!--<td>-->
+					<!--<span class="spa_cek"><input type="radio" name="is_student" value="是"  <?php if($info['is_student']=='是'){ echo 'checked';}?>/>是</span>-->
+					<!--<span class="spa_cek"><input type="radio" name="is_student" value="否" <?php if($info['is_student']=='否'){ echo 'checked';}?>/>否</span>-->
+				<!--</td>-->
+			</tr>
+			</tbody>
+		</table>
+		<table class="auntTab magrin0">
+			<tbody>
+			<tr>
+				<td class="txt_right">身份证号：</td>
+				<td><input type="text" class="form-control" value="{$info.id_card}"  name="id_card" id="id_card"/></td>
+			</tr>
+			<tr>
+				<td class="txt_right">阿姨技能：</td>
+				<td>
+					<span class="spa_cek"><input type="checkbox" name="skill1" value="技能1" <?php if($info['skill'][0]=='技能1'){ echo 'checked';}?>/>技能1</span>
+					<span class="spa_cek"><input type="checkbox" name="skill2"  value="技能2"  <?php if($info['skill'][1]=='技能2'){ echo 'checked';}?>/>技能2</span>
+					<span class="spa_cek"><input type="checkbox" name="skill3"  value="技能3"  <?php if($info['skill'][2]=='技能3'){ echo 'checked';}?>/>技能3</span>
+					<span class="spa_cek"><input type="checkbox" name="skill4"  value="技能4"  <?php if($info['skill'][3]=='技能4'){ echo 'checked';}?>/>技能4</span>
+					<span class="spa_cek"><input type="checkbox" name="skill5"  value="技能5"  <?php if($info['skill'][4]=='技能5'){ echo 'checked';}?>/>技能5</span>
+					<span class="spa_cek"><input type="checkbox" name="skill6"  value="技能6"  <?php if($info['skill'][5]=='技能6'){ echo 'checked';}?>/>技能6</span>
+					<span class="spa_cek"><input type="checkbox" name="skill7"  value="技能7"  <?php if($info['skill'][6]=='技能7'){ echo 'checked';}?>/>技能7</span>
+					<span class="spa_cek"><input type="checkbox" name="skill8"  value="技能8"  <?php if($info['skill'][7]=='技能8'){ echo 'checked';}?>/>技能8</span>
+					<span class="spa_cek"><input type="checkbox" name="skill9"  value="技能9"  <?php if($info['skill'][8]=='技能9'){ echo 'checked';}?>/>技能9</span>
+					<span class="spa_cek"><input type="checkbox" name="skill10"  value="技能10"  <?php if($info['skill'][9]=='技能10'){ echo 'checked';}?>/>技能10</span>
+					<span class="spa_cek"><input type="checkbox" name="skill11"  value="技能11"  <?php if($info['skill'][10]=='技能11'){ echo 'checked';}?>/>技能11</span>
+					<span class="spa_cek"><input type="checkbox" name="skill12"  value="技能12"  <?php if($info['skill'][11]=='技能12'){ echo 'checked';}?>/>技能12</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="txt_right">阿姨等级：</td>
+				<td>
+					<span class="spa_cek"><input type="radio" name="level_name" value="小田螺" <?php if($info['level_name']=='小田螺'){ echo 'checked';}?>/>小田螺</span>
+					<span class="spa_cek"><input type="radio" name="level_name" value="大田螺" <?php if($info['level_name']=='大田螺'){ echo 'checked';}?>/>大田螺</span>
+					<span class="spa_cek"><input type="radio" name="level_name" value="超级田螺" <?php if($info['level_name']=='超级田螺'){ echo 'checked';}?>/>超级田螺</span>
+					<span class="spa_cek"><input type="radio" name="level_name" value="金牌田螺" <?php if($info['level_name']=='金牌田螺'){ echo 'checked';}?>/>金牌田螺</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="txt_right">体检情况：</td>
+				<td><input type="text" class="form-control" value="{$info.test_detail}"  name="test_detail" id="test_detail"/></td>
+			</tr>
+			<tr>
+				<td class="txt_right">家庭情况：</td>
+				<td><input type="text" class="form-control" value="{$info.family_detail}"  name="family_detail" id="family_detail"/></td>
+			</tr>
+			<tr>
+				<td class="txt_right">行业经验：</td>
+				<td><input type="text" class="form-control" value="{$info.experience}"  name="experience" id="experience"/></td>
+			</tr>
+			<!--<tr>-->
+			<!--<td class="txt_right">核查评价：</td>-->
+			<!--<td><input type="text" class="form-control" value=""  name="check" id="check"/></td>-->
+			<!--</tr>-->
+			<tr>
+				<td class="txt_right">特殊备注：</td>
+				<td><input type="text" class="form-control" value="{$info.remark}"  name="remark" id="remark"/></td>
+			</tr>
+			<tr>
+				<td class="txt_right">身<i></i>份<i></i>证：</td>
+				<td>
+					<ul class="certificate clear">
+					<volist name="info.id_card_img_arr" id="vo">
+						<if condition="$vo neq ''">
+						<li style="margin-right: 30px;">
+							<img src="__UPLOADS__/{$vo}" alt=""/>
+							<bottom type="bottom"  class="del_this_img del_btn" src="{$vo}">X</bottom>
+						</li>
+							</if>
+					</volist>
+					</ul>
+					<!--<div class="shangchuan">-->
+						<!--<input type="file" class="filesbtn" value="" name="id_card_img[]">&nbsp;<button name="del_img_html"  type="button">删除</button>-->
+					<!--</div>-->
+					<button class="add_img_html btnform magrin0 add_btn" do="id_card_img" type="button">+&nbsp;新增</button>
+
+					<input type="hidden" name="id_card_img_del" value=""/>
+				</td>
+			</tr>
+			<tr>
+				<td class="txt_right">证书照片：</td>
+				<td>
+					<ul class="certificate clear">
+					<volist name="info.certificate_img_arr" id="vo">
+						<if condition="$vo neq ''">
+						<li style="margin-right: 30px;">
+							<img src="__UPLOADS__/{$vo}" alt=""/>
+							<bottom type="bottom" class="del_this_img del_btn" src="{$vo}">X</bottom>
+						</li>
+							</if>
+					</volist>
+					</ul>
+					<!--<div class="shangchuan">-->
+						<!--<input type="file" class="filesbtn" value="" name="certificate_img[]">&nbsp;<button name="del_img_html" type="button">删除</button>-->
+					<!--</div>-->
+					<button class="add_img_html btnform magrin0 add_btn" do="certificate_img" type="button">+&nbsp;新增</button>
+					<input type="hidden" name="certificate_img_del" value=""/>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="txt_right">体检照片：</td>
+				<td>
+					<ul class="certificate clear">
+						<volist name="info.test_img_arr" id="vo">
+							<if condition="$vo neq ''">
+							<li style="margin-right: 30px;">
+								<img src="__UPLOADS__/{$vo}" alt=""/>
+								<bottom type="bottom" class="del_this_img del_btn" src="{$vo}">X</bottom>
+							</li>
+								</if>
+						</volist>
+					</ul>
+					<!--<div class="shangchuan">-->
+						<!--<input type="file" class="filesbtn" value="" name="test_img[]">&nbsp;<button name="del_img_html" type="button">删除</button>-->
+					<!--</div>-->
+					<button class="add_img_html btnform magrin0 add_btn" do="test_img" type="button">+&nbsp;新增</button>
+					<input type="hidden" name="test_img_del" value=""/>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</form>
+
+
+	<div class="form-group">
+		<button type="button" class="btnform magrin0 m_left_20" id="sub">确认修改</button>
+		<button type="button" class="btnform" onclick="location.href='__MODULE__/Nurse/nurseInfo/id/{$info.id}.html';">返回详情</button>
+	</div>
+
+</div>
+
+<script>
+	$('.del_this_img').live('click',function(){
+		var src = $(this).attr('src');
+		var del_src = $(this).parents('td').find('input[type=hidden]').val();
+
+		$(this).parents('td').find('input[type=hidden]').val(del_src+src+',') ;
+		$(this).parent('li').remove();
+	});
+
+
+
+	var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+	//				reg.test(add_time_b);
+
+	var reg_number = /^[1-9]+[0-9]*]*$/;
+	var reg_id_card = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+	$('#sub').live('click',function(){
+		if($('#name').val() == ''){
+			layer.msg('请输入姓名！');
+			return false;
+		}
+		if(!reg_number.test($('#age').val())){
+			layer.msg('请输入正确的年龄！');
+			return false;
+		}
+
+		if($('#origin').val() == ''||$('#zodiac').val() == ''||$('#test_time').val() == ''||$('#phone').val() == ''){
+			layer.msg('请输入籍贯、属相、体检时间、电话！');
+			return false;
+		}
+		if($('input[name=other1]').is(':checked')==false && $('input[name=other2]').is(':checked')==false && $('input[name=other3]').is(':checked')==false &&$('input[name=other4]').is(':checked')==false ){
+			layer.msg('请选择阿姨类型！');
+			return false;
+		}
+		if(!reg_id_card.test($('#id_card').val())){
+			layer.msg('请输入正确身份证号！');
+			return false;
+		}
+
+
+
+// 					if($('input[name=real_name]').val() == ''){
+//						layer.msg('请输入昵称！');
+//						return false;
+//					}
+
+		$('#form').submit();
+	});
+
+	$('button[name=del_img_html]').live('click',function(){
+		$(this).parent('.shangchuan').remove();
+	});
+	$('.add_img_html').live('click',function(){
+		var  html = '<div class="shangchuan">\
+							<input type="file" class="filesbtn" value="" name="'+$(this).attr('do')+'[]">&nbsp;<button name="del_img_html" class="del_btn">删除</button>\
+					</div>';
+		$(this).before(html);
+	});
+	$(".certificate li img").click(function(){
+		var imgs = $(this).attr("src");
+		layer.open({
+		  type: 1,
+		  title: false,
+		  area: ['auto', 'auto'],
+		  content: '<img src="'+imgs+'" alt=""/>'
+		});
+	});
+</script>
+<!--main end-->
+</body>
+
+</html>
