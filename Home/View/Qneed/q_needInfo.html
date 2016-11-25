@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					订单详情
+				</div>
+				<div class="tab_tle" >
+					<span class="int_s"></span>订单信息
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="33%"><label>订单编号：</label>{$info.number}</td>
+							<td width="33%"><label>派发人：</label>{$info.add_employee}</td>
+							<td width="33%"></td>
+						</tr>
+						<tr>
+							<td><label>订单类型：</label>{$info.order_type_name}</td>
+							<td><label>服务周期：</label>{$info.service_day}天</td>
+							<td><label>订单价格：</label>{$info.product_price}元</td>
+						</tr>
+						<tr>
+							<td><label>预计上户时间：</label>{$info.b_time}</td>
+							<td><label>实际上户时间：</label>{$info.true_b_time}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label>客户姓名：</label>{$info.name}</td>
+							<td><label>手机：</label>{$info.phone}</td>
+							<td><label>微信：</label>{$info.wchat}</td>
+						</tr>
+						
+						<tr>
+							<td colspan="3"><label>服务地址：</label>
+								<div class="rtdiv">
+									{$info.service_place}
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>备注：</label>
+								<div class="rtdiv">
+									{$info.remark}
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				
+				<div class="form-group">
+					<if condition="$info['status'] eq 3">
+						<input type="button" class="btnform m_left_20 magrin0" value="订单发出" onclick="location.href='__MODULE__/Qneed/q_changeNeedStatus/id/{$info.id}.html'"/>
+					</if>
+
+					<input type="button" class="default_btn" onclick="location.href='__MODULE__/Qneed/q_changeNeed/id/{$info.id}.html'" value="修改"/>
+					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
+				</div>
+			</div> 
+			<!--main end-->
+			
+			
+</body>
+
+</html>

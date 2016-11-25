@@ -28,7 +28,7 @@ class UserController extends CommonController {
         $count = M('employee')->count();
 
         $permission_name = ['','客服','顾问','内勤管理','财务'];
-        $permission_name[11] = '系统管理员';
+        $permission_name[24] = '系统管理员';
         foreach($list as $k=>$v){
             $list[$k]['permission_name'] = $permission_name[$v['permission']];
             $list[$k]['status_name'] = $v['status']==1?'<span style="color: #000020">正常</span>':'<span style="color: red">停用</span>';
@@ -44,7 +44,7 @@ class UserController extends CommonController {
 
     //添加员工
     public function addUser(){
-        $this->authority(array(11));
+        $this->authority(array(24));
         if(I('post.')){
             $post = I('post.');
             $post['pwd'] = $this->md5_pwd(trim('tlay123'));
@@ -66,7 +66,7 @@ class UserController extends CommonController {
 
     //修改信息
     public function changeInfo(){
-        $this->authority(array(11));
+        $this->authority(array(24));
         if(I('post.')){
             $post = I('post.');
             if(!$post['id']){
@@ -88,14 +88,14 @@ class UserController extends CommonController {
                 echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
                 exit;
             }
-            if(!($_SESSION[C('USER_AUTH_KEY')]['permission']==11||$_SESSION[C('USER_AUTH_KEY')]['id'] = I('get.id'))){
+            if(!($_SESSION[C('USER_AUTH_KEY')]['permission']==24||$_SESSION[C('USER_AUTH_KEY')]['id'] = I('get.id'))){
                 echo "<script>alert('你没有权限');window.onload=function(){window.history.go(-1);return false;}</script>";
                 exit;
             }
             $user_info = M('employee')->where('id='.I('get.id').'')->find();
 
             $permission_name = ['','客服','顾问','内勤管理','财务'];
-            $permission_name[11] = '系统管理员';
+            $permission_name[24] = '系统管理员';
             $user_info['permission_name'] = $permission_name[$user_info['permission']];
 
 
@@ -106,12 +106,12 @@ class UserController extends CommonController {
     }
 
     public function resetPwd(){
-        $this->authority(array(11));
+        $this->authority(array(24));
         if(!I('get.id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-        if($_SESSION[C('USER_AUTH_KEY')]['permission']!=11){
+        if($_SESSION[C('USER_AUTH_KEY')]['permission']!=24){
             echo "<script>alert('无权限！');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
@@ -139,14 +139,14 @@ class UserController extends CommonController {
         $user_info = M('employee')->where('id='.I('get.id').'')->find();
 
         $permission_name = ['','客服','顾问','内勤管理','财务'];
-        $permission_name[11] = '系统管理员';
+        $permission_name[24] = '系统管理员';
         $user_info['permission_name'] = $permission_name[$user_info['permission']];
 
         $login_time = M('login_log')->field('login_time')->where('employee_id=' . $user_info['id'] . '')->order('login_time desc')->limit(2)->select();
         $user_info['log_time'] = $login_time[1]['login_time'] ? date('Y-m-d H:i:s', $login_time[1]['login_time']) : '首次登录';
 
         $user_info['change_per'] = 0;
-        if($_SESSION[C('USER_AUTH_KEY')]['permission']==11||$_SESSION[C('USER_AUTH_KEY')]['id'] = I('get.id')){
+        if($_SESSION[C('USER_AUTH_KEY')]['permission']==24||$_SESSION[C('USER_AUTH_KEY')]['id'] = I('get.id')){
             $user_info['change_per'] = 1;
         }
 
@@ -156,7 +156,7 @@ class UserController extends CommonController {
 
     //停用
     public function set_status_0(){
-        $this->authority(array(11));
+        $this->authority(array(24));
         if(!I('get.id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -173,7 +173,7 @@ class UserController extends CommonController {
     }
     //启用
     public function set_status_1(){
-        $this->authority(array(11));
+        $this->authority(array(24));
         if(!I('get.id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -192,7 +192,7 @@ class UserController extends CommonController {
 
     //删除
     public function del_user(){
-        $this->authority(array(11));
+        $this->authority(array(24));
         if(!I('get.id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -213,7 +213,7 @@ class UserController extends CommonController {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-        if(!($_SESSION[C('USER_AUTH_KEY')]['permission']==11||$_SESSION[C('USER_AUTH_KEY')]['id'] = I('get.id'))){
+        if(!($_SESSION[C('USER_AUTH_KEY')]['permission']==24||$_SESSION[C('USER_AUTH_KEY')]['id'] = I('get.id'))){
             echo "<script>alert('你没有权限');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }

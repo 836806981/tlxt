@@ -24,7 +24,7 @@ class IndexController extends CommonController {
                     echo "<script>alert('账号被停用或非后台账号，无法登陆！');window.location.href='" . __MODULE__ . "/Index/login.html;</script>";
                 }else {
                     $permission_name = ['','客服','顾问','管理员内勤','财务'];
-                    $permission_name[11] = '系统管理员';
+                    $permission_name[24] = '系统管理员';
                     $user_info['permission_name'] = $permission_name[$user_info['permission']];
 
                     $_SESSION[C('USER_AUTH_KEY')] = $user_info;
@@ -46,7 +46,7 @@ class IndexController extends CommonController {
                     M('login_log')->add($log);
                     echo "<script>alert('登录成功！');window.location.href='" . __MODULE__ . "';</script>";
                 }
-            } else{
+            }else{
                 $ip = $this->getIP();
                 $log['sessionid']='';
                 $log['login_ip']=$ip;
@@ -68,7 +68,7 @@ class IndexController extends CommonController {
     }
     //退出登录
     public function login_out(){
-        $_SESSION[C('USER_AUTH_KEY')]=null;
+        $_SESSION[C('USER_AUTH_KEY')] = null;
         echo "<script>alert('已成功退出！');window.location.href='".__MODULE__."/Index/login.html';</script>";
     }
 

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+<!--top-->
+<include file="Nav/header"/>
+<!--left end-->
+<script>
+	$('.left_menu li').eq(1).addClass('called');
+</script>
+<!--main-->
+
+<form action="__MODULE__/Qneed/q_changeNeed" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定？')"  enctype="multipart/form-data">
+	<div class="col-md-10 main">
+		<div class="tab_tle1">
+			合作渠道派单表
+		</div>
+		<table class="auntTab iptTab">
+			<tbody>
+			<tr>
+				<td><label>渠道来源：</label>
+					{$info.source}
+					<!--<select class="form-control" >-->
+					<!--<option value="安琪儿">安琪儿</option>-->
+					<!--<option value="锦月美惠">锦月美惠</option>-->
+					<!--</select>-->
+				</td>
+				<td><label>价格：</label>
+					<input type="hidden" name="order_id" value="{$info.id}"/>
+					<input type="text" class="form-control w160" value="{$info.product_price}" id="product_price" name="product_price"/>&nbsp;&nbsp;元
+				</td>
+			</tr>
+			<tr>
+				<td><label>特殊情况：</label>
+					<input type="radio" name="price_add" value="1" <if condition="$info['price_add'] eq 1">checked</if>/>有&nbsp;&nbsp;
+					<input type="radio" name="price_add" value="0" <if condition="$info['price_add'] eq 0">checked</if>/>无&nbsp;&nbsp;
+				</td>
+				<td><label>加价原因：</label>
+					<input type="text" class="form-control" id="add_reason" name="add_reason" value="{$info.add_reason}"/>
+				</td>
+			</tr>
+			<tr>
+				<td><label>订单加价：</label>
+					<input type="number" class="form-control w160" id="add_order_price" name="add_order_price" value="{$info.add_order_price}"/>&nbsp;&nbsp;元
+				</td>
+				<td><label>阿姨薪资加价：</label>
+					<input type="number" class="form-control w160" id="add_nurse_price" name="add_nurse_price" value="{$info.add_nurse_price}"/>&nbsp;&nbsp;元
+				</td>
+			</tr>
+			<tr>
+				<td><label>派发人：</label>{$_SESSION[C('USER_AUTH_KEY')]['real_name']}</td>
+				<td><label>订单性质：</label>
+					<input type="radio" name="order_type" value="2" <if condition="$info['order_type'] eq 2">checked</if>/>实习&nbsp;&nbsp;
+					<input type="radio" name="order_type" value="3" <if condition="$info['order_type'] eq 3">checked</if>/>非实习&nbsp;&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td><label>手机：</label>
+					<input type="text" class="form-control" value="{$info.phone}" id="phone" name="phone"/>
+				</td>
+				<td><label>微信：</label>
+					<input type="text" class="form-control" value="{$info.wchat}" id="wchat" name="wchat"/>
+				</td>
+			</tr>
+			<tr>
+				<td><label>预估上户时间：</label>
+					<input type="text" class="form-control" value="{$info.b_time}" id="b_time" name="b_time"/>
+				</td>
+				<td><label>服务周期：</label>
+					<input type="number" class="form-control" value="{$info.service_day}" id="service_day" name="service_day"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><label>备注：</label>
+					<div class="rtdiv">
+						<textarea class="form-control beizhu" id="remark" name="remark">{$info.remark}</textarea>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="line-height: 24px;">特殊备注:<br />
+					1、选择“实习”，客户称谓写“安琪儿实习单”或“锦月美慧实习单”，其他渠道以此类推。一般3000-4000之间均为实习单，推荐学员实习；<br />
+					2、选择“渠道”，客户成为写“安琪儿渠道单”或“xxx渠道单”，以此类推，合作渠道4000以上一般建议为渠道单，使用对象为学员和阿姨。
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="form-group">
+			<input type="button" class="btnform m_left_20 magrin0 sub_add" value="存储"  status="3"/>
+			<input type="button" class="btnform m_left_20 default_btn " onclick="javascript:history.go(-1);" value="取消"/>
+		</div>
+	</div>
+</form>
+
+<script>
+	$('.sub_add').live('click',function(){
+		var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+		if($('#product_price').val() == ''){
+			layer.msg('请输入价格！');
+			return false;
+		}
+		if($('#phone').val() == '') {
+			layer.msg('请输入手机！');
+			return false;
+		}
+		if($('input[name=price_add]:checked').val() == 1){
+			if($('#add_reason').val()== ''||$('#add_order_price').val()== ''||$('#add_nurse_price').val()== ''){
+				layer.msg('请完善加价信息！');
+				return false;
+			}
+		}
+		if(!reg.test($('#b_time').val())){
+			layer.msg('请输入正确的服务时间！');
+			return false;
+		}
+		if($('#service_day').val() == ''){
+			layer.msg('请输入服务周期！');
+			return false;
+		}
+		if($('#remark').val() == ''){
+			layer.msg('请输入备注！');
+			return false;
+		}
+		$('#form_add').submit();
+	});
+</script>
+<!--main end-->
+
+
+</body>
+
+</html>

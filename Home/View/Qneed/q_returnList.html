@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+
+				<!--头部导航-->
+				<include file="Need/top"/>
+				<!--头部导航-->
+
+				<div class="form-inline">
+					<div class="form-group">
+						<label>订单编号</label><input type="text" class="form-control" id="number"/>
+					</div>
+					<div class="form-group">
+						<label>回收时间</label><input type="text" class="form-control" id="status_23"/>
+					</div>
+					<div class="form-group">
+						 <label>渠道性质</label>
+						 <select class="form-control" id="order_type">
+						 	<option value="0">全部</option>
+					         <option value="2">实习</option>
+					         <option value="3">非实习</option>
+					     </select>
+					</div>
+					<div class="form-group">
+						 <button type="button" class="subform" id="search">搜索</button>
+					</div>
+					
+				</div>
+				<table class="tab_info">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								当前搜索订单：<span id="show_number_str"></span>条
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">订单编号</td>
+							<td width="8%">渠道性质</td>
+							<td width="8%">派单人</td>
+							<td width="8%">派发时间</td>
+							<td width="8%">回收时间</td>
+							<td width="8%">客户姓名</td>
+							<td width="15%">删除原因</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td>11111</td>-->
+							<!--<td>11</td>-->
+							<!--<td>11</td>-->
+							<!--<td>11</td>-->
+							<!--<td>1</td>-->
+							<!--<td>1</td>-->
+							<!--<td>1</td>-->
+						<!--</tr>-->
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+								</div>
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<script src="__PUBLIC__/js/q_returnList.js"></script>
+			<!--main end-->
+			
+			
+</body>
+
+</html>

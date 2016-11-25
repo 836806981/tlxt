@@ -33,6 +33,8 @@ ul,li {
 .statistics li {
 	line-height: 42px;
 }
+
+
 /************top************/
 .page-header {
 	position: fixed;
@@ -155,7 +157,6 @@ ul,li {
 	height: 51px;
 	font-size: 18px;
 	line-height: 27px;
-	position: relative;
 }
 
 .mune>ul.left_menu>li>a>span.dingdan {
@@ -200,6 +201,7 @@ ul,li {
 
 .nav-tabs {
 	border-bottom: 2px solid #a2d0ff;
+	margin-bottom: 20px;
 }
 
 .nav-tabs>li {
@@ -219,8 +221,9 @@ ul,li {
 .nav-tabs>li>a {
 	padding: 10px 5px;
 	color: #333333;
-	font-size: 16px;
+	font-size: 18px;
 	cursor: pointer;
+	font-weight: 700;
 }
 
 .form-inline {
@@ -293,9 +296,6 @@ input[type=file]{
 	cursor: pointer;
 	font-size: 14px;
 }
-.shangchuan{
-	margin-bottom: 5px;
-}
 .subform:hover,.btnform:hover,.default_btn:hover {
 	background-color: #0f73da;
 	color: #FFFFFF;
@@ -306,7 +306,7 @@ input[type=file]{
 }
 
 .tab_info>tbody>tr>td {
-	padding: 10px 5px;
+	padding: 12px 0;
 	border: 1px solid #999999;
 	text-align: center;
 	font-size: 14px;
@@ -421,9 +421,6 @@ input[type=file]{
 	height: 60px;
 }
 
-.default_btn {
-	margin-right: 20px;
-}
 /*************info*************/
 .txt_right {
 	text-align: right;
@@ -435,7 +432,7 @@ input[type=file]{
 }
 
 .auntTab {
-	width: 860px;
+	width: 900px;
 	margin-left: 19px;
 	margin-top: 20px;
 }
@@ -445,6 +442,9 @@ input[type=file]{
 }
 .magrintop20 {
 	margin-top: 20px;
+}
+.magrintop10 {
+	margin-top: 10px;
 }
 .m_left_20 {
 	margin-left: 20px;
@@ -456,8 +456,8 @@ input[type=file]{
 .aunt_img {
 	overflow: hidden;
 	padding: 3px 0 0;
-	width: 150px;
-	height: 180px;
+	width: 176px;
+	height: 222px;
 }
 
 .aunt_img img {
@@ -475,23 +475,65 @@ input[type=file]{
 
 .auntTab tr td {
 	padding-bottom: 10px;
-	height: 32px;
+	height: 34px;
 	vertical-align: top;
-	line-height: 30px;
+	line-height: 34px;
+	color: #666;
+	clear:both;
 }
-
-.info_table tr:first-child td,.tab_tle {
+.face_tab_2 tr td{
+	height:auto;
+	line-height: normal;
+}
+.auntTab tr td label{
+    max-width: 100%;
+    margin-bottom: 0;
+    color: #333;
+    float: left;
+}
+.auntTab tr td .rtdiv{
+    float: left;
+    max-width:80%;
+}
+.pictures tr td label{
+	
+min-width: 100px;
+	
+text-align: right;
+}
+.iptTab tr td label{
+	
+min-width: 100px;
+	
+text-align: right;
+}
+.info_table tr:first-child td{
 	font-weight: bold;
 	font-size: 20px;
 }
-
 .tab_tle {
 	padding: 20px 0 0;
+	font-weight: bold;
+	font-size: 18px;
+}
+.tab_tle>span.togbtn{
+	font-size: 12px;
+	background: #097ff9;
+	cursor: pointer;
+	font-weight: normal;
+	margin-left: 20px;
+	color: #FFFFFF;
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 4px;
 }
 .tab_tle1{
-	font-size: 16px;
-	color:#666;
-	padding: 28px 0 10px 19px;
+	font-weight: bold;
+	font-size: 18px;
+	padding: 10px 0;
+	/* margin-left: 18px; */
+	border-bottom: 2px solid #579fe9;
+	margin-bottom: 10px;
 }
 .info_table tr td span.int_s,.tab_tle span.int_s {
 	display: inline-block;
@@ -512,23 +554,65 @@ input[type=file]{
 	width: 14px;
 }
 .spa_cek,.auntTab tr td span {
-	margin-right: 5px;
+	margin-right: 8px;
 }
-
-.spa_cek input[type=checkbox],.spa_cek input[type=radio],.opn_div span input[type=radio] ,.auntTab td input[type=checkbox]{
-	margin: 0px 3px 2px 0px;
+.auntTab tr td span.marks {
+	margin-right: 5px;
+	display: inline-block;
+	min-width: 170px;
+}
+input[type=radio],input[type=checkbox]{
+	margin: 0px 2px 2px 0px;
 	vertical-align: middle;
 	cursor: pointer;
 }
 
 .info_table tr td .form-control,.auntTab tr td .form-control {
 	display: inline;
+	width: 190px;
+	padding: 6px 10px;
+}
+.auntTab tr td .marks_ipt {
+	width: 40px;
+	padding: 6px 0px;
+	text-align: center;
+	margin: 0 3px;
+	margin-bottom: 10px;
+}
+.auntTab tr td .little_ipt {
+	width: 40px;
+	padding: 6px 0px;
+	text-align: center;
+	margin: 0 3px;
+}
+.info_table tr td select.form-control,.auntTab tr td select.form-control {
+	padding: 6px 6px;
+}
+.info_table tr td textarea.jianjie,.auntTab tr td textarea.jianjie{
+	width: 400px;
+	height: 80px;
+}
+.info_table tr td textarea.beizhu,.auntTab tr td textarea.beizhu{
+	width: 614px;
+	height: 120px;
 }
 .files tr td .form-control{
 	width:80%
 }
 .auntTab tr td .w160{
 	width:160px;
+}
+.auntTab tr td .w120{
+	width:120px;
+}
+.auntTab tr td .w100{
+	width:100px;
+}
+.auntTab tr td .w320{
+	width:320px;
+}
+.auntTab tr td .w500{
+	width:500px;
 }
 .info_table tr td .age_ipt {
 	padding: 5px;
@@ -541,9 +625,11 @@ input[type=file]{
 }
 
 .face_tab_2 {
-	max-width: 600px;
+	max-width: 100%;
 }
-
+.tab860 {
+	width: 860px;
+}
 .lay_cnt {
 	padding: 30px 30px 15px;
 	width: 100%;
@@ -590,7 +676,9 @@ input[type=file]{
 	float: left;
 	width: 240px;
 }
-
+.opn_div input[type=text].w212,.opn_div select.w212{
+	width: 212px;
+}
 .btn_div button {
 	margin: 0 0 0 10px;
 	padding: 6px 12px;
@@ -627,7 +715,7 @@ input[type=file]{
 	width: 100%;
 	height: 100%;
 }
-.certificate li>.del_btn{
+.certificate li>.del_img{
 	position: absolute;
 	top: 0;
 	left: 62px;
@@ -662,7 +750,7 @@ h5{
 
 /*
 
-分页样式
+ÃƒÆ’Ã‚Â¥Ãƒâ€¹Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â©Ãƒâ€šÃ‚Â¡Ãƒâ€šÃ‚ÂµÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚Â Ãƒâ€šÃ‚Â·ÃƒÆ’Ã‚Â¥Ãƒâ€šÃ‚Â¼Ãƒâ€šÃ‚Â
 
 */
 
@@ -706,8 +794,8 @@ h5{
 	color: white;
 	display: inline-block;
 }
-
-.timer{
+/*ÃƒÂ¦Ã‚Â¡Ã‚Â£ÃƒÂ¦Ã…â€œÃ…Â¸*/
+/*.timer{
 	width: 646px;
 	height: 12px;
 	border: 1px solid #097ff9;
@@ -758,18 +846,60 @@ h5{
 .add_dangqi{
 	margin: 0;
 	margin-left: 5px;
+}*/
+
+.lxfs tr td{
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 0;
 }
-.new{
-	background: url(../img/new.png) no-repeat center;
-	background-size: 100%;
-	display: inline-block;
-	width: 25px;
-	height: 25px;
+.lxfs tr td label{
+	width: 100%;
+	text-align: center;
+}
+.lxfs tr td .form-control{
+	margin-bottom: 10px;
+}
+.add_btn{
+	padding: 1px 4px;
+}
+.del_btn{
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #579fe9;
+	margin-left: 5px;
+}
+.pipei li{
+	float: left;
+	position: relative;
+	margin-right: 25px;
+}
+.pipei{
+	padding: 20px 20px;
+}
+.pipei li>a{
+	display: block;
+	width: 100px;
+	height: 120px;
+}
+.pipei li>a>img{
+	width: 100%;
+	height: 100%;
+}
+.pipei li>p{
+	text-align: center;
+	margin-top: 5px;
+}
+.pipei li>input[type=button]{
 	position: absolute;
-	right: 0;
-	top: 13px;
+	right: -17px;
+	top: 0;
+	background: #333;
+	border: none;
+	color: #fff;
+	padding: 0 3px;
 }
-.nav-tabs>li>.new{
-	top: -2px;
-	right: -13px;
+.pipei li>input[type=button]:hover{
+	background: red;
 }

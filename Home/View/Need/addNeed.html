@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+</head>
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<form action="__MODULE__/Need/addNeed" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定派出么？')"  enctype="multipart/form-data">
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					客户标准需求表
+				</div>
+				<table class="auntTab iptTab">
+
+					<tbody>
+						<tr>
+							<td width="47%"><label>派发人：</label>
+								<!--如果是管理员则选择顾问。如果是客服则为自己-->
+								{$_SESSION[C('USER_AUTH_KEY')]['real_name']}
+							</td>
+							<!--<td width="53%"><label>需求编号：</label>-->
+								<!--<input type="text" class="form-control" value="" readonly="readonly"/>-->
+							<!--</td>-->
+						</tr>
+						<tr>
+							<td><label>产品选择：</label>
+							    <select class="form-control" id="product" name="product">
+						          	<option value="小田螺">小田螺</option>
+						          	<option value="大田螺">大田螺</option>
+						          	<option value="金牌田螺">金牌田螺</option>
+						          	<option value="超级田螺">超级田螺</option>
+						          	<option value="育儿嫂">育儿嫂</option>
+						          	<option value="3980特价">3980特价</option>
+						        </select>
+							</td>
+							<td><label>价格：</label>
+								<input type="text" class="form-control w160" name="product_price" value="5880" readonly="readonly" id="product_price"/>&nbsp;&nbsp;元
+							</td>
+						</tr>
+
+						<tr>
+							<td><label>客户称谓：</label>
+								<input type="text" class="form-control" value="" name="name" id="name"/>
+							</td>
+							<td><label>客户来源：</label>
+							    <select class="form-control" name="source">
+						          	<option>官网（竞价）</option>
+							        <option>官网（优化）</option>
+							        <option>第三方渠道</option>
+							        <option>微信公众号</option>
+							        <option>电话咨询</option>
+							        <option>微博</option>
+							        <option>QQ</option>
+							        <option>客户转介绍</option>
+							        <option>护理人员介绍</option>
+							        <option>内部员工介绍</option>
+							        <option>58同城</option>
+							        <option>外呼</option>
+							        <option>自然进店</option>
+							        <option>天使印象</option>
+							        <option>合作渠道介绍</option>
+							        <option>其他</option>
+							    </select>
+							</td>
+						</tr>
+						<tr>
+							<td><label>手机：</label>
+								<input type="text" class="form-control" value="" name="phone" id="phone"/>
+							</td>
+							<td><label>微信：</label>
+								<input type="text" class="form-control" value="" name="wchat" id="wchat"/>
+							</td>
+						</tr>
+						<tr>
+							<td><label>需要服务时间：</label>
+								<input type="text" class="form-control" value="" name="b_time" id="b_time"/>
+							</td>
+							<td><label>服务地点：</label>
+								<input type="text" class="form-control" value="" name="service_place" id="service_place"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>派发对象：</label>
+								<div class="rtdiv">
+									<volist name="employee_2" id="vo" key="k">
+										<input type="radio" name="sales_id" value="{$vo.id}"  <if condition="$k eq 1">checked</if>/>{$vo.real_name}&nbsp;&nbsp;
+									</volist>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>备注：</label>
+								<div class="rtdiv">
+									<textarea class="form-control beizhu" name="remark" id="remark"></textarea>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+
+				</table>
+				
+				<div class="form-group">
+					<input type="button" class="btnform m_left_20 magrin0" value="需求派出" id="sub_add"/>
+					<input type="button" class="default_btn" onclick="javascript:history.back(-1);" value="取消"/>
+				</div>
+			</div>
+			</form>
+			<!--main end-->
+			<script>
+				$('#sub_add').live('click',function(){
+					var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+					if($('#name').val() == ''){
+						layer.msg('请输入客户称谓！');
+						return false;
+					}
+					if($('#product_price').val() == ''){
+
+						alert($('#product_price').val());
+						layer.msg('请输入价格！');
+						return false;
+					}
+					if($('#phone').val() == ''){
+						layer.msg('请输入手机！');
+						return false;
+					}
+					if(!reg.test($('#b_time').val())){
+						layer.msg('请输入正确的服务时间！');
+						return false;
+					}
+					if($('#service_place').val() == ''){
+						layer.msg('请输入服务地点！');
+						return false;
+					}
+					if($('#remark').val() == ''){
+						layer.msg('请输入备注！');
+						return false;
+					}
+					$('#form_add').submit();
+				});
+
+				var price = $('input[name=product_price]');
+				$('#product').bind('change',function(){
+					if($(this).val()=='小田螺'){
+						price.val(5880).attr('readonly','readonly');
+					}else if($(this).val()=='大田螺'){
+						price.val(7880).attr('readonly','readonly');
+					}else if($(this).val()=='金牌田螺'){
+						price.val(9880).attr('readonly','readonly');
+					}else if($(this).val()=='超级田螺'){
+						price.val(12880).attr('readonly','readonly');
+					}else if($(this).val()=='育儿嫂'){
+						price.val('').removeAttr('readonly');
+					}else if($(this).val()=='3980特价'){
+						price.val(3980).attr('readonly','readonly');
+					}
+				});
+			</script>
+			
+</body>
+
+</html>

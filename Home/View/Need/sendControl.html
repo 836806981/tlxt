@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<!--头部导航-->
+				<include file="Need/top"/>
+				<!--头部导航-->
+				<div class="tab_tle">
+					<span class="int_s"></span>渠道派单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								今日共派出渠道单<strong>{$data.qd_count_day}</strong>单
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">类型</td>
+							<td width="8%">累计</td>
+							<td width="8%">当月</td>
+							<td width="8%">当日</td>
+						</tr>
+						<tr>
+							<td>实习单</td>
+							<td>{$data.sx_count}</td>
+							<td>{$data.sx_count_month}</td>
+							<td>{$data.sx_count_day}</td>
+						</tr>
+						<tr>
+							<td>渠道单</td>
+							<td>{$data.fsx_count}</td>
+							<td>{$data.fsx_count_month}</td>
+							<td>{$data.fsx_count_day}</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>客服派单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								今日共派出客服单<strong>{$data.kf_count_day}</strong>单
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">类型</td>
+							<td width="8%">累计</td>
+							<td width="8%">当月</td>
+							<td width="8%">当日</td>
+						</tr>
+						<tr>
+							<td>月嫂</td>
+							<td>{$data.ys_count}</td>
+							<td>{$data.ys_count_month}</td>
+							<td>{$data.ys_count_day}</td>
+						</tr>
+						<tr>
+							<td>育儿嫂</td>
+							<td>{$data.yes_count}</td>
+							<td>{$data.yes_count_month}</td>
+							<td>{$data.yes_count_day}</td>
+						</tr>
+						<tr>
+							<td>3980特价</td>
+							<td>{$data.tj_count}</td>
+							<td>{$data.tj_count_month}</td>
+							<td>{$data.tj_count_day}</td>
+						</tr>
+						<tr>
+							<td>总计</td>
+							<td>{$data.zg_count}</td>
+							<td>{$data.zg_count_month}</td>
+							<td>{$data.zg_count_day}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div> 
+			<!--main end-->
+			
+			
+</body>
+
+</html>

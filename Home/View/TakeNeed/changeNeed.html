@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<form action="__MODULE__/Need/changeNeed" method="post" id="form_edit" onsubmit="javascript:return window.confirm('确定派出么？')"  enctype="multipart/form-data">
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					修改客户需求
+				</div>
+				<table class="auntTab iptTab">
+					<tbody>
+						<tr>
+							<td width="47%"><label>派发人：</label>
+								{$info.add_employee}
+							</td>
+							<input type="hidden" name="id" value="{$info.id}"/>
+							<td width="53%"><label>需求编号：</label>
+								<input type="text" class="form-control" value="{$info.number}" readonly="readonly" />
+							</td>
+						</tr>
+						<tr>
+							<td><label>产品选择：</label>
+								<select class="form-control" id="product" name="product">
+									<option value="小田螺" <if condition="$info['product'] eq '小田螺'">selected</if>>小田螺</option>
+									<option value="大田螺" <if condition="$info['product'] eq '大田螺'">selected</if>>大田螺</option>
+									<option value="金牌田螺" <if condition="$info['product'] eq '金牌田螺'">selected</if>>金牌田螺</option>
+									<option value="超级田螺" <if condition="$info['product'] eq '超级田螺'">selected</if>>超级田螺</option>
+									<option value="育儿嫂" <if condition="$info['product'] eq '育儿嫂'">selected</if>>育儿嫂</option>
+									<option value="3980特价" <if condition="$info['product'] eq '3980特价'">selected</if>>3980特价</option>
+								</select>
+							</td>
+							<td><label>价格：</label>
+								<input type="text" class="form-control w160" name="product_price" value="{$info.product_price}" <if condition="$info['product'] neq '育儿嫂'">readonly</if> product_price/>&nbsp;&nbsp;元
+							</td>
+						</tr>
+
+						<tr>
+							<td><label>客户称谓：</label>
+								<input type="text" class="form-control" value="{$info.name}" name="name" id="name"/>
+							</td>
+							<td><label>客户来源：</label>
+								<select class="form-control" name="source">
+									<option <if condition="$info['source'] eq '官网（竞价）'">selected</if>>官网（竞价）</option>
+									<option <if condition="$info['source'] eq '官网（优化）'">selected</if>>官网（优化）</option>
+									<option <if condition="$info['source'] eq '第三方渠道'">selected</if>>第三方渠道</option>
+									<option <if condition="$info['source'] eq '微信公众号'">selected</if>>微信公众号</option>
+									<option <if condition="$info['source'] eq '电话咨询'">selected</if>>电话咨询</option>
+									<option <if condition="$info['source'] eq '微博'">selected</if>>微博</option>
+									<option <if condition="$info['source'] eq 'QQ'">selected</if>>QQ</option>
+									<option <if condition="$info['source'] eq '客户转介绍'">selected</if>>客户转介绍</option>
+									<option <if condition="$info['source'] eq '护理人员介绍'">selected</if>>护理人员介绍</option>
+									<option <if condition="$info['source'] eq '内部员工介绍'">selected</if>>内部员工介绍</option>
+									<option <if condition="$info['source'] eq '58同城'">selected</if>>58同城</option>
+									<option <if condition="$info['source'] eq '外呼'">selected</if>>外呼</option>
+									<option <if condition="$info['source'] eq '自然进店'">selected</if>>自然进店</option>
+									<option <if condition="$info['source'] eq '天使印象'">selected</if>>天使印象</option>
+									<option <if condition="$info['source'] eq '合作渠道介绍'">selected</if>>合作渠道介绍</option>
+									<option <if condition="$info['source'] eq '其他'">selected</if>>其他</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><label>手机：</label>
+								<input type="text" class="form-control" value="{$info.phone}" name="phone" id="phone"/>
+							</td>
+							<td><label>微信：</label>
+								<input type="text" class="form-control" value="{$info.wchat}" name="wchat" id="wchat"/>
+							</td>
+						</tr>
+						<tr>
+							<td><label>需要服务时间：</label>
+								<input type="text" class="form-control" value="{$info.b_time}" name="b_time" id="b_time"/>
+							</td>
+							<td><label>服务地点：</label>
+								<input type="text" class="form-control" value="{$info.service_place}" name="service_place" id="service_place"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>派发对象：</label>
+								<div class="rtdiv">
+									<volist name="employee_2" id="vo" key="k">
+										<input type="radio" name="sales_id" value="{$vo.id}"  <if condition="$info['sales_id'] eq $vo['id']">checked</if>/>{$vo.real_name}&nbsp;&nbsp;
+									</volist>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>备注：</label>
+								<div class="rtdiv">
+									<textarea class="form-control beizhu" name="remark" id="remark">{$info.remark}</textarea>
+								</div>
+							</td>
+						</tr>
+						<if condition="$info['status'] eq 22">
+							<tr>
+								<td colspan="2"><label>打回原因：</label>
+									{$info.back_reason}
+								</td>
+							</tr>
+						</if>
+
+					</tbody>
+				</table>
+				
+				<div class="form-group">
+					<input type="button" class="btnform m_left_20 magrin0" value="修改并发出" id="sub_edit"/>
+					<input type="button" class="default_btn" onclick="javascript:history.back(-1);" value="取消"/>
+				</div>
+			</div>
+			</form>
+			<!--main end-->
+			<script>
+
+
+				$('#sub_edit').live('click',function(){
+					var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+					if($('#name').val() == ''){
+						layer.msg('请输入客户称谓！');
+						return false;
+					}
+					if($('#product_price').val() == ''){
+						layer.msg('请输入价格！');
+						return false;
+					}
+					if($('#phone').val() == ''){
+						layer.msg('请输入手机！');
+						return false;
+					}
+					if(!reg.test($('#b_time').val())){
+						layer.msg('请输入正确的服务时间！');
+						return false;
+					}
+					if($('#service_place').val() == ''){
+						layer.msg('请输入服务地点！');
+						return false;
+					}
+					if($('#remark').val() == ''){
+						layer.msg('请输入备注！');
+						return false;
+					}
+					$('#form_edit').submit();
+				});
+
+				var price = $('input[name=product_price]');
+				$('#product').bind('change',function(){
+					if($(this).val()=='小田螺'){
+						price.val(5880).attr('readonly','readonly');
+					}else if($(this).val()=='大田螺'){
+						price.val(7880).attr('readonly','readonly');
+					}else if($(this).val()=='金牌田螺'){
+						price.val(9880).attr('readonly','readonly');
+					}else if($(this).val()=='超级田螺'){
+						price.val(12880).attr('readonly','readonly');
+					}else if($(this).val()=='育儿嫂'){
+						price.val('').removeAttr('readonly');
+					}else if($(this).val()=='3980特价'){
+						price.val(3980).attr('readonly','readonly');
+					}
+				});
+			</script>
+
+			
+			
+</body>
+
+</html>

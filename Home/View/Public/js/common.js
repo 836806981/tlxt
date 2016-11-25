@@ -2,6 +2,10 @@
 (function ($) {
     $.extend({
     //显示页码
+
+
+
+
     ProductPageShow: function (obj,pagenum) {
 
         var num = obj % pagenum == 0 ? 0 : 1;

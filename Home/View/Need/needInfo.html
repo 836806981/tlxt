@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					客服派单详细信息
+				</div>
+				<div class="tab_tle" >
+					<span class="int_s"></span>订单信息
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="33%"><label>需求编号：</label>{$info.number}</td>
+							<td width="33%"><label>派发人：</label>{$info.add_employee}</td>
+							<td width="33%"><label>派发对象：</label>{$info.sales_name}</td>
+						</tr>
+						<tr>
+							<td><label>派发时间：</label>{$info.status_1_str}</td>
+							<td><label>接单时间：</label>{$info.status_2_str}</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="tab_tle" >
+					<span class="int_s"></span>客户需求
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="33%"><label>客户称谓：</label>{$info.name}</td>
+							<td width="33%"><label>客户需求：</label>{$info.product}</td>
+							<td width="33%"><label>客户来源：</label>{$info.source}</td>
+						</tr>
+						<tr>
+							<td><label>手机：</label>{$info.phone}</td>
+							<td><label>微信：</label>{$info.wchat}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label>价格：</label>{$info.product_price}</td>
+							<td><label>服务时间：</label>{$info.b_time}</td>
+							<td><label>服务地点：</label>{$info.service_place}</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>备注：</label>
+								<div class="rtdiv">
+									{$info.remark}
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="form-group">
+					<if condition="$info['status'] neq 2">
+					<input type="button" class="default_btn m_left_20 magrin0" onclick="location.href='__MODULE__/Need/changeNeed/id/{$info.id}.html'" value="编辑"/>
+					</if>
+					<input type="button" class="default_btn" onclick="javascript:history.back(-1);" value="取消"/>
+				</div>
+			</div>
+
+
+			<!--main end-->
+			
+			
+</body>
+
+</html>

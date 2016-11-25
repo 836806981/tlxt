@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+
+				<!--头部导航-->
+				<include file="Need/top"/>
+				<!--头部导航-->
+
+
+				<div class="form-inline">
+					<div class="form-group">
+						 <label>需求编号</label><input type="text" class="form-control" id="number"/>
+					</div>
+					<div class="form-group">
+						 <label>派单时间</label><input type="text" class="form-control" id="status_1"/>
+					</div>
+					<div class="form-group">
+						 <label>顾问</label>
+						 <select class="form-control" id="sales_id">
+						 	<option value="0">全部</option>
+							 <volist name="gu" id="vo">
+								 <option value="{$vo.id}">{$vo.real_name}</option>
+							 </volist>
+					     </select>
+					</div>
+
+					<if condition=" $_SESSION[C('USER_AUTH_KEY')]['permission'] eq 24">
+					<div class="form-group">
+						 <label>派单人</label>
+						 <select class="form-control" id="employee_id">
+						 	<option value="0">全部</option>
+							 <volist name="pai" id="vo">
+								 <option value="{$vo.id}">{$vo.real_name}</option>
+							 </volist>
+					     </select>
+					</div>
+						<else/>
+						<input type="hidden" value="{$_SESSION[C('USER_AUTH_KEY')]['id']}" id="employee_id"/>
+					</if>
+
+					<div class="form-group">
+						 <label>需求状态</label>
+						 <select class="form-control" id="status">
+						 	 <option value="0">全部</option>
+					         <option value="1">待接待</option>
+					         <option value="2">已接待</option>
+					         <option value="22">打回</option>
+					     </select>
+					</div>
+					<div class="form-group">
+						 <button type="submit" class="subform" id="search">搜索</button>
+					</div>
+					
+				</div>
+				<table class="tab_info">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								当前搜索订单：<span id="show_number_str"></span>条
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">需求编号</td>
+							<td width="8%">需求来源</td>
+							<td width="8%">派发时间</td>
+							<td width="8%">派发人</td>
+							<td width="8%">客户姓名</td>
+							<td width="8%">顾问</td>
+							<td width="8%">接单时间</td>
+							<td width="8%">需求状态</td>
+							<td width="15%">操作</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td>11111</td>-->
+							<!--<td>11</td>-->
+							<!--<td>11</td>-->
+							<!--<td>11</td>-->
+							<!--<td>1</td>-->
+							<!--<td>1</td>-->
+							<!--<td>1</td>-->
+							<!--<td>1</td>-->
+							<!--<td><a href="needInfo.html">查看</a><a href="changeNeed.html">编辑</a><a href="#" class="rtnbtn">放入回收站</a></td>-->
+						<!--</tr>-->
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+
+								<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+								</div>
+
+								<div class="btn_modular">
+									<input type="button" class="btnform" onclick="location.href='__MODULE__/Need/addNeed.html'" value="新增派单"/>
+								</div>
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<script src="__PUBLIC__/js/showTimeDown.js"></script>
+			<script src="__PUBLIC__/js/serviceList.js"></script>
+			<!--main end-->
+			<script>
+
+
+
+//				放入回收站
+				$('.del_this').live('click',function(){
+					var sub_str = "javascript:return window.confirm('确定放入回收站？')";
+					var order_id = $(this).attr('order_id');
+					layer.open({
+						type: 1,
+						title: '是否放入回收站？',
+						area: ['auto', 'auto'], //宽高
+						content: '<div class="lay_cnt">'
+							+   '<form action="__MODULE__/Need/delNeed" method="post" id="form_del" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+							+	'<div class="opn_div clear">'
+							+		'<input type="text" class="form-control" value="" placeholder="请输入放入回收站原因" name="del_reason" id="del_reason"/>'
+							+		'<input type="hidden" name="order_id" value="'+order_id+'" />'
+							+	'</div>'
+							+	'<div class="btn_div clear">'
+							+		'<button type="button" class="default_btn" id="sub_del">确认</button>'
+							+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+							+	'</div>'
+							+	'</form>'
+							+'</div>'
+					});
+				});
+
+				$('#sub_del').live('click',function(){
+					if($('#del_reason').val() == ''){
+						layer.msg('请输入原因！');
+						return false;
+					}
+					$('#form_del').submit();
+				});
+
+				function close_lay(){
+					layer.closeAll();
+				}
+			</script>
+
+			
+</body>
+
+</html>
