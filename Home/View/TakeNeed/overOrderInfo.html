@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(2).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					订单详情
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>订单信息
+					</div>
+					<table class="auntTab">
+						<tbody>
+							<tr>
+								<td width="33%"><label>需求编号：</label>{$info.number}</td>
+								<td width="33%"><label>派发人：</label>{$info.number}</td>
+								<td width="33%"><label>派发对象：</label>{$info.number}</td>
+							</tr>
+							<tr>
+								<td><label>派发时间：</label>{$info.number}</td>
+								<td><label>接单时间：</label>{$info.number}</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>客户需求
+					</div>
+					<table class="auntTab">
+						<tbody>
+							<tr>
+								<td width="33%"><label>客户称谓：</label>{$info.number}</td>
+								<td width="33%"><label>客户需求：</label>{$info.number}</td>
+								<td width="33%"><label>客户来源：</label>{$info.number}</td>
+							</tr>
+							<tr>
+								<td><label>手机：</label>{$info.number}</td>
+								<td><label>微信：</label>{$info.number}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><label>价格：</label>{$info.number}</td>
+								<td><label>服务时间：</label>{$info.number}</td>
+								<td><label>服务地点：</label>{$info.number}</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>价格：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>家庭情况<span class="togbtn">展开∨</span>
+					</div>
+					<table class="auntTab" style="display: none; overflow: hidden;">
+						<tbody>
+							<tr>
+								<td width="33%"><label>客户姓名：</label>{$info.number}</td>
+								<td width="33%"><label>主要联系方式：</label>{$info.number}</td>
+								<td width="33%"><label>紧急联系人：</label>{$info.number}</td>
+							</tr>
+							<tr>
+								<td><label>需要服务时间：</label>{$info.number}</td>
+								<td><label>服务周期：</label>{$info.number}天</td>
+								<td><label>家庭人数：</label>{$info.number}人</td>
+							</tr>
+							<tr>
+								<td><label>小孩：</label>{$info.number}人</td>
+								<td><label>老人：</label>{$info.number}人</td>
+								<td><label>成人：</label>{$info.number}人</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>家庭成员情况：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>家庭住址：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>周边环境：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>工作内容<span class="togbtn">展开∨</span>
+					</div>
+					<table class="auntTab" style="display: none;">
+						<tbody>
+							<tr>
+								<td width="33%"><label>阿姨年龄要求：</label>{$info.number}</td>
+								<td width="33%"><label>生肖要求：</label>{$info.number}</td>
+								<td width="33%"><label>形象要求：</label>{$info.number}</td>
+							</tr>
+							
+							<tr>
+								<td colspan="3"><label>技能要求：</label>
+									<div class="rtdiv">
+										<span class="marks"><input type="checkbox" checked="checked" readonly="readonly">新生儿生活护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">新生儿健康护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">新生儿疾病预防</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">新生儿早期促进</span><br>
+										<span class="marks"><input type="checkbox" checked="checked" readonly="readonly">产妇专业护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">产妇生活护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">产妇心理预防</span>
+										<span class="marks"><input type="checkbox" checked="checked" readonly="readonly">产妇疾病预防</span><br>
+										<span class="marks"><input type="checkbox" readonly="readonly">产妇产后恢复</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">产妇乳房护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">产妇饮食护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">早期智力开发、启蒙训练</span><br>
+										<span class="marks"><input type="checkbox" readonly="readonly">小儿推拿</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">幼儿辅食添加</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">早产、疾病儿护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">产妇疾病预防</span><br>
+										<span class="marks"><input type="checkbox" readonly="readonly">高龄产妇护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">新生儿意外伤害的预防和护理</span>
+										<span class="marks"><input type="checkbox" readonly="readonly">厨艺</span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>性格要求：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>主要工作内容：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>次要工作内容：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>风俗及禁忌：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>家庭对接人<span class="togbtn">展开∨</span>
+					</div>
+					<table class="auntTab" style="display: none;">
+						<tbody>
+							<tr>
+								<td colspan="3"><label>长期在家人：</label>{$info.number}</td>
+							</tr>
+							<tr>
+								<td width="34%"><label>主要对接人：</label>{$info.number}</td>
+								<td width="66%"><label>次要对接人：</label>{$info.number}</td>
+							</tr>
+							<tr>
+								<td colspan="3"><label>对接人性格：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>顾问判定<span class="togbtn">展开∨</span>
+					</div>
+					<table class="auntTab" style="display: none;">
+						<tbody>
+							<tr>
+								<td width="33%"><label>阿姨建议：</label>{$info.number}</td>
+								<td width="67%"><label>工作性质：</label>
+									<input type="radio" name="xingzhi" checked="checked" readonly="readonly">月嫂&nbsp;&nbsp;
+									<input type="radio" name="xingzhi" readonly="readonly">育儿嫂&nbsp;&nbsp;
+								</td>
+							</tr>
+							<tr>
+							<td><label>阿姨价位：</label>{$info.number}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label>服务周期：</label>{$info.number}天</td>
+							<td><label>假期：</label>{$info.number}天</td>
+						</tr>
+						<tr>
+							<td><label>预计上户时间：</label>{$info.number}</td>
+							<td><label>预计下户时间：</label>{$info.number}</td>
+						</tr>
+						<tr>
+							<td><label>特殊情况：</label>{$info.number}</td>
+							<td><label>加价原因：</label>{$info.number}</td>
+						</tr>
+						<tr>
+							<td><label>订单加价：</label>{$info.number}元</td>
+							<td><label>阿姨薪资加价：</label>{$info.number}元</td>
+						</tr>
+							<tr>
+								<td colspan="2"><label>其他建议：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><label>备注：</label>
+									<div class="rtdiv">
+										{$info.number}
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="form-group">
+					<input type="button" class="default_btn m_left_20 magrin0" onclick="location.href='overOrderInfo_1.html'" value="发单">
+					<input type="button" class="default_btn" onclick="location.href='changeOrder.html'" value="修改">
+					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="取消">
+				</div>
+			</div> 
+			<!--main end-->
+
+</body>
+
+</html>

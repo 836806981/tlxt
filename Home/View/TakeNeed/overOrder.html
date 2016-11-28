@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(2).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					完善订单
+				</div>
+				<div class="tab_tle" >
+					<span class="int_s"></span>订单信息
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="33%"><label>需求编号：</label>{$info.number}</td>
+							<td width="33%"><label>派发人：</label>{$info.add_employee}</td>
+							<td width="33%"><label>派发对象：</label>{$info.sales_name}</td>
+						</tr>
+						<tr>
+							<td><label>派发时间：</label>{$info.status_1_str}</td>
+							<td><label>接单时间：</label>{$info.status_2_str}</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="tab_tle" >
+					<span class="int_s"></span>客户需求
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="33%"><label>客户称谓：</label>{$info.name}</td>
+							<td width="33%"><label>客户需求：</label>{$info.product}</td>
+							<td width="33%"><label>客户来源：</label>{$info.source}</td>
+						</tr>
+						<tr>
+							<td><label>手机：</label>{$info.phone}</td>
+							<td><label>微信：</label>{$info.wchat}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label>价格：</label>{$info.product_price}元</td>
+							<td><label>服务时间：</label>{$info.b_time}</td>
+							<td><label>服务地点：</label>{$info.service_place}</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>备注：</label>
+								<div class="rtdiv">
+									{$info.remark}
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="tab_tle" >
+					<span class="int_s"></span>订单信息
+				</div>
+				<form action="__MODULE__/TakeNeed/overOrder" method="post" id="form_save" onsubmit="javascript:return window.confirm('确定保存么？')"  enctype="multipart/form-data">
+				<table class="auntTab iptTab">
+					<tbody>
+						<tr>
+							<td width="33%"><label>客户姓名：</label>
+								<input type="text" class="form-control" value="{$info.name}" name="name" id="name"/>
+								<input type="hidden" name="order_id" value="{$info.id}"/>
+							</td>
+							<td width="33%"><label>主要联系方式：</label>
+								<input type="text" class="form-control" value="{$info.phone}" name="phone" id="phone"/>
+							</td>
+							<td width="33%"><label>紧急联系人：</label>
+								<input type="text" class="form-control" value="" name="urgent_phone" id="urgent_phone"/>
+							</td>
+						</tr>
+						<tr>
+							<td><label>家庭人数：</label>
+								<input type="text" class="form-control w160" name="family_num" id="family_num"/>&nbsp;&nbsp;人
+							</td>
+							<td><label>小孩：</label>
+								<input type="text" class="form-control w160" name="baby_num" id="baby_num"/>&nbsp;&nbsp;人
+							</td>
+							<td><label>老人：</label>
+								<input type="text" class="form-control w160" name="old_num" id="old_num"/>&nbsp;&nbsp;人
+							</td>
+						</tr>
+						<tr>
+
+							<td><label>成人：</label>
+								<input type="text" class="form-control w160" name="adult_num" id="adult_num"/>&nbsp;&nbsp;人
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>家庭成员情况：</label>
+								<input type="text" class="form-control w500" name="family_situation" id="family_situation"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>家庭住址：</label>
+								<input type="text" class="form-control w500" name="family_address" id="family_address"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>周边环境：</label>
+								<input type="text" class="form-control w500" name="environment" id="environment"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle" >
+					<span class="int_s"></span>工作内容
+				</div>
+				<table class="auntTab iptTab">
+					<tbody>
+						<tr>
+							<td width="33%"><label>阿姨年龄要求：</label>
+								<input type="text" class="form-control" value="" name="nurse_age" id="nurse_age"/>
+							</td>
+							<td width="33%"><label>生肖要求：</label>
+								<input type="text" class="form-control" name="nurse_zodiac" id="nurse_zodiac"/>
+							</td>
+							<td width="33%"><label>形象要求：</label>
+								<input type="text" class="form-control" name="nurse_show" id="nurse_show"/>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="3"><label>技能要求：</label>
+								<div class="rtdiv">
+									<span class="marks"><input type="checkbox" name="skills1" id="skills1" value="1"/>新生儿生活护理</span>
+									<span class="marks"><input type="checkbox" name="skills2" id="skills2" value="1"/>新生儿健康护理</span>
+									<span class="marks"><input type="checkbox" name="skills3" id="skills3" value="1"/>新生儿疾病预防</span>
+									<span class="marks"><input type="checkbox" name="skills4" id="skills4" value="1"/>新生儿早期促进</span><br />
+									<span class="marks"><input type="checkbox" name="skills5" id="skills5" value="1"/>产妇专业护理</span>
+									<span class="marks"><input type="checkbox" name="skills6" id="skills6" value="1"/>产妇生活护理</span>
+									<span class="marks"><input type="checkbox" name="skills7" id="skills7" value="1"/>产妇心理预防</span>
+									<span class="marks"><input type="checkbox" name="skills8" id="skills8" value="1"/>产妇疾病预防</span><br />
+									<span class="marks"><input type="checkbox" name="skills9" id="skills9" value="1"/>产妇产后恢复</span>
+									<span class="marks"><input type="checkbox" name="skills10" id="skills10" value="1"/>产妇乳房护理</span>
+									<span class="marks"><input type="checkbox" name="skills11" id="skills11" value="1"/>产妇饮食护理</span>
+									<span class="marks"><input type="checkbox" name="skills12" id="skills12" value="1"/>早期智力开发、启蒙训练</span><br />
+									<span class="marks"><input type="checkbox" name="skills13" id="skills13" value="1"/>小儿推拿</span>
+									<span class="marks"><input type="checkbox" name="skills14" id="skills14" value="1"/>幼儿辅食添加</span>
+									<span class="marks"><input type="checkbox" name="skills15" id="skills15" value="1"/>早产、疾病儿护理</span>
+									<span class="marks"><input type="checkbox" name="skills16" id="skills16" value="1"/>产妇疾病预防</span><br />
+									<span class="marks"><input type="checkbox" name="skills17" id="skills17" value="1"/>高龄产妇护理</span>
+									<span class="marks"><input type="checkbox" name="skills18" id="skills18" value="1"/>新生儿意外伤害的预防和护理</span>
+									<span class="marks"><input type="checkbox" name="skills19" id="skills19" value="1"/>厨艺</span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>性格要求：</label>
+								<input type="text" class="form-control w500" name="character" id="character"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>主要工作内容：</label>
+								<input type="text" class="form-control w500" name="work_first" id="work_first"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>次要工作内容：</label>
+								<input type="text" class="form-control w500" name="work_second" id="work_second"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>风俗及禁忌：</label>
+								<input type="text" class="form-control w500" name="custom_taboo" id="custom_taboo"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle" >
+					<span class="int_s"></span>家庭对接人
+				</div>
+				<table class="auntTab iptTab">
+					<tbody>
+						<tr>
+							<td colspan="3"><label>长期在家人：</label>
+								<input type="text" class="form-control w500" name="long_family" id="long_family"/>
+							</td>
+						</tr>
+						<tr>
+							<td width="34%"><label>主要对接人：</label>
+								<input type="text" class="form-control" name="first_pick" id="first_pick"/>
+							</td>
+							<td width="66%"><label>次要对接人：</label>
+								<input type="text" class="form-control" name="second_pick" id="second_pick"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>对接人性格：</label>
+								<input type="text" class="form-control w500" name="pick_character" id="pick_character"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle" >
+					<span class="int_s"></span>顾问判定
+				</div>
+				<table class="auntTab iptTab">
+					<tbody>
+						<tr>
+							<td width="34%"><label>阿姨建议：</label>
+								<input type="text" class="form-control" name="nurse_jy" id="nurse_jy"/>
+							</td>
+							<td width="66%"><label>工作性质：</label>
+								<input type="radio" name="xingzhi" name="work_type"/>月嫂&nbsp;&nbsp;
+								<input type="radio" name="xingzhi" name="work_type" />育儿嫂&nbsp;&nbsp;
+							</td>
+						</tr>
+						<tr>
+							<td><label>阿姨价位：</label>
+								<input type="text" class="form-control" name="nurse_price" id="nurse_price"/>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label>服务周期：</label>
+								<input type="text" class="form-control" name="service_day" id="service_day"/>
+							</td>
+							<td>
+								<label>假期：</label>
+								<input type="text" class="form-control w160" name="holiday" id="holiday"/>&nbsp;&nbsp;天
+							</td>
+						</tr>
+						<tr>
+							<td><label>预计上户时间：</label>
+								<input type="text" class="form-control" name="b_time" id="b_time"/>
+							</td>
+							<td>
+								<label>预计下户时间：</label>
+								<input type="text" class="form-control" name="s_time" id="s_time"/>
+							</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td><label>阿姨价位：</label>-->
+								<!--<input type="text" class="form-control" name="name" id="name"/>-->
+							<!--</td>-->
+							<!--<td>-->
+								<!--<label>服务周期：</label>-->
+								<!--<input type="text" class="form-control" name="name" id="name"/>-->
+							<!--</td>-->
+						<!--</tr>-->
+						<tr>
+							<td><label>特殊情况：</label>
+								<input type="radio" name="teshu" name="price_add" />有&nbsp;&nbsp;
+								<input type="radio" name="teshu" name="price_add" checked/>无&nbsp;&nbsp;
+							</td>
+							<td><label>加价原因：</label>
+								<input type="text" class="form-control" name="add_reason" id="add_reason"/>
+							</td>
+						</tr>
+						<tr>
+							<td><label>订单加价：</label>
+								<input type="text" class="form-control w160" name="add_order_price" id="add_order_price"/>&nbsp;&nbsp;元
+							</td>
+							<td><label>阿姨薪资加价：</label>
+								<input type="text" class="form-control w160" name="add_nurse_price" id="add_nurse_price"/>&nbsp;&nbsp;元
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>其他建议：</label>
+								<input type="text" class="form-control w500" name="advise" id="advise"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>备注：</label>
+								<input type="text" class="form-control w500" value="{$info.remark}" name="remark" id="remark"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="form-group">
+					<input type="button" class="default_btn m_left_20" id="sub_save" value="保存"/>
+					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="取消"/>
+				</div>
+					</form>
+			</div>
+
+			<script>
+
+				$('#sub_save').live('click',function(){
+					var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+					if($('#name').val() == ''){
+						layer.msg('请输入客户称谓！');
+						return false;
+					}
+					if($('#phone').val() == ''){
+						layer.msg('请输入手机！');
+						return false;
+					}
+					if(!reg.test($('#b_time').val())){
+						layer.msg('请输入正确的服务时间！');
+						return false;
+					}
+
+					$('#form_save').submit();
+				});
+
+			</script>
+			<!--main end-->
+			
+			
+</body>
+
+</html>

@@ -123,12 +123,84 @@ class TakeNeedController extends CommonController {
             echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-
-
-
-
-
     }
+
+    //完善订单
+    public function overOrder(){
+        if (I('post.')) {
+            $post = I('post.');
+
+            $save_mod = M('order')->where('id='.$post['order_id'].'')->save($post);
+            $have_order = M('order_info')->where('order_id='.$post['order_id'].'')->find();
+
+            for($i = 1;$i < 19;$i++){
+                $post['skills'] .= $post['skills'.$i].',';
+            }
+            if($have_order){
+                M('order_info')->where('order_id='.$post['order_id'].'')->save($post);
+            }else{
+                M('order_info')->add($post);
+            }
+            if($save_mod!==false){
+                echo "<script>alert('成功'); window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
+                exit;
+            }else{
+                echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
+            }
+
+
+        } else {
+            if (!I('get.id')) {
+                echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
+            }
+            $info = M('order')->where('id=' . I('get.id') . '')->find();
+            if (!$info) {
+                echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
+            }
+            if($info['status']==1){
+                $status['status'] = 2;
+                $status['status_2'] = time();
+                $save_mod = M('order')->where('id='.I('get.id').'')->save($status);
+                if($save_mod===false){
+                    M('order')->where('id='.I('get.id').'')->save($status);
+                }
+                $info['status'] = 2;
+                $info['status_2'] = $status['status_2'] ;
+            }
+
+            $info['status_1_str'] = $info['status_1'] ? date('Y-m-d H:i:s', $info['status_1']) : 0;
+            $info['status_2_str'] = $info['status_2'] ? date('Y-m-d H:i:s', $info['status_2']) : 0;
+
+            $this->assign('info', $info);
+            $this->display();
+        }
+    }
+
+    //完善订单后详情
+    public function overOrderInfo(){
+        if (!I('get.id')) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('order')->where('id=' . I('get.id') . '')->find();
+        if (!$info) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info_in = M('order_info')->where('order_id='.I('get.id').'')->find();
+
+        $info =  array_merge($info_in,$info);
+
+
+        $this->assign('info',$info);
+        $this->display();
+    }
+
+
+
 
 
 }

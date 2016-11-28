@@ -67,7 +67,7 @@
 					</tbody>
 				</table>
 				<div class="form-group">
-					<input type="button" class="btnform m_left_20 magrin0" onclick="location.href='__MODULE__/Need/changeNeed/id/{$info.id}.html'" value="完善订单"/>
+					<input type="button" class="btnform m_left_20 magrin0" onclick="location.href='__MODULE__/TakeNeed/overOrder/id/{$info.id}.html'" value="完善订单"/>
 					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="取消"/>
 					<input type="button" class="default_btn"  value="打回" id="back" order_id="{$info.id}"/>
 				</div>
@@ -104,6 +104,10 @@
 					}
 					$('#form_del').submit();
 				});
+
+				function close_lay(){
+					layer.closeAll();
+				}
 			</script>
 			
 			
