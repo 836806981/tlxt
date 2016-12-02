@@ -109,16 +109,16 @@ $.extend({
                             status_1 = item.status_2_str    ;
                         }
                         str +='	<tr class="data">\
-                        <td>'+item.number+'</td>\
-                        <td>'+item.source+'</td>\
-                        <td>'+item.status_1_str+'</td>\
-                        <td>'+item.add_employee+'</td>\
-                        <td>'+item.name+'</td>\
-                        <td>'+item.sales_name+'</td>\
-                        <td>'+status_1+'</td>\
-                        <td>'+item.status_name+'</td>\
-                        <td><a href="' + MODULE + '/Need/needInfo/id/' + item.id + '.html">查看</a>'+dell+del_str+'</td>\
-                        </tr>';
+                            <td>'+item.number+'</td>\
+                            <td>'+item.source+'</td>\
+                            <td>'+item.status_1_str+'</td>\
+                            <td>'+item.add_employee+'</td>\
+                            <td>'+item.name+'</td>\
+                            <td>'+item.sales_name+'</td>\
+                            <td>'+status_1+'</td>\
+                            <td>'+item.status_name+'</td>\
+                            <td><a href="' + MODULE + '/Need/needInfo/id/' + item.id + '.html">查看</a>'+dell+del_str+'</td>\
+                            </tr>';
                     });
                     $dom.before(str);
                     $(".data").attr('onmouseover',"this.style.backgroundColor='#eeeeee';");

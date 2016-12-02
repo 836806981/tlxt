@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[田螺阿姨]后台</title>
 
-
 </head>
 
 <body>
@@ -81,39 +80,39 @@
 								<input type="text" class="form-control" value="{$info.phone}" name="phone" id="phone"/>
 							</td>
 							<td width="33%"><label>紧急联系人：</label>
-								<input type="text" class="form-control" value="" name="urgent_phone" id="urgent_phone"/>
+								<input type="text" class="form-control" value="{$info.urgent_phone}" name="urgent_phone" id="urgent_phone"/>
 							</td>
 						</tr>
 						<tr>
 							<td><label>家庭人数：</label>
-								<input type="text" class="form-control w160" name="family_num" id="family_num"/>&nbsp;&nbsp;人
+								<input type="text" class="form-control w160" value="{$info.family_num}" name="family_num" id="family_num"/>&nbsp;&nbsp;人
 							</td>
 							<td><label>小孩：</label>
-								<input type="text" class="form-control w160" name="baby_num" id="baby_num"/>&nbsp;&nbsp;人
+								<input type="text" class="form-control w160" value="{$info.baby_num}" name="baby_num" id="baby_num"/>&nbsp;&nbsp;人
 							</td>
 							<td><label>老人：</label>
-								<input type="text" class="form-control w160" name="old_num" id="old_num"/>&nbsp;&nbsp;人
+								<input type="text" class="form-control w160" value="{$info.old_num}" name="old_num" id="old_num"/>&nbsp;&nbsp;人
 							</td>
 						</tr>
 						<tr>
 
 							<td><label>成人：</label>
-								<input type="text" class="form-control w160" name="adult_num" id="adult_num"/>&nbsp;&nbsp;人
+								<input type="text" class="form-control w160" value="{$info.adult_num}" name="adult_num" id="adult_num"/>&nbsp;&nbsp;人
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>家庭成员情况：</label>
-								<input type="text" class="form-control w500" name="family_situation" id="family_situation"/>
+								<input type="text" class="form-control w500" value="{$info.family_situation}" name="family_situation" id="family_situation"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>家庭住址：</label>
-								<input type="text" class="form-control w500" name="family_address" id="family_address"/>
+								<input type="text" class="form-control w500" value="{$info.family_address}" name="family_address" id="family_address"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>周边环境：</label>
-								<input type="text" class="form-control w500" name="environment" id="environment"/>
+								<input type="text" class="form-control w500" value="{$info.environment}" name="environment" id="environment"/>
 							</td>
 						</tr>
 					</tbody>
@@ -126,59 +125,59 @@
 					<tbody>
 						<tr>
 							<td width="33%"><label>阿姨年龄要求：</label>
-								<input type="text" class="form-control" value="" name="nurse_age" id="nurse_age"/>
+								<input type="text" class="form-control" value="{$info.nurse_age}" name="nurse_age" id="nurse_age"/>
 							</td>
 							<td width="33%"><label>生肖要求：</label>
-								<input type="text" class="form-control" name="nurse_zodiac" id="nurse_zodiac"/>
+								<input type="text" class="form-control" value="{$info.nurse_zodiac}" name="nurse_zodiac" id="nurse_zodiac"/>
 							</td>
 							<td width="33%"><label>形象要求：</label>
-								<input type="text" class="form-control" name="nurse_show" id="nurse_show"/>
+								<input type="text" class="form-control" value="{$info.nurse_show}" name="nurse_show" id="nurse_show"/>
 							</td>
 						</tr>
 						
 						<tr>
 							<td colspan="3"><label>技能要求：</label>
 								<div class="rtdiv">
-									<span class="marks"><input type="checkbox" name="skills1" id="skills1" value="1"/>新生儿生活护理</span>
-									<span class="marks"><input type="checkbox" name="skills2" id="skills2" value="1"/>新生儿健康护理</span>
-									<span class="marks"><input type="checkbox" name="skills3" id="skills3" value="1"/>新生儿疾病预防</span>
-									<span class="marks"><input type="checkbox" name="skills4" id="skills4" value="1"/>新生儿早期促进</span><br />
-									<span class="marks"><input type="checkbox" name="skills5" id="skills5" value="1"/>产妇专业护理</span>
-									<span class="marks"><input type="checkbox" name="skills6" id="skills6" value="1"/>产妇生活护理</span>
-									<span class="marks"><input type="checkbox" name="skills7" id="skills7" value="1"/>产妇心理预防</span>
-									<span class="marks"><input type="checkbox" name="skills8" id="skills8" value="1"/>产妇疾病预防</span><br />
-									<span class="marks"><input type="checkbox" name="skills9" id="skills9" value="1"/>产妇产后恢复</span>
-									<span class="marks"><input type="checkbox" name="skills10" id="skills10" value="1"/>产妇乳房护理</span>
-									<span class="marks"><input type="checkbox" name="skills11" id="skills11" value="1"/>产妇饮食护理</span>
-									<span class="marks"><input type="checkbox" name="skills12" id="skills12" value="1"/>早期智力开发、启蒙训练</span><br />
-									<span class="marks"><input type="checkbox" name="skills13" id="skills13" value="1"/>小儿推拿</span>
-									<span class="marks"><input type="checkbox" name="skills14" id="skills14" value="1"/>幼儿辅食添加</span>
-									<span class="marks"><input type="checkbox" name="skills15" id="skills15" value="1"/>早产、疾病儿护理</span>
-									<span class="marks"><input type="checkbox" name="skills16" id="skills16" value="1"/>产妇疾病预防</span><br />
-									<span class="marks"><input type="checkbox" name="skills17" id="skills17" value="1"/>高龄产妇护理</span>
-									<span class="marks"><input type="checkbox" name="skills18" id="skills18" value="1"/>新生儿意外伤害的预防和护理</span>
-									<span class="marks"><input type="checkbox" name="skills19" id="skills19" value="1"/>厨艺</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills1"  <if condition="$info['skill_a'][0] eq 1">checked</if>>新生儿生活护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills2"  <if condition="$info['skill_a'][1] eq 1">checked</if>>新生儿健康护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills3"  <if condition="$info['skill_a'][2] eq 1">checked</if>>新生儿疾病预防</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills4"  <if condition="$info['skill_a'][3] eq 1">checked</if>>新生儿早期促进</span><br>
+									<span class="marks"><input type="checkbox" value="1"  name="skills5"  <if condition="$info['skill_a'][4] eq 1">checked</if>>产妇专业护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills6"  <if condition="$info['skill_a'][5] eq 1">checked</if>>产妇生活护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills7"  <if condition="$info['skill_a'][6] eq 1">checked</if>>产妇心理预防</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills8"  <if condition="$info['skill_a'][7] eq 1">checked</if>>产妇疾病预防</span><br>
+									<span class="marks"><input type="checkbox" value="1"  name="skills9"  <if condition="$info['skill_a'][8] eq 1">checked</if>>产妇产后恢复</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills10"  <if condition="$info['skill_a'][9] eq 1">checked</if>>产妇乳房护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills11"  <if condition="$info['skill_a'][10] eq 1">checked</if>>产妇饮食护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills12"  <if condition="$info['skill_a'][11] eq 1">checked</if>>早期智力开发、启蒙训练</span><br>
+									<span class="marks"><input type="checkbox" value="1"  name="skills13"  <if condition="$info['skill_a'][12] eq 1">checked</if>>小儿推拿</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills14"  <if condition="$info['skill_a'][13] eq 1">checked</if>>幼儿辅食添加</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills15"  <if condition="$info['skill_a'][14] eq 1">checked</if>>早产、疾病儿护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills16"  <if condition="$info['skill_a'][15] eq 1">checked</if>>产妇疾病预防</span><br>
+									<span class="marks"><input type="checkbox" value="1"  name="skills17"  <if condition="$info['skill_a'][16] eq 1">checked</if>>高龄产妇护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills18"  <if condition="$info['skill_a'][17] eq 1">checked</if>>新生儿意外伤害的预防和护理</span>
+									<span class="marks"><input type="checkbox" value="1"  name="skills19"  <if condition="$info['skill_a'][18] eq 1">checked</if>>厨艺</span>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>性格要求：</label>
-								<input type="text" class="form-control w500" name="character" id="character"/>
+								<input type="text" class="form-control w500" value="{$info.character}" name="character" id="character"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>主要工作内容：</label>
-								<input type="text" class="form-control w500" name="work_first" id="work_first"/>
+								<input type="text" class="form-control w500" value="{$info.work_first}" name="work_first" id="work_first"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>次要工作内容：</label>
-								<input type="text" class="form-control w500" name="work_second" id="work_second"/>
+								<input type="text" class="form-control w500" value="{$info.work_second}" name="work_second" id="work_second"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>风俗及禁忌：</label>
-								<input type="text" class="form-control w500" name="custom_taboo" id="custom_taboo"/>
+								<input type="text" class="form-control w500" value="{$info.custom_taboo}" name="custom_taboo" id="custom_taboo"/>
 							</td>
 						</tr>
 					</tbody>
@@ -191,20 +190,20 @@
 					<tbody>
 						<tr>
 							<td colspan="3"><label>长期在家人：</label>
-								<input type="text" class="form-control w500" name="long_family" id="long_family"/>
+								<input type="text" class="form-control w500" value="{$info.long_family}" name="long_family" id="long_family"/>
 							</td>
 						</tr>
 						<tr>
 							<td width="34%"><label>主要对接人：</label>
-								<input type="text" class="form-control" name="first_pick" id="first_pick"/>
+								<input type="text" class="form-control" value="{$info.first_pick}" name="first_pick" id="first_pick"/>
 							</td>
 							<td width="66%"><label>次要对接人：</label>
-								<input type="text" class="form-control" name="second_pick" id="second_pick"/>
+								<input type="text" class="form-control" value="{$info.second_pick}" name="second_pick" id="second_pick"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3"><label>对接人性格：</label>
-								<input type="text" class="form-control w500" name="pick_character" id="pick_character"/>
+								<input type="text" class="form-control w500" value="{$info.pick_character}" name="pick_character" id="pick_character"/>
 							</td>
 						</tr>
 					</tbody>
@@ -217,35 +216,35 @@
 					<tbody>
 						<tr>
 							<td width="34%"><label>阿姨建议：</label>
-								<input type="text" class="form-control" name="nurse_jy" id="nurse_jy"/>
+								<input type="text" class="form-control" value="{$info.nurse_jy}" name="nurse_jy" id="nurse_jy"/>
 							</td>
 							<td width="66%"><label>工作性质：</label>
-								<input type="radio" name="xingzhi" name="work_type"/>月嫂&nbsp;&nbsp;
-								<input type="radio" name="xingzhi" name="work_type" />育儿嫂&nbsp;&nbsp;
+								<input type="radio" name="work_type" value="月嫂"  <if condition="$info['work_type'] eq '月嫂'">checked</if>/>月嫂&nbsp;&nbsp;
+								<input type="radio" name="work_type" value="育儿嫂"  <if condition="$info['work_type'] eq '育儿嫂'">checked</if>/>育儿嫂&nbsp;&nbsp;
 							</td>
 						</tr>
 						<tr>
 							<td><label>阿姨价位：</label>
-								<input type="text" class="form-control" name="nurse_price" id="nurse_price"/>
+								<input type="text" class="form-control" value="{$info.nurse_price}" name="nurse_price" id="nurse_price"/>
 							</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td><label>服务周期：</label>
-								<input type="text" class="form-control" name="service_day" id="service_day"/>
+								<input type="text" class="form-control" value="{$info.service_day}" name="service_day" id="service_day"/>
 							</td>
 							<td>
 								<label>假期：</label>
-								<input type="text" class="form-control w160" name="holiday" id="holiday"/>&nbsp;&nbsp;天
+								<input type="text" class="form-control w160" value="{$info.holiday}" name="holiday" id="holiday"/>&nbsp;&nbsp;天
 							</td>
 						</tr>
 						<tr>
 							<td><label>预计上户时间：</label>
-								<input type="text" class="form-control" name="b_time" id="b_time"/>
+								<input type="text" class="form-control" value="{$info.b_time}" name="b_time" id="b_time"/>
 							</td>
 							<td>
 								<label>预计下户时间：</label>
-								<input type="text" class="form-control" name="s_time" id="s_time"/>
+								<input type="text" class="form-control" value="{$info.s_time}" name="s_time" id="s_time"/>
 							</td>
 						</tr>
 						<!--<tr>-->
@@ -257,31 +256,31 @@
 								<!--<input type="text" class="form-control" name="name" id="name"/>-->
 							<!--</td>-->
 						<!--</tr>-->
-						<tr>
-							<td><label>特殊情况：</label>
-								<input type="radio" name="teshu" name="price_add" />有&nbsp;&nbsp;
-								<input type="radio" name="teshu" name="price_add" checked/>无&nbsp;&nbsp;
-							</td>
-							<td><label>加价原因：</label>
-								<input type="text" class="form-control" name="add_reason" id="add_reason"/>
-							</td>
-						</tr>
-						<tr>
-							<td><label>订单加价：</label>
-								<input type="text" class="form-control w160" name="add_order_price" id="add_order_price"/>&nbsp;&nbsp;元
-							</td>
-							<td><label>阿姨薪资加价：</label>
-								<input type="text" class="form-control w160" name="add_nurse_price" id="add_nurse_price"/>&nbsp;&nbsp;元
-							</td>
-						</tr>
+						<!--<tr>-->
+							<!--<td><label>特殊情况：</label>-->
+								<!--<input type="radio" name="teshu" name="price_add" />有&nbsp;&nbsp;-->
+								<!--<input type="radio" name="teshu" name="price_add" checked/>无&nbsp;&nbsp;-->
+							<!--</td>-->
+							<!--<td><label>加价原因：</label>-->
+								<!--<input type="text" class="form-control" name="add_reason" id="add_reason"/>-->
+							<!--</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<td><label>订单加价：</label>-->
+								<!--<input type="text" class="form-control w160" name="add_order_price" id="add_order_price"/>&nbsp;&nbsp;元-->
+							<!--</td>-->
+							<!--<td><label>阿姨薪资加价：</label>-->
+								<!--<input type="text" class="form-control w160" name="add_nurse_price" id="add_nurse_price"/>&nbsp;&nbsp;元-->
+							<!--</td>-->
+						<!--</tr>-->
 						<tr>
 							<td colspan="2"><label>其他建议：</label>
-								<input type="text" class="form-control w500" name="advise" id="advise"/>
+								<input type="text" class="form-control w500" value="{$info.advise}" name="advise" id="advise"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><label>备注：</label>
-								<input type="text" class="form-control w500" value="{$info.remark}" name="remark" id="remark"/>
+								<input type="text" class="form-control w500" value="{$info.nurse_remark}" name="nurse_remark" id="nurse_remark"/>
 							</td>
 						</tr>
 					</tbody>

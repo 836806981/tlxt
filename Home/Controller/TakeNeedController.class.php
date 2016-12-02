@@ -171,6 +171,15 @@ class TakeNeedController extends CommonController {
                 $info['status_2'] = $status['status_2'] ;
             }
 
+
+            $info_in = M('order_info')->where('order_id='.I('get.id').'')->find();
+            if($info_in) {
+                $info = array_merge($info_in, $info);
+            }
+
+            $info['skill_a'] = explode(',',$info['skills']);
+
+
             $info['status_1_str'] = $info['status_1'] ? date('Y-m-d H:i:s', $info['status_1']) : 0;
             $info['status_2_str'] = $info['status_2'] ? date('Y-m-d H:i:s', $info['status_2']) : 0;
 
@@ -194,7 +203,11 @@ class TakeNeedController extends CommonController {
 
         $info =  array_merge($info_in,$info);
 
+        $info['skill_a'] = explode(',',$info['skills']);
+        $info['status_1_str'] = $info['status_1'] ? date('Y-m-d H:i:s', $info['status_1']) : 0;
+        $info['status_2_str'] = $info['status_2'] ? date('Y-m-d H:i:s', $info['status_2']) : 0;
 
+        $info['price_add_str'] = $info['price_add']==1?'有':'无';
         $this->assign('info',$info);
         $this->display();
     }
