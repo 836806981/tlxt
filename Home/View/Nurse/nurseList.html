@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(4).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<ul class="nav nav-tabs">
+					<li>
+						 <a href="auntControl.html">阿姨管理</a>
+					</li>
+					<li class="active">
+						 <a href="auntList_three.html">三单试用</a>
+					</li>
+					<li>
+						 <a href="#">一年合同</a>
+					</li>
+				</ul>
+				<form class="form-inline">
+					<div class="form-group">
+						 <label>阿姨姓名</label><input type="text" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label>主状态</label>
+						<select class="form-control">
+					          <option>全部</option>
+					          <option>暂不接单</option>
+					          <option>等单中</option>
+					          <option>私签中</option>
+					          <option>外单中</option>
+					          <option>等单中</option>
+					     </select>
+					</div>
+					<div class="form-group">
+						 <label>次状态</label>
+						 <select class="form-control">
+					          <option>全部</option>
+					          <option>暂不接单</option>
+					          <option>等单中</option>
+					          <option>私签中</option>
+					          <option>外单中</option>
+					          <option>等单中</option>
+					     </select>
+					</div>
+					
+					<div class="form-group">
+						 <button type="submit" class="subform">搜索</button>
+					</div>
+					
+				</form>
+				<table class="tab_info">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								当前列表数据为：<span>20</span>条
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">阿姨编号</td>
+							<td width="8%">主状态</td>
+							<td width="8%">次状态</td>
+							<td width="8%">阿姨姓名</td>
+							<td width="8%">属性</td>
+							<td width="8%">工作年限</td>
+							<td width="8%">完成订单量</td>
+							<td width="8%">下一单时间</td>
+							<td width="8%">匹配记录</td>
+							<td width="8%">签约记录</td>
+							<td width="15%">操作</td>
+						</tr>
+						<tr>
+							<td>TLAY-512</td>
+							<td>等单中</td>
+							<td>等单中</td>
+							<td>黄伟</td>
+							<td>外聘阿姨</td>
+							<td>3年2个月</td>
+							<td><a onclick="wanchengDD()">2单</a></td>
+							<td>2016-11-5</td>
+							<td>2单</td>
+							<td>2单</td>
+							<td><a onclick="taotai()">淘汰</a><a onclick="zhuanzheng()">转正</a><a href="auntInfo.html">查看</a></td>
+						</tr>
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<ul class="pagination pag_new">
+									<li>
+										 <a href="#">&lt;</a>
+									</li>
+									<li>
+										 <a href="#">1</a>
+									</li>
+									<li>
+										 <a href="#">2</a>
+									</li>
+									<li>
+										 <a href="#">&gt;</a>
+									</li>
+								</ul>
+								<div class="btn_modular">
+									<input type="button" class="btnform" onclick="location.href='__MODULE__/Nurse/addNurseInfo.html'" value="新增阿姨"/>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--main end-->
+			<script>
+//					淘汰 弹窗
+					function taotai(){
+						layer.open({
+						  	type: 1,
+						  	title: '淘汰',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+									+   '<form>'
+									+	'<div class="opn_div clear">此操作不可逆，你确定淘汰XXX阿姨吗？</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>淘汰时间：</label><input type="text" class="form-control" value=""/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>淘汰原因：</label><input type="text" class="form-control" value=""/>'
+									+	'</div>'
+									+	'<div class="btn_div clear">'
+									+		'<button type="submit" class="default_btn">放入回收站</button>'
+									+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+									+	'</div>'
+									+	'</form>'
+									+'</div>'
+						});
+					}
+//					转正 弹窗
+					function zhuanzheng(){
+						layer.open({
+						  	type: 1,
+						  	title: '转正',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+									+   '<form>'
+									+	'<div class="opn_div clear">此操作不可逆，你确定XXX阿姨转正吗？</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>转正时间：</label><input type="text" class="form-control" value=""/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>协议编号：</label><input type="text" class="form-control" value=""/>'
+									+	'</div>'
+									+	'<div class="btn_div clear">'
+									+		'<button type="submit" class="default_btn">确定</button>'
+									+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+									+	'</div>'
+									+	'</form>'
+									+'</div>'
+						});
+					}
+//					完成订单量  弹窗
+					function wanchengDD(){
+						layer.open({
+						  	type: 1,
+						  	title: '完成订单量',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt lay_cnt_max">'
+									+	'<table class="tab_info tab860">'
+									+	'<tbody>'
+									+		'<tr class="info_name">'
+									+			'<td width="12%">订单编号</td>'
+									+			'<td width="12%">订单性质</td>'
+									+			'<td width="12%">派单人</td>'
+									+			'<td width="12%">订单完成时间</td>'
+									+			'<td width="12%">客户姓名</td>'
+									+			'<td width="12%">操作</td>'
+									+		'</tr>'
+									+		'<tr>'
+									+			'<td>21</td>'
+									+			'<td>实习</td>'
+									+			'<td>xx</td>'
+									+			'<td>xxxx-xx-xx</td>'
+									+			'<td>xx</td>'
+									+			'<td><a href="#">查看详情</a></td>'
+									+		'</tr>'
+									+	'</tbody>'
+									+	'</table>'
+									+'</div>'
+						});
+					}
+					function close_lay(){
+						layer.closeAll();
+					}
+			</script>
+</body>
+
+</html>

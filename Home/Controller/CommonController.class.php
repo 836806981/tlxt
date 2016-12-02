@@ -20,6 +20,34 @@ class CommonController extends Controller{
         }
     }
 
+    function shuiyin($dst_path){
+        $img_take = explode('.',$dst_path);
+        if($img_take[1] == 'gif'){
+            return $dst_path;
+            exit;
+        }
+
+        $dst_path = 'http://xt2.tlay.com/Uploads'.$dst_path;
+        $src_path = 'http://xt2.tlay.com/Home/View/Public/img/shuiyin.png';
+
+//imagecopyresized( $dst_path, $src_path,  0,  0,  0,  0, dst_w,  dst_h,  src_w,  src_h );
+//创建图片的实例
+        $dst = imagecreatefromstring(file_get_contents($dst_path));
+        $src = imagecreatefromstring(file_get_contents($src_path));
+        list($dst_w, $dst_h) = getimagesize($dst_path);
+        list($src_w, $src_h) = getimagesize($src_path);
+        for($dst_w_o = 0;$dst_w_o<$dst_w;$dst_w_o += $src_w){
+            for($dst_h_o = 0;$dst_h_o<$dst_h;$dst_h_o += $src_h){
+                imagecopy($dst, $src,$dst_w_o, $dst_h_o, 0, 0, $src_w,$src_h);
+            }
+        }
+
+//        header('Content-Type: image/jpeg');
+        imagegif($dst , 'Uploads'.$img_take[0].'_s.'.$img_take[1]);
+        return $img_take[0].'_s.'.$img_take[1];
+//        imagejpeg($dst);
+    }
+
     function exportExcel($filename,$content){
         header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
         header("Content-Type: application/vnd.ms-excel");

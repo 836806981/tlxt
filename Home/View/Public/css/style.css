@@ -319,7 +319,9 @@ input[type=file]{
 .tab_info>tbody>tr.info_name {
 	background: #c8defc;
 }
-
+.tab_info>tbody>tr.pst{
+	
+}
 .tab_info>tbody>tr:hover {
 	background: #c8defc;
 }
@@ -635,7 +637,12 @@ input[type=radio],input[type=checkbox]{
 	width: 100%;
 	height: auto;
 }
-
+.lay_cnt_max{
+	max-height: 361px;
+    margin: 30px 0;
+    padding: 0 30px;
+    overflow: auto;
+}
 .opn_div,.btn_div {
 	margin-bottom: 10px;
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<script type="text/javascript" src="../js/jquery-1.7.1.min.js" ></script>
+<script type="text/javascript" src="../js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="../layer/layer.js" ></script>
+</head>
+
+<body>
+			<!--top-->
+			<div class="page-header">
+				<div class="top_right">
+					<button type="button" class="out">退出系统</button>
+				</div>
+			</div>
+			<!--top end-->
+			<!--left-->
+			<div class="col-md-2 column mune">
+				<div class="head_img">
+					<img src="../img/user_img.jpg" />
+				</div>
+				<div class="user_info">
+					<p class="name">刘庆</p>
+					<p class="job">客服</p>
+				</div>
+				<ul class="left_menu">
+					<li><a href="#"><span class="dingdan">首<i></i>页</span></a></li>
+					<li><a href="../auntControl/auntControl.html"><span class="dingdan">阿姨管理</span></a></li>
+				</ul>
+			</div>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						 <a href="auntControl.html">阿姨管理</a>
+					</li>
+					<li>
+						 <a href="auntList_three.html">三单试用</a>
+					</li>
+					<li>
+						 <a href="#">一年合同</a>
+					</li>
+				</ul>
+				
+				<table class="tab_info tab860 magrintop20">
+					<tbody>
+						<tr class="info_name">
+							<td width="25%">阿姨类型</td>
+							<td width="25%">三单试用</td>
+							<td width="25%">一年合同</td>
+							<td width="25%">合计</td>
+						</tr>
+						<tr>
+							<td>外聘阿姨</td>
+							<td>21</td>
+							<td>11</td>
+							<td>32</td>
+						</tr>
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<div class="btn_modular">
+									<input type="button" class="btnform" onclick="location.href='addAunt.html'" value="新增阿姨"/>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+					
+				</table>
+			</div>
+			<!--main end-->
+</body>
+
+</html>
