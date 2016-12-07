@@ -66,9 +66,13 @@ class NurseController extends CommonController {
 
 
     //添加
-    public function addNurseInfo(){
+    public function addNurse(){
         if(I('post.')){
             $post = I('post.');
+            if($post['name']==''||$post['phone']==''){
+                echo "<script>alert('请填写姓名和电话');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
+            }
             $have = M('nurse')->where('name="'.$post['name'].'"  and phone ="'.$post['phone'].'"')->find();
             if($have){
                 echo "<script>alert('已存在该阿姨');window.onload=function(){window.history.go(-1);return false;}</script>";
@@ -189,9 +193,11 @@ class NurseController extends CommonController {
                     $post['imgs'] = substr($post['imgs'],0,-1);
                 }
             }
-            //定薪
+            //性格
             $rand = rand(1,4);
             $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
+
+            //定薪
             $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
             if($post['agreement_type'] == 1){
                 $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
@@ -206,16 +212,16 @@ class NurseController extends CommonController {
             $post['skills'] = substr($post['skills'],0,-1);
 
             //家庭成员
-            for($i=1;$i<=4;$i++){
+            for($i=1;$i<=5;$i++){
                 $post['family_1'] .= ($post['family_1_'.$i]?$post['family_1_'.$i]:' ').'||';
             }
             $post['family_urgent'] == 1?( $post['family_1'].=1):( $post['family_1'].=0);
 
-            for($i=1;$i<=4;$i++){
+            for($i=1;$i<=5;$i++){
                 $post['family_2'] .= ($post['family_2_'.$i]?$post['family_2_'.$i]:' ').'||';
             }
             $post['family_urgent'] == 2?( $post['family_2'].=1):( $post['family_2'].=0);
-            for($i=1;$i<=4;$i++){
+            for($i=1;$i<=5;$i++){
                 $post['family_3'] .= ($post['family_3_'.$i]?$post['family_3_'.$i]:' ').'||';
             }
             $post['family_urgent'] == 3?( $post['family_3'].=1):( $post['family_3'].=0);
@@ -252,6 +258,7 @@ class NurseController extends CommonController {
             $post['is_student'] = 0;
             $post['add_time'] = time();
             $post['status'] = 1;
+            $post['status_sh'] = 1;
 
 
 
@@ -276,138 +283,252 @@ class NurseController extends CommonController {
 
 
     //修改
-    public function changeNurseInfo(){
-
-        $this->authority(array(11,2,3));
+    public function changeNurse(){
         if(I('post.')){
             $post = I('post.');
-            $nurse_info = M('nurse')->field('id,id_card_img,certificate_img,test_img')->where('id='.$post['id'].'')->find();
-            $post['id_card_img'] = $nurse_info['id_card_img'];
-            $post['certificate_img'] = $nurse_info['certificate_img'];
-            $post['test_img'] = $nurse_info['test_img'];
-//            echo $post['id_card_img'].'<br/>'. $post['certificate_img'].'<br/>' .$post['test_img'].'<br/>';
-            //处理删除的图片
-            if($post['id_card_img_del']){
-                $id_card_img_del_arr = explode(',',substr($post['id_card_img_del'],0,-1));
-                foreach($id_card_img_del_arr as $v){
-                    $post['id_card_img'] = str_replace($v.',','',$post['id_card_img']);
-                    $post['id_card_img'] = str_replace(','.$v,'', $post['id_card_img']);
-                    $post['id_card_img'] = str_replace($v,'', $post['id_card_img']);
-                    if(strstr($v,'student')===false){
-                        $unlink[] = $v;
-                    }
-                }
-                $post['id_card_img']? $post['id_card_img'].=',':'';
+            if($post['name']==''||$post['phone']==''){
+                echo "<script>alert('请填写姓名和电话');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
             }
-            //处理删除的图片
-            if($post['certificate_img_del']){
-                $id_card_img_del_arr = explode(',',substr($post['certificate_img_del'],0,-1));
-                foreach($id_card_img_del_arr as $v){
-                    $post['certificate_img'] = str_replace($v.',','',$post['certificate_img']);
-                    $post['certificate_img'] = str_replace(','.$v,'', $post['certificate_img']);
-                    $post['certificate_img'] = str_replace($v,'', $post['certificate_img']);
-                    if(strstr($v,'student')===false){
-                        $unlink[] = $v;
-                    }
-                }
-                $post['certificate_img']? $post['certificate_img'].=',':'';
+            $have = M('nurse')->where('name="'.$post['name'].'"  and phone ="'.$post['phone'].'" and id!='.$post['id'].'')->find();
+            if($have){
+                echo "<script>alert('已存在该阿姨');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
             }
-            //处理删除的图片
-            if($post['test_img_del']){
-                $id_card_img_del_arr = explode(',',substr($post['test_img_del'],0,-1));
-                foreach($id_card_img_del_arr as $v){
-                    $post['test_img'] = str_replace($v.',','',$post['test_img']);
-                    $post['test_img'] = str_replace(','.$v,'', $post['test_img']);
-                    $post['test_img'] = str_replace($v,'', $post['test_img']);
-                    if(strstr($v,'student')===false){
-                        $unlink[] = $v;
-                    }
-                }
-                $post['test_img']? $post['test_img'].=',':'';
-            }
-//            echo $post['id_card_img'].'<br/>'. $post['certificate_img'].'<br/>' .$post['test_img'].'<br/>';
-//            print_r($unlink);die;
-            unset($post['title_img']);
+            $nurse_info = M('nurse')->where('id='.$post['id'].'')->find();
+
             if($_FILES['title_img']['tmp_name']) {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2145728;// 设置附件上传大小
                 $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-                $upload->savePath = '/nurse/';// 设置附件上传目录// 上传文件
+                $upload->savePath = '/nurse/title_img/';// 设置附件上传目录// 上传文件
                 $info = $upload->uploadOne($_FILES['title_img']);
                 if (!$info) {// 上传错误提示错误信息
                     $this->error($upload->getError());
                 } else {//上传成功 获取上传文件信息
                     $post['title_img']  = $info['savepath'] . $info['savename'];
-                    if(strstr($post['old_title_img'],'student')===false){
-                        $unlink[] = $post['old_title_img'];
-                    }
+                    $unlink[] = $nurse_info['title_img'];
                 }
             }
-            if($_FILES['id_card_img']['tmp_name'][0]) {
+            if($_FILES['life_img1']['tmp_name']) {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2145728;// 设置附件上传大小
                 $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-                $upload->savePath = '/nurse/';// 设置附件上传目录// 上传文件
-                $info = $upload->upload(array($_FILES['id_card_img']));
+                $upload->savePath = '/nurse/life/';// 设置附件上传目录// 上传文件
+                $info = $upload->uploadOne($_FILES['life_img1']);
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {//上传成功 获取上传文件信息
+                    $post['life_img1']  = $info['savepath'] . $info['savename'];
+                    $img_s = $this->shuiyin($post['life_img1']);
+                    if($img_s){
+                        $post['life_img1'] = $img_s;
+                    }
+                    $unlink[] = $nurse_info['life_img1'];
+                    $del_s = explode('_s',$nurse_info['life_img1']);
+                    $unlink[] = $del_s[0].$del_s[1];
+                }
+            }
+            if($_FILES['life_img2']['tmp_name']) {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 2145728;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->savePath = '/nurse/life/';// 设置附件上传目录// 上传文件
+                $info = $upload->uploadOne($_FILES['life_img2']);
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {//上传成功 获取上传文件信息
+                    $post['life_img2']  = $info['savepath'] . $info['savename'];
+                    $img_s = $this->shuiyin($post['life_img2']);
+                    if($img_s){
+                        $post['life_img2'] = $img_s;
+                    }
+                    $unlink[] = $nurse_info['life_img2'];
+                    $del_s = explode('_s',$nurse_info['life_img2']);
+                    $unlink[] = $del_s[0].$del_s[1];
+                }
+            }
+            if($_FILES['id_img']['tmp_name']) {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 2145728;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->savePath = '/nurse/id_img/';// 设置附件上传目录// 上传文件
+                $info = $upload->uploadOne($_FILES['id_img']);
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {//上传成功 获取上传文件信息
+                    $post['id_img']  = $info['savepath'] . $info['savename'];
+                    $img_s = $this->shuiyin($post['id_img']);
+                    if($img_s){
+                        $post['id_img'] = $img_s;
+                    }
+                    $unlink[] = $nurse_info['id_img'];
+                    $del_s = explode('_s',$nurse_info['id_img']);
+                    $unlink[] = $del_s[0].$del_s[1];
+                }
+            }
+            if($_FILES['test_img']['tmp_name']) {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 2145728;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->savePath = '/nurse/test_img/';// 设置附件上传目录// 上传文件
+                $info = $upload->uploadOne($_FILES['test_img']);
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {//上传成功 获取上传文件信息
+                    $post['test_img']  = $info['savepath'] . $info['savename'];
+                    $img_s = $this->shuiyin($post['test_img']);
+                    if($img_s){
+                        $post['test_img'] = $img_s;
+                    }
+                    $unlink[] = $nurse_info['test_img'];
+                    $del_s = explode('_s',$nurse_info['test_img']);
+                    $unlink[] = $del_s[0].$del_s[1];
+                }
+            }
+            if($_FILES['zs_img']['tmp_name']) {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 2145728;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->savePath = '/nurse/zs_img/';// 设置附件上传目录// 上传文件
+                $info = $upload->uploadOne($_FILES['zs_img']);
+                if (!$info) {// 上传错误提示错误信息
+                    $this->error($upload->getError());
+                } else {//上传成功 获取上传文件信息
+                    $post['zs_img']  = $info['savepath'] . $info['savename'];
+                    $img_s = $this->shuiyin($post['zs_img']);
+                    if($img_s){
+                        $post['zs_img'] = $img_s;
+                    }
+                    $unlink[] = $nurse_info['zs_img'];
+                    $del_s = explode('_s',$nurse_info['zs_img']);
+                    $unlink[] = $del_s[0].$del_s[1];
+                }
+            }
+            $post['imgs'] = $nurse_info['imgs']!=''?($nurse_info['imgs'].','):'';
+            if($_FILES['imgs']['tmp_name'][0]) {
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize = 2145728;// 设置附件上传大小
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->savePath = '/nurse/imgs/';// 设置附件上传目录// 上传文件
+                $info = $upload->upload(array($_FILES['imgs']));
                 if (!$info) {// 上传错误提示错误信息
                     $this->error($upload->getError());
                 } else {//上传成功 获取上传文件信息
                     foreach($info as $v){
-                        $post['id_card_img']  .=  $v['savepath'] . $v['savename'].',';
+                        $img_g =  $v['savepath'] . $v['savename'];
+                        $img_s = $this->shuiyin($img_g);
+                        if($img_s){
+                            $post['imgs'] .= $img_s.',';
+                        }else{
+                            $post['imgs'] .= $img_g.',';
+                        }
                     }
-                    $post['id_card_img'] = substr($post['id_card_img'],0,-1);
                 }
             }
-            if($_FILES['certificate_img']['tmp_name'][0]) {
-                $upload = new \Think\Upload();// 实例化上传类
-                $upload->maxSize = 2145728;// 设置附件上传大小
-                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-                $upload->savePath = '/nurse/';// 设置附件上传目录// 上传文件
-                $info = $upload->upload(array($_FILES['certificate_img']));
-                if (!$info) {// 上传错误提示错误信息
-                    $this->error($upload->getError());
-                } else {//上传成功 获取上传文件信息
-                    foreach($info as $v){
-                        $post['certificate_img']  .=   $v['savepath'] . $v['savename'].',';
-                    }
-                    $post['certificate_img'] = substr($post['certificate_img'],0,-1);
+            $post['imgs'] = substr($post['imgs'],0,-1);
+
+
+            if($post['imgs_del']&&$post['imgs_del']!=''){
+                $del_imgs_a = explode(',',substr($post['imgs_del'],0,-1));
+                foreach($del_imgs_a as $v){
+                    $post['imgs'] = str_replace($v.',','',$post['imgs']);
+                    $post['imgs'] = str_replace(','.$v,'', $post['imgs']);
+                    $post['imgs'] = str_replace($v,'', $post['imgs']);
+                    $unlink[] = $v;
+                    $del_s = explode('_s',$v);
+                    $unlink[] = $del_s[0].$del_s[1];
                 }
-            }
-            if($_FILES['test_img']['tmp_name'][0]) {
-                $upload = new \Think\Upload();// 实例化上传类
-                $upload->maxSize = 2145728;// 设置附件上传大小
-                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-                $upload->savePath = '/nurse/';// 设置附件上传目录// 上传文件
-                $info = $upload->upload(array($_FILES['test_img']));
-                if (!$info) {// 上传错误提示错误信息
-                    $this->error($upload->getError());
-                } else {//上传成功 获取上传文件信息
-                    foreach($info as $v){
-                        $post['test_img']  .=   $v['savepath'] . $v['savename'].',';
-                    }
-                    $post['test_img'] = substr($post['test_img'],0,-1);
-                }
-            }
-            $post['other'] = $post['other1'].','.$post['other2'].','.$post['other3'].','.$post['other4'];
-            for($i=1;$i<12;$i++){
-                @$post['skill'] .= @$post['skill'.$i].',';
             }
 
-            $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺1.1','大田螺1.2','大田螺1.3','大田螺1.4','大田螺1.5','超级田螺1.1','超级田螺1.2','超级田螺1.3','超级田螺1.4','超级田螺1.5','金牌田螺'];
-            $post['level_name'] = $level_name[$post['level']];
+            //性格
+            if($post['character_type']!=$nurse_info['character_type']){
+                $rand = rand(1,4);
+                $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
+            }
 
+            //定薪
+            $post['price_level'] = 0;
+            $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
+            if($post['agreement_type'] == 1){
+                $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
+                $price_level = array_keys($level_name,$post['price_name']);
+                $post['price_level'] = $price_level[0];
+                $post['price'] = $price_arr[$post['price_level']];
+            }
+            //等级
+            for($i=1;$i<=11;$i++){
+                $post['skills'] .= ($post['skills'.$i]?$post['skills'.$i]:0).',';
+            }
+            $post['skills'] = substr($post['skills'],0,-1);
+
+            //家庭成员
+            for($i=1;$i<=5;$i++){
+                $post['family_1'] .= ($post['family_1_'.$i]?$post['family_1_'.$i]:' ').'||';
+            }
+            $post['family_urgent'] == 1?( $post['family_1'].=1):( $post['family_1'].=0);
+
+            for($i=1;$i<=5;$i++){
+                $post['family_2'] .= ($post['family_2_'.$i]?$post['family_2_'.$i]:' ').'||';
+            }
+            $post['family_urgent'] == 2?( $post['family_2'].=1):( $post['family_2'].=0);
+            for($i=1;$i<=5;$i++){
+                $post['family_3'] .= ($post['family_3_'.$i]?$post['family_3_'.$i]:' ').'||';
+            }
+            $post['family_urgent'] == 3?( $post['family_3'].=1):( $post['family_3'].=0);
+
+            //擅长菜系处理
+            for($i=1;$i<=9;$i++){
+                $post['good_cuisine'] .= ($post['good_cuisine'.$i]?$post['good_cuisine'.$i]:' ').',';
+            }
+            $post['good_cuisine'] = substr($post['good_cuisine'],0,-1);
+
+            //擅长口味处理
+            for($i=1;$i<=5;$i++){
+                $post['good_flavor'] .=($post['good_flavor'.$i]?$post['good_flavor'.$i]:' ').',';
+            }
+            $post['good_flavor'] = substr($post['good_flavor'],0,-1);
+
+
+
+            //个人经历成员
+            for($i=1;$i<=8;$i++){
+                $post['experience_own1'] .= ($post['experience_own1_'.$i]?$post['experience_own1_'.$i]:' ').'||';
+            }
+            $post['experience_own1'] = substr($post['experience_own1'],0,-2);
+
+            for($i=1;$i<=8;$i++){
+                $post['experience_own2'] .= ($post['experience_own2_'.$i]?$post['experience_own2_'.$i]:' ').'||';
+            }
+            $post['experience_own2'] = substr($post['experience_own2'],0,-2);
+            for($i=1;$i<=8;$i++){
+                $post['experience_own3'] .= ($post['experience_own3_'.$i]?$post['experience_own3_'.$i]:' ').'||';
+            }
+            $post['experience_own3'] = substr($post['experience_own3'],0,-2);
+
+//            $post['is_student'] = 0;
 //            $post['add_time'] = time();
+//            $post['status'] = 1;
+
+
+
             $nurse_id = M('nurse')->where('id='.$post['id'].'')->save($post);
             if($nurse_id!==false) {
                 foreach($unlink as $v){
                     unlink('Uploads/'.$v);
                 }
-                echo "<script>alert('修改成功'); window.location.href='".__MODULE__."/Nurse/nurseInfo/id/".$post['id'].".html'</script>";
+                $save['number'] = 'TLAY-' . str_pad($post['id'], 6, 0, STR_PAD_LEFT);  //6位数不足补0
+                $save_mod = M('nurse')->where('id=' . $post['id'] . '')->save($save);
+                if ($save_mod === false) {
+                    M('nurse')->where('id=' . $post['id'] . '')->save($save);
+                }
+                echo "<script>alert('修改成功'); window.location.href='".__MODULE__."/Nurse/nurseList'</script>";
                 exit;
             }else{
                 echo "<script>alert('修改失败');window.onload=function(){window.history.go(-1);return false;}</script>";
                 exit;
             }
+
         }else{
             if(!I('get.id')){
                 echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
@@ -418,23 +539,26 @@ class NurseController extends CommonController {
                 echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
                 exit;
             }
-            $info['id_card_img_arr'] = explode(',',$info['id_card_img']);
-            $info['certificate_img_arr'] = explode(',',$info['certificate_img']);
-            $info['test_img_arr'] = explode(',',$info['test_img']);
-            $info['other'] = explode(',',$info['other']);
-            $info['skill'] = explode(',',$info['skill']);
-//            print_r($info['other']);die;
+            $info['imgs_a'] = explode(',',$info['imgs']);
+            $info['skills_a'] = explode(',',$info['skills']);
+            $info['family_1_a'] = explode('||',$info['family_1']);
+            $info['family_2_a'] = explode('||',$info['family_2']);
+            $info['family_3_a'] = explode('||',$info['family_3']);
+            $info['good_cuisine_a'] = explode(',',$info['good_cuisine']);
+            $info['good_flavor_a'] = explode(',',$info['good_flavor']);
+            $info['experience_own1_a'] = explode('||',$info['experience_own1']);
+            $info['experience_own2_a'] = explode('||',$info['experience_own2']);
+            $info['experience_own3_a'] = explode('||',$info['experience_own3']);
+
             $this->assign('info',$info);
             $this->display();
         }
-
     }
 
 
     //详情
     public function nurseInfo(){
 
-        $this->authority(array(11,2,3,4));
         if(!I('get.id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -444,42 +568,47 @@ class NurseController extends CommonController {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-        $info['id_card_img_arr'] = explode(',',$info['id_card_img']);
-        $info['certificate_img_arr'] = explode(',',$info['certificate_img']);
-        $info['test_img_arr'] = explode(',',$info['test_img']);
-        $info['other'] = explode(',',$info['other']);
-        $info['skill'] = explode(',',$info['skill']);
+        $info['imgs_a'] = explode(',',$info['imgs']);
+        $info['skills_a'] = explode(',',$info['skills']);
+        $info['family_1_a'] = explode('||',$info['family_1']);
+        $info['family_2_a'] = explode('||',$info['family_2']);
+        $info['family_3_a'] = explode('||',$info['family_3']);
+        $info['good_cuisine_a'] = explode(',',$info['good_cuisine']);
+        $info['good_flavor_a'] = explode(',',$info['good_flavor']);
+        $info['experience_own1_a'] = explode('||',$info['experience_own1']);
+        $info['experience_own2_a'] = explode('||',$info['experience_own2']);
+        $info['experience_own3_a'] = explode('||',$info['experience_own3']);
 
-        $status_sh_name = ['','已上户','已下户'];
+        $status_sh_name = ['','未上户','已上户'];
         $info['status_sh_name'] = $status_sh_name[$info['status_sh']];
-        $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺1.1','大田螺1.2','大田螺1.3','大田螺1.4','大田螺1.5','超级田螺1.1','超级田螺1.2','超级田螺1.3','超级田螺1.4','超级田螺1.5','金牌田螺'];
-        $info['next_level_name'] = $level_name[$info['level']+1];
 
-        $contact =  M('contact')->where('nurse_id='.I('get.id').'')->select();
+        $info['level_name'] = $info['level'].'育婴师'.'、';
+        $info['is_tr']==1?($info['level_name'].='通乳师、'):'';
+        $info['is_tn']==1?($info['level_name'].='小儿推拿师、'):'';
+        $info['is_yy']==1?($info['level_name'].='公共营养师、'):'';
+        $info['is_xl']==1?($info['level_name'].='心理咨询师、'):'';
+        $info['level_name'] = substr($info['level_name'],0,-3);
 
+        $info['is_stay_name']= ($info['is_stay']==1?'是':'否');
 
-        $is_service_name = ['','否','是'];
-        $order_nurse = M('order_nurse')->field("IF(true_b_time!='',true_b_time,b_time) as after_time,b_time,true_b_time,IF(true_s_time!='',true_s_time,s_time) as before_time,s_time,true_s_time,order_id,order_name,do_time,is_service")->where('nurse_id='.I('get.id').'')->order("IF(true_s_time!='',true_s_time,s_time) desc")->select();
-        foreach($order_nurse as $k=>$v){
-            $order_nurse[$k]['is_service_name'] = $is_service_name[$v['is_service']];
-            $order_nurse[$k]['b_time_show'] = $v['true_b_time']?$v['true_b_time'].'(实)':$v['b_time'].'(预)';
-            $order_nurse[$k]['s_time_show'] = $v['true_s_time']?$v['true_s_time'].'(实)':$v['s_time'].'(预)';
+        $character_type_name = ['','活泼型','外向型','踏实型','敏感型','服从型','均衡型'];
+        $info['character_type_name'] = $character_type_name[$info['character_type']];
+
+        $good_cuisine_name = ['面食','煲汤','川菜小炒','流食','素食','肉类','小吃','甜品','补品'];
+        foreach($info['good_cuisine_a'] as $k=>$v){
+            $info['good_cuisine_str'] .= ($v==1?$good_cuisine_name[$k].' ':'');
         }
 
-        $order_nurse_after = M('order_nurse')->field("IF(true_b_time!='',true_b_time,b_time) as after_time,b_time,true_b_time,IF(true_s_time!='',true_s_time,s_time) as before_time,s_time,true_s_time,order_id,order_name,do_time,is_service")->where('nurse_id='.I('get.id').'  and IF(true_s_time!="",true_s_time,s_time)  >="'.date('Y-m-d').'"')->order("before_time asc")->select();
-        foreach($order_nurse_after as $k=>$v){
-            if($v['order_id']){
-                $order_nurse_after[$k]['customer_name'] = '<a href="'.__MODULE__.'/OrderShow/OrderInfo/id/'.$v['order_id'].'.html">'.$v['order_name'].'</a>('.$v['do_time'].')';
-            }else{
-                $order_nurse_after[$k]['customer_name'] = '';
-            }
+        $good_flavor_name = ['清淡','咸鲜','甜食','辣','酸'];
+        foreach($info['good_flavor_a'] as $k=>$v){
+            $info['good_flavor_str'] .= ($v==1?$good_flavor_name[$k].' ':'');
         }
+
+
+
+
 
         $this->assign('info',$info);
-        $this->assign('contact',$contact);
-        $this->assign('order_nurse',$order_nurse);
-        $this->assign('order_nurse_after',$order_nurse_after);
-
         $this->display();
     }
 

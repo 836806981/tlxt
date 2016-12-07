@@ -13,7 +13,7 @@
 			<include file="Nav/header"/>
 			<!--left end-->
 			<script>
-				$('.left_menu li').eq(4).addClass('called');
+				$('.left_menu li').eq(3).addClass('called');
 			</script>
 			<!--main-->
 			<div class="col-md-10 main">
@@ -23,7 +23,7 @@
 				<div class="tab_tle">
 					<span class="int_s"></span>图片资料
 				</div>
-				<form action="__MODULE__/Nurse/addNurseInfo" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定添加么？')"  enctype="multipart/form-data">
+				<form action="__MODULE__/Nurse/addNurse" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定添加么？')"  enctype="multipart/form-data">
 				<table class="auntTab pictures">
 					<tbody>
 						<tr>
@@ -134,6 +134,12 @@
 							<td><label>工资银行：</label><input type="text" class="form-control"  name="bank_name" id="bank_name"/></td>
 							<td><label>银行卡号：</label><input type="text" class="form-control"  name="back_card" id="back_card"/></td>
 						</tr>
+						<!--<tr>-->
+							<!--<td><label>是否学员：</label>-->
+								<!--<input type="radio" name="is_student" value="1"/>是-->
+								<!--<input type="radio" name="is_student" checked value="0"/>否-->
+							<!--</td>-->
+						<!--</tr>-->
 						<tr>
 							<td colspan="3"><label>当前职称：</label>
 								<select class="form-control w100"  name="level" id="level">
@@ -167,7 +173,7 @@
 									<input type="radio" name="character_type" value="3"/>踏实型&nbsp;&nbsp;
 									<input type="radio" name="character_type" value="4"/>敏感型&nbsp;&nbsp;
 									<input type="radio" name="character_type" value="5"/>服从型&nbsp;&nbsp;
-									<input type="radio" name="character_type" value="6"/>敏感型&nbsp;&nbsp;
+									<input type="radio" name="character_type" value="6"/>均衡型&nbsp;&nbsp;
 								</div>
 							</td>
 						</tr>
@@ -199,7 +205,7 @@
 									        <option>金牌田螺</option>
 									    </select>
 								    </div>
-								<div class="rtdiv">
+								</div>
 							</td>
 						</tr>
 						<tr>

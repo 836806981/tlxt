@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(1).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					阿姨资料
+				</div>
+				<div class="tab_tle">
+					<span class="int_s"></span>基本详情
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td rowspan="6" width="21%">
+								<div class="aunt_img">
+									<img src="__UPLOADS__{$info.title_img}" />
+								</div>
+							</td>
+							<td width="26%"><label>编号：</label>{$info.number}</td>
+							<td width="26%"><label>姓名：</label>{$info.name}</td>
+							<td width="27%"><label>年龄：</label>{$info.age}</td>
+						</tr>
+						<tr>
+							<td><label>属相：</label>{$info.zodiac}</td>
+							<td><label>籍贯：</label>{$info.native_place}</td>
+							<td><label>从业时间：</label>{$info.work_time}年</td>
+						</tr>
+						<tr>
+							<td><label>身高：</label>{$info.height}cm</td>
+							<td><label>体重：</label>{$info.weight}KG</td>
+							<td><label>上一份工作：</label>{$info.up_work}</td>
+						</tr>
+						<tr>
+							<td><label>出生日期：</label>{$info.birth_day}</td>
+							<td><label>当前状态：</label>{$info.status_sh_name}</td>
+							<td><label>当前职称：</label>{$info.level_name}</td>
+						</tr>
+						<tr>
+							<td><label>微信号：</label>{$info.wchat}</td>
+							<td><label>联系方式：</label>{$info.phone}</td>
+							<td><label>身份证：</label>{$info.id_card}</td>
+						</tr>
+						<tr>
+							<td><label>是否住宿：</label>{$info.is_stay_name}</td>
+							<td><label>工资银行：</label>{$info.bank_name}</td>
+							<td><label>银行卡号：</label>{$info.back_card}</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>专业能力
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="47%"><label>职业培训学校：</label>{$info.training_school}</td>
+							<td width="53%"><label>性格：</label>{$info.character_type_name}</td>
+						</tr>
+						<if condition="$info.agreement_type eq 1">
+							<tr>
+								<td><label>协议类型：</label>一年合同</td>
+								<td><label>等级评定：</label>{$info.price_name}</td>
+							</tr>
+						<else/>
+							<tr>
+								<td><label>协议类型：</label>三单定薪</td>
+								<td><label>定薪：</label>{$info.price}</td>
+							</tr>
+						</if>
+
+						<tr>
+							<td colspan="2"><label>从业经历简介：</label>
+								<div class="rtdiv">{$info.experience}</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>技能评估：</label>
+								<div class="rtdiv">
+									<span class="marks">新生儿生活照料{$info['skills_a'][0]}分</span>
+									<span class="marks">新生儿健康护理{$info['skills_a'][1]}分</span>
+									<span class="marks">新生儿疾病监测{$info['skills_a'][2]}分</span>
+									<span class="marks">新生儿早起促进{$info['skills_a'][3]}分</span>
+									<br />
+									<span class="marks">产妇专业护理{$info['skills_a'][4]}分</span>
+									<span class="marks">产妇生活护理{$info['skills_a'][5]}分</span>
+									<span class="marks">产妇心里护理{$info['skills_a'][6]}分</span>
+									<span class="marks">产妇疾病预防{$info['skills_a'][7]}分</span>
+									<br />
+									<span class="marks">产妇产后恢复{$info['skills_a'][8]}分</span>
+									<span class="marks">产妇乳房护理{$info['skills_a'][9]}分</span>
+									<span class="marks">产妇饮食护理{$info['skills_a'][10]}分</span>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>家庭资料
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="47%"><label>家庭住址：</label>{$info.family_address}</td>
+							<td width="53%"><label>现居住地：</label>{$info.new_address}</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">
+								<table class="tab_info face_tab_2">
+									<tbody>
+										<tr class="info_name">
+											<td width="17%">家庭成员姓名</td>
+											<td width="17%">关系</td>
+											<td width="17%">职业</td>
+											<td width="17%">联系方式</td>
+											<td width="32%">现居地</td>
+										</tr>
+										<if condition="$info['family_1_a'][0] neq '' OR $info['family_1_a'][5] eq 1">
+										<tr>
+											<td><if condition="$info['family_1_a'][5] eq 1"><span style="color: red;float: left;">紧</span></if>{$info['family_1_a'][0]}</td>
+											<td>{$info['family_1_a'][1]}</td>
+											<td>{$info['family_1_a'][2]}</td>
+											<td>{$info['family_1_a'][3]}</td>
+											<td>{$info['family_1_a'][4]}</td>
+										</tr>
+										</if>
+
+										<if condition="$info['family_2_a'][0] neq '' OR $info['family_2_a'][5] eq 1">
+											<tr>
+												<td><if condition="$info['family_2_a'][5] eq 1"><span style="color: red;float: left;">紧</span></if>{$info['family_2_a'][0]}</td>
+												<td>{$info['family_2_a'][1]}</td>
+												<td>{$info['family_2_a'][2]}</td>
+												<td>{$info['family_2_a'][3]}</td>
+												<td>{$info['family_2_a'][4]}</td>
+											</tr>
+										</if>
+
+										<if condition="$info['family_3_a'][0] neq '' OR $info['family_3_a'][5] eq 1">
+											<tr>
+												<td><if condition="$info['family_3_a'][5] eq 1"><span style="color: red;float: left;">紧</span></if>{$info['family_3_a'][0]}</td>
+												<td>{$info['family_3_a'][1]}</td>
+												<td>{$info['family_3_a'][2]}</td>
+												<td>{$info['family_3_a'][3]}</td>
+												<td>{$info['family_3_a'][4]}</td>
+											</tr>
+										</if>
+
+
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>个人信息
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="47%"><label>婚姻情况：</label>{$info.marrige}</td>
+							<td width="53%"><label>带孩子：</label>{$info.baby_take}个</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2"><label>个人签名：</label>
+								<div class="rtdiv">{$info.sign}</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>曾接受过的职业培训项目：</label>
+								<div class="rtdiv">{$info.order_train}</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>擅长菜系：</label>
+								<div class="rtdiv">{$info.good_cuisine_str}</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>擅长口味：</label>
+								<div class="rtdiv">{$info.good_flavor_str}</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>个人经历
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td>
+								<table class="tab_info face_tab_2">
+									<tbody>
+										<tr class="info_name">
+											<td width="17%">时间</td>
+											<td width="17%">单位名称</td>
+											<td width="17%">职位</td>
+											<td width="17%">薪酬</td>
+											<td width="32%">工作内容</td>
+										</tr>
+										<if condition="$info['experience_own1_a'][4] neq ''">
+										<tr>
+											<td>{$info['experience_own1_a'][0]}-{$info['experience_own1_a'][1]}至{$info['experience_own1_a'][2]}-{$info['experience_own1_a'][3]}</td>
+											<td>{$info['experience_own1_a'][4]}</td>
+											<td>{$info['experience_own1_a'][5]}</td>
+											<td>{$info['experience_own1_a'][6]}</td>
+											<td>{$info['experience_own1_a'][7]}</td>
+										</tr>
+										</if>
+
+										<if condition="$info['experience_own2_a'][4] neq ''">
+											<tr>
+												<td>{$info['experience_own2_a'][0]}-{$info['experience_own2_a'][1]}至{$info['experience_own2_a'][2]}-{$info['experience_own2_a'][3]}</td>
+												<td>{$info['experience_own2_a'][4]}</td>
+												<td>{$info['experience_own2_a'][5]}</td>
+												<td>{$info['experience_own2_a'][6]}</td>
+												<td>{$info['experience_own2_a'][7]}</td>
+											</tr>
+										</if>
+
+										<if condition="$info['experience_own3_a'][4] neq ''">
+											<tr>
+												<td>{$info['experience_own3_a'][0]}-{$info['experience_own3_a'][1]}至{$info['experience_own3_a'][2]}-{$info['experience_own3_a'][3]}</td>
+												<td>{$info['experience_own3_a'][4]}</td>
+												<td>{$info['experience_own3_a'][5]}</td>
+												<td>{$info['experience_own3_a'][6]}</td>
+												<td>{$info['experience_own3_a'][7]}</td>
+											</tr>
+										</if>
+										
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>老师评语
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td><label>老师评语：</label>
+								<div class="rtdiv">{$info.teacher_remark}</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>图片资料
+				</div>
+				<table class="auntTab pictures">
+					<tbody>
+						<tr>
+							<td><label>生活照：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="__UPLOADS__{$info.life_img1}"/></li>
+										<li><img src="__UPLOADS__{$info.life_img2}"/></li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>身份证扫描件：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="__UPLOADS__{$info.id_img}"/></li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>体检报告：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="__UPLOADS__{$info.test_img}"/></li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>从业资格证：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="__UPLOADS__{$info.zs_img}"/></li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>其他资料：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<volist name="info.imgs_a" id="vo">
+											<li><img src="__UPLOADS__{$vo}"/></li>
+										</volist>
+
+									</ul>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="form-group">
+					<input type="button" class="default_btn m_left_20" onclick="location.href='__MODULE__/Nurse/changeNurse/id/{$info.id}.html'" value="修改"/>
+					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
+				</div>
+			</div> 
+			<!--main end-->
+			<script>
+				$('.certificate>li>img').click(function(imgs){
+					imgs = $(this).attr('src');
+					layer.open({
+					  type: 1,
+					  title: false,
+					  area: ['auto', 'auto'],
+					  content: '<img src="'+imgs+'"/>'
+					});
+				});
+			</script>
+			
+			
+</body>
+
+</html>
