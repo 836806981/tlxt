@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+<!--top-->
+<include file="Nav/header"/>
+<!--left end-->
+<script>
+	$('.left_menu li').eq(4).addClass('called');
+</script>
+<!--main-->
+<div class="col-md-10 main">
+	<form action="__MODULE__/Student/changeStudent" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定修改么？')"  enctype="multipart/form-data">
+
+		<div class="tab_tle1">
+			学员资料录入
+		</div>
+		<div class="tab_tle" >
+			<span class="int_s"></span>学员来历
+		</div>
+		<table class="auntTab">
+			<tbody>
+			<tr>
+				<td width="47%"><label>学员来历：</label>
+					<select class="form-control" name="come">
+						<option <if condition="$info.come eq '来历1'">selected</if>>来历1</option>
+						<option <if condition="$info.come eq '来历2'">selected</if>>来历2</option>
+						<option <if condition="$info.come eq '来历3'">selected</if>>来历3</option>
+					</select>
+				</td>
+				<td width="53%"><label>招生对接人：</label>
+					<select class="form-control" name="pick_name">
+						<option  <if condition="$info.pick_name eq '曾军'">selected</if>>曾军</option>
+						<option  <if condition="$info.pick_name eq '廖薇'">selected</if>>廖薇</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td width="47%"><label>报道时间：</label>
+					<input type="text" class="form-control" value="{$info.come_time}" name="come_time" id="come_time"/>
+				</td>
+				<td width="53%"><label>预估学时：</label>
+					<input type="number" class="form-control" value="{$info.study_day}"name="study_day" id="study_day"/>&nbsp;天
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="tab_tle">
+			<span class="int_s"></span>图片资料
+		</div>
+		<table class="auntTab pictures">
+			<tbody>
+			<tr>
+				<td><label>头像：</label>
+					<div class="rtdiv">
+						<ul class="certificate clear">
+							<if condition="$info.title_img neq ''"><li><img src="__UPLOADS__/{$info.title_img}"/></li></if>
+							<input type="hidden" name="id" value="{$info.id}"/>
+						</ul>
+						<div class="shangchuan">
+							<input type="file" class="filesbtn" name="title_img" id="title_img">
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><label>生活照：</label>
+					<div class="rtdiv">
+						<ul class="certificate clear">
+							<if condition="$info.life_img1 neq ''"><li><img src="__UPLOADS__/{$info.life_img1}"/></li></if>
+						</ul>
+						<div class="shangchuan">
+							<input type="file" class="filesbtn"name="life_img1" id="life_img1" />
+						</div>
+						<ul class="certificate clear">
+							<if condition="$info.life_img2 neq ''"><li><img src="__UPLOADS__/{$info.life_img2}"/></li></if>
+						</ul>
+						<div class="shangchuan">
+							<input type="file" class="filesbtn"name="life_img2" id="life_img2" />
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><label>身份证扫描件：</label>
+					<div class="rtdiv">
+						<ul class="certificate clear">
+							<if condition="$info.id_img neq ''"><li><img src="__UPLOADS__/{$info.id_img}"/></li></if>
+						</ul>
+						<div class="shangchuan">
+							<input type="file" class="filesbtn"  name="id_img" id="id_img" />
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><label>体检报告：</label>
+					<div class="rtdiv">
+						<ul class="certificate clear">
+							<if condition="$info.test_img neq ''"><li><img src="__UPLOADS__/{$info.test_img}"/></li></if>
+						</ul>
+						<div class="shangchuan">
+							<input type="file" class="filesbtn"  name="test_img" id="test_img">
+						</div>
+					</div>
+				</td>
+			</tr>
+			<!--<tr>-->
+			<!--<td><label>从业资格证：</label>-->
+			<!--<div class="rtdiv">-->
+			<!--<div class="shangchuan">-->
+			<!--<input type="file" class="filesbtn"  name="zs_img" id="zs_img">-->
+			<!--</div>-->
+			<!--</div>-->
+			<!--</td>-->
+			<!--</tr>-->
+			<tr>
+				<td><label>其他资料：</label>
+					<div class="rtdiv">
+						<div class="shangchuan">
+							<ul class="certificate clear">
+								<volist name="info.imgs_a" id="vo">
+									<if condition="$vo neq ''"><li style="margin-right: 30px;"><img src="__UPLOADS__/{$vo}"/><bottom type="bottom" class="del_img" src="{$vo}">X</bottom></li></if>
+								</volist>
+							</ul>
+							<input type="file" class="filesbtn"  name="imgs[]" />
+							<input type="hidden"  name="imgs_del" id="imgs_del"  value=""/>
+						</div>
+						<input class="btnform magrin0 add_btn" type="button" value="+&nbsp;新增"/>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="tab_tle">
+			<span class="int_s"></span>基础资料
+		</div>
+		<table class="auntTab iptTab">
+			<tbody>
+			<tr>
+				<td><label>姓名：</label><input type="text" class="form-control" value="{$info.name}" name="name" id="name"/></td>
+				<td><label>班级：</label>
+					<select class="form-control w100" name="class_name" >
+						<option <if condition="$info.class_name eq '育婴师'">selected</if>>育婴师</option>
+						<option <if condition="$info.class_name eq '通乳师'">selected</if>>通乳师</option>
+					</select>
+					第<input type="text" class="form-control little_ipt" value="{$info.class_number}" name="class_number" id="class_number"/>期
+				</td>
+				<td><label>班主任：</label>
+					<select class="form-control" name="teacher" >
+						<option <if condition="$info.teacher eq '廖薇1'">selected</if>>廖薇1</option>
+						<option <if condition="$info.teacher eq '廖薇2'">selected</if>>廖薇2</option>
+						<option <if condition="$info.teacher eq '廖薇3'">selected</if>>廖薇3</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label>年龄：</label><input type="text" class="form-control w160" value="{$info.age}" name="age" id="age"/>&nbsp;&nbsp;岁</td>
+
+				<td><label>出生日期：</label><input type="text" class="form-control" value="{$info.birth_day}" name="birth_day" id="birth_day"/></td>
+				<td><label>身份证：</label><input type="text" class="form-control" value="{$info.id_card}" name="id_card" id="id_card"/></td>
+			</tr>
+			<tr>
+				<td><label>属相：</label>
+					<select class="form-control" name="zodiac" >
+						<option <if condition="$info.zodiac eq '鼠'">selected</if>>鼠</option>
+						<option <if condition="$info.zodiac eq '牛'">selected</if>>牛</option>
+						<option <if condition="$info.zodiac eq '虎'">selected</if>>虎</option>
+						<option <if condition="$info.zodiac eq '兔'">selected</if>>兔</option>
+						<option <if condition="$info.zodiac eq '龙'">selected</if>>龙</option>
+						<option <if condition="$info.zodiac eq '蛇'">selected</if>>蛇</option>
+						<option <if condition="$info.zodiac eq '马'">selected</if>>马</option>
+						<option <if condition="$info.zodiac eq '羊'">selected</if>>羊</option>
+						<option <if condition="$info.zodiac eq '猴'">selected</if>>猴</option>
+						<option <if condition="$info.zodiac eq '鸡'">selected</if>>鸡</option>
+						<option <if condition="$info.zodiac eq '狗'">selected</if>>狗</option>
+						<option <if condition="$info.zodiac eq '猪'">selected</if>>猪</option>
+					</select>
+				</td>
+				<td><label>联系方式：</label><input type="text" class="form-control" value="{$info.phone}" name="phone" id="phone"/></td>
+				<td><label>微信：</label><input type="text" class="form-control" value="{$info.wchat}" name="wchat" id="wchat"/></td>
+			</tr>
+			<tr>
+				<td><label>籍贯：</label><input type="text" class="form-control" value="{$info.native_place}" name="native_place" id="native_place"/></td>
+				<td><label>体重：</label><input type="number" class="form-control w160" value="{$info.weight}" name="weight" id="weight"/>&nbsp;&nbsp;KG</td>
+				<td><label>身高：</label><input type="number" class="form-control w160" value="{$info.height}" name="height" id="height"/>&nbsp;&nbsp;CM</td>
+			</tr>
+
+			<tr>
+				<td><label>是否住宿：</label>
+					<input type="radio" name="is_stay"  <if condition="$info.is_stay eq 1">checked</if> value="1"/>是
+					<input type="radio" name="is_stay"  <if condition="$info.is_stay eq 0">checked</if> value="0"/>否
+				</td>
+				<td><label>工资银行：</label><input type="text" class="form-control" value="{$info.bank_name}" name="bank_name" id="bank_name"/></td>
+				<td><label>银行卡号：</label><input type="text" class="form-control" value="{$info.back_card}" name="back_card" id="back_card"/></td>
+			</tr>
+			<tr>
+				<td><label>上一份工作：</label><input type="text" class="form-control" value="{$info.up_work}" name="up_work" id="up_work"/></td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="tab_tle">
+			<span class="int_s"></span>家庭资料
+		</div>
+		<table class="auntTab">
+			<tbody>
+			<tr>
+				<td width="47%"><label>家庭住址：</label><input type="text" class="form-control" value="{$info.family_address}" name="family_address" id="family_address"/></td>
+				<td width="53%"><label>现居住地：</label><input type="text" class="form-control" value="{$info.new_address}" name="new_address" id="new_address"/></td>
+			</tr>
+
+			<tr>
+				<td colspan="2">
+					<table class="lxfs">
+						<tbody>
+						<tr>
+							<td><label>家庭成员姓名</label></td>
+							<td><label>关系</label></td>
+							<td><label>职业</label></td>
+							<td><label>联系方式</label></td>
+							<td><label>现居地</label></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="form-control w120" value="{$info['family_1_a'][0]}" name="family_1_1" id="family_1_1"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_1_a'][1]}" name="family_1_2" id="family_1_2"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_1_a'][2]}" name="family_1_3" id="family_1_3"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_1_a'][3]}" name="family_1_4" id="family_1_4"/></td>
+							<td><input type="text" class="form-control" value="{$info['family_1_a'][4]}" name="family_1_5" id="family_1_5"/></td>
+							<td>
+								<input type="radio" name="family_urgent" value="1" <if condition="$info['family_1_a'][5] eq 1">checked</if> />紧急联系人
+							</td>
+						</tr>
+						<tr>
+							<td><input type="text" class="form-control w120" value="{$info['family_2_a'][0]}" name="family_2_1" id="family_2_1"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_2_a'][1]}" name="family_2_2" id="family_2_2"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_2_a'][2]}" name="family_2_3" id="family_2_3"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_2_a'][3]}" name="family_2_4" id="family_2_4"/></td>
+							<td><input type="text" class="form-control" value="{$info['family_2_a'][4]}" name="family_2_5" id="family_2_5"/></td>
+							<td>
+								<input type="radio" name="family_urgent" value="2" <if condition="$info['family_2_a'][5] eq 1">checked</if> />紧急联系人
+							</td>
+						</tr>
+						<tr>
+							<td><input type="text" class="form-control w120" value="{$info['family_3_a'][0]}" name="family_3_1" id="family_3_1"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_3_a'][1]}" name="family_3_2" id="family_3_2"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_3_a'][2]}" name="family_3_3" id="family_3_3"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['family_3_a'][3]}" name="family_3_4" id="family_3_4"/></td>
+							<td><input type="text" class="form-control" value="{$info['family_3_a'][4]}" name="family_3_5" id="family_3_5"/></td>
+							<td>
+								<input type="radio" name="family_urgent" value="3" <if condition="$info['family_3_a'][5] eq 1">checked</if> />紧急联系人
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+
+			</tbody>
+		</table>
+
+		<div class="tab_tle">
+			<span class="int_s"></span>个人信息
+		</div>
+		<table class="auntTab">
+			<tbody>
+			<tr>
+				<td width="47%"><label>婚姻情况：</label>
+					<select class="form-control" name="marrige">
+						<option <if condition="$info.marrige eq '未婚'">selected</if>>未婚</option>
+						<option <if condition="$info.marrige eq '已婚未孕'">selected</if>>已婚未孕</option>
+						<option <if condition="$info.marrige eq '已婚已孕'">selected</if>>已婚已孕</option>
+					</select>
+				</td>
+				<td width="53%"><label>带孩子：</label><input type="text" class="form-control w120" value="{$info.baby_take}" name="baby_take" id="baby_take"/>&nbsp;个孩子</td>
+			</tr>
+
+			<tr>
+				<td colspan="2"><label>个人签名：</label>
+					<div class="rtdiv">
+						<textarea class="form-control jianjie" name="sign" id="sign">{$info.sign}</textarea>
+						（不超过40个字）
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><label>是否接受过其他职业培训：</label>
+					<div class="rtdiv">
+						<input type="radio" name="is_other_train" value="1" <if condition="$info.is_other_train eq 1">checked</if>/>是&nbsp;&nbsp;
+						<input type="radio" name="is_other_train" value="0" <if condition="$info.is_other_train eq 0">checked</if>/>否&nbsp;&nbsp;
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><label>曾接受过的职业培训项目：</label>
+					<input type="text" class="form-control w320" value="{$info.order_train}" name="order_train" id="order_train"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><label>是否擅长做饭：</label>
+					<div class="rtdiv">
+						<input type="radio" name="is_cook" value="是" <if condition="$info.is_cook eq '是'">checked</if>/>是&nbsp;&nbsp;
+						<input type="radio" name="is_cook" value="否" <if condition="$info.is_cook eq '否'">checked</if>/>否&nbsp;&nbsp;
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><label>擅长菜系（多选）：</label>
+					<div class="rtdiv">
+						<input type="checkbox" name="good_cuisine1" value="1" <if condition="$info['good_cuisine'][0] eq 1">checked</if>/>面食&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine2" value="1" <if condition="$info['good_cuisine'][1] eq 1">checked</if>/>煲汤&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine3" value="1" <if condition="$info['good_cuisine'][2] eq 1">checked</if>/>川菜小炒&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine4" value="1" <if condition="$info['good_cuisine'][3] eq 1">checked</if>/>流食&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine5" value="1" <if condition="$info['good_cuisine'][4] eq 1">checked</if>/>素食&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine6" value="1" <if condition="$info['good_cuisine'][5] eq 1">checked</if>/>肉类&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine7" value="1" <if condition="$info['good_cuisine'][6] eq 1">checked</if>/>小吃&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine8" value="1" <if condition="$info['good_cuisine'][7] eq 1">checked</if>/>甜品&nbsp;&nbsp;
+						<input type="checkbox" name="good_cuisine9" value="1" <if condition="$info['good_cuisine'][8] eq 1">checked</if>/>补品&nbsp;&nbsp;
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><label>擅长口味（多选）：</label>
+					<div class="rtdiv">
+						<input type="checkbox" name="good_flavor1" value="1" <if condition="$info['good_flavor_a'][0] eq 1">checked</if>/>清淡&nbsp;&nbsp;
+						<input type="checkbox" name="good_flavor2" value="1" <if condition="$info['good_flavor_a'][1] eq 1">checked</if>/>咸鲜&nbsp;&nbsp;
+						<input type="checkbox" name="good_flavor3" value="1" <if condition="$info['good_flavor_a'][2] eq 1">checked</if>/>甜食&nbsp;&nbsp;
+						<input type="checkbox" name="good_flavor4" value="1" <if condition="$info['good_flavor_a'][3] eq 1">checked</if>/>辣&nbsp;&nbsp;
+						<input type="checkbox" name="good_flavor5" value="1" <if condition="$info['good_flavor_a'][4] eq 1">checked</if>/>酸&nbsp;&nbsp;
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="tab_tle">
+			<span class="int_s"></span>个人经历
+		</div>
+		<table class="auntTab">
+			<tbody>
+			<tr>
+				<td>
+					<table class="lxfs">
+						<tbody>
+						<tr>
+							<td><label>时间</label></td>
+							<td><label>单位名称</label></td>
+							<td><label>职位</label></td>
+							<td><label>薪酬</label></td>
+							<td><label>工作内容</label></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own1_a'][0]}" name="experience_own1_1" id="experience_own1_1"/>年
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own1_a'][1]}" name="experience_own1_2" id=experience_own1_2"/>月 --
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own1_a'][2]}" name="experience_own1_3" id="experience_own1_3"/>年
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own1_a'][3]}" name="experience_own1_4" id="experience_own1_4"/>月
+							</td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own1_a'][4]}" name="experience_own1_5" id="experience_own1_5"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own1_a'][5]}" name="experience_own1_6" id="experience_own1_6"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own1_a'][6]}" name="experience_own1_7" id="experience_own1_7"/></td>
+							<td><input type="text" class="form-control" value="{$info['experience_own1_a'][7]}" name="experience_own1_8" id="experience_own1_8"/></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own2_a'][0]}" name="experience_own2_1" id="experience_own2_1"/>年
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own2_a'][1]}" name="experience_own2_2" id=experience_own2_2"/>月 --
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own2_a'][2]}" name="experience_own2_3" id="experience_own2_3"/>年
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own2_a'][3]}" name="experience_own2_4" id="experience_own2_4"/>月
+							</td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own2_a'][4]}" name="experience_own2_5" id="experience_own2_5"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own2_a'][5]}" name="experience_own2_6" id="experience_own2_6"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own2_a'][6]}" name="experience_own2_7" id="experience_own2_7"/></td>
+							<td><input type="text" class="form-control" value="{$info['experience_own2_a'][7]}" name="experience_own2_8" id="experience_own2_8"/></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own3_a'][0]}" name="experience_own3_1" id="experience_own3_1"/>年
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own3_a'][1]}" name="experience_own3_2" id=experience_own3_2"/>月 --
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own3_a'][2]}" name="experience_own3_3" id="experience_own3_3"/>年
+								<input type="text" class="form-control marks_ipt" value="{$info['experience_own3_a'][3]}" name="experience_own3_4" id="experience_own3_4"/>月
+							</td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own3_a'][4]}" name="experience_own3_5" id="experience_own3_5"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own3_a'][5]}" name="experience_own3_6" id="experience_own3_6"/></td>
+							<td><input type="text" class="form-control w120" value="{$info['experience_own3_a'][6]}" name="experience_own3_7" id="experience_own3_7"/></td>
+							<td><input type="text" class="form-control" value="{$info['experience_own3_a'][7]}" name="experience_own3_8" id="experience_own3_8"/></td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="form-group">
+			<input type="button" class="default_btn m_left_20" value="保存" id="sub_add"/>
+			<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
+		</div>
+	</form>
+</div>
+<!--main end-->
+<script>
+
+	$('#sub_add').live('click',function(){
+		var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+		var number =/^(\+|-)?\d+$/;
+		if(!reg.test($('#come_time').val())){
+			layer.msg('请输入正确的报道时间！');
+			return false;
+		}
+		if(!number.test($('#study_day').val())||$('#study_day').val()<=0){
+			layer.msg('请输入正确学时！');
+			return false;
+		}
+
+		if($('#name').val() == ''){
+			layer.msg('请输入姓名！');
+			return false;
+		}
+//		if($('#title_img').val() == '' || $('#life_img1').val() == '' || $('#life_img2').val() == '' || $('#id_img').val() == '' ){
+//			layer.msg('请上传图片！');
+//			return false;
+//		}
+		if($('#id_card').val() == ''){
+			layer.msg('请输入身份证！');
+			return false;
+		}
+		if($('#birth_day').val() == ''){
+			layer.msg('请输入出生日期！');
+			return false;
+		}
+		if($('#phone').val() == ''){
+			layer.msg('联系方式！');
+			return false;
+		}
+		if($('#weight').val() == ''){
+			layer.msg('请输入体重！');
+			return false;
+		}
+		if($('#height').val() == ''){
+			layer.msg('请输入身高！');
+			return false;
+		}
+		if($('#native_place').val() == ''){
+			layer.msg('请输入籍贯！');
+			return false;
+		}
+		if($('#work_time').val() == ''){
+			layer.msg('请输入从业时间！');
+			return false;
+		}
+		if($('#up_work').val() == ''){
+			layer.msg('请输入上一份工作！');
+			return false;
+		}
+		if($('#bank_name').val() == ''&&$('#back_card').val() == ''){
+			layer.msg('请输入银行卡信息！');
+			return false;
+		}
+		if($('#training_school').val() == ''){
+			layer.msg('请输入培训学校！');
+			return false;
+		}
+		if($('#agreement_type').val() == 3 && $('#price').val() == '' ){
+			layer.msg('请输入定薪工资！');
+			return false;
+		}
+//					if($('#skills1').val() == '' || $('#skills2').val() == '' || $('#skills3').val() == '' || $('#skills4').val() == '' || $('#skills5').val() == '' || $('#skills6').val() == '' || $('#skills7').val() == '' || $('#skills8').val() == '' || $('#skills9').val() == '' || $('#skills10').val() == '' || $('#skills11').val() == ''){
+//						layer.msg('请输入技能评估分！');
+//						return false;
+//					}
+		if($('#experience').val() == ''){
+			layer.msg('请输入从业经历！');
+			return false;
+		}
+		if($('#family_address').val() == ''){
+			layer.msg('请输入家庭住址！');
+			return false;
+		}
+		if($('#new_address').val() == ''){
+			layer.msg('请输入现居地！');
+			return false;
+		}
+		if($('#baby_take').val() == ''){
+			layer.msg('请输入带孩子数！');
+			return false;
+		}
+		if($('#sign').val() == ''){
+			layer.msg('请输入签名！');
+			return false;
+		}
+//					if($('#teacher_remark').val() == ''){
+//						layer.msg('请输入老师评语！');
+//						return false;
+//					}
+
+		$('#form_add').submit();
+	});
+
+
+
+	$('.certificate>li>img').click(function(imgs){
+		imgs = $(this).attr('src');
+		layer.open({
+			type: 1,
+			title: false,
+			area: ['auto', 'auto'],
+			content: '<img src="'+imgs+'"/>'
+		});
+	});
+	$('.add_btn').live("click",function(){
+		var html = '<div class="shangchuan"><input type="file" class="filesbtn" name="imgs[]"><input class="del_btn" type="button" value="删除"/></div>';
+		$(this).before(html);
+	});
+	$('.del_img').live("click",function(){
+		var src = $(this).attr('src');
+		var dal_val = $('#imgs_del').val();
+		$('#imgs_del').val(dal_val+src+',');
+		$(this).parent('li').remove();
+	});
+</script>
+
+
+</body>
+
+</html>

@@ -129,7 +129,12 @@ class TakeNeedController extends CommonController {
     public function overOrder(){
         if (I('post.')) {
             $post = I('post.');
-
+            $order_info = M('order')->where('id='.$post['order_id'].'')->find();
+            if($order_info['status']==2){
+                $post['status'] = 3;
+                $post['status_3'] = time();
+            }
+            $post['number'] = 'DD-' . str_pad($post['order_id'], 6, 0, STR_PAD_LEFT);  //6位数不足补0
             $save_mod = M('order')->where('id='.$post['order_id'].'')->save($post);
             $have_order = M('order_info')->where('order_id='.$post['order_id'].'')->find();
 
@@ -142,6 +147,7 @@ class TakeNeedController extends CommonController {
                 M('order_info')->add($post);
             }
             if($save_mod!==false){
+
                 echo "<script>alert('成功'); window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
                 exit;
             }else{
@@ -186,6 +192,38 @@ class TakeNeedController extends CommonController {
             $this->assign('info', $info);
             $this->display();
         }
+    }
+
+    //发单
+    public function status_4(){
+        if (!I('get.id')) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('order')->where('id=' . I('get.id') . '')->find();
+        if (!$info) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if ($info['status']!=3) {
+            echo "<script>alert('未完善或已经发单');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $save['status'] = 4;
+        $save['status_4'] = time();
+
+        $save_mod = M('order')->where('id='.$info['id'].'')->save($save);
+        if($save_mod!==false){
+            echo "<script>alert('成功'); window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$info['id'].".html'</script>";
+            exit;
+        }else{
+            echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+
+
+
+
     }
 
     //完善订单后详情

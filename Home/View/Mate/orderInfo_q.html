@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[田螺阿姨]后台</title>
+
+
+
+</head>
+
+<body>
+<!--top-->
+<include file="Nav/header"/>
+<script type="text/javascript" src="__PUBLIC__/js/toggle.js" ></script>
+<!--left end-->
+<script>
+	$('.left_menu li').eq(5).addClass('called');
+</script>
+<!--main-->
+<div class="col-md-10 main">
+	<div class="tab_tle1">
+		订单详情
+	</div>
+	<div class="page">
+		<div class="tab_tle">
+			<span class="int_s"></span>订单信息
+		</div>
+		<table class="auntTab">
+		<tbody>
+		<tr>
+			<td width="33%"><label>订单编号：</label>{$info.number}</td>
+			<td width="33%"><label>派发人：</label>{$info.add_employee}</td>
+			<td width="33%"></td>
+		</tr>
+		<tr>
+			<td><label>订单类型：</label>{$info.order_type_name}</td>
+			<td><label>服务周期：</label>{$info.service_day}天</td>
+			<td><label>订单价格：</label>{$info.product_price}元</td>
+		</tr>
+		<tr>
+			<td><label>预计上户时间：</label>{$info.b_time}</td>
+			<td><label>实际上户时间：</label>{$info.true_b_time}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><label>客户姓名：</label>{$info.name}</td>
+			<td><label>手机：</label>{$info.phone}</td>
+			<td><label>微信：</label>{$info.wchat}</td>
+		</tr>
+
+		<tr>
+			<td colspan="3"><label>服务地址：</label>
+				<div class="rtdiv">
+					{$info.service_place}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"><label>备注：</label>
+				<div class="rtdiv">
+					{$info.remark}
+				</div>
+			</td>
+		</tr>
+		<if condition="$info.price_add eq 1">
+			<tr>
+				<td><label>阿姨加价：</label>{$info.add_nurse_price}</td>
+				<td><label>订单加价：</label>{$info.add_order_price}</td>
+			</tr>
+			<tr>
+				<td><label>加价原因：</label>{$info.add_reason}</td>
+			</tr>
+		</if>
+		</tbody>
+			</table>
+	</div>
+
+	<div class="page">
+		<div class="tab_tle">
+			<span class="int_s"></span>匹配列表
+		</div>
+		<ul class="pipei clear">
+			<volist name="order_nurse" id="vo">
+				<li nurse_id="{$vo.id}">
+					<a href="__MODULE__/Nurse/nurseInfo/id/{$vo.id}.html"><img src="__UPLOADS__{$vo.title_img}" /></a>
+					<p>{$vo.nurse_name}</p>
+					<input type="button" class="del_aunt" value="X" do="del_nurse" nurse_id="{$vo.id}"/>
+				</li>
+			</volist>
+			<if condition="$info.status eq 4">
+			<li id="pp_add_li">
+				<a class="addpipei"><img src="__PUBLIC__/img/addpipei.png" /></a>
+				<input type="hidden" id="order_id" value="{$info.id}"/>
+			</li>
+			</if>
+		</ul>
+	</div>
+
+	<div class="form-group">
+		<if condition="$info.status eq 4">
+			<input type="button" class="default_btn"  value="完成匹配" id="status_5" order_id="{$info.id}">
+		</if>
+		<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="取消">
+	</div>
+</div>
+<!--main end-->
+<script>
+	$('#status_5').live('click',function(){
+		var length_nurse = $('.pipei li').length;
+		if(length_nurse>=2){
+			window.location.href="__MODULE__/Mate/status_5/id/"+$(this).attr('order_id')+".html";
+		}else{
+			layer.msg('请匹配阿姨！');
+			return false;
+		}
+
+	});
+
+	$('.addpipei').live('click',addpipei);
+	var name = '';
+	var status_sh = 0;
+	var number = '';
+	var type = 0;
+
+	function addnewLi(){
+		layer.closeAll();
+	}
+	//				新增匹配  弹窗
+
+
+	function ajax(){
+		$.AjaxPost(MODULE+"/Mate/getNurseList", {order_id:$('#order_id').val(),name:name,number:number,status_sh:status_sh,type:type}, function (backdata) {
+			var List_zcj = backdata.data.list;
+			if (backdata.code == 1000) {
+				var str='';
+				var $dom=$(".info_name");
+				$(".data").remove();
+				if(List_zcj!=null){
+					$.each(List_zcj,function(i,item){
+						//未接单或者打回才能放回收站
+						var checked = '';
+						if(item.our_nurse==1){
+							checked = 'checked';
+						}
+
+						str +='	<tr class="data">'
+						+				'<td><input type="checkbox" '+checked+' do="checked" nurse_id="'+item.id+'"></td>'
+						+				'<td>'+item.number+'</td>'
+						+				'<td>'+item.name+'</td>'
+						+				'<td>'+item.status_sh_name+'</td>'
+						+				'<td>'+item.status_own_name+'</td>'
+						+				'<td>'+item.type_name+'</td>'
+						+				'<td><a href="__MODULE__/Nurse/nurseInfo/id/'+item.id+'.html" target="_blank">查看</a></td>'
+						+			'</tr>';
+					});
+					$dom.after(str);
+					$(".data").attr('onmouseover',"this.style.backgroundColor='#eeeeee';");
+					$(".data").attr('onmouseout',"this.style.backgroundColor='#ffffff';");
+				}else{
+					str ='<div style="color: #c3c3c3; width: 80px; display: block; margin: 50px auto;" id="zanwushuju">暂无数据</div>';
+					$dom.after(str);
+				}
+			} else {
+
+			}
+		}, true);
+	}
+
+	$('input[do=checked]').live('click',function(){
+		if($(this).attr('checked')=='checked'){
+			$.AjaxPost(MODULE+"/Mate/change_order_nurse", {order_id:$('#order_id').val(),nurse_id:$(this).attr('nurse_id'),action:1}, function (backdata) {
+				var data = backdata.data;
+				var str = '<li nurse_id="'+data.id+'">'
+						+'<a href="__MODULE__/Nurse/nurseInfo/id/'+data.id+'.html"><img src="__UPLOADS__'+data.title_img+'" /></a><p>'+data.name+'</p>'
+						+'<input type="button" class="del_aunt" value="X" do="del_nurse" nurse_id="'+data.id+'"/>'
+						+'</li>';
+				$('#pp_add_li').before(str);
+			});
+		}else{
+			$.AjaxPost(MODULE+"/Mate/change_order_nurse", {order_id:$('#order_id').val(),nurse_id:$(this).attr('nurse_id'),action:0}, function (backdata) {
+				$('li[nurse_id='+backdata.nurse_id+']').remove();
+			});
+		}
+	})
+
+	$('input[do=del_nurse]').live('click',function(){
+		$.AjaxPost(MODULE+"/Mate/change_order_nurse", {order_id:$('#order_id').val(),nurse_id:$(this).attr('nurse_id'),action:0}, function (backdata) {
+			$('li[nurse_id='+backdata.nurse_id+']').remove();
+		});
+	});
+
+
+
+	function addpipei(){
+
+		ajax();
+		layer.open({
+			type: 1,
+			title: '新增匹配',
+			area: ['auto', 'auto'], //宽高
+			content: '<div class="lay_cnt" style="padding:15px 0;">'
+			+	'<form class="form-inline" style="padding:0 30px 30px;">'
+			+		'<div class="form-group">'
+			+			'<label>编号</label><input type="text" class="form-control" id="number"/>'
+			+		'</div>'
+			+		'<div class="form-group">'
+			+			 '<label>姓名</label><input type="text" class="form-control" id="name"/>'
+			+		'</div>'
+			+		'<div class="form-group">'
+			+			 '<label>主状态</label>'
+			+			 '<select class="form-control" id="status_sh">'
+			+			 	'<option value="0">全部</option>'
+			+		         '<option value="1">未匹配</option>'
+			+		         '<option value="2">待上户</option>'
+			+		         '<option value="3">已上户</option>'
+			+		     '</select>'
+			+		'</div>'
+			+		'<div class="form-group">'
+			+			 '<label>类型</label>'
+			+			 '<select class="form-control" id="type">'
+			+			 	'<option value="0">全部</option>'
+			+		         '<option value="1">学员</option>'
+			+		         '<option value="2">阿姨</option>'
+			+		     '</select>'
+			+		'</div>'
+			+		'<div class="form-group">'
+			+			 '<button type="submit" class="subform" id="search">搜索</button>'
+			+		'</div>'
+			+	'</form>'
+			+	'<div class="lay_cnt_max" style="padding:0 30px;margin: 0 0 20px;">'
+			+	'<table class="tab_info tab860">'
+			+		'<tbody>'
+			+			'<tr class="info_name">'
+			+				'<td width="4%"></td>'
+			+				'<td width="12%">学员编号</td>'
+			+				'<td width="12%">姓名</td>'
+			+				'<td width="12%">主状态</td>'
+			+				'<td width="12%">次状态</td>'
+			+				'<td width="12%">类型</td>'
+			+				'<td width="12%">操作</td>'
+			+			'</tr>'
+			+		'</tbody>'
+			+	'</table>'
+			+	'</div>'
+			+	'<div class="btn_div clear" style="padding:0 30px;">'
+			+		'<button type="submit" class="default_btn" onclick="addnewLi()">确定</button>'
+			+	'</div>'
+			+'</div>'
+		});
+	}
+
+	//搜索
+	$("#search").live("click", function () {
+		number = $('#number').val();
+		status_sh = $('#status_sh').val();
+		name = $('#name').val();
+		type = $('#type').val();
+		ajax();
+	});
+
+
+
+
+	function close_lay(){
+		layer.closeAll();
+	}
+	$('.del_aunt').live('click',function(){
+		$(this).parent('li').remove();
+	});
+</script>
+<!--main end-->
+
+</body>
+
+</html>

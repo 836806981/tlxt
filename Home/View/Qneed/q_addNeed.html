@@ -30,7 +30,7 @@
 								<if condition=" $_SESSION[C('USER_AUTH_KEY')]['permission'] eq 24">
 										<select class="form-control" id="source" name="source">
 											<volist name="employee_3" id="vo">
-												<option>{$vo.real_name}</option>
+												<option value="{$vo.id}">{$vo.real_name}</option>
 											</volist>
 										</select>
 									<else/>

@@ -4,11 +4,10 @@ var List_zcj=[];
 var Num_zcj=[];
 
 
-var number = $('#number').val();
 var order_type = $('#order_type').val();
-var status_1 = $('#status_1').val();
-var employee_id = $('#employee_id').val();
-var status = $('#status').val();
+var status_4 = $('#status_4').val();
+var sales_id = $('#sales_id').val();
+var name = $('#name').val();
 
 
 $(function () {
@@ -57,14 +56,13 @@ $.extend({
 
         //搜索
         $("#search").live("click", function () {
-            number = $('#number').val();
             order_type = $('#order_type').val();
-            status_1 = $('#status_1').val();
-            employee_id = $('#employee_id').val();
-            status = $('#status').val();
+            status_4 = $('#status_4').val();
+            sales_id = $('#sales_id').val();
+            name = $('#name').val();
             reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
-            if(!reg.test(status_1) && status_1){
-                layer.msg('请输入正确派单时间 格式：2016-01-01！');
+            if(!reg.test(status_4) && status_4){
+                layer.msg('请输入正确派发时间 格式：2016-01-01！');
                 return false;
             }
             currentpage_zcj = 1;
@@ -79,7 +77,7 @@ $.extend({
 	//根据所有条件查询新闻列表
     getNewsListByAllTerm: function () {
         //异步提交数据,参数：currentpage,要查询的页码;pagenum，每页的条数
-        $.AjaxPost(MODULE+"/Qneed/q_getServiceList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,number:number,status_1:status_1,order_type:order_type,employee_id:employee_id,status:status}, function (backdata) {
+        $.AjaxPost(MODULE+"/mate/getMateList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,order_type:order_type,status_4:status_4,sales_id:sales_id,name:name}, function (backdata) {
             if (backdata.code == 1000) {
                 List_zcj = backdata.data.list;
                 Num_zcj = backdata.data.num;
@@ -88,26 +86,21 @@ $.extend({
                 $('#show_number_str').text(Num_zcj);
 				var str='';
 				var $dom=$(".last_tr");
-                var del_str = '';
                 $(".data").remove();
-                var dell = '';
                 if(List_zcj!=null){
                     $.each(List_zcj,function(i,item){
-                        //未接单或者打回才能放回收站
-                        del_str = '';
-                        dell = '';
-                        if(item.status<5) {
-                            del_str = '<a class="del_this" order_id="' + item.id + '">放入回收站</a>';
-                            dell = '<a href="' + MODULE + '/Qneed/q_changeNeed/id/' + item.id + '.html" name="edit">编辑</a>';
-                        }
-                        str +='	<tr class="data">\
-                        <td>'+item.number+'</td>\
+                          var   status_1 =  '<span name="show" val="'+item.time_down+'" ></span>';
+
+
+                        str +='<tr class="data">\
+                       <td>'+item.number+'</td>\
+                        <td>'+item.product+'</td>\
+                        <td>'+item.status_4_str+'</td>\
+                        <td>'+item.name+'</td>\
+                        <td>'+item.product_price+'</td>\
                         <td>'+item.sales_name+'</td>\
-                        <td>'+item.order_type_name+'</td>\
-                        <td>'+item.add_employee+'</td>\
-                        <td>'+item.status_3_str+'</td>\
-                        <td>'+item.order_type_name+'</td>\
-                        <td><a href="' + MODULE + '/Qneed/q_needInfo/id/' + item.id + '.html">查看</a>'+dell+del_str+'</td>\
+                        <td>'+status_1+'</td>\
+                        <td><a href="'+MODULE+'/Mate/orderInfo/id/'+item.id+'.html">查看</a></td>\
                         </tr>';
                     });
                     $dom.before(str);
@@ -117,10 +110,11 @@ $.extend({
                     str ='<div style="color: #c3c3c3; width: 80px; display: block; margin: 50px auto;" id="zanwushuju">暂无数据</div>';
                     $dom.before(str);
                 }
+                showTimeDown();
             } else {
-
             }
         }, true);
     }
+
     
 });

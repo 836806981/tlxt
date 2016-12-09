@@ -5,7 +5,7 @@
 
 namespace Home\Controller;
 use Think\Controller;
-class NurseController extends CommonController {
+class StudentController extends CommonController {
     public function  login_test(){
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Admin/login.html';</script>";
@@ -14,39 +14,46 @@ class NurseController extends CommonController {
         }
     }
     //列表页
-    public function nurseList(){
+    public function studentList_1(){
 
 
         $this->display();
     }
 
     //获取列表数据
-    public function getNurseList(){
+    public function getStudentList(){
         $currentpage = I("post.currentpage");
         $pagenum = I("post.pagenum");
         $start = ($currentpage - 1) * $pagenum;
         $post = I("post.");
         $where = 'status = 1 ';
-
         if($post['name']&&$post['name']!=''){
             $where .= ' and  name LIKE "%'.$post['name'].'%"';
         }
-        if($post['status_sh']){
-            $where .= ' and status_sh = '.$post['status_sh'].'';
+        if($post['age1']){
+            $where .= ' and age >='.$post['age1'].'';
         }
-        if($post['status_own']){
-            $where .= ' and status_own = '.$post['status_own'].'';
+        if($post['age2']){
+            $where .= ' and age <='.$post['age2'].'';
+        }
+
+        if($post['other']){
+            $where .= ' and  other LIKE "%'.$post['other'].'%" ';
+
+        }
+        if($post['status_sh']){
+            $where .= ' and status_sh <= '.$post['status_sh'].'';
+        }
+        if($post['level_name']){
+            $where .= ' and level = "'.$post['level_name'].'"';
         }
 
 
         $list = M('nurse')->where($where)->limit($start,$pagenum)->order('add_time desc')->select();
 
-        $status_sh_name = ['','未匹配','待上户','已上户'];
-        $status_own_name = ['','暂不接单','等单中','私签中','外单中'];
+        $status_sh_name = ['','已上户','未上户'];
         foreach($list as $k=>$v){
             $list[$k]['status_sh_name'] = $status_sh_name[$v['status_sh']];
-            $list[$k]['status_own_name'] = $status_own_name[$v['status_own']];
-            $list[$k]['is_student_str'] = ($v['is_student']==1?'学员':'外聘');
         }
 
         $count = M('nurse')->where($where)->count();
@@ -57,18 +64,9 @@ class NurseController extends CommonController {
         echo json_encode($back);
     }
 
-    //修改阿姨次要状态
-    public function changeStatus_own(){
-        $save['status_own'] = I('post.status_own');
-        $save_mod = M('nurse')->where('id='.I('post.nurse_id').'')->save($save);
-        if($save_mod===false){
-            M('nurse')->where('id='.I('post.nurse_id').'')->save($save);
-        }
-    }
-
 
     //添加
-    public function addNurse(){
+    public function addStudent(){
         if(I('post.')){
             $post = I('post.');
             if($post['name']==''||$post['phone']==''){
@@ -158,22 +156,22 @@ class NurseController extends CommonController {
                     }
                 }
             }
-            if($_FILES['zs_img']['tmp_name']) {
-                $upload = new \Think\Upload();// 实例化上传类
-                $upload->maxSize = 2145728;// 设置附件上传大小
-                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-                $upload->savePath = '/nurse/zs_img/';// 设置附件上传目录// 上传文件
-                $info = $upload->uploadOne($_FILES['zs_img']);
-                if (!$info) {// 上传错误提示错误信息
-                    $this->error($upload->getError());
-                } else {//上传成功 获取上传文件信息
-                    $post['zs_img']  = $info['savepath'] . $info['savename'];
-                    $img_s = $this->shuiyin($post['zs_img']);
-                    if($img_s){
-                        $post['zs_img'] = $img_s;
-                    }
-                }
-            }
+//            if($_FILES['zs_img']['tmp_name']) {
+//                $upload = new \Think\Upload();// 实例化上传类
+//                $upload->maxSize = 2145728;// 设置附件上传大小
+//                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+//                $upload->savePath = '/nurse/zs_img/';// 设置附件上传目录// 上传文件
+//                $info = $upload->uploadOne($_FILES['zs_img']);
+//                if (!$info) {// 上传错误提示错误信息
+//                    $this->error($upload->getError());
+//                } else {//上传成功 获取上传文件信息
+//                    $post['zs_img']  = $info['savepath'] . $info['savename'];
+//                    $img_s = $this->shuiyin($post['zs_img']);
+//                    if($img_s){
+//                        $post['zs_img'] = $img_s;
+//                    }
+//                }
+//            }
             if($_FILES['imgs']['tmp_name'][0]) {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2145728;// 设置附件上传大小
@@ -196,22 +194,26 @@ class NurseController extends CommonController {
                 }
             }
             //性格
-            $rand = rand(1,4);
-            $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
+//            $rand = rand(1,4);
+//            $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
 
             //定薪
-            $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
-            if($post['agreement_type'] == 1){
-                $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
-                $price_level = array_keys($level_name,$post['price_name']);
-                $post['price_level'] = $price_level[0];
-                $post['price'] = $price_arr[$post['price_level']];
-            }
+//            $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
+//            if($post['agreement_type'] == 1){
+//                $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
+//                $price_level = array_keys($level_name,$post['price_name']);
+//                $post['price_level'] = $price_level[0];
+//                $post['price'] = $price_arr[$post['price_level']];
+//            }
             //等级
-            for($i=1;$i<=11;$i++){
-                $post['skills'] .= ($post['skills'.$i]?$post['skills'.$i]:0).',';
-            }
-            $post['skills'] = substr($post['skills'],0,-1);
+//            for($i=1;$i<=11;$i++){
+//                $post['skills'] .= ($post['skills'.$i]?$post['skills'.$i]:0).',';
+//            }
+//            $post['skills'] = substr($post['skills'],0,-1);
+
+            // 学时算预计完成时间
+            $post['finish_time'] = date('Y-m-d',strtotime($post['come_time'],'+'.$post['study_day'].' days'));
+
 
             //家庭成员
             for($i=1;$i<=5;$i++){
@@ -257,17 +259,17 @@ class NurseController extends CommonController {
             }
             $post['experience_own3'] = substr($post['experience_own3'],0,-2);
 
-            $post['is_student'] = 0;
+            $post['is_student'] = 1;
             $post['add_time'] = time();
             $post['status'] = 1;
             $post['status_sh'] = 1;
-            $post['type'] = 2;
+            $post['type'] = 1;
 
 
 
             $nurse_id = M('nurse')->add($post);
             if($nurse_id) {
-                $save['number'] = 'TLAY-' . str_pad($nurse_id, 6, 0, STR_PAD_LEFT);  //6位数不足补0
+                $save['number'] = 'TLXY-' . str_pad($nurse_id, 6, 0, STR_PAD_LEFT);  //6位数不足补0
                 $save_mod = M('nurse')->where('id=' . $nurse_id . '')->save($save);
                 if ($save_mod === false) {
                     M('nurse')->where('id=' . $nurse_id . '')->save($save);
@@ -286,7 +288,7 @@ class NurseController extends CommonController {
 
 
     //修改
-    public function changeNurse(){
+    public function changeStudent(){
         if(I('post.')){
             $post = I('post.');
             if($post['name']==''||$post['phone']==''){
@@ -389,25 +391,25 @@ class NurseController extends CommonController {
                     $unlink[] = $del_s[0].$del_s[1];
                 }
             }
-            if($_FILES['zs_img']['tmp_name']) {
-                $upload = new \Think\Upload();// 实例化上传类
-                $upload->maxSize = 2145728;// 设置附件上传大小
-                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-                $upload->savePath = '/nurse/zs_img/';// 设置附件上传目录// 上传文件
-                $info = $upload->uploadOne($_FILES['zs_img']);
-                if (!$info) {// 上传错误提示错误信息
-                    $this->error($upload->getError());
-                } else {//上传成功 获取上传文件信息
-                    $post['zs_img']  = $info['savepath'] . $info['savename'];
-                    $img_s = $this->shuiyin($post['zs_img']);
-                    if($img_s){
-                        $post['zs_img'] = $img_s;
-                    }
-                    $unlink[] = $nurse_info['zs_img'];
-                    $del_s = explode('_s',$nurse_info['zs_img']);
-                    $unlink[] = $del_s[0].$del_s[1];
-                }
-            }
+//            if($_FILES['zs_img']['tmp_name']) {
+//                $upload = new \Think\Upload();// 实例化上传类
+//                $upload->maxSize = 2145728;// 设置附件上传大小
+//                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+//                $upload->savePath = '/nurse/zs_img/';// 设置附件上传目录// 上传文件
+//                $info = $upload->uploadOne($_FILES['zs_img']);
+//                if (!$info) {// 上传错误提示错误信息
+//                    $this->error($upload->getError());
+//                } else {//上传成功 获取上传文件信息
+//                    $post['zs_img']  = $info['savepath'] . $info['savename'];
+//                    $img_s = $this->shuiyin($post['zs_img']);
+//                    if($img_s){
+//                        $post['zs_img'] = $img_s;
+//                    }
+//                    $unlink[] = $nurse_info['zs_img'];
+//                    $del_s = explode('_s',$nurse_info['zs_img']);
+//                    $unlink[] = $del_s[0].$del_s[1];
+//                }
+//            }
             $post['imgs'] = $nurse_info['imgs']!=''?($nurse_info['imgs'].','):'';
             if($_FILES['imgs']['tmp_name'][0]) {
                 $upload = new \Think\Upload();// 实例化上传类
@@ -444,26 +446,30 @@ class NurseController extends CommonController {
                 }
             }
 
-            //性格
-            if($post['character_type']!=$nurse_info['character_type']){
-                $rand = rand(1,4);
-                $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
-            }
 
-            //定薪
-            $post['price_level'] = 0;
-            $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
-            if($post['agreement_type'] == 1){
-                $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
-                $price_level = array_keys($level_name,$post['price_name']);
-                $post['price_level'] = $price_level[0];
-                $post['price'] = $price_arr[$post['price_level']];
-            }
-            //等级
-            for($i=1;$i<=11;$i++){
-                $post['skills'] .= ($post['skills'.$i]?$post['skills'.$i]:0).',';
-            }
-            $post['skills'] = substr($post['skills'],0,-1);
+            // 学时算预计完成时间
+            $post['finish_time'] = date('Y-m-d',strtotime($post['come_time'],'+'.$post['study_day'].' days'));
+
+//            //性格
+//            if($post['character_type']!=$nurse_info['character_type']){
+//                $rand = rand(1,4);
+//                $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
+//            }
+
+//            //定薪
+//            $post['price_level'] = 0;
+//            $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
+//            if($post['agreement_type'] == 1){
+//                $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
+//                $price_level = array_keys($level_name,$post['price_name']);
+//                $post['price_level'] = $price_level[0];
+//                $post['price'] = $price_arr[$post['price_level']];
+//            }
+//            //等级
+//            for($i=1;$i<=11;$i++){
+//                $post['skills'] .= ($post['skills'.$i]?$post['skills'.$i]:0).',';
+//            }
+//            $post['skills'] = substr($post['skills'],0,-1);
 
             //家庭成员
             for($i=1;$i<=5;$i++){

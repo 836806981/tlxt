@@ -18,6 +18,12 @@ class QneedController extends CommonController {
                 exit;
             }
             $post = I('post.');
+
+            $employee = M('employee')->where('id='.$post['source'].'')->find();
+            $post['source'] = $employee['real_name'];
+            $post['sales_id'] = $employee['id'];
+            $post['sales_name'] = $employee['real_name'];
+
             $post['add_time'] = time();
             $post['status_1'] = $post['add_time'];
             $post['status_2'] = $post['add_time'];

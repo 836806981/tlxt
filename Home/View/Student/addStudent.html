@@ -13,95 +13,139 @@
 			<include file="Nav/header"/>
 			<!--left end-->
 			<script>
-				$('.left_menu li').eq(3).addClass('called');
+				$('.left_menu li').eq(4).addClass('called');
 			</script>
 			<!--main-->
 			<div class="col-md-10 main">
+				<form action="__MODULE__/Student/addStudent" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定添加么？')"  enctype="multipart/form-data">
+
 				<div class="tab_tle1">
-					阿姨资料录入
+					学员资料录入
 				</div>
-				<div class="tab_tle">
-					<span class="int_s"></span>图片资料
+				<div class="tab_tle" >
+					<span class="int_s"></span>学员来历
 				</div>
-				<form action="__MODULE__/Nurse/addNurse" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定添加么？')"  enctype="multipart/form-data">
-				<table class="auntTab pictures">
+				<table class="auntTab">
 					<tbody>
 						<tr>
-							<td><label>头像：</label>
-								<div class="rtdiv">
-									<div class="shangchuan">
-										<input type="file" class="filesbtn" name="title_img" id="title_img">
-									</div>
-								</div>
+							<td width="47%"><label>学员来历：</label>
+								<select class="form-control" name="come">
+							        <option>来历1</option>
+							        <option>来历2</option>
+							        <option>来历3</option>
+							    </select>
+							</td>
+							<td width="53%"><label>招生对接人：</label>
+								<select class="form-control" name="pick_name">
+							        <option>曾军</option>
+							        <option>廖薇</option>
+							    </select>
 							</td>
 						</tr>
 						<tr>
-							<td><label>生活照：</label>
-								<div class="rtdiv">
-									<div class="shangchuan">
-										<input type="file" class="filesbtn"  name="life_img1" id="life_img1">&nbsp;&nbsp;
-										<input type="file" class="filesbtn"  name="life_img2" id="life_img2">
-									</div>
-								</div>
+							<td width="47%"><label>报道时间：</label>
+								<input type="text" class="form-control" value="" name="come_time" id="come_time"/>
 							</td>
-						</tr>
-						<tr>
-							<td><label>身份证扫描件：</label>
-								<div class="rtdiv">
-									<div class="shangchuan">
-										<input type="file" class="filesbtn"  name="id_img" id="id_img">
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>体检报告：</label>
-								<div class="rtdiv">
-									<div class="shangchuan">
-										<input type="file" class="filesbtn"  name="test_img" id="test_img">
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>从业资格证：</label>
-								<div class="rtdiv">
-									<div class="shangchuan">
-										<input type="file" class="filesbtn"  name="zs_img" id="zs_img">
-									</div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>其他资料：</label>
-								<div class="rtdiv">
-									<div class="shangchuan">
-										<input type="file" class="filesbtn"  name="imgs[]" >
-									</div>
-									<input class="btnform magrin0 add_btn" type="button" value="+&nbsp;新增"/>
-								</div>
+							<td width="53%"><label>预估学时：</label>
+								<input type="number" class="form-control" value=""name="study_day" id="study_day"/>&nbsp;天
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>图片资料
+				</div>
+				<table class="auntTab pictures">
+					<tbody>
+					<tr>
+						<td><label>头像：</label>
+							<div class="rtdiv">
+								<div class="shangchuan">
+									<input type="file" class="filesbtn" name="title_img" id="title_img">
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><label>生活照：</label>
+							<div class="rtdiv">
+								<div class="shangchuan">
+									<input type="file" class="filesbtn"  name="life_img1" id="life_img1">&nbsp;&nbsp;
+									<input type="file" class="filesbtn"  name="life_img2" id="life_img2">
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><label>身份证扫描件：</label>
+							<div class="rtdiv">
+								<div class="shangchuan">
+									<input type="file" class="filesbtn"  name="id_img" id="id_img">
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><label>体检报告：</label>
+							<div class="rtdiv">
+								<div class="shangchuan">
+									<input type="file" class="filesbtn"  name="test_img" id="test_img">
+								</div>
+							</div>
+						</td>
+					</tr>
+					<!--<tr>-->
+						<!--<td><label>从业资格证：</label>-->
+							<!--<div class="rtdiv">-->
+								<!--<div class="shangchuan">-->
+									<!--<input type="file" class="filesbtn"  name="zs_img" id="zs_img">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</td>-->
+					<!--</tr>-->
+					<tr>
+						<td><label>其他资料：</label>
+							<div class="rtdiv">
+								<div class="shangchuan">
+									<input type="file" class="filesbtn"  name="imgs[]" >
+								</div>
+								<input class="btnform magrin0 add_btn" type="button" value="+&nbsp;新增"/>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				
 				<div class="tab_tle">
 					<span class="int_s"></span>基础资料
 				</div>
 				<table class="auntTab iptTab">
 					<tbody>
 						<tr>
-							<td><label>姓名：</label><input type="text" class="form-control"  name="name" id="name"/></td>
-							<td><label>出生日期：</label><input type="text" class="form-control"  name="birth_day" id="birth_day"/></td>
-							<td><label>身份证：</label><input type="text" class="form-control"  name="id_card" id="id_card"/></td>
+							<td><label>姓名：</label><input type="text" class="form-control" value="" name="name" id="name"/></td>
+							<td><label>班级：</label>
+								<select class="form-control w100" name="class_name" >
+							        <option>育婴师</option>
+							        <option>通乳师</option>
+							    </select>
+							        第<input type="text" class="form-control little_ipt" value="" name="class_number" id="class_number"/>期
+							</td>
+							<td><label>班主任：</label>
+								<select class="form-control" name="teacher" >
+							        <option>廖薇</option>
+							    </select>
+							</td>
 						</tr>
 						<tr>
-							<td><label>年龄：</label><input type="number" class="form-control w160"  name="age" id="age"/>&nbsp;&nbsp;岁</td>
-							<td><label>联系方式：</label><input type="text" class="form-control"  name="phone" id="phone"/></td>
-							<td><label>微信：</label><input type="text" class="form-control"  name="wchat" id="wchat"/></td>
+							<td><label>年龄：</label><input type="text" class="form-control w160" value="" name="age" id="age"/>&nbsp;&nbsp;岁</td>
+							
+							<td><label>出生日期：</label><input type="text" class="form-control" value="" name="birth_day" id="birth_day"/></td>
+							<td><label>身份证：</label><input type="text" class="form-control" value="" name="id_card" id="id_card"/></td>
 						</tr>
 						<tr>
 							<td><label>属相：</label>
-								<select class="form-control"  name="zodiac" id="zodiac">
+								<select class="form-control" name="zodiac" >
 							        <option>鼠</option>
 							        <option>牛</option>
 							        <option>虎</option>
@@ -116,15 +160,14 @@
 							        <option>猪</option>
 							    </select>
 							</td>
-							<td><label>体重：</label><input type="number" class="form-control w160"  name="weight" id="weight"/>&nbsp;&nbsp;KG</td>
-							<td><label>身高：</label><input type="number" class="form-control w160"  name="height" id="height"/>&nbsp;&nbsp;CM</td>
+							<td><label>联系方式：</label><input type="text" class="form-control"  name="phone" id="phone"/></td>
+							<td><label>微信：</label><input type="text" class="form-control"  name="wchat" id="wchat"/></td>
 						</tr>
 						<tr>
 							<td><label>籍贯：</label><input type="text" class="form-control"  name="native_place" id="native_place"/></td>
-							<td><label>从业时间：</label><input type="text" class="form-control w160"  name="work_time" id="work_time"/>&nbsp;&nbsp;年</td>
-							<td><label>上一份工作：</label><input type="text" class="form-control"  name="up_work" id="up_work"/></td>
+							<td><label>体重：</label><input type="number" class="form-control w160"  name="weight" id="weight"/>&nbsp;&nbsp;KG</td>
+							<td><label>身高：</label><input type="number" class="form-control w160"  name="height" id="height"/>&nbsp;&nbsp;CM</td>
 						</tr>
-						
 						
 						<tr>
 							<td><label>是否住宿：</label>
@@ -134,105 +177,8 @@
 							<td><label>工资银行：</label><input type="text" class="form-control"  name="bank_name" id="bank_name"/></td>
 							<td><label>银行卡号：</label><input type="text" class="form-control"  name="back_card" id="back_card"/></td>
 						</tr>
-						<!--<tr>-->
-							<!--<td><label>是否学员：</label>-->
-								<!--<input type="radio" name="is_student" value="1"/>是-->
-								<!--<input type="radio" name="is_student" checked value="0"/>否-->
-							<!--</td>-->
-						<!--</tr>-->
 						<tr>
-							<td colspan="3"><label>当前职称：</label>
-								<select class="form-control w100"  name="level" id="level">
-						          <option>高级</option>
-						          <option>中级</option>
-						          <option>初级</option>
-						        </select>
-						       	 育婴师&nbsp;&nbsp;
-						       	<input type="checkbox"  name="is_tr" id="is_tr" value="1"/>通乳师&nbsp;&nbsp;
-								<input type="checkbox"  name="is_tn" id="is_tn" value="1"/>小儿推拿师&nbsp;&nbsp;
-								<input type="checkbox"  name="is_yy" id="is_yy" value="1"/>公共营养师&nbsp;&nbsp;
-								<input type="checkbox"  name="is_xl" id="is_xl" value="1"/>心理咨询师&nbsp;&nbsp;
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<div class="tab_tle">
-					<span class="int_s"></span>专业能力
-				</div>
-				<table class="auntTab">
-					<tbody>
-						<tr>
-							<td><label>职业培训学校：</label><input type="text" class="form-control"  name="training_school" id="training_school"/></td>
-						</tr>
-						<tr>
-							<td><label>性格：</label>
-								<div class="rtdiv">
-									<input type="radio" name="character_type" value="1" checked/>活泼型&nbsp;&nbsp;
-									<input type="radio" name="character_type" value="2"/>外向型&nbsp;&nbsp;
-									<input type="radio" name="character_type" value="3"/>踏实型&nbsp;&nbsp;
-									<input type="radio" name="character_type" value="4"/>敏感型&nbsp;&nbsp;
-									<input type="radio" name="character_type" value="5"/>服从型&nbsp;&nbsp;
-									<input type="radio" name="character_type" value="6"/>均衡型&nbsp;&nbsp;
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>协议类型：</label>
-								<div class="rtdiv">
-									<div>
-										<input type="radio" name="agreement_type" value="3" checked/>三单试用&nbsp;
-										<input type="number" class="form-control"  name="price" id="price" placeholder="请填写定薪工资"/>
-									</div>
-									<div class="magrintop10">
-										<input type="radio" name="agreement_type" value="1"/>正式员工&nbsp;
-										<select class="form-control" name="price_name">
-									        <option>小田螺1.1</option>
-									        <option>小田螺1.2</option>
-									        <option>小田螺1.3</option>
-									        <option>小田螺1.4</option>
-									        <option>小田螺1.5</option>
-									        <option>大田螺2.1</option>
-									        <option>大田螺2.2</option>
-									        <option>大田螺2.3</option>
-									        <option>大田螺2.4</option>
-									        <option>大田螺2.5</option>
-									        <option>超级田螺3.1</option>
-									        <option>超级田螺3.2</option>
-									        <option>超级田螺3.3</option>
-									        <option>超级田螺3.4</option>
-									        <option>超级田螺3.5</option>
-									        <option>金牌田螺</option>
-									    </select>
-								    </div>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>从业经历简介：</label>
-								<div class="rtdiv">
-									<textarea class="form-control jianjie" name="experience" id="experience"></textarea>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>技能评估：</label>
-								<div class="rtdiv">
-									<span class="marks">新生儿生活照料<input type="text" class="form-control marks_ipt"  name="skills1" id="skills1"/>分</span>
-									<span class="marks">新生儿健康护理<input type="text" class="form-control marks_ipt"  name="skills2" id="skills2"/>分</span>
-									<span class="marks">新生儿疾病监测<input type="text" class="form-control marks_ipt"  name="skills3" id="skills3"/>分</span>
-									<span class="marks">新生儿早起促进<input type="text" class="form-control marks_ipt"  name="skills4" id="skills4"/>分</span>
-									<br />
-									<span class="marks">产妇专业护理<input type="text" class="form-control marks_ipt"  name="skills5" id="skills5"/>分</span>
-									<span class="marks">产妇生活护理<input type="text" class="form-control marks_ipt"  name="skills6" id="skills6"/>分</span>
-									<span class="marks">产妇心里护理<input type="text" class="form-control marks_ipt"  name="skills7" id="skills7"/>分</span>
-									<span class="marks">产妇疾病预防<input type="text" class="form-control marks_ipt"  name="skills8" id="skills8"/>分</span>
-									<br />
-									<span class="marks">产妇产后恢复<input type="text" class="form-control marks_ipt"  name="skills9" id="skills9"/>分</span>
-									<span class="marks">产妇乳房护理<input type="text" class="form-control marks_ipt"  name="skills10" id="skills10"/>分</span>
-									<span class="marks">产妇饮食护理<input type="text" class="form-control marks_ipt"  name="skills11" id="skills11"/>分</span>
-								</div>
-							</td>
+							<td><label>上一份工作：</label><input type="text" class="form-control"  name="up_work" id="up_work"/></td>
 						</tr>
 					</tbody>
 				</table>
@@ -312,7 +258,7 @@
 							</td>
 							<td width="53%"><label>带孩子：</label><input type="text" class="form-control w120"  name="baby_take" id="baby_take"/>&nbsp;个孩子</td>
 						</tr>
-						
+
 						<tr>
 							<td colspan="2"><label>个人签名：</label>
 								<div class="rtdiv">
@@ -430,33 +376,26 @@
 					</tbody>
 				</table>
 				
-				<div class="tab_tle">
-					<span class="int_s"></span>老师评语
-				</div>
-				<table class="auntTab">
-					<tbody>
-						<tr>
-							<td><label>老师评语：</label>
-								<div class="rtdiv">
-									<textarea class="form-control jianjie" name="teacher_remark" id="teacher_remark"></textarea>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				
-				
 				<div class="form-group">
 					<input type="button" class="default_btn m_left_20" value="添加" id="sub_add"/>
 					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
 				</div>
-					</form>
+				</form>
 			</div> 
 			<!--main end-->
 			<script>
+
 				$('#sub_add').live('click',function(){
 					var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+					var number =/^(\+|-)?\d+$/;
+					if(!reg.test($('#come_time').val())){
+						layer.msg('请输入正确的报道时间！');
+						return false;
+					}
+					if(!number.test($('#study_day').val())||$('#study_day').val()<=0){
+						layer.msg('请输入正确学时！');
+						return false;
+					}
 
 					if($('#name').val() == ''){
 						layer.msg('请输入姓名！');
@@ -510,10 +449,10 @@
 						layer.msg('请输入定薪工资！');
 						return false;
 					}
-					if($('#skills1').val() == '' || $('#skills2').val() == '' || $('#skills3').val() == '' || $('#skills4').val() == '' || $('#skills5').val() == '' || $('#skills6').val() == '' || $('#skills7').val() == '' || $('#skills8').val() == '' || $('#skills9').val() == '' || $('#skills10').val() == '' || $('#skills11').val() == ''){
-						layer.msg('请输入技能评估分！');
-						return false;
-					}
+//					if($('#skills1').val() == '' || $('#skills2').val() == '' || $('#skills3').val() == '' || $('#skills4').val() == '' || $('#skills5').val() == '' || $('#skills6').val() == '' || $('#skills7').val() == '' || $('#skills8').val() == '' || $('#skills9').val() == '' || $('#skills10').val() == '' || $('#skills11').val() == ''){
+//						layer.msg('请输入技能评估分！');
+//						return false;
+//					}
 					if($('#experience').val() == ''){
 						layer.msg('请输入从业经历！');
 						return false;
@@ -534,14 +473,13 @@
 						layer.msg('请输入签名！');
 						return false;
 					}
-					if($('#teacher_remark').val() == ''){
-						layer.msg('请输入老师评语！');
-						return false;
-					}
+//					if($('#teacher_remark').val() == ''){
+//						layer.msg('请输入老师评语！');
+//						return false;
+//					}
 
 					$('#form_add').submit();
 				});
-
 
 
 

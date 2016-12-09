@@ -69,6 +69,15 @@
 									</div>
 								</td>
 							</tr>
+							<if condition="$info.price_add eq 1">
+								<tr>
+									<td><label>阿姨加价：</label>{$info.add_nurse_price}</td>
+									<td><label>订单加价：</label>{$info.add_order_price}</td>
+								</tr>
+								<tr>
+									<td><label>加价原因：</label>{$info.add_reason}</td>
+								</tr>
+							</if>
 						</tbody>
 					</table>
 				</div>
@@ -254,12 +263,17 @@
 									</div>
 								</td>
 							</tr>
+
 						</tbody>
 					</table>
 				</div>
 				<div class="form-group">
-					<input type="button" class="default_btn m_left_20 magrin0" onclick="location.href='overOrderInfo_1.html'" value="发单">
-					<input type="button" class="default_btn" onclick="location.href='changeOrder.html'" value="修改">
+					<if condition="$info.status eq 3">
+					<input type="button" class="default_btn m_left_20 magrin0" onclick="location.href='__MODULE__/TakeNeed/status_4/id/{$info.id}.html'" value="发单">
+					<elseif condition="$info.status eq 4"/>
+						已发单，待匹配
+					</if>
+					<input type="button" class="default_btn" onclick="location.href='__MODULE__/TakeNeed/overOrder/id/{$info.id}'" value="修改">
 					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="取消">
 				</div>
 			</div> 

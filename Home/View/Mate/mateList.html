@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(5).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						 <a href="pipeiControl.html">匹配管理</a>
+					</li>
+				</ul>
+				<div class="form-inline">
+					<div class="form-group">
+						 <label>订单类型</label>
+						 <select class="form-control" id="order_type">
+					         <option value="0">全部</option>
+					         <option value="1">客户单</option>
+					         <option value="2">渠道实习</option>
+					         <option value="3">渠道非实习</option>
+					     </select>
+					</div>
+					<div class="form-group">
+						<label>客户姓名</label><input type="text" class="form-control" id="name"/>
+					</div>
+
+					<div class="form-group">
+						 <label>派发时间</label><input type="text" class="form-control" id="status_4"/>
+					</div>
+					<div class="form-group">
+						 <label>派发人</label>
+						<select class="form-control" id="sales_id">
+							<option value="0">全部</option>
+							<volist name="sales_id" id="vo">
+								<option value="{$vo.id}">{$vo.real_name}</option>
+							</volist>
+
+						</select>
+					</div>
+					<div class="form-group">
+						 <button type="submit" class="subform" id="search">搜索</button>
+					</div>
+					
+				</div>
+				<table class="tab_info">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								当前列表数据为：<span id="show_number_str"></span>条
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">订单编号</td>
+							<td width="8%">订单类型</td>
+							<td width="8%">派发订单时间</td>
+							<td width="8%">客户姓名</td>
+							<td width="8%">预期价位</td>
+							<td width="8%">派发人</td>
+							<td width="8%">待匹配时间</td>
+							<td width="15%">操作</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td>DD-2016111501</td>-->
+							<!--<td>月嫂</td>-->
+							<!--<td>2016-11-15 16:40</td>-->
+							<!--<td>黄女士</td>-->
+							<!--<td>5880</td>-->
+							<!--<td>杨柳</td>-->
+							<!--<td>00:13:45</td>-->
+							<!--<td>正常单</td>-->
+							<!--<td><a href="overOrderInfo_1.html">查看</a></td>-->
+						<!--</tr>-->
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+								</div>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<script src="__PUBLIC__/js/showTimeDown.js"></script>
+			<script src="__PUBLIC__/js/mateLIst.js"></script>
+			<!--main end-->
+</body>
+
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(4).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					结业信息补录
+				</div>
+				<div class="tab_tle">
+					<span class="int_s"></span>图片资料
+				</div>
+				<table class="auntTab pictures">
+					<tbody>
+						<tr>
+							<td><label>头像：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="../img/user_img.jpg"/></li>
+									</ul>
+									<div class="shangchuan">
+										<input type="file" class="filesbtn">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>生活照：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="../img/user_img.jpg"/></li>
+									</ul>
+									<div class="shangchuan">
+										<input type="file" class="filesbtn">
+									</div>
+									<ul class="certificate clear">
+										<li><img src="../img/user_img.jpg"/></li>
+									</ul>
+									<div class="shangchuan">
+										<input type="file" class="filesbtn">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>身份证扫描件：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="../img/user_img.jpg"/></li>
+									</ul>
+									<div class="shangchuan">
+										<input type="file" class="filesbtn">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>体检报告：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="../img/user_img.jpg"/></li>
+									</ul>
+									<div class="shangchuan">
+										<input type="file" class="filesbtn">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>从业资格证：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li><img src="../img/user_img.jpg"/></li>
+									</ul>
+									<div class="shangchuan">
+										<input type="file" class="filesbtn">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>其他资料：</label>
+								<div class="rtdiv">
+									<ul class="certificate clear">
+										<li style="margin-right: 30px;"><img src="../img/user_img.jpg"/><bottom type="bottom" class="del_img">X</bottom></li>
+										<li style="margin-right: 30px;"><img src="../img/user_img.jpg"/><bottom type="bottom" class="del_img">X</bottom></li>
+										<li style="margin-right: 30px;"><img src="../img/user_img.jpg"/><bottom type="bottom" class="del_img">X</bottom></li>
+									</ul>
+									<input class="btnform magrin0 add_btn" type="button" value="+&nbsp;新增"/>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="tab_tle">
+					<span class="int_s"></span>基础资料
+				</div>
+				<table class="auntTab iptTab">
+					<tbody>
+						<tr>
+							<td><label>姓名：</label><input type="text" class="form-control" value=""/></td>
+							<td><label>出生日期：</label><input type="text" class="form-control" value=""/></td>
+							<td><label>身份证：</label><input type="text" class="form-control" value=""/></td>
+						</tr>
+						<tr>
+							<td><label>年龄：</label><input type="text" class="form-control w160" value=""/>&nbsp;&nbsp;岁</td>
+							<td><label>联系方式：</label><input type="text" class="form-control" value=""/></td>
+							<td><label>微信：</label><input type="text" class="form-control" value=""/></td>
+						</tr>
+						<tr>
+							<td><label>属相：</label>
+								<select class="form-control">
+							        <option>鼠</option>
+							        <option>牛</option>
+							        <option>虎</option>
+							        <option>兔</option>
+							        <option>龙</option>
+							        <option>蛇</option>
+							        <option>马</option>
+							        <option>羊</option>
+							        <option>猴</option>
+							        <option>鸡</option>
+							        <option>狗</option>
+							        <option>猪</option>
+							    </select>
+							</td>
+							<td><label>体重：</label><input type="text" class="form-control w160" value=""/>&nbsp;&nbsp;KG</td>
+							<td><label>身高：</label><input type="text" class="form-control w160" value=""/>&nbsp;&nbsp;CM</td>
+						</tr>
+						<tr>
+							<td><label>籍贯：</label><input type="text" class="form-control" value=""/></td>
+							<td><label>从业时间：</label><input type="text" class="form-control w160" value=""/>&nbsp;&nbsp;年</td>
+							<td><label>上一份工作：</label><input type="text" class="form-control" value=""/></td>
+						</tr>
+						
+						
+						<tr>
+							<td><label>是否住宿：</label>
+								<input type="radio" name="stu"/>是
+								<input type="radio" name="stu"/>否
+							</td>
+							<td><label>工资银行：</label><input type="text" class="form-control" value=""/></td>
+							<td><label>银行卡号：</label><input type="text" class="form-control" value=""/></td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>当前职称：</label>
+								<select class="form-control w100">
+						          <option>高级</option>
+						          <option>中级</option>
+						          <option>初级</option>
+						        </select>
+						       	 育婴师&nbsp;&nbsp;
+						       	<input type="checkbox"/>通乳师&nbsp;&nbsp;
+								<input type="checkbox"/>小儿推拿师&nbsp;&nbsp;
+								<input type="checkbox"/>公共营养师&nbsp;&nbsp; 
+								<input type="checkbox"/>心理咨询师&nbsp;&nbsp; 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>专业能力
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td><label>职业培训学校：</label><input type="text" class="form-control" value=""/></td>
+						</tr>
+						<tr>
+							<td><label>性格：</label>
+								<div class="rtdiv">
+									<input type="radio" name="character"/>活泼型&nbsp;&nbsp;
+									<input type="radio" name="character"/>外向型&nbsp;&nbsp;
+									<input type="radio" name="character"/>踏实型&nbsp;&nbsp;
+									<input type="radio" name="character"/>敏感型&nbsp;&nbsp;
+									<input type="radio" name="character"/>服从型&nbsp;&nbsp;
+									<input type="radio" name="character"/>敏感型&nbsp;&nbsp;
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>协议类型：</label>
+								<div class="rtdiv">
+									<div>
+										<input type="radio" name="agreement"/>三单试用&nbsp;
+										<input type="text" class="form-control" value="" placeholder="请填写定薪工资"/>
+									</div>
+									<div class="magrintop10">
+										<input type="radio" name="agreement"/>正式员工&nbsp;
+										<select class="form-control">
+									        <option>小田螺1.1</option>
+									        <option>小田螺1.2</option>
+									        <option>小田螺1.3</option>
+									        <option>小田螺1.4</option>
+									        <option>小田螺1.5</option>
+									        <option>大田螺2.1</option>
+									        <option>大田螺2.2</option>
+									        <option>大田螺2.3</option>
+									        <option>大田螺2.4</option>
+									        <option>大田螺2.5</option>
+									        <option>金牌田螺3.1</option>
+									        <option>金牌田螺3.2</option>
+									        <option>金牌田螺3.3</option>
+									        <option>金牌田螺3.4</option>
+									        <option>金牌田螺3.5</option>
+									        <option>超级田螺</option>
+									    </select>
+								    </div>
+								<div class="rtdiv">
+							</td>
+						</tr>
+						<tr>
+							<td><label>从业经历简介：</label>
+								<div class="rtdiv">
+									<textarea class="form-control jianjie"></textarea>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>技能评估：</label>
+								<div class="rtdiv">
+									<span class="marks">新生儿生活照料<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">新生儿健康护理<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">新生儿疾病监测<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">新生儿早起促进<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<br />
+									<span class="marks">产妇专业护理<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">产妇生活护理<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">产妇心里护理<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">产妇疾病预防<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<br />
+									<span class="marks">产妇产后恢复<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">产妇乳房护理<input type="text" class="form-control marks_ipt" value=""/>分</span>
+									<span class="marks">产妇饮食护理<input type="text" class="form-control marks_ipt" value=""/>分</span>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>家庭资料
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="47%"><label>家庭住址：</label><input type="text" class="form-control" value=""/></td>
+							<td width="53%"><label>现居住地：</label><input type="text" class="form-control" value=""/></td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">
+								<table class="lxfs">
+									<tbody>
+										<tr>
+											<td><label>家庭成员姓名</label></td>
+											<td><label>关系</label></td>
+											<td><label>职业</label></td>
+											<td><label>联系方式</label></td>
+											<td><label>现居地</label></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control" value=""/></td>
+											<td>
+												<input type="radio" name="character"/>紧急联系人
+											</td>
+										</tr>
+										<tr>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control" value=""/></td>
+											<td>
+												<input type="radio" name="character"/>紧急联系人
+											</td>
+										</tr>
+										<tr>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control" value=""/></td>
+											<td>
+												<input type="radio" name="character"/>紧急联系人
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>个人信息
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td width="47%"><label>婚姻情况：</label>
+								<select class="form-control">
+									<option>未婚</option>
+									<option>已婚未孕</option>
+									<option>已婚已孕</option>
+								</select>
+							</td>
+							<td width="53%"><label>带孩子：</label><input type="text" class="form-control w120" value=""/>&nbsp;个孩子</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2"><label>个人签名：</label>
+								<div class="rtdiv">
+									<textarea class="form-control jianjie"></textarea>
+									（不超过40个字）
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>是否接受过其他职业培训：</label>
+								<div class="rtdiv">
+									<input type="radio" name="otherTrain"/>是&nbsp;&nbsp;
+									<input type="radio" name="otherTrain"/>否&nbsp;&nbsp;
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>曾接受过的职业培训项目：</label>
+								<input type="text" class="form-control w320" value=""/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>是否擅长做饭：</label>
+								<div class="rtdiv">
+									<input type="radio" name="zuofan"/>是&nbsp;&nbsp;
+									<input type="radio" name="zuofan"/>否&nbsp;&nbsp;
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>擅长菜系（多选）：</label>
+								<div class="rtdiv">
+									<input type="checkbox"/>面食&nbsp;&nbsp;
+									<input type="checkbox"/>煲汤&nbsp;&nbsp;
+									<input type="checkbox"/>川菜小炒&nbsp;&nbsp;
+									<input type="checkbox"/>流食&nbsp;&nbsp;
+									<input type="checkbox"/>素食&nbsp;&nbsp;
+									<input type="checkbox"/>肉类&nbsp;&nbsp;
+									<input type="checkbox"/>小吃&nbsp;&nbsp;
+									<input type="checkbox"/>甜品&nbsp;&nbsp;
+									<input type="checkbox"/>补品&nbsp;&nbsp;
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><label>擅长口味（多选）：</label>
+								<div class="rtdiv">
+									<input type="checkbox"/>清淡&nbsp;&nbsp;
+									<input type="checkbox"/>咸鲜&nbsp;&nbsp;
+									<input type="checkbox"/>甜食&nbsp;&nbsp;
+									<input type="checkbox"/>辣&nbsp;&nbsp;
+									<input type="checkbox"/>酸&nbsp;&nbsp;
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>个人经历
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td>
+								<table class="lxfs">
+									<tbody>
+										<tr>
+											<td><label>时间</label></td>
+											<td><label>单位名称</label></td>
+											<td><label>职位</label></td>
+											<td><label>薪酬</label></td>
+											<td><label>工作内容</label></td>
+										</tr>
+										<tr>
+											<td>
+												<input type="text" class="form-control marks_ipt" value=""/>年
+												<input type="text" class="form-control marks_ipt" value=""/>月 --
+												<input type="text" class="form-control marks_ipt" value=""/>年
+												<input type="text" class="form-control marks_ipt" value=""/>月
+											</td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control" value=""/></td>
+										</tr>
+										<tr>
+											<td>
+												<input type="text" class="form-control marks_ipt" value=""/>年
+												<input type="text" class="form-control marks_ipt" value=""/>月 --
+												<input type="text" class="form-control marks_ipt" value=""/>年
+												<input type="text" class="form-control marks_ipt" value=""/>月
+											</td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control" value=""/></td>
+										</tr>
+										<tr>
+											<td>
+												<input type="text" class="form-control marks_ipt" value=""/>年
+												<input type="text" class="form-control marks_ipt" value=""/>月 --
+												<input type="text" class="form-control marks_ipt" value=""/>年
+												<input type="text" class="form-control marks_ipt" value=""/>月
+											</td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control w120" value=""/></td>
+											<td><input type="text" class="form-control" value=""/></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="tab_tle">
+					<span class="int_s"></span>老师评语
+				</div>
+				<table class="auntTab">
+					<tbody>
+						<tr>
+							<td><label>老师评语：</label>
+								<div class="rtdiv">
+									<textarea class="form-control jianjie"></textarea>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				
+				
+				<div class="form-group">
+					<input type="button" class="default_btn m_left_20" value="添加"/>
+					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
+				</div>
+			</div> 
+			<!--main end-->
+			<script>
+				$('.certificate>li>img').click(function(imgs){
+					imgs = $(this).attr('src');
+					layer.open({
+					  type: 1,
+					  title: false,
+					  area: ['auto', 'auto'],
+					  content: '<img src="'+imgs+'"/>'
+					});
+				});
+				$('.add_btn').live("click",function(){
+					var html = '<div class="shangchuan"><input type="file" class="filesbtn"><input class="del_btn" type="button" value="删除"/></div>';
+					$(this).before(html);
+				});
+				$('.del_btn').live("click",function(){
+					$(this).parent('.shangchuan').remove();
+				});
+				$('.del_img').live("click",function(){
+					$(this).parent('li').remove();
+				});
+			</script>
+			
+			
+</body>
+
+</html>

@@ -64,6 +64,15 @@
 								</div>
 							</td>
 						</tr>
+						<if condition="$info.price_add eq 1">
+							<tr>
+								<td><label>阿姨加价：</label>{$info.add_nurse_price}</td>
+								<td><label>订单加价：</label>{$info.add_order_price}</td>
+							</tr>
+							<tr>
+								<td><label>加价原因：</label>{$info.add_reason}</td>
+							</tr>
+						</if>
 					</tbody>
 				</table>
 				<div class="form-group">

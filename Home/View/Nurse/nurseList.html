@@ -21,49 +21,46 @@
 						 <a href="auntControl.html">阿姨管理</a>
 					</li>
 					<li class="active">
-						 <a href="auntList_three.html">三单试用</a>
+						 <a href="__MODULE__/Nurse/nurseList.html">三单试用</a>
 					</li>
 					<li>
 						 <a href="#">一年合同</a>
 					</li>
 				</ul>
-				<form class="form-inline">
+				<div class="form-inline">
 					<div class="form-group">
-						 <label>阿姨姓名</label><input type="text" class="form-control"/>
+						 <label>阿姨姓名</label><input type="text" class="form-control" id="name"/>
 					</div>
 					<div class="form-group">
 						<label>主状态</label>
-						<select class="form-control">
-					          <option>全部</option>
-					          <option>暂不接单</option>
-					          <option>等单中</option>
-					          <option>私签中</option>
-					          <option>外单中</option>
-					          <option>等单中</option>
+						<select class="form-control" id="status_sh">
+					          <option value="0">全部</option>
+					          <option value="1">未匹配</option>
+					          <option value="2">待上户</option>
+					          <option value="3">已上户</option>
 					     </select>
 					</div>
 					<div class="form-group">
 						 <label>次状态</label>
-						 <select class="form-control">
-					          <option>全部</option>
-					          <option>暂不接单</option>
-					          <option>等单中</option>
-					          <option>私签中</option>
-					          <option>外单中</option>
-					          <option>等单中</option>
+						 <select class="form-control" id="status_own">
+							 <option value="0">全部</option>
+							 <option value="1">暂不接单</option>
+							 <option value="2">等单中</option>
+							 <option value="3">私签中</option>
+							 <option value="4">外单中</option>
 					     </select>
 					</div>
 					
 					<div class="form-group">
-						 <button type="submit" class="subform">搜索</button>
+						 <button type="submit" class="subform" id="search">搜索</button>
 					</div>
 					
-				</form>
+				</div>
 				<table class="tab_info">
 					<tbody>
 						<tr class="present_num">
 							<td colspan="14">
-								当前列表数据为：<span>20</span>条
+								当前列表数据为：<span id="show_number_str"></span>条
 							</td>
 						</tr>
 						<tr class="info_name">
@@ -79,35 +76,25 @@
 							<td width="8%">签约记录</td>
 							<td width="15%">操作</td>
 						</tr>
-						<tr>
-							<td>TLAY-512</td>
-							<td>等单中</td>
-							<td>等单中</td>
-							<td>黄伟</td>
-							<td>外聘阿姨</td>
-							<td>3年2个月</td>
-							<td><a onclick="wanchengDD()">2单</a></td>
-							<td>2016-11-5</td>
-							<td>2单</td>
-							<td>2单</td>
-							<td><a onclick="taotai()">淘汰</a><a onclick="zhuanzheng()">转正</a><a href="auntInfo.html">查看</a></td>
-						</tr>
+						<!--<tr>-->
+							<!--<td>TLAY-512</td>-->
+							<!--<td>等单中</td>-->
+							<!--<td>等单中</td>-->
+							<!--<td>黄伟</td>-->
+							<!--<td>外聘阿姨</td>-->
+							<!--<td>3年2个月</td>-->
+							<!--<td><a onclick="wanchengDD()">2单</a></td>-->
+							<!--<td>2016-11-5</td>-->
+							<!--<td>2单</td>-->
+							<!--<td>2单</td>-->
+							<!--<td><a onclick="taotai()">淘汰</a><a onclick="zhuanzheng()">转正</a><a href="auntInfo.html">查看</a></td>-->
+						<!--</tr>-->
 						<tr class="last_tr">
 							<td colspan="14" class="clear">
-								<ul class="pagination pag_new">
-									<li>
-										 <a href="#">&lt;</a>
-									</li>
-									<li>
-										 <a href="#">1</a>
-									</li>
-									<li>
-										 <a href="#">2</a>
-									</li>
-									<li>
-										 <a href="#">&gt;</a>
-									</li>
-								</ul>
+								<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+								</div>
+
 								<div class="btn_modular">
 									<input type="button" class="btnform" onclick="location.href='__MODULE__/Nurse/addNurse.html'" value="新增阿姨"/>
 								</div>
@@ -116,6 +103,9 @@
 					</tbody>
 				</table>
 			</div>
+<script src="__PUBLIC__/js/nurseList.js"></script>
+
+
 			<!--main end-->
 			<script>
 //					淘汰 弹窗
