@@ -95,12 +95,18 @@ $.extend({
                         //未接单或者打回才能放回收站
                         var status_1 = '';
                         back = '';
+                        var edit = '';
                         if(item.status == 1){
                             status_1 =  '<span name="show" val="'+item.time_down+'" >'+item.time_down+'</span>';
                         }else{
                             status_1 = item.status_2_str    ;
                         }
-                        back = '<a class="back_this" order_id="'+item.id+'">打回</a>';
+                        if(item.status==3){
+                             edit == '<a href="' + MODULE + '/TakeNeed/overOrder/id/' + item.id + '.html">完善订单</a>';
+                        }
+                        if(item.status<4) {
+                            back = '<a class="back_this" order_id="' + item.id + '">打回</a>';
+                        }
                         str +='	<tr class="data">\
                         <td>'+item.number+'</td>\
                         <td>'+item.source+'</td>\
@@ -112,7 +118,7 @@ $.extend({
                         <td>'+status_1+'</td>\
                         <td>'+item.status_name+'</td>\
                         <td>'+item.is_service_name+'</td>\
-                        <td><a href="' + MODULE + '/TakeNeed/needInfo/id/' + item.id + '.html">查看</a><a href="' + MODULE + '/TakeNeed/needInfo/id/' + item.id + '.html">完善订单</a>'+back+'</td>\
+                        <td><a href="' + MODULE + '/TakeNeed/needInfo/id/' + item.id + '.html">查看</a>'+edit+back+'</td>\
                         </tr>';
                     });
                     $dom.before(str);

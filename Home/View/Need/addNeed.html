@@ -42,7 +42,7 @@
 						        </select>
 							</td>
 							<td><label>价格：</label>
-								<input type="text" class="form-control w160" name="product_price" value="5880" readonly="readonly" id="product_price"/>&nbsp;&nbsp;元
+								<input type="text" class="form-control w160" name="product_price" value="5880" <if condition="$_SESSION[C('USER_AUTH_KEY')]['permission'] eq 1">readonly="readonly" </if> id="product_price"/>&nbsp;&nbsp;元
 							</td>
 						</tr>
 
@@ -115,6 +115,7 @@
 			</form>
 			<!--main end-->
 			<script>
+				var primission = {$_SESSION[C('USER_AUTH_KEY')]['permission']};
 				$('#sub_add').live('click',function(){
 					var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
 
@@ -150,17 +151,32 @@
 				var price = $('input[name=product_price]');
 				$('#product').bind('change',function(){
 					if($(this).val()=='小田螺'){
-						price.val(5880).attr('readonly','readonly');
+						price.val(5880);
+						if(primission==1){
+							price.attr('readonly','readonly');
+						}
 					}else if($(this).val()=='大田螺'){
-						price.val(7880).attr('readonly','readonly');
+						price.val(7880);
+						if(primission==1){
+							price.attr('readonly','readonly');
+						}
 					}else if($(this).val()=='金牌田螺'){
-						price.val(9880).attr('readonly','readonly');
+						price.val(9880);
+						if(primission==1){
+							price.attr('readonly','readonly');
+						}
 					}else if($(this).val()=='超级田螺'){
-						price.val(12880).attr('readonly','readonly');
+						price.val(12880);
+						if(primission==1){
+							price.attr('readonly','readonly');
+						}
 					}else if($(this).val()=='育儿嫂'){
 						price.val('').removeAttr('readonly');
 					}else if($(this).val()=='3980特价'){
-						price.val(3980).attr('readonly','readonly');
+						price.val(3980);
+						if(primission==1){
+							price.attr('readonly','readonly');
+						}
 					}
 				});
 			</script>

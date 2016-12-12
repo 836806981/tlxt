@@ -43,13 +43,13 @@ class TakeNeedController extends CommonController {
             $where .= ' and  employee_id ='.$post['employee_id'].'';
         }
         if($post['status']==0){
-            $where .= ' and status in(22,1,2)';
+            $where .= ' and status in(22,1,2,3,4,5,6)';
         }else{
             $where .= ' and status = '.$post['status'].'';
         }
         $list = M('order')->where($where)->limit($start,$pagenum)->order('add_time desc')->select();
 
-        $status_name = ['','待接单','已接单','已完善','已发单','已匹配','已签单','已上户','已下户','已完结'];
+        $status_name = ['','待接单','已接单','已完善','待匹配','已匹配','已签单','已上户','已下户','已完结'];
         $status_name[22] = ['已打回'];
         $status_name[23] = ['回收站'];
         foreach($list as $k=>$v){
@@ -64,8 +64,6 @@ class TakeNeedController extends CommonController {
             $list[$k]['status_2_str'] = $v['status_2']?date('Y-m-d H:i:s',$v['status_2']):0;
             $list[$k]['status_name'] = $status_name[$v['status']];
             $list[$k]['is_service_name'] = ($v['is_service']==1?'售后':'正常');
-
-
         }
         $count = M('order')->where($where)->count();
         $back['data']['list'] = $list;
@@ -88,9 +86,13 @@ class TakeNeedController extends CommonController {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
+        //若已完善则跳转到overOrderinfo
+        if($info['status']>3){
+            echo "<script> window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".I('get.id').".html'</script>";
+        }
+
         $info['status_1_str'] = $info['status_1']?date('Y-m-d H:i:s',$info['status_1']):0;
         $info['status_2_str'] = $info['status_2']?date('Y-m-d H:i:s',$info['status_2']):0;
-
 
         $this->assign('info', $info);
         $this->display();
@@ -155,7 +157,6 @@ class TakeNeedController extends CommonController {
                 exit;
             }
 
-
         } else {
             if (!I('get.id')) {
                 echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
@@ -176,8 +177,7 @@ class TakeNeedController extends CommonController {
                 $info['status'] = 2;
                 $info['status_2'] = $status['status_2'] ;
             }
-
-
+            $info['work_type'] = ($info['work_type']!='育儿嫂'?'月嫂':'育儿嫂');
             $info_in = M('order_info')->where('order_id='.I('get.id').'')->find();
             if($info_in) {
                 $info = array_merge($info_in, $info);
@@ -220,10 +220,6 @@ class TakeNeedController extends CommonController {
             echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-
-
-
-
     }
 
     //完善订单后详情
