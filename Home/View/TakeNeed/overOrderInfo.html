@@ -269,14 +269,111 @@
 				</div>
 				<div class="form-group">
 					<if condition="$info.status eq 3">
-					<input type="button" class="default_btn m_left_20 magrin0" onclick="location.href='__MODULE__/TakeNeed/status_4/id/{$info.id}.html'" value="发单">
+						<input type="button" class="default_btn m_left_20 magrin0" onclick="location.href='__MODULE__/TakeNeed/status_4/id/{$info.id}.html'" value="发单">
 					<elseif condition="$info.status eq 4"/>
 						已发单，待匹配
 					</if>
-					<input type="button" class="default_btn" onclick="location.href='__MODULE__/TakeNeed/overOrder/id/{$info.id}'" value="修改">
+
+
+					<input type="button" class="btnform magrin0 again" value="重新匹配">
+					<input type="button" class="btnform magrin0 finish" value="完成合同">
+
+					<if condition="$info.status egt 3 and $info.status lt 22">
+						<input type="button" class="default_btn" onclick="location.href='__MODULE__/TakeNeed/overOrder/id/{$info.id}'" value="修改">
+					</if>
 					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="取消">
 				</div>
-			</div> 
+			</div>
+
+			<script>
+				$('.del_aunt').live('click',function(){
+					$(this).parent('li').remove();
+				});
+				$('.again').live('click',function(){
+					layer.confirm('确认所有阿姨都不适合上户吗？', {
+						btn: ['是的','再努力下'] //按钮
+					}, function(){
+						alert(true);
+					}, function(){
+					});
+				});
+				$('.finish').live('click',function(){
+					var aunt = $('input:radio[name=aunt]:checked').val();
+					if(aunt==null){
+						layer.msg('请选中一个，才能完成订单');
+						return false;
+					}else{
+						layer.confirm('确认使用'+aunt+'上户吗？', {
+							btn: ['确认','点错了'] //按钮
+						}, function(){
+							layer.closeAll();
+							finish();
+						}, function(){
+
+						});
+					}
+
+				});
+				//					完成合同签约 弹窗
+				function finish(){
+					layer.open({
+						type: 1,
+						title: '完成合同签约',
+						area: ['auto', 'auto'], //宽高
+						content: '<div class="lay_cnt">'
+						+   '<form>'
+						+	'<div class="opn_div clear">'
+						+		'<label>合同编号：</label><input type="text" class="form-control" value="" readonly="readonly"/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>合同金额：</label><input type="text" class="form-control" value=""/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>已收金额：</label><input type="text" class="form-control" value=""/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>阿姨编号：</label><input type="text" class="form-control" value="" readonly="readonly"/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>阿姨姓名：</label><input type="text" class="form-control" value="" readonly="readonly"/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>保险状态：已购买</label>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>保险到期时间：2017-12-1</label>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>保险状态：未购买</label>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>保险购买日期：</label>'
+						+       '<select class="form-control w212">'
+						+          	'<option>上户当日购买</option>'
+						+          	'<option>不购买</option>'
+						+       '</select>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>服务周期：</label><input type="text" class="form-control" value=""/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>预计上户：</label><input type="text" class="form-control" value=""/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>预计下户：</label><input type="text" class="form-control" value=""/>'
+						+	'</div>'
+						+	'<div class="btn_div clear">'
+						+		'<button type="submit" class="default_btn">完成</button>'
+						+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+						+	'</div>'
+						+	'</form>'
+						+'</div>'
+					});
+				}
+				function close_lay(){
+					layer.closeAll();
+				}
+			</script>
 			<!--main end-->
 
 </body>

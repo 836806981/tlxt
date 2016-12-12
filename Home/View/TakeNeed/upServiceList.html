@@ -28,7 +28,7 @@
 						 <label>需求编号</label><input type="text" class="form-control" id="number"/>
 					</div>
 					<div class="form-group">
-						 <label>派单时间</label><input type="text" class="form-control" id="status_1"/>
+						 <label>签单时间</label><input type="text" class="form-control" id="status_6"/>
 					</div>
 
 					<if condition=" $_SESSION[C('USER_AUTH_KEY')]['permission'] eq 24">
@@ -61,13 +61,16 @@
 						 <label>需求状态</label>
 						 <select class="form-control" id="status">
 						 	 <option value="0">全部</option>
-					         <option value="1">待接待</option>
-					         <option value="2">已接待</option>
-					         <option value="3">已完善</option>
-					         <option value="4">待匹配</option>
-					         <option value="5">已匹配</option>
+					         <!--<option value="1">待接待</option>-->
+					         <!--<option value="2">已接待</option>-->
+					         <!--<option value="3">已完善</option>-->
+					         <!--<option value="4">待匹配</option>-->
+					         <!--<option value="5">已匹配</option>-->
+					         <!--<option value="6">已签单</option>-->
 					         <option value="6">已签单</option>
-					         <option value="22">已打回</option>
+					         <option value="7">已上户</option>
+					         <option value="8">已下户</option>
+					         <option value="9">已完结</option>
 					     </select>
 					</div>
 					<div class="form-group">
@@ -119,8 +122,8 @@
 				</table>
 			</div>
 
-			<script src="__PUBLIC__/js/showTimeDown.js"></script>
-			<script src="__PUBLIC__/js/take_serviceList.js"></script>
+			<!--<script src="__PUBLIC__/js/showTimeDown.js"></script>-->
+			<script src="__PUBLIC__/js/upServiceList.js"></script>
 			<!--main end-->
 			<script>
 

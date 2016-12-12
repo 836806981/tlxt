@@ -265,23 +265,23 @@
 								<!--<input type="text" class="form-control" name="name" id="name"/>-->
 							<!--</td>-->
 						<!--</tr>-->
-						<!--<tr>-->
-							<!--<td><label>特殊情况：</label>-->
-								<!--<input type="radio" name="teshu" name="price_add" />有&nbsp;&nbsp;-->
-								<!--<input type="radio" name="teshu" name="price_add" checked/>无&nbsp;&nbsp;-->
-							<!--</td>-->
-							<!--<td><label>加价原因：</label>-->
-								<!--<input type="text" class="form-control" name="add_reason" id="add_reason"/>-->
-							<!--</td>-->
-						<!--</tr>-->
-						<!--<tr>-->
-							<!--<td><label>订单加价：</label>-->
-								<!--<input type="text" class="form-control w160" name="add_order_price" id="add_order_price"/>&nbsp;&nbsp;元-->
-							<!--</td>-->
-							<!--<td><label>阿姨薪资加价：</label>-->
-								<!--<input type="text" class="form-control w160" name="add_nurse_price" id="add_nurse_price"/>&nbsp;&nbsp;元-->
-							<!--</td>-->
-						<!--</tr>-->
+						<tr>
+							<td><label>特殊情况：</label>
+								<input type="radio" name="price_add" value="1" <if condition="$info['price_add'] eq 1">checked</if> />有&nbsp;&nbsp;
+								<input type="radio" name="price_add" value="0" <if condition="$info['price_add'] eq 0">checked</if>/>无&nbsp;&nbsp;
+							</td>
+							<td><label>加价原因：</label>
+								<input type="text" class="form-control" value="{$info.add_reason}" name="add_reason" id="add_reason"/>
+							</td>
+						</tr>
+						<tr>
+							<td><label>订单加价：</label>
+								<input type="text" class="form-control w160"  value="{$info.add_order_price}" name="add_order_price" id="add_order_price"/>&nbsp;&nbsp;元
+							</td>
+							<td><label>阿姨薪资加价：</label>
+								<input type="text" class="form-control w160"  value="{$info.add_nurse_price}" name="add_nurse_price" id="add_nurse_price"/>&nbsp;&nbsp;元
+							</td>
+						</tr>
 						<tr>
 							<td colspan="2"><label>其他建议：</label>
 								<input type="text" class="form-control w500" value="{$info.advise}" name="advise" id="advise"/>
