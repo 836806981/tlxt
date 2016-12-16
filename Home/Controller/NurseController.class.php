@@ -321,7 +321,7 @@ class NurseController extends CommonController {
                 if ($save_mod === false) {
                     M('nurse')->where('id=' . $nurse_id . '')->save($save);
                 }
-                echo "<script>alert('添加成功'); window.location.href='".__MODULE__."/Nurse/nurseList'</script>";
+                echo "<script>alert('添加成功'); window.location.href='".__MODULE__."/Nurse/nurseList_".$post['agreement_type'].".html'</script>";
                 exit;
             }else{
                 echo "<script>alert('添加失败');window.onload=function(){window.history.go(-1);return false;}</script>";
@@ -574,7 +574,7 @@ class NurseController extends CommonController {
                 if ($save_mod === false) {
                     M('nurse')->where('id=' . $post['id'] . '')->save($save);
                 }
-                echo "<script>alert('修改成功'); window.location.href='".__MODULE__."/Nurse/nurseList'</script>";
+                echo "<script>alert('修改成功'); window.location.href='".__MODULE__."/Nurse/nurseList_".$post['agreement_type'].".html'</script>";
                 exit;
             }else{
                 echo "<script>alert('修改失败');window.onload=function(){window.history.go(-1);return false;}</script>";

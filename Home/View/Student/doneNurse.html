@@ -342,15 +342,21 @@
 							<td width="47%"><label>婚姻情况：</label>
 								<select class="form-control" name="marrige">
 									<option  <if condition="$info.marrige eq '未婚'">selected</if>>未婚</option>
+									<option  <if condition="$info.marrige eq '已婚有孩'">selected</if>>已婚有孩</option>
+									<option  <if condition="$info.marrige eq '已婚无孩'">selected</if>>已婚无孩</option>
 									<option  <if condition="$info.marrige eq '已婚未孕'">selected</if>>已婚未孕</option>
 									<option  <if condition="$info.marrige eq '已婚已孕'">selected</if>>已婚已孕</option>
+									<option  <if condition="$info.marrige eq '离异有孩'">selected</if>>离异有孩</option>
+									<option  <if condition="$info.marrige eq '离异无孩'">selected</if>>离异无孩</option>
+									<option  <if condition="$info.marrige eq '丧偶有孩'">selected</if>>丧偶有孩</option>
+									<option  <if condition="$info.marrige eq '丧偶无孩'">selected</if>>丧偶无孩</option>
 								</select>
 							</td>
 							<td width="53%"><label>带孩子：</label><input type="text" class="form-control w120" value="{$info.baby_take}" name="baby_take" id="baby_take"/>&nbsp;个孩子</td>
 						</tr>
 						
 						<tr>
-							<td colspan="2"><label>个人签名：</label>
+							<td colspan="2"><label>座右铭：</label>
 								<div class="rtdiv">
 									<textarea class="form-control jianjie" name="sign" id="sign">{$info.sign}</textarea>
 									（不超过40个字）

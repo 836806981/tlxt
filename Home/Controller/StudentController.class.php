@@ -557,7 +557,7 @@ class StudentController extends CommonController {
                 if ($save_mod === false) {
                     M('nurse')->where('id=' . $post['id'] . '')->save($save);
                 }
-                echo "<script>alert('修改成功'); window.location.href='".__MODULE__."/Student/studentList'</script>";
+                echo "<script>alert('修改成功'); window.location.href='".__MODULE__."/Student/studentList_1.html'</script>";
                 exit;
             }else{
                 echo "<script>alert('修改失败');window.onload=function(){window.history.go(-1);return false;}</script>";
