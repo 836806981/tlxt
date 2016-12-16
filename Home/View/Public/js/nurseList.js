@@ -7,6 +7,7 @@ var Num_zcj=[];
 var name = $('#name').val();
 var status_sh = $('#status_sh').val();
 var status_own = $('#status_own').val();
+var agreement_type = $('#agreement_type').val();
 
 
 $(function () {
@@ -58,6 +59,7 @@ $.extend({
             name = $('#name').val();
             status_sh = $('#status_sh').val();
             status_own = $('#status_own').val();
+            agreement_type = $('#agreement_type').val();
             //reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
             //if(!reg.test(status_23) && status_23){
             //    layer.msg('请输入正确回收时间 格式：2016-01-01！');
@@ -75,7 +77,7 @@ $.extend({
 	//根据所有条件查询新闻列表
     getNewsListByAllTerm: function () {
         //异步提交数据,参数：currentpage,要查询的页码;pagenum，每页的条数
-        $.AjaxPost(MODULE+"/Nurse/getNurseList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,name:name,status_sh:status_sh,status_own:status_own}, function (backdata) {
+        $.AjaxPost(MODULE+"/Nurse/getNurseList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,agreement_type:agreement_type,name:name,status_sh:status_sh,status_own:status_own}, function (backdata) {
             if (backdata.code == 1000) {
                 List_zcj = backdata.data.list;
                 Num_zcj = backdata.data.num;
@@ -89,6 +91,8 @@ $.extend({
                     $.each(List_zcj,function(i,item){
                         //未接单或者打回才能放回收站
                         var status_own_str = '';
+                        var status_24 = '';
+                        var agreement_type_1 = '';
                         if(item.status_own==1){
                             status_own_str = '<select class="form-control" nurse_id="'+item.id+'" status_own="status_own" >\
                             <option value="1" selected>暂不接单</option>\
@@ -119,19 +123,37 @@ $.extend({
                         </select>';
                         }
 
-                        str +='<tr class="data">\
-                        <td>'+item.number+'</td>\
-                        <td>'+item.status_sh_name+'</td>\
-                        <td>'+status_own_str+'</td>\
-                        <td>'+item.name+'</td>\
-                        <td>'+item.is_student_str+'</td>\
-                        <td>'+item.work_time+'年</td>\
-                        <td><a onclick="wanchengDD()">'+0+'</a></td>\
-                        <td>'+0+'</td>\
-                        <td>'+0+'</td>\
-                        <td>'+0+'</td>\
-                        <td><a onclick="taotai()">淘汰</a><a onclick="zhuanzheng()">转正</a><a href="'+MODULE+'/Nurse/nurseInfo/id/'+item.id+'.html">查看</a></td>\
+                        if(item.status!=24){
+                            status_24 = '<a do_type="taotai" s_id="'+item.id+'" s_name="'+item.name+'">淘汰</a>';
+                        }
+                        if(item.agreement_type==3 && item.status!=24){
+                            agreement_type_1 = '<a href="'+MODULE+'/Nurse/changeNurse/id/'+item.id+'.html">转正</a>';
+                        }
+                        if(item.status==24){
+                            str += '<tr class="data">\
+                                <td>' + item.number + '</td>\
+                                <td>' + item.name + '</td>\
+                                <td>' + item.is_student_str + '</td>\
+                                <td>' + item.work_time + '年</td>\
+                                <td>' + item.status_24_t + '</td>\
+                                <td>' + item.status_24_r + '</td>\
+                                <td>' + status_24 + agreement_type_1 + '<a href="' + MODULE + '/Nurse/nurseInfo/id/' + item.id + '.html">查看</a></td>\
+                                </tr>';
+                        }else {
+                            str += '<tr class="data">\
+                                <td>' + item.number + '</td>\
+                                <td>' + item.status_sh_name + '</td>\
+                                <td>' + status_own_str + '</td>\
+                                <td>' + item.name + '</td>\
+                                <td>' + item.is_student_str + '</td>\
+                                <td>' + item.work_time + '年</td>\
+                                <td><a onclick="wanchengDD()">' + 0 + '</a></td>\
+                                <td>' + 0 + '</td>\
+                                <td>' + 0 + '</td>\
+                                <td>' + 0 + '</td>\
+                                <td>' + status_24 + agreement_type_1 + '<a href="' + MODULE + '/Nurse/nurseInfo/id/' + item.id + '.html">查看</a></td>\
                         </tr>';
+                        }
                     });
                     $dom.before(str);
                     $(".data").attr('onmouseover',"this.style.backgroundColor='#eeeeee';");

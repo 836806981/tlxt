@@ -13,11 +13,27 @@ class NurseController extends CommonController {
             //str_pad($str,6,0,STR_PAD_LEFT);  6位数不足补0
         }
     }
-    //列表页
-    public function nurseList(){
+    //一年合同
+    public function nurseList_1(){
 
+        $this->assign('agreement_type',1);
+        $this->assign('now_day',date('Y-m-d'));
+        $this->display('nurseList');
+    }
 
-        $this->display();
+    //三单试用
+    public function nurseList_3(){
+
+        $this->assign('agreement_type',3);
+        $this->assign('now_day',date('Y-m-d'));
+        $this->display('nurseList');
+    }
+
+    //回收站
+    public function nurseList_24(){
+
+        $this->assign('agreement_type',24);
+        $this->display('nurseList');
     }
 
     //获取列表数据
@@ -26,7 +42,12 @@ class NurseController extends CommonController {
         $pagenum = I("post.pagenum");
         $start = ($currentpage - 1) * $pagenum;
         $post = I("post.");
-        $where = 'status = 1 ';
+        $where = 'type=2';
+        if($post['agreement_type']<24){
+            $where .= ' and agreement_type = '.$post['agreement_type'].' and status!=24';
+        }else{
+            $where .= ' and status = 24';
+        }
 
         if($post['name']&&$post['name']!=''){
             $where .= ' and  name LIKE "%'.$post['name'].'%"';
@@ -56,6 +77,34 @@ class NurseController extends CommonController {
         $back['code'] = 1000;
         echo json_encode($back);
     }
+
+    //淘汰
+    public function status_24(){
+        if(!I('post.id')){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('nurse')->where('id='.I('post.id').'')->find();
+        if(!$info){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $post = I('post.');
+        $post['status']=24;
+        $save = M('nurse')->where('id='.I('post.id').'')->save($post);
+        if($save!==false){
+            echo "<script>alert('淘汰成功'); window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }else{
+            echo "<script>alert('淘汰失败，请重新操作');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+
+    }
+
+
+
+
 
     //修改阿姨次要状态
     public function changeStatus_own(){
@@ -197,7 +246,7 @@ class NurseController extends CommonController {
             }
             //性格
             $rand = rand(1,4);
-            $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
+            $post['character_img'] =  '/character_type/'.(($post['character_type']-1)*4+$rand).'.jpg';
 
             //定薪
             $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
@@ -447,7 +496,7 @@ class NurseController extends CommonController {
             //性格
             if($post['character_type']!=$nurse_info['character_type']){
                 $rand = rand(1,4);
-                $post['character_img'] =  '/character_type/'.($post['character_type']*$rand).'.jpg';
+                $post['character_img'] =  '/character_type/'.(($post['character_type']-1)*4+$rand).'.jpg';
             }
 
             //定薪

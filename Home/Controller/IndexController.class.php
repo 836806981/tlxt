@@ -8,6 +8,76 @@ class IndexController extends CommonController {
         }
     }
 
+
+    public function jianli(){
+        if(!I('get.number')){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('nurse')->where('number="'.I('get.number').'"')->find();
+        if(!$info){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if($info['status']!=1){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if($info['type']!=2){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+
+
+        $info['imgs_a'] = explode(',',$info['imgs']);
+        $info['skills_a'] = explode(',',$info['skills']);
+        $info['family_1_a'] = explode('||',$info['family_1']);
+        $info['family_2_a'] = explode('||',$info['family_2']);
+        $info['family_3_a'] = explode('||',$info['family_3']);
+        $info['good_cuisine_a'] = explode(',',$info['good_cuisine']);
+        $info['good_flavor_a'] = explode(',',$info['good_flavor']);
+        $info['experience_own1_a'] = explode('||',$info['experience_own1']);
+        $info['experience_own2_a'] = explode('||',$info['experience_own2']);
+        $info['experience_own3_a'] = explode('||',$info['experience_own3']);
+
+        $status_sh_name = ['','未上户','已上户'];
+        $info['status_sh_name'] = $status_sh_name[$info['status_sh']];
+
+        $info['level_name'] = $info['level'].'育婴师'.'、';
+        $info['is_tr']==1?($info['level_name'].='通乳师、'):'';
+        $info['is_tn']==1?($info['level_name'].='小儿推拿师、'):'';
+        $info['is_yy']==1?($info['level_name'].='公共营养师、'):'';
+        $info['is_xl']==1?($info['level_name'].='心理咨询师、'):'';
+        $info['level_name'] = substr($info['level_name'],0,-3);
+
+        $info['is_stay_name']= ($info['is_stay']==1?'是':'否');
+
+        $character_type_name = ['','活泼型','外向型','踏实型','敏感型','服从型','均衡型'];
+        $info['character_type_name'] = $character_type_name[$info['character_type']];
+
+        $good_cuisine_name = ['面食','煲汤','川菜小炒','流食','素食','肉类','小吃','甜品','补品'];
+        foreach($info['good_cuisine_a'] as $k=>$v){
+            $info['good_cuisine_str'] .= ($v==1?$good_cuisine_name[$k].' ':'');
+        }
+
+        $good_flavor_name = ['清淡','咸鲜','甜食','辣','酸'];
+        foreach($info['good_flavor_a'] as $k=>$v){
+            $info['good_flavor_str'] .= ($v==1?$good_flavor_name[$k].' ':'');
+        }
+
+        $level_name = ['','小田螺','小田螺','小田螺','小田螺','小田螺','大田螺','大田螺','大田螺','大田螺','大田螺','超级田螺','超级田螺','超级田螺','超级田螺','超级田螺','金牌田螺'];
+        $info['price_level_name'] = $level_name[$info['price_level']];
+
+        $status_7 = M('order_nurse')->where('nurse_id='.$info['id'].' and status=7')->find();
+
+
+
+        $this->assign('status_7',$status_7);
+        $this->assign('info',$info);
+        $this->display();
+
+    }
+
     //登录功能及页面
     public function  login(){
         $post = I('post.');

@@ -1,0 +1,53 @@
+html {font-size: 62.5%;}
+* {font-family: 'Microsoft Yahei', 'Helvetica Neue', 'ff-tisa-web-pro-1', 'ff-tisa-web-pro-2', 'Lucida Grande', 'Hiragino Sans GB', 'Hiragino Sans GB W3', Helvetica, Arial, sans-serif;margin: 0;padding: 0;color: #333;-webkit-font-smoothing: antialiased;}
+.f-cb:after {display: block;visibility: hidden;clear: both;overflow: hidden;height: 0;content: '.';}
+.f-cb {zoom: 1;}
+ul,
+li {list-style: none;}
+.f-fl {float: left;}
+.f-fr {float: right;}
+a {text-decoration: none;color: #666;}
+body,
+html {position: relative;width: 100%;min-width: 1024px;background-color: #eee;}
+article {width: 1024px;margin: 0 auto;padding-bottom: 20px;background-color: #fff;}
+header {padding: 40px 40px 0;}
+section {padding: 20px 40px;}
+div.headLeft {font-size: 2.6em;float: left;}
+div.headLeft > img {width: 180px;height: auto;}
+div.headRight {font-size: 2.6em;line-height: 1.5em;float: right;margin-top: 10px;}
+div.headRight > p {color: #f55352;}
+div.headRight > p > span {color: #333;}
+section.pageInfo {position: relative;margin-top: 100px;padding-top: 110px;padding-bottom: 20px;background-color: #ffac43;}
+div.title > img {display: inline-block;float: left;width: 80px;height: 100px;}
+div.title > span {font-size: 4em;font-weight: bold;display: inline-block;float: left;margin-top: 23px;margin-left: 12px;color: #f55352;}
+div.pic {position: absolute;top: -90px;width: 944px;text-align: center;}
+div.pic > img {width: 180px;height: 180px;border: 2px solid #fff;border-radius: 50%;background-color: #333;}
+div.nameInfo > p {padding-top: 10px;text-align: center;}
+div.nameInfo > p.infoP {font-size: 2.4em;padding-top: 15px;}
+div.nameInfo > p.namelv > span.name {font-size: 6em;font-weight: bold;position: relative;color: #fff;}
+div.nameInfo > p.namelv > span.name > i.lv {font-size: .4em;font-weight: normal;font-style: normal;position: absolute;top: 40px;width: 200px;padding-left: 11px;text-align: left;color: #333;}
+table.infotable {width: 96%;margin: 0 auto;}
+table.infotable tr td {font-size: 2.4em;line-height: 2em;}
+table.infotable tr td > label {color: #f55352;}
+section.jingli > p,
+section.pingjia > p {font-size: 2.4em;line-height: 1.8em;padding: 0 20px;padding-top: 20px;text-indent: 2em;}
+img.mbtiImg {display: block;width: 80%;margin: 20px auto 0;}
+section.kill > ul {padding-top: 20px;padding-right: 20px;padding-left: 20px;}
+section.kill > ul > li {padding-bottom: 20px;}
+section.kill > ul > li:last-child {padding-bottom: 0;}
+section.kill > ul > li > div.killName {font-size: 2.4em;line-height: 32px;float: left;width: 240px;height: 32px;text-align: right;}
+section.kill > ul > li > div.meter {float: left;margin-left: 4px;}
+section.kill > ul > li > div.meter > div.meterBg {float: left;overflow: hidden;width: 540px;height: 14px;margin-top: 9px;border-radius: 7px;background-color: #e0e0e0;}
+section.kill > ul > li > div.meter > div.meterBg > div.mtr {height: 14px;background-color: #ffcb00;}
+section.kill > ul > li > div.meter > input {font-size: 2.2em;display: block;float: left;width: 50px;margin-left: 12px;padding-top: 2px;border: none;}
+ul.imgs {width: 900px;margin: 20px auto 0;}
+ul.imgs > li {float: left;width: 170px;margin: 0 5px;text-align: center;}
+ul.imgs > li > img {width: 160px;height: 200px;cursor: pointer;}
+ul.imgs > li > p {font-size: 2.4em;line-height: 2em;text-align: center;}
+table.yuding {width: 96%;margin: 20px auto 0;}
+table.yuding tr.first td {color: #f55352;}
+table.yuding tr td {font-size: 2.4em;line-height: 2em;text-align: center;}
+.layImg {position: fixed;top: 0;left: 0;display: table;cursor: pointer;text-align: center;}
+.layImg > span {display: table-cell;vertical-align: middle;}
+.layImg > span > img {min-width: 600px;max-width: 800px;}
+.black {position: fixed;top: 0;left: 0;width: 100%;height: 100%;pointer-events: auto;background-color: rgba(0, 0, 0, .6);}

@@ -7,22 +7,24 @@
 
 </head>
 
+<!--学员完善-->
+
 <body>
 			<!--top-->
 			<include file="Nav/header"/>
 			<!--left end-->
 			<script>
-				$('.left_menu li').eq(3).addClass('called');
+				$('.left_menu li').eq(4).addClass('called');
 			</script>
 			<!--main-->
 			<div class="col-md-10 main">
 				<div class="tab_tle1">
-					阿姨资料录入
+					学员资料完善
 				</div>
 				<div class="tab_tle">
 					<span class="int_s"></span>图片资料
 				</div>
-				<form action="__MODULE__/Nurse/changeNurse" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定修改么？')"  enctype="multipart/form-data">
+				<form action="__MODULE__/Student/doneNurse" method="post" id="form_add" onsubmit="javascript:return window.confirm('确定完善么？')"  enctype="multipart/form-data">
 				<table class="auntTab pictures">
 					<tbody>
 						<tr>
@@ -496,10 +498,10 @@
 						layer.msg('请输入姓名！');
 						return false;
 					}
-					if($('#title_img').val() == '' || $('#life_img1').val() == '' || $('#life_img2').val() == '' || $('#id_img').val() == '' ){
-						layer.msg('请上传图片！');
-						return false;
-					}
+//					if($('#title_img').val() == '' || $('#life_img1').val() == '' || $('#life_img2').val() == '' || $('#id_img').val() == '' ){
+//						layer.msg('请上传图片！');
+//						return false;
+//					}
 					if($('#id_card').val() == ''){
 						layer.msg('请输入身份证！');
 						return false;

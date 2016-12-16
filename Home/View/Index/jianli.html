@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>阿姨简历</title>
+    <link rel="stylesheet" href="__PUBLIC__/jianli/css/style.css">
+    <script type="text/javascript" src="__PUBLIC__/jianli/js/jquery-1.7.1.min.js"></script>
+</head>
+
+<body>
+    <article>
+        <header class="f-cb">
+            <div class="headLeft">
+                <img src="__PUBLIC__/jianli/img/logo.png">
+                <p>NO.<span>{$info.number}</span></p>
+            </div>
+
+            <!--待修改-->
+            <if condition="$status_7.service_place neq ''">
+            <div class="headRight">
+                <P>当前上户中</P>
+                <P>服务地点：<span>{$status_7.service_place}</span></P>
+            </div>
+                <else/>
+                <div class="headRight">
+                    <P>当前等单中</P>
+                </div>
+            </if>
+
+        </header>
+        <section class="pageInfo">
+            <div class="pic"><img src="__UPLOADS__/{$info.title_img}"></div>
+            <div class="nameInfo">
+                <p class="namelv">
+                    <span class="name">田阿姨<i class="lv">{$info.price_level_name}</i></span>
+                </p>
+                <p class="infoP">{$info.level_name}</p>
+                <p class="infoP">{$info.sign}</p>
+            </div>
+        </section>
+        <section>
+            <div class="title f-cb"><img src="__PUBLIC__/jianli/img/t1.png"><span>基本资料</span></div>
+            <div class="content">
+                <table cellpadding="0" cellspacing="0" border="0" class="infotable">
+                    <tr>
+                        <td width="34%">
+                            <label>年龄：</label>{$info.age}岁</td>
+                        <td width="33%">
+                            <label>籍贯：</label>{$info.native_place}</td>
+                        <td width="33%">
+                            <label>属相：</label>{$info.zodiac}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>身高：</label>{$info.height}cm</td>
+                        <td>
+                            <label>体重：</label>{$info.weight}kg</td>
+                        <td>
+                            <label>学历：</label>{$info.education}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>婚姻关系：</label>{$info.marrige}</td>
+                        <td>
+                            <label>服务年限：</label>{$info.work_time}年</td>
+                        <td>
+                            <label>培训：</label>{$info.training_school}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label>擅长菜系：</label>{$info.good_cuisine_str}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label>擅长口味：</label>{$info.good_flavor_str}</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <section class="jingli">
+            <div class="title f-cb"><img src="__PUBLIC__/jianli/img/t2.png"><span>从业经历</span></div>
+            <p>
+                {$info.experience}
+            </p>
+        </section>
+        <section>
+            <div class="title f-cb"><img src="__PUBLIC__/jianli/img/t3.png"><span>性格MBTI评估</span></div>
+            <img src="__UPLOADS__/{$info.character_img}" class="mbtiImg">
+        </section>
+        <section class="kill">
+            <div class="title f-cb"><img src="__PUBLIC__/jianli/img/t4.png"><span>个人技能</span></div>
+            <ul>
+                <li class="f-cb">
+                    <div class="killName">新生儿生活照料：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][0]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">新生儿健康护理：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][1]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">新生儿疾病监测：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][2]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">新生儿早起促进：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][3]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">产妇专业护理：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][4]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">产妇生活护理：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][5]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">产妇心里护理：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][6]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">产妇疾病预防：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][7]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">产妇产后恢复：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][8]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">产妇乳房护理：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][9]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+                <li class="f-cb">
+                    <div class="killName">产妇饮食护理：</div>
+                    <div class="meter f-cb">
+                        <div class="meterBg">
+                            <div class="mtr"></div>
+                        </div>
+                        <input type="text" value="{$info['skills_a'][10]}" readonly="readonly" name="mark" />
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <script>
+        $('input[name=mark]').each(function() {
+            var mark = $(this).val();
+            $(this).siblings('.meterBg').children('.mtr').css({
+                width: mark + '%'
+            });
+        });
+        </script>
+        <section class="pingjia">
+            <div class="title f-cb"><img src="__PUBLIC__/jianli/img/t5.png"><span>田螺评价</span></div>
+            <p>
+               {$info.teacher_remark}
+                  </p>
+        </section>
+        <section>
+            <div class="title f-cb"><img src="__PUBLIC__/jianli/img/t6.png"><span>相关照片</span></div>
+            <ul class="imgs f-cb">
+                <li>
+                    <img src="__UPLOADS__{$info.id_img}">
+                    <p>身份证</p>
+                </li>
+                <li>
+                    <img src="__UPLOADS__{$info.zs_img}">
+                    <p>从业资格证</p>
+                </li>
+                <li>
+                    <img src="__UPLOADS__{$info.test_img}">
+                    <p>体检报告</p>
+                </li>
+                <li>
+                    <img src="__UPLOADS__{$info.life_img1}">
+                    <p>生活照1</p>
+                </li>
+                <li>
+                    <img src="__UPLOADS__{$info.life_img2}">
+                    <p>生活照2</p>
+                </li>
+            </ul>
+        </section>
+        <script>
+        $('.imgs>li>img').live('click', function(imgaddress) {
+            imgaddress = $(this).attr('src');
+            $('body').append('<div class="black"></div>' + '<div class="layImg">' + '<span><img src=' + imgaddress + '></span>' + '</div>');
+            $('.layImg').css({
+                width: $('.black').width(),
+                height: $('.black').height()
+            });;
+        });
+
+        $('.layImg').live('click', function() {
+            $('.layImg').remove();
+            $('.black').remove();
+        });
+        </script>
+        <!--<section>-->
+            <!--<div class="title f-cb"><img src="__PUBLIC__/jianli/img/t7.png"><span>预定客户</span></div>-->
+            <!--<table cellspacing="0" cellpadding="0" border="0" class="yuding">-->
+                <!--<tr class="first">-->
+                    <!--<td>订单编号</td>-->
+                    <!--<td>服务地点</td>-->
+                    <!--<td>客户称呼</td>-->
+                    <!--<td>订单价格</td>-->
+                    <!--<td>预产期</td>-->
+                    <!--<td>当前状态</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>TLAY-20160500</td>-->
+                    <!--<td>成都高新区</td>-->
+                    <!--<td>李先生</td>-->
+                    <!--<td>7880元</td>-->
+                    <!--<td>2016-10-22</td>-->
+                    <!--<td>已上户</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+        <!--</section>-->
+    </article>
+</body>
+
+</html>

@@ -150,6 +150,7 @@ class TakeNeedController extends CommonController {
         //若已完善则跳转到overOrderinfo
         if($info['status']>=3){
             echo "<script> window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".I('get.id').".html'</script>";
+            exit;
         }
 
         $info['status_1_str'] = $info['status_1']?date('Y-m-d H:i:s',$info['status_1']):0;
@@ -197,9 +198,16 @@ class TakeNeedController extends CommonController {
                 $post['status'] = 3;
                 $post['status_3'] = time();
             }
+            if($post['price_add'] == 0){
+                $post['add_reason'] = '';
+                $post['add_order_price'] = 0;
+                $post['add_nurse_price'] = 0;
+            }
             $post['number'] = 'DD-' . str_pad($post['order_id'], 6, 0, STR_PAD_LEFT);  //6位数不足补0
             $save_mod = M('order')->where('id='.$post['order_id'].'')->save($post);
             $have_order = M('order_info')->where('order_id='.$post['order_id'].'')->find();
+
+
 
             for($i = 1;$i < 19;$i++){
                 $post['skills'] .= $post['skills'.$i].',';
@@ -209,15 +217,28 @@ class TakeNeedController extends CommonController {
             }else{
                 M('order_info')->add($post);
             }
-            if($save_mod!==false){
 
+            //修改订单然后去修改匹配里面的订单信息
+            $order_info = M('order')->where('id='.$post['order_id'].'')->find();
+            $add = $order_info;
+            $add['order_id'] = $order_info['id'];
+            $add['order_name'] = $order_info['name'];
+
+            unset($add['id']);
+            unset($add['number']);
+            unset($add['remark']);
+            $add_mod =  M('order_nurse')->where('order_id='.$post['order_id'].'')->save($add);
+            if($add_mod==false){
+                M('order_nurse')->where('order_id='.$post['order_id'].'')->save($add);
+            }
+
+            if($save_mod!==false){
                 echo "<script>alert('成功'); window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
                 exit;
             }else{
                 echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
                 exit;
             }
-
         } else {
             if (!I('get.id')) {
                 echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
@@ -283,6 +304,115 @@ class TakeNeedController extends CommonController {
         }
     }
 
+
+    //重新匹配
+    public function status_re_4(){
+        if (!I('get.id')) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('order')->where('id=' . I('get.id') . '')->find();
+        if (!$info) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if ($info['status']!=5) {
+            echo "<script>alert('操作异常！');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $save['status'] = 4;
+        $save['status_4'] = time();
+        $save['status_5'] = '';
+
+        $save_mod = M('order')->where('id='.$info['id'].'')->save($save);
+        if($save_mod!==false){
+            $de = M('order_nurse')->where('order_id='.$info['id'].'')->delete();
+            if(!$de){
+                M('order_nurse')->where('order_id='.$info['id'].'')->delete();
+            }
+
+            echo "<script>alert('成功'); window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$info['id'].".html'</script>";
+            exit;
+        }else{
+            echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+    }
+
+    //删除匹配阿姨
+    public function del_nurse(){
+        if ((!I('post.order_id')&&I('post.order_id'))) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('order_nurse')->where('order_id=' . I('post.order_id') . ' and nurse_id=' . I('post.nurse_id') . '')->find();
+        if (!$info) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if ($info['status']!=5) {
+            echo "<script>alert('操作异常！');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $de = M('order_nurse')->where('order_id=' . I('post.order_id') . ' and nurse_id=' . I('post.nurse_id') . '')->delete();
+        if($de){
+            $code = 1;
+        }else{
+            $code = 0;
+        }
+        echo json_encode($code);
+
+    }
+
+    //签约
+    public function status_6(){
+       $post = I('post.');
+
+        if (!($post['order_id']&&$post['nurse_id'])) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->find();
+        $order_info = M('order')->where('id=' .$post['order_id'] . '')->find();
+        if (!$info) {
+            echo "<script>alert('未匹配该阿姨！');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if ($order_info['status']!=5) {
+            echo "<script>alert('不是已匹配完成状态。不能签单！');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $where_nurse_do = 'status>5 and status<=8 and nurse_id='. $post['nurse_id'] .' and  (("'.$post['b_time'].'" <= IF(true_s_time!="",true_s_time,s_time) and "'.$post['b_time'].'">=IF(true_b_time!="" ,true_b_time , b_time)) OR ("'.$post['s_time'].'" >= IF(true_b_time!="" ,true_b_time , b_time) and "'.$post['s_time'].'" <=IF(true_s_time!="",true_s_time,s_time) ) OR ("'.$post['b_time'].'" <= IF(true_b_time!="" ,true_b_time , b_time) and "'.$post['s_time'].'" >= IF(true_s_time!="",true_s_time,s_time) )   )';
+        $have = M('order_nurse')->where($where_nurse_do)->find();
+        if($have){
+            echo "<script>alert('阿姨档期冲突');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+
+        $post['status'] = 6 ;
+        $post['status_6'] = time() ;
+
+        M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->save($post);
+        M('order')->where('id=' .$post['order_id'] . '')->save($post);
+
+        M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id !=' . $post['nurse_id'] . '')->delete();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
     //完善订单后详情
     public function overOrderInfo(){
         if (!I('get.id')) {
@@ -304,6 +434,10 @@ class TakeNeedController extends CommonController {
         $info['status_2_str'] = $info['status_2'] ? date('Y-m-d H:i:s', $info['status_2']) : 0;
 
         $info['price_add_str'] = $info['price_add']==1?'有':'无';
+
+        $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img,nurse.number as nurse_number')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').'')->select();
+        $this->assign('order_nurse',$order_nurse);
+
         $this->assign('info',$info);
         $this->display();
     }

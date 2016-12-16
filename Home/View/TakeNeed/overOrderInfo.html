@@ -231,12 +231,12 @@
 							</tr>
 							<tr>
 							<td><label>阿姨价位：</label>{$info.nurse_price}</td>
-							<td></td>
+								<td><label>服务周期：</label>{$info.service_day}天</td>
 						</tr>
-						<tr>
-							<td><label>服务周期：</label>{$info.service_day}天</td>
-							<td><label>假期：</label>{$info.holiday}天</td>
-						</tr>
+						<!--<tr>-->
+							<!--<td><label>服务周期：</label>{$info.service_day}天</td>-->
+							<!--<td><label>假期：</label>{$info.holiday}天</td>-->
+						<!--</tr>-->
 						<tr>
 							<td><label>预计上户时间：</label>{$info.b_time}</td>
 							<td><label>预计下户时间：</label>{$info.s_time}</td>
@@ -263,20 +263,61 @@
 									</div>
 								</td>
 							</tr>
+							<input type="hidden" id="order_id" value="{$info.id}"/>
 
 						</tbody>
 					</table>
 				</div>
+				<if condition="$info.status eq 5">
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>匹配列表
+					</div>
+					<ul class="pipei clear">
+						<volist name="order_nurse" id="vo" k="key">
+							<li nurse_id="{$vo.id}">
+								<a href="__MODULE__/Nurse/nurseInfo/id/{$vo.id}.html"><img src="__UPLOADS__{$vo.title_img}" /></a>
+								<p><input type="radio" name="nurse_id" value="{$vo.id}" nurse_name="{$vo.nurse_name}" nurse_number="{$vo.nurse_number}" <if condition="$key eq 0">checked</if>/>{$vo.nurse_name} </p>
+
+								<input type="button" class="del_aunt" value="X" do="del_nurse" nurse_id="{$vo.id}"/>
+							</li>
+						</volist>
+					</ul>
+				</div>
+
+
+					<elseif condition="$info.status egt 6 OR $info.status lt 22"/>
+					<div class="page">
+						<div class="tab_tle">
+							<span class="int_s"></span>匹配列表
+						</div>
+						<ul class="pipei clear">
+							<volist name="order_nurse" id="vo" k="key">
+								<li nurse_id="{$vo.id}">
+									<a href="__MODULE__/Nurse/nurseInfo/id/{$vo.id}.html"><img src="__UPLOADS__{$vo.title_img}" /></a>
+									<p>{$vo.nurse_name} </p>
+									<input type="hidden" name="nurse_id" value="{$vo.id}" nurse_name="{$vo.nurse_name}" nurse_number="{$vo.nurse_number}" />
+								</li>
+							</volist>
+						</ul>
+					</div>
+				</if>
+
 				<div class="form-group">
 					<if condition="$info.status eq 3">
 						<input type="button" class="default_btn m_left_20 magrin0" onclick="location.href='__MODULE__/TakeNeed/status_4/id/{$info.id}.html'" value="发单">
 					<elseif condition="$info.status eq 4"/>
-						已发单，待匹配
+						待匹配
 					</if>
 
+					<if condition="$info.status eq 5">
+						<input type="button" class="btnform magrin0 again" value="重新匹配" id="status_4">
+						<input type="button" class="btnform magrin0 finish" value="完成合同" id="status_6">
+					</if>
 
-					<input type="button" class="btnform magrin0 again" value="重新匹配">
-					<input type="button" class="btnform magrin0 finish" value="完成合同">
+					<if condition="$info.status eq 6">
+						<input type="button" class="btnform magrin0 finish" value="上户" id="status_7">
+					</if>
 
 					<if condition="$info.status egt 3 and $info.status lt 22">
 						<input type="button" class="default_btn" onclick="location.href='__MODULE__/TakeNeed/overOrder/id/{$info.id}'" value="修改">
@@ -287,18 +328,33 @@
 
 			<script>
 				$('.del_aunt').live('click',function(){
-					$(this).parent('li').remove();
+					var nurse_id = $(this).attr('nurse_id');
+					var order_id = $('#order_id').val();
+					var this_li = $(this).parent('li');
+					$.ajax({
+						type:'POST', url:MODULE+'/TakeNeed/del_nurse.html', dataType:'json', data:{nurse_id:nurse_id,order_id:order_id},
+						success:function(code){
+							if(code==1){
+								layer.msg('成功');
+								this_li.remove();}else{
+								layer.msg('异常，请重试');
+							}}});
 				});
-				$('.again').live('click',function(){
+
+				$('#status_4').live('click',function(){
 					layer.confirm('确认所有阿姨都不适合上户吗？', {
 						btn: ['是的','再努力下'] //按钮
 					}, function(){
-						alert(true);
+
+						window.location.href=MODULE+"/TakeNeed/status_re_4/id/"+$('#order_id').val()+".html";
+
 					}, function(){
 					});
 				});
-				$('.finish').live('click',function(){
-					var aunt = $('input:radio[name=aunt]:checked').val();
+				$('#status_6').live('click',function(){
+					var aunt = $('input:radio[name=nurse_id]:checked').attr('nurse_name');
+					var nurse_number = $('input:radio[name=nurse_id]:checked').attr('nurse_number');
+					var nurse_id = $('input:radio[name=nurse_id]:checked').val();
 					if(aunt==null){
 						layer.msg('请选中一个，才能完成订单');
 						return false;
@@ -307,69 +363,206 @@
 							btn: ['确认','点错了'] //按钮
 						}, function(){
 							layer.closeAll();
-							finish();
+							var sub_str = "javascript:return window.confirm('确认签订？')";
+							layer.open({
+								type: 1,
+								title: '完成合同签约',
+								area: ['auto', 'auto'], //宽高
+								content: '<div class="lay_cnt">'
+								+   '<form action="__MODULE__/TakeNeed/status_6" method="post" id="form_status_6" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+								+	'<div class="opn_div clear">'
+								+		'<label>合同编号：</label><input type="text" name="pact_number" id="pact_number" class="form-control" value="" />'
+								+         '<input type="hidden" name="order_id" class="form-control" value="{$info.id}" />'
+								+         '<input type="hidden" name="nurse_id" class="form-control" value="'+nurse_id+'" />'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>合同金额：</label><input type="text" name="price_come" class="form-control" value="{$info.product_price}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>已收金额：</label><input type="text" name="price_come_true" class="form-control" value="{$info.price_come_true}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>阿姨编号：</label><input type="text" class="form-control" value="'+nurse_number+'" readonly="readonly"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>阿姨姓名：</label><input type="text" class="form-control" value="'+aunt+'" readonly="readonly"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>是否加价：</label><input type="radio" name="price_add" value="1" <if condition="$info.price_add eq 1">checked</if>/>有&nbsp;&nbsp;'
+								+		'<input type="radio" name="price_add" value="0"  <if condition="$info.price_add eq 0">checked</if>/>无&nbsp;&nbsp;'
+								+	'</div>'
+								+	'<div class="opn_div clear" id="add_reason" <if condition="$info.price_add eq 0">style="display:none;"</if>>'
+								+		'<label>加价原因：</label><input type="text" name="add_reason" class="form-control" value="{$info.add_reason}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear" id="add_nurse_price"  <if condition="$info.price_add eq 0">style="display:none;"</if>>'
+								+		'<label>阿姨加价：</label><input type="text" name="add_nurse_price" class="form-control" value="{$info.add_nurse_price}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear" id="add_order_price"  <if condition="$info.price_add eq 0">style="display:none;"</if>>'
+								+		'<label>客户加价：</label><input type="text" name="add_order_price" class="form-control" value="{$info.add_order_price}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>服务周期：</label><input type="number" name="service_day" id="service_day" class="form-control" style="width: 77%;" value="{$info.service_day}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>预计上户：</label><input type="text" name="b_time" id="b_time" class="form-control" value="{$info.b_time}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>预计下户：</label><input type="text" name="s_time" id="s_time" class="form-control" value="{$info.s_time}"/>'
+								+	'</div>'
+								+	'<div class="btn_div clear">'
+								+		'<button type="button" class="default_btn" id="sub_status_6">完成</button>'
+								+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+								+	'</div>'
+								+	'</form>'
+								+'</div>'
+							});
 						}, function(){
 
 						});
 					}
 
 				});
-				//					完成合同签约 弹窗
-				function finish(){
-					layer.open({
-						type: 1,
-						title: '完成合同签约',
-						area: ['auto', 'auto'], //宽高
-						content: '<div class="lay_cnt">'
-						+   '<form>'
-						+	'<div class="opn_div clear">'
-						+		'<label>合同编号：</label><input type="text" class="form-control" value="" readonly="readonly"/>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>合同金额：</label><input type="text" class="form-control" value=""/>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>已收金额：</label><input type="text" class="form-control" value=""/>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>阿姨编号：</label><input type="text" class="form-control" value="" readonly="readonly"/>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>阿姨姓名：</label><input type="text" class="form-control" value="" readonly="readonly"/>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>保险状态：已购买</label>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>保险到期时间：2017-12-1</label>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>保险状态：未购买</label>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>保险购买日期：</label>'
-						+       '<select class="form-control w212">'
-						+          	'<option>上户当日购买</option>'
-						+          	'<option>不购买</option>'
-						+       '</select>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>服务周期：</label><input type="text" class="form-control" value=""/>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>预计上户：</label><input type="text" class="form-control" value=""/>'
-						+	'</div>'
-						+	'<div class="opn_div clear">'
-						+		'<label>预计下户：</label><input type="text" class="form-control" value=""/>'
-						+	'</div>'
-						+	'<div class="btn_div clear">'
-						+		'<button type="submit" class="default_btn">完成</button>'
-						+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
-						+	'</div>'
-						+	'</form>'
-						+'</div>'
-					});
-				}
+
+				$('#sub_status_6').live('click',function(){
+					var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+					if($('#pact_number').val() == ''){
+						layer.msg('请输入合同编号！');
+						return false;
+					}
+					if($('#service_day').val() == ''){
+						layer.msg('请输入服务周期！');
+						return false;
+					}
+					if(!reg.test($('#b_time').val())){
+						layer.msg('请输入正确的预计上户时间！');
+						return false;
+					}
+					if(!reg.test($('#s_time').val())){
+						layer.msg('请输入正确的预计下户时间！');
+						return false;
+					}
+					$('#form_status_6').submit();
+				});
+
+				$('input[name=price_add]').live('click',function(){
+					var price_add = $('input[name=price_add]:checked').val();
+					if(price_add==1){
+						$('#add_reason').show();
+						$('#add_nurse_price').show();
+						$('#add_order_price').show();
+					}else{
+						$('#add_reason').hide();
+						$('#add_nurse_price').hide();
+						$('#add_order_price').hide();
+					}
+
+				});
+
+
+				//上户
+
+				$('#status_7').live('click',function(){
+					var aunt = $('input[name=nurse_id]').attr('nurse_name');
+					var nurse_number = $('input[name=nurse_id]').attr('nurse_number');
+					var nurse_id = $('input[name=nurse_id]').val();
+						layer.confirm('确认上户操作吗？', {
+							btn: ['确认','点错了'] //按钮
+						}, function(){
+							layer.closeAll();
+							var sub_str = "javascript:return window.confirm('确认上户？')";
+							layer.open({
+								type: 1,
+								title: '完成合同签约',
+								area: ['auto', 'auto'], //宽高
+								content: '<div class="lay_cnt">'
+								+   '<form action="__MODULE__/TakeNeed/status_7" method="post" id="form_status_7" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+								+	'<div class="opn_div clear">'
+								+		'<label>合同编号：</label><input type="text" name="pact_number" id="pact_number" class="form-control" value="{$info.pact_number}" />'
+								+         '<input type="hidden" name="order_id" class="form-control" value="{$info.id}" />'
+								+         '<input type="hidden" name="nurse_id" class="form-control" value="'+nurse_id+'" />'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>合同金额：</label><input type="text" name="price_come" class="form-control" value="{$info.product_price}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>已收金额：</label><input type="text" name="price_come_true" class="form-control" value="{$info.price_come_true}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>阿姨编号：</label><input type="text" class="form-control" value="'+nurse_number+'" readonly="readonly"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>阿姨姓名：</label><input type="text" class="form-control" value="'+aunt+'" readonly="readonly"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>是否加价：</label><input type="radio" name="price_add" value="1" <if condition="$info.price_add eq 1">checked</if>/>有&nbsp;&nbsp;'
+								+		'<input type="radio" name="price_add" value="0"  <if condition="$info.price_add eq 0">checked</if>/>无&nbsp;&nbsp;'
+								+	'</div>'
+								+	'<div class="opn_div clear" id="add_reason" <if condition="$info.price_add eq 0">style="display:none;"</if>>'
+								+		'<label>加价原因：</label><input type="text" name="add_reason" class="form-control" value="{$info.add_reason}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear" id="add_nurse_price"  <if condition="$info.price_add eq 0">style="display:none;"</if>>'
+								+		'<label>阿姨加价：</label><input type="text" name="add_nurse_price" class="form-control" value="{$info.add_nurse_price}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear" id="add_order_price"  <if condition="$info.price_add eq 0">style="display:none;"</if>>'
+								+		'<label>客户加价：</label><input type="text" name="add_order_price" class="form-control" value="{$info.add_order_price}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>服务周期：</label><input type="number" name="service_day" id="service_day" class="form-control" style="width: 77%;" value="{$info.service_day}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>预计上户：</label><input type="text" name="b_time" id="b_time" class="form-control" value="{$info.b_time}"/>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>预计下户：</label><input type="text" name="s_time" id="s_time" class="form-control" value="{$info.s_time}"/>'
+								+	'</div>'
+								+	'<div class="btn_div clear">'
+								+		'<button type="button" class="default_btn" id="sub_status_7">完成</button>'
+								+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+								+	'</div>'
+								+	'</form>'
+								+'</div>'
+							});
+						}, function(){
+
+						});
+
+				});
+				$('#sub_status_7').live('click',function(){
+					var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+
+					if($('#pact_number').val() == ''){
+						layer.msg('请输入合同编号！');
+						return false;
+					}
+					if($('#service_day').val() == ''){
+						layer.msg('请输入服务周期！');
+						return false;
+					}
+					if(!reg.test($('#b_time').val())){
+						layer.msg('请输入正确的预计上户时间！');
+						return false;
+					}
+					if(!reg.test($('#s_time').val())){
+						layer.msg('请输入正确的预计下户时间！');
+						return false;
+					}
+					$('#form_status_7').submit();
+				});
+
+				$('input[name=price_add]').live('click',function(){
+					var price_add = $('input[name=price_add]:checked').val();
+					if(price_add==1){
+						$('#add_reason').show();
+						$('#add_nurse_price').show();
+						$('#add_order_price').show();
+					}else{
+						$('#add_reason').hide();
+						$('#add_nurse_price').hide();
+						$('#add_order_price').hide();
+					}
+
+				});
 				function close_lay(){
 					layer.closeAll();
 				}

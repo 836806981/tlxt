@@ -30,9 +30,8 @@
 			<tr>
 				<td width="47%"><label>学员来历：</label>
 					<select class="form-control" name="come">
-						<option <if condition="$info.come eq '来历1'">selected</if>>来历1</option>
-						<option <if condition="$info.come eq '来历2'">selected</if>>来历2</option>
-						<option <if condition="$info.come eq '来历3'">selected</if>>来历3</option>
+						<option <if condition="$info.come eq '渠道'">selected</if>>渠道</option>
+						<option <if condition="$info.come eq '自费'">selected</if>>自费</option>
 					</select>
 				</td>
 				<td width="53%"><label>招生对接人：</label>
@@ -205,6 +204,7 @@
 			</tr>
 			<tr>
 				<td><label>上一份工作：</label><input type="text" class="form-control" value="{$info.up_work}" name="up_work" id="up_work"/></td>
+				<td><label>学历：</label><input type="text" class="form-control" value="{$info.education}"  name="education" id="education"/></td>
 			</tr>
 			</tbody>
 		</table>

@@ -28,37 +28,37 @@
 						<tr>
 							<td rowspan="6" width="21%">
 								<div class="aunt_img">
-									<img src="../img/user_img.jpg" />
+									<img src="__UPLOADS__{$info.title_img}" />
 								</div>
 							</td>
-							<td width="26%"><label>编号：</label>TLAY-20160214</td>
-							<td width="26%"><label>姓名：</label>李翰宇</td>
-							<td width="27%"><label>年龄：</label>25</td>
+							<td width="26%"><label>编号：</label>{$info.number}</td>
+							<td width="26%"><label>姓名：</label>{$info.name}</td>
+							<td width="27%"><label>年龄：</label>{$info.age}</td>
 						</tr>
 						<tr>
-							<td><label>属相：</label>哈哈</td>
-							<td><label>籍贯：</label>湖北襄阳</td>
-							<td><label>出生日期：</label>1975-06-01</td>
+							<td><label>属相：</label>{$info.zodiac}</td>
+							<td><label>籍贯：</label>{$info.native_place}</td>
+							<td><label>出生日期：</label>{$info.birth_day}</td>
 						</tr>
 						<tr>
-							<td><label>身高：</label>165cm</td>
-							<td><label>体重：</label>65KG</td>
-							<td><label>上一份工作：</label>***</td>
+							<td><label>身高：</label>{$info.height}cm</td>
+							<td><label>体重：</label>{$info.weight}KG</td>
+							<td><label>上一份工作：</label>{$info.up_work}</td>
 						</tr>
 						<tr>
-							<td><label>班级：</label>育婴师第3期</td>
-							<td><label>班主任：</label>廖薇</td>
-							<td><label>当前状态：</label>实习中</td>
+							<td><label>班级：</label>{$info.class_name}{$info.class_number}期</td>
+							<td><label>班主任：</label>{$info.teacher}</td>
+							<td><label>当前状态：</label>{$info.status_name}</td>
 						</tr>
 						<tr>
-							<td><label>微信号：</label>lihanyu1002</td>
-							<td><label>联系方式：</label>18382389765</td>
-							<td><label>身份证：</label>420624195421521252</td>
+							<td><label>微信号：</label>{$info.wchat}</td>
+							<td><label>联系方式：</label>{$info.phone}</td>
+							<td><label>身份证：</label>{$info.id_card}</td>
 						</tr>
 						<tr>
-							<td><label>是否住宿：</label>是</td>
-							<td><label>工资银行：</label>农业银行</td>
-							<td><label>银行卡号：</label>420624195421521252</td>
+							<td><label>是否住宿：</label>{$info.is_stay_name}</td>
+							<td><label>工资银行：</label>{$info.bank_name}</td>
+							<td><label>银行卡号：</label>{$info.back_card}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -69,12 +69,12 @@
 				<table class="auntTab">
 					<tbody>
 						<tr>
-							<td width="47%"><label>学员来历：</label>渠道</td>
-							<td width="53%"><label>招生对接人：</label>曾军</td>
+							<td width="47%"><label>学员来历：</label>{$info.come}</td>
+							<td width="53%"><label>招生对接人：</label>{$info.pick_name}</td>
 						</tr>
 						<tr>
-							<td width="47%"><label>报道时间：</label>2016-02-02</td>
-							<td width="53%"><label>预估学时：</label>20天</td>
+							<td width="47%"><label>报道时间：</label>{$info.come_time}</td>
+							<td width="53%"><label>预估学时：</label>{$info.study_day}天</td>
 						</tr>
 					</tbody>
 				</table>
@@ -85,8 +85,8 @@
 				<table class="auntTab">
 					<tbody>
 						<tr>
-							<td width="47%"><label>家庭住址：</label>成都市高新区环球中心E1-18楼</td>
-							<td width="53%"><label>现居住地：</label>成都市高新区环球中心E1-18楼</td>
+							<td width="47%"><label>家庭住址：</label>{$info.family_address}</td>
+							<td width="53%"><label>现居住地：</label>{$info.new_address}</td>
 						</tr>
 						
 						<tr>
@@ -100,13 +100,35 @@
 											<td width="17%">联系方式</td>
 											<td width="32%">现居地</td>
 										</tr>
-										<tr>
-											<td>李翰宇</td>
-											<td>2016-07-15</td>
-											<td>李翰宇</td>
-											<td>18883238989</td>
-											<td>成都市高新区环球中心E1-18楼</td>
-										</tr>
+										<if condition="$info['family_1_a'][0] neq ' ' OR $info['family_1_a'][5] eq 1">
+											<tr>
+												<td><if condition="$info['family_1_a'][5] eq 1"><span style="color: red;float: left;">紧</span></if>{$info['family_1_a'][0]}</td>
+												<td>{$info['family_1_a'][1]}</td>
+												<td>{$info['family_1_a'][2]}</td>
+												<td>{$info['family_1_a'][3]}</td>
+												<td>{$info['family_1_a'][4]}</td>
+											</tr>
+										</if>
+
+										<if condition="$info['family_2_a'][0] neq ' ' OR $info['family_2_a'][5] eq 1">
+											<tr>
+												<td><if condition="$info['family_2_a'][5] eq 1"><span style="color: red;float: left;">紧</span></if>{$info['family_2_a'][0]}</td>
+												<td>{$info['family_2_a'][1]}</td>
+												<td>{$info['family_2_a'][2]}</td>
+												<td>{$info['family_2_a'][3]}</td>
+												<td>{$info['family_2_a'][4]}</td>
+											</tr>
+										</if>
+
+										<if condition="$info['family_3_a'][0] neq ' ' OR $info['family_3_a'][5] eq 1">
+											<tr>
+												<td><if condition="$info['family_3_a'][5] eq 1"><span style="color: red;float: left;">紧</span></if>{$info['family_3_a'][0]}</td>
+												<td>{$info['family_3_a'][1]}</td>
+												<td>{$info['family_3_a'][2]}</td>
+												<td>{$info['family_3_a'][3]}</td>
+												<td>{$info['family_3_a'][4]}</td>
+											</tr>
+										</if>
 										
 									</tbody>
 								</table>
@@ -122,28 +144,28 @@
 				<table class="auntTab">
 					<tbody>
 						<tr>
-							<td width="47%"><label>婚姻情况：</label>已婚已育</td>
-							<td width="53%"><label>带孩子：</label>20个</td>
+							<td width="47%"><label>婚姻情况：</label>{$info.marrige}</td>
+							<td width="53%"><label>带孩子：</label>{$info.baby_take}个</td>
 						</tr>
 						
 						<tr>
 							<td colspan="2"><label>个人签名：</label>
-								<div class="rtdiv">哈哈哈哈健身房地方就肯定是分看电视就浪费空间的顺口溜分开了的思</div>
+								<div class="rtdiv">{$info.sign}</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><label>曾接受过的职业培训项目：</label>
-								<div class="rtdiv">技能1&nbsp;&nbsp;技能2&nbsp;&nbsp;技能3&nbsp;&nbsp;</div>
+								<div class="rtdiv">{$info.order_train}</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><label>擅长菜系：</label>
-								<div class="rtdiv">川菜&nbsp;&nbsp;嘻嘻菜&nbsp;&nbsp;嘻嘻菜&nbsp;&nbsp;</div>
+								<div class="rtdiv">{$info.good_cuisine_str}</div>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><label>擅长口味：</label>
-								<div class="rtdiv">川菜&nbsp;&nbsp;嘻嘻菜&nbsp;&nbsp;嘻嘻菜&nbsp;&nbsp;</div>
+								<div class="rtdiv">{$info.good_flavor_str}</div>
 							</td>
 						</tr>
 					</tbody>
@@ -165,13 +187,35 @@
 											<td width="17%">薪酬</td>
 											<td width="32%">工作内容</td>
 										</tr>
-										<tr>
-											<td>2016-07至2016-07</td>
-											<td>环球中心</td>
-											<td>月嫂</td>
-											<td>5K</td>
-											<td>月嫂</td>
-										</tr>
+										<if condition="$info['experience_own1_a'][4] neq ' '">
+											<tr>
+												<td>{$info['experience_own1_a'][0]}-{$info['experience_own1_a'][1]}至{$info['experience_own1_a'][2]}-{$info['experience_own1_a'][3]}</td>
+												<td>{$info['experience_own1_a'][4]}</td>
+												<td>{$info['experience_own1_a'][5]}</td>
+												<td>{$info['experience_own1_a'][6]}</td>
+												<td>{$info['experience_own1_a'][7]}</td>
+											</tr>
+										</if>
+
+										<if condition="$info['experience_own2_a'][4] neq ' '">
+											<tr>
+												<td>{$info['experience_own2_a'][0]}-{$info['experience_own2_a'][1]}至{$info['experience_own2_a'][2]}-{$info['experience_own2_a'][3]}</td>
+												<td>{$info['experience_own2_a'][4]}</td>
+												<td>{$info['experience_own2_a'][5]}</td>
+												<td>{$info['experience_own2_a'][6]}</td>
+												<td>{$info['experience_own2_a'][7]}</td>
+											</tr>
+										</if>
+
+										<if condition="$info['experience_own3_a'][4] neq ' '">
+											<tr>
+												<td>{$info['experience_own3_a'][0]}-{$info['experience_own3_a'][1]}至{$info['experience_own3_a'][2]}-{$info['experience_own3_a'][3]}</td>
+												<td>{$info['experience_own3_a'][4]}</td>
+												<td>{$info['experience_own3_a'][5]}</td>
+												<td>{$info['experience_own3_a'][6]}</td>
+												<td>{$info['experience_own3_a'][7]}</td>
+											</tr>
+										</if>
 										
 									</tbody>
 								</table>
@@ -186,48 +230,50 @@
 				</div>
 				<table class="auntTab pictures">
 					<tbody>
-						<tr>
-							<td><label>生活照：</label>
-								<div class="rtdiv">
-									<ul class="certificate clear">
-										<li><img src="../img/user_img.jpg"/></li>
-										<li><img src="../img/user_img.jpg"/></li>
-									</ul>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>身份证扫描件：</label>
-								<div class="rtdiv">
-									<ul class="certificate clear">
-										<li><img src="../img/user_img.jpg"/></li>
-									</ul>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>体检报告：</label>
-								<div class="rtdiv">
-									<ul class="certificate clear">
-										<li><img src="../img/user_img.jpg"/></li>
-									</ul>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><label>其他资料：</label>
-								<div class="rtdiv">
-									<ul class="certificate clear">
-										<li><img src="../img/user_img.jpg"/></li>
-										<li><img src="../img/erweima.jpg"/></li>
-									</ul>
-								</div>
-							</td>
-						</tr>
+					<tr>
+						<td><label>生活照：</label>
+							<div class="rtdiv">
+								<ul class="certificate clear">
+									<li><img src="__UPLOADS__{$info.life_img1}"/></li>
+									<li><img src="__UPLOADS__{$info.life_img2}"/></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><label>身份证扫描件：</label>
+							<div class="rtdiv">
+								<ul class="certificate clear">
+									<li><img src="__UPLOADS__{$info.id_img}"/></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><label>体检报告：</label>
+							<div class="rtdiv">
+								<ul class="certificate clear">
+									<li><img src="__UPLOADS__{$info.test_img}"/></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><label>其他资料：</label>
+							<div class="rtdiv">
+								<ul class="certificate clear">
+									<volist name="info.imgs_a" id="vo">
+										<li><img src="__UPLOADS__{$vo}"/></li>
+									</volist>
+
+								</ul>
+							</div>
+						</td>
+					</tr>
 					</tbody>
 				</table>
 				<div class="form-group">
-					<input type="button" class="default_btn m_left_20" onclick="location.href='changeStudentInfo.html'" value="修改"/>
+					<input type="button" class="default_btn m_left_20" onclick="location.href='__MODULE__/Student/changeStudent/id/{$info.id}.html'" value="修改"/>
 					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
 				</div>
 			</div> 
