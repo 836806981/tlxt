@@ -109,7 +109,7 @@ $.extend({
                         }else if(item.status==0&&backdata.session_per==24&&item.permission!=24){
                             var set_status = '<a onclick="'+confirm2+'" href="'+MODULE+'/User/set_status_1/id/'+item.id+'.html">启用</a>';
                         }
-                        if(backdata.session_per==11&&item.permission!=24){
+                        if(backdata.session_per==24&&item.permission!=24){
                             var del_employee = '<a onclick="'+confirm3+'" href="'+MODULE+'/User/del_user/id/'+item.id+'.html">删除</a>\
                                 <a onclick="'+confirm4+'" href="'+MODULE+'/User/resetPwd/id/'+item.id+'.html">重置密码</a>';
                         }else{
