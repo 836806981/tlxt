@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[田螺阿姨]后台</title>
+
+
+</head>
+
+<body>
+<!--top-->
+<include file="Nav/header"/>
+<!--left end-->
+<script>
+	$('.left_menu li').eq(7).addClass('called');
+</script>
+<!--main-->
+<div class="col-md-10 main">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="__MODULE__/Hold/holdList.html">保险购买列表</a>
+		</li>
+	</ul>
+	<div class="form-inline">
+		<div class="form-group">
+			<label>订单编号</label><input type="text" class="form-control" id="order_number"/>
+		</div>
+		<div class="form-group">
+			<label>客户姓名</label><input type="text" class="form-control" id="order_name"/>
+		</div>
+		<div class="form-group">
+			<label>阿姨编号</label><input type="text" class="form-control" id="nurse_number"/>
+		</div>
+		<div class="form-group">
+			<label>阿姨姓名</label><input type="text" class="form-control" id="nurse_name"/>
+		</div>
+
+
+		<div class="form-group">
+			<button type="submit" class="subform" id="search">搜索</button>
+		</div>
+
+	</div>
+	<table class="tab_info">
+		<tbody>
+		<tr class="present_num">
+			<td colspan="14">
+				当前列表数据为：<span id="show_number_str"></span>条
+			</td>
+		</tr>
+		<tr class="info_name">
+			<td width="8%">订单编号</td>
+			<td width="8%">客户姓名</td>
+			<td width="8%">阿姨编号</td>
+			<td width="8%">阿姨姓名</td>
+			<td width="8%">上户时间</td>
+			<td width="8%">订单状态</td>
+			<td width="8%">推荐购买时间</td>
+			<td width="15%">操作</td>
+		</tr>
+		<!--<tr>-->
+		<!--<td>DD-00001</td>-->
+		<!--<td>月嫂</td>-->
+		<!--<td>2016-11-22</td>-->
+		<!--<td>李先生</td>-->
+		<!--<td>123123</td>-->
+		<!--<td>已签约</td>-->
+		<!--<td><a href="orderinfo.html">查看</a></td>-->
+		<!--</tr>-->
+		<tr class="last_tr">
+			<td colspan="14" class="clear">
+				<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+				</div>
+
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<script src="__PUBLIC__/js/safeList.js"></script>
+
+
+<script>
+
+	//				打回
+	$('.nurse_safe').live('click',function(){
+		var sub_str = "javascript:return window.confirm('确定购买？')";
+		var safe_id = $(this).attr('safe_id');
+		var nurse_name = $(this).attr('nurse_name');
+		layer.open({
+			type: 1,
+			title: '为'+nurse_name+'购买保险？',
+			area: ['auto', 'auto'], //宽高
+			content: '<div class="lay_cnt">'
+			+   '<form action="__MODULE__/Safe/addSafe" method="post" id="form_add" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+			+	'上传凭证：<div class="opn_div clear">'
+			+		'<input type="file" class="form-control" name="img" id="img"/>'
+			+		'<input type="hidden" name="id" value="'+safe_id+'" />'
+			+	'</div>'
+			+	'<div class="btn_div clear">'
+			+		'<button type="button" class="default_btn" id="sub_add">确认</button>'
+			+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+			+	'</div>'
+			+	'</form>'
+			+'</div>'
+		});
+	});
+
+
+
+	$('#sub_add').live('click',function(){
+		if($('#img').val() == ''){
+			layer.msg('请上传凭证！');
+			return false;
+		}
+		$('#form_add').submit();
+	});
+	$('.no_safe').live('click',function(){
+		var safe_id = $(this).attr('safe_id');
+		layer.confirm('确认不需要购买？', {
+			btn: ['确认','取消'] //按钮
+		}, function(){
+			window.location.href="__MODULE__/Safe/noSafe/id/"+safe_id+".html";
+		});
+	});
+
+	function close_lay(){
+		layer.closeAll();
+	}
+</script>
+<!--main end-->
+
+</body>
+
+</html>

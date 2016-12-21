@@ -37,7 +37,7 @@
 							<td width="53%"><label>招生对接人：</label>
 								<select class="form-control" name="pick_name">
 							        <option>曾军</option>
-							        <!--<option>廖薇</option>-->
+							        <option>张群华</option>
 							    </select>
 							</td>
 						</tr>
@@ -61,7 +61,7 @@
 						<td><label>头像：</label>
 							<div class="rtdiv">
 								<div class="shangchuan">
-									<input type="file" class="filesbtn" name="title_img" id="title_img">
+									<input type="file" class="filesbtn" name="title_img" id="title_img" title="上传图片"/>
 								</div>
 							</div>
 						</td>
@@ -70,8 +70,8 @@
 						<td><label>生活照：</label>
 							<div class="rtdiv">
 								<div class="shangchuan">
-									<input type="file" class="filesbtn"  name="life_img1" id="life_img1">&nbsp;&nbsp;
-									<input type="file" class="filesbtn"  name="life_img2" id="life_img2">
+									<input type="file" class="filesbtn"  name="life_img1" id="life_img1" title="上传图片"/>&nbsp;&nbsp;
+									<input type="file" class="filesbtn"  name="life_img2" id="life_img2" title="上传图片"/>
 								</div>
 							</div>
 						</td>
@@ -80,7 +80,7 @@
 						<td><label>身份证扫描件：</label>
 							<div class="rtdiv">
 								<div class="shangchuan">
-									<input type="file" class="filesbtn"  name="id_img" id="id_img">
+									<input type="file" class="filesbtn"  name="id_img" id="id_img" title="上传图片"/>
 								</div>
 							</div>
 						</td>
@@ -89,7 +89,7 @@
 						<td><label>体检报告：</label>
 							<div class="rtdiv">
 								<div class="shangchuan">
-									<input type="file" class="filesbtn"  name="test_img" id="test_img">
+									<input type="file" class="filesbtn"  name="test_img" id="test_img" title="上传图片或pdf"/>
 								</div>
 							</div>
 						</td>
@@ -107,7 +107,7 @@
 						<td><label>其他资料：</label>
 							<div class="rtdiv">
 								<div class="shangchuan">
-									<input type="file" class="filesbtn"  name="imgs[]" >
+									<input type="file" class="filesbtn"  name="imgs[]" title="上传图片"/>
 								</div>
 								<input class="btnform magrin0 add_btn" type="button" value="+&nbsp;新增"/>
 							</div>
@@ -409,99 +409,89 @@
 						layer.msg('请输入姓名！');
 						return false;
 					}
-					if($('#title_img').val() == '' || $('#life_img1').val() == '' || $('#life_img2').val() == '' || $('#id_img').val() == '' ){
-						layer.msg('请上传图片！');
-						return false;
-					}
-					if($('#id_card').val() == ''){
-						layer.msg('请输入身份证！');
-						return false;
-					}
-					if($('#birth_day').val() == ''){
-						layer.msg('请输入出生日期！');
-						return false;
-					}
-					if($('#phone').val() == ''){
-						layer.msg('联系方式！');
-						return false;
-					}
-					if($('#weight').val() == ''){
-						layer.msg('请输入体重！');
-						return false;
-					}
-					if($('#height').val() == ''){
-						layer.msg('请输入身高！');
-						return false;
-					}
-					if($('#native_place').val() == ''){
-						layer.msg('请输入籍贯！');
-						return false;
-					}
-					if($('#work_time').val() == ''){
-						layer.msg('请输入从业时间！');
-						return false;
-					}
-					if($('#up_work').val() == ''){
-						layer.msg('请输入上一份工作！');
-						return false;
-					}
-					if($('#bank_name').val() == ''&&$('#back_card').val() == ''){
-						layer.msg('请输入银行卡信息！');
-						return false;
-					}
-					if($('#training_school').val() == ''){
-						layer.msg('请输入培训学校！');
-						return false;
-					}
-					if($('#agreement_type').val() == 3 && $('#price').val() == '' ){
-						layer.msg('请输入定薪工资！');
-						return false;
-					}
-//					if($('#skills1').val() == '' || $('#skills2').val() == '' || $('#skills3').val() == '' || $('#skills4').val() == '' || $('#skills5').val() == '' || $('#skills6').val() == '' || $('#skills7').val() == '' || $('#skills8').val() == '' || $('#skills9').val() == '' || $('#skills10').val() == '' || $('#skills11').val() == ''){
-//						layer.msg('请输入技能评估分！');
+////					if($('#title_img').val() == '' || $('#life_img1').val() == '' || $('#life_img2').val() == '' || $('#id_img').val() == '' ){
+////						layer.msg('请上传图片！');
+////						return false;
+////					}
+//					if($('#id_card').val() == ''){
+//						layer.msg('请输入身份证！');
 //						return false;
 //					}
-					if($('#experience').val() == ''){
-						layer.msg('请输入从业经历！');
-						return false;
-					}
-					if($('#family_address').val() == ''){
-						layer.msg('请输入家庭住址！');
-						return false;
-					}
-					if($('#new_address').val() == ''){
-						layer.msg('请输入现居地！');
-						return false;
-					}
-					if($('#baby_take').val() == ''){
-						layer.msg('请输入带孩子数！');
-						return false;
-					}
-					if($('#sign').val() == ''){
-						layer.msg('请输入签名！');
-						return false;
-					}
-//					if($('#teacher_remark').val() == ''){
-//						layer.msg('请输入老师评语！');
+//					if($('#birth_day').val() == ''){
+//						layer.msg('请输入出生日期！');
 //						return false;
 //					}
+//					if($('#phone').val() == ''){
+//						layer.msg('联系方式！');
+//						return false;
+//					}
+//					if($('#weight').val() == ''){
+//						layer.msg('请输入体重！');
+//						return false;
+//					}
+//					if($('#height').val() == ''){
+//						layer.msg('请输入身高！');
+//						return false;
+//					}
+//					if($('#native_place').val() == ''){
+//						layer.msg('请输入籍贯！');
+//						return false;
+//					}
+//					if($('#work_time').val() == ''){
+//						layer.msg('请输入从业时间！');
+//						return false;
+//					}
+//					if($('#up_work').val() == ''){
+//						layer.msg('请输入上一份工作！');
+//						return false;
+//					}
+//					if($('#bank_name').val() == ''&&$('#back_card').val() == ''){
+//						layer.msg('请输入银行卡信息！');
+//						return false;
+//					}
+//					if($('#training_school').val() == ''){
+//						layer.msg('请输入培训学校！');
+//						return false;
+//					}
+//					if($('#agreement_type').val() == 3 && $('#price').val() == '' ){
+//						layer.msg('请输入定薪工资！');
+//						return false;
+//					}
+////					if($('#skills1').val() == '' || $('#skills2').val() == '' || $('#skills3').val() == '' || $('#skills4').val() == '' || $('#skills5').val() == '' || $('#skills6').val() == '' || $('#skills7').val() == '' || $('#skills8').val() == '' || $('#skills9').val() == '' || $('#skills10').val() == '' || $('#skills11').val() == ''){
+////						layer.msg('请输入技能评估分！');
+////						return false;
+////					}
+//					if($('#experience').val() == ''){
+//						layer.msg('请输入从业经历！');
+//						return false;
+//					}
+//					if($('#family_address').val() == ''){
+//						layer.msg('请输入家庭住址！');
+//						return false;
+//					}
+//					if($('#new_address').val() == ''){
+//						layer.msg('请输入现居地！');
+//						return false;
+//					}
+//					if($('#baby_take').val() == ''){
+//						layer.msg('请输入带孩子数！');
+//						return false;
+//					}
+//					if($('#sign').val() == ''){
+//						layer.msg('请输入签名！');
+//						return false;
+//					}
+////					if($('#teacher_remark').val() == ''){
+////						layer.msg('请输入老师评语！');
+////						return false;
+////					}
 
 					$('#form_add').submit();
 				});
 
 
-
-				$('.certificate>li>img').click(function(imgs){
-					imgs = $(this).attr('src');
-					layer.open({
-					  type: 1,
-					  title: false,
-					  area: ['auto', 'auto'],
-					  content: '<img src="'+imgs+'"/>'
-					});
-				});
 				$('.add_btn').live("click",function(){
-					var html = '<div class="shangchuan"><input type="file" class="filesbtn" name="imgs[]"><input class="del_btn" type="button" value="删除"/></div>';
+					var html = '<div class="shangchuan"><input type="file" class="filesbtn" name="imgs[]" title="上传图片"><input class="del_btn" type="button" value="删除"/></div>';
 					$(this).before(html);
 				});
 				$('.del_btn').live("click",function(){

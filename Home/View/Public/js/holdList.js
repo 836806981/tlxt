@@ -6,8 +6,7 @@ var Num_zcj=[];
 
 var number = $('#number').val();
 var status_6 = $('#status_6').val();
-var sales_id = $('#sales_id').val();
-var employee_id = $('#employee_id').val();
+var name = $('#name').val();
 var status = $('#status').val();
 
 
@@ -59,12 +58,11 @@ $.extend({
         $("#search").live("click", function () {
             number = $('#number').val();
             status_6 = $('#status_6').val();
-            sales_id = $('#sales_id').val();
-            employee_id = $('#employee_id').val();
+            name = $('#name').val();
             status = $('#status').val();
             reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
             if(!reg.test(status_6) && status_6){
-                layer.msg('请输入正确签单时间 格式：2016-01-01！');
+                layer.msg('请输入正确的签单时间 格式：2016-01-01！');
                 return false;
             }
             currentpage_zcj = 1;
@@ -79,7 +77,7 @@ $.extend({
 	//根据所有条件查询新闻列表
     getNewsListByAllTerm: function () {
         //异步提交数据,参数：currentpage,要查询的页码;pagenum，每页的条数
-        $.AjaxPost(MODULE+"/TakeNeed/getUpServiceList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,number:number,status_6:status_6,sales_id:sales_id,employee_id:employee_id,status:status}, function (backdata) {
+        $.AjaxPost(MODULE+"/Hold/getHoldList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,number:number,status_6:status_6,name:name,status:status}, function (backdata) {
             if (backdata.code == 1000) {
                 List_zcj = backdata.data.list;
                 Num_zcj = backdata.data.num;
@@ -93,18 +91,14 @@ $.extend({
                 if(List_zcj!=null){
                     $.each(List_zcj,function(i,item){
                         //未接单或者打回才能放回收站
-                        str +='	<tr class="data">\
+                        str +='<tr class="data">\
                         <td>'+item.number+'</td>\
-                        <td>'+item.source+'</td>\
                         <td>'+item.product+'</td>\
                         <td>'+item.status_6_str+'</td>\
-                        <td>'+item.add_employee+'</td>\
                         <td>'+item.name+'</td>\
-                        <td>'+item.sales_name+'</td>\
-                        <td>'+item.status_7_str+'</td>\
+                        <td>'+item.price_come+'</td>\
                         <td>'+item.status_name+'</td>\
-                        <td>'+item.is_service_name+'</td>\
-                        <td><a href="' + MODULE + '/TakeNeed/needInfo/id/' + item.id + '.html">查看</a></td>\
+                        <td><a href="'+MODULE+'/Hold/holdInfo/id/'+item.id+'.html">查看</a></td>\
                         </tr>';
                     });
                     $dom.before(str);

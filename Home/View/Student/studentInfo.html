@@ -234,8 +234,8 @@
 						<td><label>生活照：</label>
 							<div class="rtdiv">
 								<ul class="certificate clear">
-									<li><img src="__UPLOADS__{$info.life_img1}"/></li>
-									<li><img src="__UPLOADS__{$info.life_img2}"/></li>
+									<if condition="$info.life_img1 neq ''"><li><img src="__UPLOADS__{$info.life_img1}"/></li></if>
+									<if condition="$info.life_img2 neq ''"><li><img src="__UPLOADS__{$info.life_img2}"/></li></if>
 								</ul>
 							</div>
 						</td>
@@ -244,7 +244,7 @@
 						<td><label>身份证扫描件：</label>
 							<div class="rtdiv">
 								<ul class="certificate clear">
-									<li><img src="__UPLOADS__{$info.id_img}"/></li>
+									<if condition="$info.id_img neq ''"><li><img src="__UPLOADS__{$info.id_img}"/></li></if>
 								</ul>
 							</div>
 						</td>
@@ -253,7 +253,13 @@
 						<td><label>体检报告：</label>
 							<div class="rtdiv">
 								<ul class="certificate clear">
-									<li><img src="__UPLOADS__{$info.test_img}"/></li>
+									<if condition="$info.test_img neq ''">
+										<if condition="$info.test_img_pdf eq 1">
+											<li><button><a href="__MODULE__/Nurse/pdf/id/{$info.id}" target="_blank">查看pdf</a></button></li>
+											<else/>
+											<li><img src="__UPLOADS__/{$info.test_img}"/></li>
+										</if>
+									</if>
 								</ul>
 							</div>
 						</td>
@@ -263,7 +269,7 @@
 							<div class="rtdiv">
 								<ul class="certificate clear">
 									<volist name="info.imgs_a" id="vo">
-										<li><img src="__UPLOADS__{$vo}"/></li>
+										<if condition="$vo neq ''"><li><img src="__UPLOADS__{$vo}"/></li></if>
 									</volist>
 
 								</ul>
@@ -285,7 +291,7 @@
 					  type: 1,
 					  title: false,
 					  area: ['auto', 'auto'],
-					  content: '<img src="'+imgs+'"/>'
+						content: '<img src="'+imgs+'" class="layer_img"/>'
 					});
 				});
 			</script>

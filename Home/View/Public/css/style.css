@@ -910,3 +910,8 @@ h5{
 .pipei li>input[type=button]:hover{
 	background: red;
 }
+
+.layer_img{
+	max-height: 800px;
+	max-width: 1200px;
+}

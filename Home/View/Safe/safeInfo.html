@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+<!--top-->
+<include file="Nav/header"/>
+<!--left end-->
+<script>
+	$('.left_menu li').eq(7).addClass('called');
+</script>
+<!--main-->
+<div class="col-md-10 main">
+	<div class="tab_tle1">
+		阿姨保险购买情况
+	</div>
+	<div class="tab_tle">
+		<span class="int_s"></span>基本详情
+	</div>
+	<table class="auntTab">
+		<tbody>
+		<tr>
+			<td rowspan="6" width="21%">
+				<div class="aunt_img">
+					<img src="__UPLOADS__{$info.title_img}" />
+				</div>
+			</td>
+			<td width="26%"><label>编号：</label>{$info.number}</td>
+			<td width="26%"><label>姓名：</label>{$info.name}</td>
+			<td width="27%"><label>年龄：</label>{$info.age}</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<table class="auntTab">
+		<tbody>
+		购买保险情况：
+		<volist name="nurse_safe" id="vo">
+			<tr>
+				<td>
+					<div class="rtdiv">
+						<ul class="certificate clear">
+							<if condition="$info.zs_img neq ''"><li><img src="__UPLOADS__{$vo.img}"/></li></if>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</volist>
+
+		</tbody>
+	</table>
+
+
+	<div class="form-group">
+		<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
+	</div>
+</div>
+<!--main end-->
+<script>
+	$('.certificate>li>img').click(function(imgs){
+		imgs = $(this).attr('src');
+		layer.open({
+			type: 1,
+			title: false,
+			area: ['auto', 'auto'],
+			content: '<img src="'+imgs+'" class="layer_img"/>'
+		});
+	});
+</script>
+
+
+</body>
+
+</html>

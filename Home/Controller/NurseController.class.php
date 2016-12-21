@@ -194,16 +194,18 @@ class NurseController extends CommonController {
             if($_FILES['test_img']['tmp_name']) {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2145728;// 设置附件上传大小
-                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg','pdf');// 设置附件上传类型
                 $upload->savePath = '/nurse/test_img/';// 设置附件上传目录// 上传文件
                 $info = $upload->uploadOne($_FILES['test_img']);
                 if (!$info) {// 上传错误提示错误信息
                     $this->error($upload->getError());
                 } else {//上传成功 获取上传文件信息
                     $post['test_img']  = $info['savepath'] . $info['savename'];
-                    $img_s = $this->shuiyin($post['test_img']);
-                    if($img_s){
-                        $post['test_img'] = $img_s;
+                    if(!strstr($post['test_img'],'pdf')) {
+                        $img_s = $this->shuiyin($post['test_img']);
+                        if ($img_s) {
+                            $post['test_img'] = $img_s;
+                        }
                     }
                 }
             }
@@ -255,6 +257,8 @@ class NurseController extends CommonController {
                 $price_level = array_keys($level_name,$post['price_name']);
                 $post['price_level'] = $price_level[0];
                 $post['price'] = $price_arr[$post['price_level']];
+            }else{
+                $post['price_name'] = '三单合同';
             }
             //等级
             for($i=1;$i<=11;$i++){
@@ -422,20 +426,26 @@ class NurseController extends CommonController {
             if($_FILES['test_img']['tmp_name']) {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2145728;// 设置附件上传大小
-                $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->exts = array('jpg', 'gif', 'png', 'jpeg','pdf');// 设置附件上传类型
                 $upload->savePath = '/nurse/test_img/';// 设置附件上传目录// 上传文件
                 $info = $upload->uploadOne($_FILES['test_img']);
                 if (!$info) {// 上传错误提示错误信息
                     $this->error($upload->getError());
                 } else {//上传成功 获取上传文件信息
                     $post['test_img']  = $info['savepath'] . $info['savename'];
-                    $img_s = $this->shuiyin($post['test_img']);
-                    if($img_s){
-                        $post['test_img'] = $img_s;
+                    if(strstr($post['test_img'],'pdf')){
+                        $unlink[] = $nurse_info['test_img'];
+                        $del_s = explode('_s', $nurse_info['test_img']);
+                        $unlink[] = $del_s[0] . $del_s[1];
+                    }else {
+                        $img_s = $this->shuiyin($post['test_img']);
+                        if ($img_s) {
+                            $post['test_img'] = $img_s;
+                        }
+                        $unlink[] = $nurse_info['test_img'];
+                        $del_s = explode('_s', $nurse_info['test_img']);
+                        $unlink[] = $del_s[0] . $del_s[1];
                     }
-                    $unlink[] = $nurse_info['test_img'];
-                    $del_s = explode('_s',$nurse_info['test_img']);
-                    $unlink[] = $del_s[0].$del_s[1];
                 }
             }
             if($_FILES['zs_img']['tmp_name']) {
@@ -507,6 +517,8 @@ class NurseController extends CommonController {
                 $price_level = array_keys($level_name,$post['price_name']);
                 $post['price_level'] = $price_level[0];
                 $post['price'] = $price_arr[$post['price_level']];
+            }else{
+                $post['price_name'] = '三单合同';
             }
             //等级
             for($i=1;$i<=11;$i++){
@@ -602,11 +614,29 @@ class NurseController extends CommonController {
             $info['experience_own2_a'] = explode('||',$info['experience_own2']);
             $info['experience_own3_a'] = explode('||',$info['experience_own3']);
 
+            $info['test_img_pdf'] = 0;
+            if(strstr($info['test_img'],'pdf')){
+                $info['test_img_pdf'] = 1;
+            }
+
             $this->assign('info',$info);
             $this->display();
         }
     }
 
+    public function pdf(){
+        $id = I('get.id');
+        $test_img = M('nurse')->field('test_img')->where('id='.$id.'')->find();
+        if(!strstr($test_img['test_img'],'pdf')){
+            header('Content-type: application/jpg');
+            $file = 'http://xt.tianluoayi.com/Uploads' . $test_img['test_img'];
+            readfile($file);
+        }else {
+            header('Content-type: application/pdf');
+            $file = 'http://xt.tianluoayi.com/Uploads' . $test_img['test_img'];
+            readfile($file);
+        }
+    }
 
     //详情
     public function nurseInfo(){
@@ -659,6 +689,10 @@ class NurseController extends CommonController {
 
 
 
+        $info['test_img_pdf'] = 0;
+        if(strstr($info['test_img'],'pdf')){
+            $info['test_img_pdf'] = 1;
+        }
 
         $this->assign('info',$info);
         $this->display();

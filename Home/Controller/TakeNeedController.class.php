@@ -121,8 +121,8 @@ class TakeNeedController extends CommonController {
             if(time() - $v['status_1'] < 300){
                 $list[$k]['time_down'] = 300 - (time() - $v['status_1']);
             }
-            $list[$k]['status_1_str'] = $v['status_1']?date('Y-m-d H:i:s',$v['status_1']):0;
-            $list[$k]['status_2_str'] = $v['status_2']?date('Y-m-d H:i:s',$v['status_2']):0;
+            $list[$k]['status_6_str'] = $v['status_6']?date('Y-m-d H:i:s',$v['status_6']):'';
+            $list[$k]['status_7_str'] = $v['status_7']?date('Y-m-d H:i:s',$v['status_7']):'';
             $list[$k]['status_name'] = $status_name[$v['status']];
             $list[$k]['is_service_name'] = ($v['is_service']==1?'售后':'正常');
         }
@@ -204,6 +204,16 @@ class TakeNeedController extends CommonController {
                 $post['add_nurse_price'] = 0;
             }
             $post['number'] = 'DD-' . str_pad($post['order_id'], 6, 0, STR_PAD_LEFT);  //6位数不足补0
+
+            //判断需要催款
+            if($order_info['status']>=7&& $order_info['status']<=9){
+                $price_come = $order_info['price_come'];
+                $order_info['price_add']==1?($price_come+=$order_info['add_order_price']):'';
+                if($order_info['price_come_true']<$price_come){
+                    $post['is_press'] = 1;
+                }
+            }
+
             $save_mod = M('order')->where('id='.$post['order_id'].'')->save($post);
             $have_order = M('order_info')->where('order_id='.$post['order_id'].'')->find();
 
@@ -326,10 +336,26 @@ class TakeNeedController extends CommonController {
 
         $save_mod = M('order')->where('id='.$info['id'].'')->save($save);
         if($save_mod!==false){
-            $de = M('order_nurse')->where('order_id='.$info['id'].'')->delete();
-            if(!$de){
-                M('order_nurse')->where('order_id='.$info['id'].'')->delete();
+            $nurse_id_arr = M('order_nurse')->field('nurse_id')->where('order_id='.$info['id'].'')->select();
+            foreach($nurse_id_arr as $k=>$v){
+                //判断 阿姨是否还有匹配
+                $post['nurse_id'] = $v['nurse_id'];
+                $nurse = M('nurse')->field('status_sh')->where('id='.$post['nurse_id'].'')->find();
+                if($nurse['status_sh'] == 2){
+                    $have_status = M('order_nurse')->where('nurse_id='.$post['nurse_id'].' and status in(5,6)')->find();
+                    if(!$have_status||$have_status==''){
+                        $status_sh['status_sh'] = 1;
+                        M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
+                    }
+                }
+
             }
+
+            $de = M('order_nurse')->where('order_id='.$info['id'].' and is_service=0')->delete();
+            if(!$de){
+                M('order_nurse')->where('order_id='.$info['id'].' and is_service=0')->delete();
+            }
+
 
             echo "<script>alert('成功'); window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$info['id'].".html'</script>";
             exit;
@@ -354,8 +380,18 @@ class TakeNeedController extends CommonController {
             echo "<script>alert('操作异常！');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-        $de = M('order_nurse')->where('order_id=' . I('post.order_id') . ' and nurse_id=' . I('post.nurse_id') . '')->delete();
+        $de = M('order_nurse')->where('order_id=' . I('post.order_id') . ' and nurse_id=' . I('post.nurse_id') . ' and is_service=0')->delete();
         if($de){
+            //判断 阿姨是否还有匹配
+            $post['nurse_id'] = I('post.order_id');
+            $nurse = M('nurse')->field('status_sh')->where('id='.$post['nurse_id'].'')->find();
+            if($nurse['status_sh'] == 2){
+                $have_status = M('order_nurse')->where('nurse_id='.$post['nurse_id'].' and status in(5,6)')->find();
+                if(!$have_status||$have_status==''){
+                    $status_sh['status_sh'] = 1;
+                    M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
+                }
+            }
             $code = 1;
         }else{
             $code = 0;
@@ -391,26 +427,100 @@ class TakeNeedController extends CommonController {
 
         $post['status'] = 6 ;
         $post['status_6'] = time() ;
+        $post['s_time'] = date('Y-m-d',strtotime($post['b_time'])+$post['service_day']*86400);
 
-        M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->save($post);
-        M('order')->where('id=' .$post['order_id'] . '')->save($post);
-
-        M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id !=' . $post['nurse_id'] . '')->delete();
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $order_nurse_save = M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->save($post);
+        if($order_nurse_save==false){
+            M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->save($post);
+        }
+        $order_save = M('order')->where('id=' .$post['order_id'] . '')->save($post);
+        if($order_save==false){
+            M('order')->where('id=' .$post['order_id'] . '')->save($post);
+        }
+        $order_nurse_del = M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id !=' . $post['nurse_id'] . ' and is_service=0')->delete();
+        if(!$order_nurse_del){
+            M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id !=' . $post['nurse_id'] . '')->delete();
+        }
+        echo "<script>alert('签单成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
+        exit;
     }
 
+
+
+    //上户
+    public function status_7(){
+        $post = I('post.');
+
+        if (!($post['order_id']&&$post['nurse_id'])) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->find();
+        $order_info = M('order')->where('id=' .$post['order_id'] . '')->find();
+        if (!$info) {
+            echo "<script>alert('未匹配该阿姨！');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if ($order_info['status']!=6) {
+            echo "<script>alert('不是已签单状态，不能上户！');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+//        $where_nurse_do = 'status>5 and status<=8 and nurse_id='. $post['nurse_id'] .' and  (("'.$post['b_time'].'" <= IF(true_s_time!="",true_s_time,s_time) and "'.$post['b_time'].'">=IF(true_b_time!="" ,true_b_time , b_time)) OR ("'.$post['s_time'].'" >= IF(true_b_time!="" ,true_b_time , b_time) and "'.$post['s_time'].'" <=IF(true_s_time!="",true_s_time,s_time) ) OR ("'.$post['b_time'].'" <= IF(true_b_time!="" ,true_b_time , b_time) and "'.$post['s_time'].'" >= IF(true_s_time!="",true_s_time,s_time) )   )';
+//        $have = M('order_nurse')->where($where_nurse_do)->find();
+//        if($have){
+//            echo "<script>alert('阿姨档期冲突');window.onload=function(){window.history.go(-1);return false;}</script>";
+//            exit;
+//        }
+
+        $post['status'] = 7 ;
+        $post['status_7'] = time() ;
+
+
+        $post['s_time'] = date('Y-m-d',strtotime($post['true_b_time'])+$post['service_day']*86400);
+
+        $order_nurse_save = M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->save($post);
+        if($order_nurse_save==false){
+            M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->save($post);
+        }
+
+        //判断需要催款
+        $price_come = $order_info['price_come'];
+        $order_info['price_add']==1?($price_come+=$order_info['add_order_price']):'';
+        if($order_info['price_come_true']<$price_come){
+            $post['is_press'] = 1;
+        }
+
+        $order_save = M('order')->where('id=' .$post['order_id'] . '')->save($post);
+        if($order_save==false){
+            M('order')->where('id=' .$post['order_id'] . '')->save($post);
+        }
+
+        $nurse = M('nurse')->field('name,number')->where('id='.$post['nurse_id'].'')->find();
+        //保险提醒添加
+        $add['order_id'] = $post['order_id'];
+        $add['nurse_id'] = $post['nurse_id'];
+
+        $add['order_name'] = $order_info['name'];
+        $add['order_number'] = $order_info['number'];
+        $add['nurse_name'] = $nurse['name'];
+        $add['nurse_number'] = $nurse['number'];
+
+        $add['time'] = $post['time'];
+        $add['add_time'] = time();
+        $add['status'] = 1;
+        $safe_add = M('nurse_safe')->add($add);
+        if(!$safe_add){
+            M('nurse_safe')->add($add);
+        }
+
+        $save_nurse['status_sh'] = 3;
+        $save_nurse = M('nurse')->where('id='.$post['nurse_id'].'')->save($save_nurse);
+        if($save_nurse==false){
+            M('nurse')->where('id='.$post['nurse_id'].'')->save($save_nurse);
+        }
+        echo "<script>alert('上户成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
+        exit;
+    }
 
 
     //完善订单后详情
@@ -435,15 +545,167 @@ class TakeNeedController extends CommonController {
 
         $info['price_add_str'] = $info['price_add']==1?'有':'无';
 
-        $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img,nurse.number as nurse_number')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').'')->select();
-        $this->assign('order_nurse',$order_nurse);
+        $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img,nurse.number as nurse_number')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').'  and is_service=0')->select();
 
+        //售后
+        $is_service = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').' and is_service=1')->select();
+        $this->assign('is_service',$is_service);
+
+
+        if($info['status'] == 7){
+            $nurse = M('nurse')->where('id='.$order_nurse[0]['id'].'')->find();
+            $this->assign('nurse',$nurse);
+        }
+        $this->assign('order_nurse',$order_nurse);
         $this->assign('info',$info);
+        $this->assign('now',date('Y-m-d'));
+
+        $status_name = ['','已派单/待接单','已接单/待完善','已完善/待发单','已发单/待匹配','已匹配/待签约','已签约/待上户','已上户','已下户','已完结'];
+
+
+        $this->assign('status_name',$status_name);
         $this->display();
     }
 
+    //根据实际下户时间判断数据
+    public function sure_price(){
+        $post = I('post.');
+        $order = M('order')->where('id='.$post['order_id'].'')->find();
+        $nurse = M('nurse')->where('id='.$post['nurse_id'].'')->find();
+
+        $data['service_day'] = (strtotime($post['true_s_time']) - strtotime($order['true_b_time']))/86400 ;
+        if($data['service_day']<=0){
+            $data['code'] = 1001;
+            echo json_encode($data);
+            exit;
+        }
+        if($nurse['type'] == 1){
+            $price = ($data['service_day']>=15)?(300+ sprintf("%.2f", 3000/28 * ($data['service_day']-15))):$data['service_day']*20;
+        }elseif($nurse['type'] == 2){
+            if($nurse['agreement_type']==1){
+                $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
+                $price = 0;
+                $level = array_search($nurse['price'],$price_arr);
+                $day = $data['service_day'];
+                $number = ceil($day/26);//多少单
+                for($i=1;$i<=$number;$i++){
+                    $price +=   ($day-26>=0) ?  $price_arr[$level]  :  sprintf("%.2f", ($price_arr[$level]/26) * $day);
+                    $day = $day-26;
+                    $day = $day<0?0:$day;
+                    if($level<5) {
+                        $level++;
+                    }elseif($level>5&&$level<10){
+                        $level++;
+                    }elseif($level>10&&$level<15){
+                        $level++;
+                    }
+                }
+            }else{
+                $price = sprintf("%.2f", $nurse['price']/28 * ($data['service_day']));
+            }
+        }
+        $data['code'] = 1000;
+        $data['price'] = $price;
+        echo json_encode($data);
+        exit;
+    }
+
+    //下户或者售后
+    public function status_8(){
+        $post = I('post.');
+        if($post['true_s_time']==''||$post['nurse_id']==''||$post['order_id']==''||$post['nurse_pay']==''){
+            echo "<script>alert('数据异常，请重新提交！');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $order = M('order')->where('id='.$post['order_id'].'')->find();
+        $nurse = M('nurse')->where('id='.$post['nurse_id'].'')->find();
 
 
+
+
+        $data['service_day'] = (strtotime($post['true_s_time']) - strtotime($order['true_b_time']))/86400 ;
+        if($data['service_day']<=0){
+            echo "<script>alert('下户时间异常，请重新提交');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if($nurse['type'] == 1){
+            $price = ($data['service_day']>=15)?(300+ sprintf("%.2f", 3000/28 * ($data['service_day']-15))):$data['service_day']*20;
+        }elseif($nurse['type'] == 2){
+            if($nurse['agreement_type']==1){
+                $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
+                $price = 0;
+                $level = array_search($nurse['price'],$price_arr);
+                $day = $data['service_day'];
+                $number = ceil($day/26);//多少单
+                for($i=1;$i<=$number;$i++){
+                    $price +=   ($day-26>=0) ?  $price_arr[$level]  :  sprintf("%.2f", ($price_arr[$level]/26) * $day);
+                    $day = $day-26;
+                    $day = $day<0?0:$day;
+                    if($level<5) {
+                        $level++;
+                    }elseif($level>5&&$level<10){
+                        $level++;
+                    }elseif($level>10&&$level<15){
+                        $level++;
+                    }
+                }
+            }else{
+                $price = sprintf("%.2f", $nurse['price']/28 * ($data['service_day']));
+            }
+        }
+
+        $post['nurse_pay_do'] = $price;
+        $post['service_day'] = $data['service_day'];
+        $post['status_8'] = time();
+        $save_order_nurse = $post;
+        $save_order = $post;
+        $save_order_nurse['status'] = 8;
+        if($post['status']==8){
+
+        }else{
+            $save_order_nurse['is_service'] = 1;
+            $save_order['is_service'] = 1;
+            $save_order['true_b_time'] = '';
+            $save_order['true_s_time'] = '';
+            $save_order['service_day'] = $order['service_day'] - $day;
+            $save_order['status_4'] = time();
+            $save_order['status_5'] = '';
+            $save_order['status_6'] = '';
+            $save_order['status_7'] = '';
+        }
+
+
+
+        //售后数据处
+
+        $save_order_mod = M('order')->where('id='.$post['order_id'].'')->save($save_order);
+        if($save_order_mod==false){
+            M('order')->where('id='.$post['order_id'].'')->save($save_order);
+        }
+        $save_order_nurse_mod = M('order_nurse')->where('order_id='.$post['order_id'].' and nurse_id='.$post['nurse_id'].' and is_service=0')->save($save_order_nurse);
+        if($save_order_nurse_mod==false){
+            M('order_nurse')->where('order_id='.$post['order_id'].' and nurse_id='.$post['nurse_id'].' and is_service=0')->save($save_order_nurse);
+        }
+
+        //判断 阿姨是否还有匹配
+        $have_status = M('order_nurse')->where('nurse_id='.$post['nurse_id'].' and status in(5,6)')->find();
+        if(!$have_status||$have_status==''){
+            $status_sh['status_sh'] = 1;
+        }else{
+            $status_sh['status_sh'] = 2;
+        }
+        $save_nurse_mod = M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
+        if($save_nurse_mod==false){
+            M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
+        }
+
+
+        echo "<script>alert('成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
+        exit;
+
+
+
+    }
 
 
 }

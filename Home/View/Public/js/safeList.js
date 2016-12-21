@@ -4,11 +4,10 @@ var List_zcj=[];
 var Num_zcj=[];
 
 
-var number = $('#number').val();
-var status_6 = $('#status_6').val();
-var sales_id = $('#sales_id').val();
-var employee_id = $('#employee_id').val();
-var status = $('#status').val();
+var order_number = $('#order_number').val();
+var order_name = $('#order_name').val();
+var nurse_number = $('#nurse_number').val();
+var nurse_name = $('#nurse_name').val();
 
 
 $(function () {
@@ -57,16 +56,10 @@ $.extend({
 
         //搜索
         $("#search").live("click", function () {
-            number = $('#number').val();
-            status_6 = $('#status_6').val();
-            sales_id = $('#sales_id').val();
-            employee_id = $('#employee_id').val();
-            status = $('#status').val();
-            reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
-            if(!reg.test(status_6) && status_6){
-                layer.msg('请输入正确签单时间 格式：2016-01-01！');
-                return false;
-            }
+            order_number = $('#order_number').val();
+            order_name = $('#order_name').val();
+            nurse_number = $('#nurse_number').val();
+            nurse_name = $('#nurse_name').val();
             currentpage_zcj = 1;
             $.getNewsListByAllTerm();
         });
@@ -79,7 +72,7 @@ $.extend({
 	//根据所有条件查询新闻列表
     getNewsListByAllTerm: function () {
         //异步提交数据,参数：currentpage,要查询的页码;pagenum，每页的条数
-        $.AjaxPost(MODULE+"/TakeNeed/getUpServiceList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,number:number,status_6:status_6,sales_id:sales_id,employee_id:employee_id,status:status}, function (backdata) {
+        $.AjaxPost(MODULE+"/Safe/getSafeList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,order_number:order_number,order_name:order_name,nurse_number:nurse_number,nurse_name:nurse_name}, function (backdata) {
             if (backdata.code == 1000) {
                 List_zcj = backdata.data.list;
                 Num_zcj = backdata.data.num;
@@ -94,17 +87,14 @@ $.extend({
                     $.each(List_zcj,function(i,item){
                         //未接单或者打回才能放回收站
                         str +='	<tr class="data">\
-                        <td>'+item.number+'</td>\
-                        <td>'+item.source+'</td>\
-                        <td>'+item.product+'</td>\
+                        <td>'+item.order_number+'</td>\
+                        <td>'+item.order_name+'</td>\
+                        <td>'+item.nurse_number+'</td>\
+                        <td>'+item.nurse_name+'</td>\
                         <td>'+item.status_6_str+'</td>\
-                        <td>'+item.add_employee+'</td>\
-                        <td>'+item.name+'</td>\
-                        <td>'+item.sales_name+'</td>\
-                        <td>'+item.status_7_str+'</td>\
                         <td>'+item.status_name+'</td>\
-                        <td>'+item.is_service_name+'</td>\
-                        <td><a href="' + MODULE + '/TakeNeed/needInfo/id/' + item.id + '.html">查看</a></td>\
+                        <td>'+item.time+'</td>\
+                        <td><a class="nurse_safe" safe_id="' + item.id + '" nurse_name="'+item.nurse_name+'">购买</a> | <a class="no_safe" safe_id="' + item.id + '">不需要购买</a> | <a href="'+MODULE+'/Safe/nurseBuy/id/'+item.nurse_id+'.html">查看记录</a></td>\
                         </tr>';
                     });
                     $dom.before(str);

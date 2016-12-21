@@ -88,15 +88,22 @@ class MateController extends CommonController {
             $info['status_1_str'] = $info['status_1'] ? date('Y-m-d H:i:s', $info['status_1']) : 0;
             $info['status_2_str'] = $info['status_2'] ? date('Y-m-d H:i:s', $info['status_2']) : 0;
             $info['price_add_str'] = $info['price_add']==1?'有':'无';
-            $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').'')->select();
+            $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').' and is_service=0')->select();
+
+            $is_service = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').' and is_service=1')->select();
+            $this->assign('is_service',$is_service);
+
             $this->assign('order_nurse',$order_nurse);
             $this->assign('info',$info);
             $this->display();
         }else{
-            $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').'')->select();
+            $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').' and is_service=0')->select();
 
             $order_type_name = ['','','实习','非实习'];
             $info['order_type_name'] = $order_type_name[$info['order_type']];
+
+            $is_service = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').' and is_service=1')->select();
+            $this->assign('is_service',$is_service);
             $this->assign('order_nurse',$order_nurse);
             $this->assign('info',$info);
             $this->display('orderInfo_q');
@@ -124,13 +131,14 @@ class MateController extends CommonController {
             $where .= ' and type = '.$post['type'].'';
         }
 
+
         $list = M('nurse')->where($where)->order('add_time desc')->select();
 
         $status_sh_name = ['','未匹配','待上户','已上户'];
         $status_own_name = ['','暂不接单','等单中','私签中','外单中'];
         $type_name = ['','学员','阿姨'];
         foreach($list as $k=>$v){
-            $our_nurse = M('order_nurse')->field('id')->where('order_id='.$post['order_id'].' and nurse_id='.$v['id'].'')->find();// 是否选择了这个阿姨
+            $our_nurse = M('order_nurse')->field('id')->where('order_id='.$post['order_id'].' and nurse_id='.$v['id'].' and is_service=0')->find();// 是否选择了这个阿姨
             if($our_nurse){
                 $list[$k]['our_nurse'] = 1;
             }else{
@@ -157,7 +165,7 @@ class MateController extends CommonController {
     public function change_order_nurse(){
         $post = I('post.');
         if($post['action']==1){
-            $have = M('order_nurse')->field('id')->where('nurse_id='.$post['nurse_id'].' and order_id='.$post['order_id'].'')->find();
+            $have = M('order_nurse')->field('id')->where('nurse_id='.$post['nurse_id'].' and order_id='.$post['order_id'].' and is_service=0')->find();
             if($have){
                 $back['code'] = 1000;
                 echo json_encode($back);
@@ -173,20 +181,41 @@ class MateController extends CommonController {
             $add['nurse_price'] = $nurse_info['price'];
             $add['add_time'] = time();
             $add['status'] = 5;
+            $add['is_service'] = 0;
+
 
             unset($add['id']);
             unset($add['number']);
             unset($add['remark']);
             $add_mod =  M('order_nurse')->add($add);
             if($add_mod){
+
+                //判断 阿姨是否还有匹配
+                $post['nurse_id'] = I('post.order_id');
+                $nurse = M('nurse')->field('status_sh')->where('id='.$post['nurse_id'].'')->find();
+                if($nurse['status_sh'] == 1){
+                    $status_sh['status_sh'] = 2;
+                    M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
+                }
+
                 $back['code'] = 1000;
                 $back['data'] = $nurse_info;
                 echo json_encode($back);
                 exit;
             }
         }else{
-            $delete_mod = M('order_nurse')->field('id')->where('nurse_id='.$post['nurse_id'].' and order_id='.$post['order_id'].'')->delete();
+            $delete_mod = M('order_nurse')->where('nurse_id='.$post['nurse_id'].' and order_id='.$post['order_id'].' and is_service=0')->delete();
             if($delete_mod!==false){
+
+                //判断 阿姨是否还有匹配
+                $nurse = M('nurse')->field('status_sh')->where('id='.$post['nurse_id'].'')->find();
+                if($nurse['status_sh'] == 2){
+                    $have_status = M('order_nurse')->where('nurse_id='.$post['nurse_id'].' and status in(5,6)')->find();
+                    if(!$have_status||$have_status==''){
+                        $status_sh['status_sh'] = 1;
+                        M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
+                    }
+                }
                 $back['code'] = 1000;
                 $back['nurse_id'] = $post['nurse_id'];
                 echo json_encode($back);

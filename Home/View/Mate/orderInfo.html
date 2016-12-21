@@ -20,7 +20,7 @@
 <!--main-->
 <div class="col-md-10 main">
 	<div class="tab_tle1">
-		订单详情
+		订单详情 <if condition="$info.is_service eq 1"><span class="font-red">|售后|</span></if>
 	</div>
 	<div class="page">
 		<div class="tab_tle">
@@ -267,6 +267,23 @@
 			</tbody>
 		</table>
 	</div>
+
+	<if condition="$is_service[0]['id'] neq ''">
+		<div class="page">
+			<div class="tab_tle">
+				<span class="int_s"></span>售后阿姨
+			</div>
+			<ul class="pipei clear">
+				<volist name="is_service" id="vo">
+					<li >
+						<a href="__MODULE__/Nurse/nurseInfo/id/{$vo.id}.html"><img src="__UPLOADS__{$vo.title_img}" /></a>
+						<p>{$vo.nurse_name}</p>
+					</li>
+				</volist>
+			</ul>
+		</div>
+	</if>
+
 	<div class="page">
 		<div class="tab_tle">
 			<span class="int_s"></span>匹配列表
