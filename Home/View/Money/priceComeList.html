@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(8).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<ul class="nav nav-tabs">
+					<li <if condition="ACTION_NAME eq 'pressList'">class="active" </if>>
+					<a href="__MODULE__/Money/pressList.html">催款</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'priceComeList'">class="active" </if>>
+					<a href="__MODULE__/Money/priceComeList.html">收款</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'doneLIst'">class="active" </if>>
+					<a href="__MODULE__/Money/doneLIst.html">已完结</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'statement'">class="active" </if>>
+					<a href="__MODULE__/Money/statement.html">结算</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'financeList'">class="active" </if>>
+					<a href="__MODULE__/Money/financeList.html">财务审核</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'bossList'">class="active" </if>>
+					<a href="__MODULE__/Money/bossList.html">boss审核</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'giveList'">class="active" </if>>
+					<a href="__MODULE__/Money/giveList.html">工资发放</a>
+					</li>
+				</ul>
+				<div class="form-inline">
+					<div class="form-group">
+						 <label>需求编号</label><input type="text" class="form-control" id="number"/>
+					</div>
+					<div class="form-group">
+						 <label>客户姓名</label><input type="text" class="form-control" id="name"/>
+					</div>
+					<div class="form-group">
+						 <label>上户时间</label>
+						 <select class="form-control" id="time">
+						 	  <option value="0">全部</option>
+					          <option value="1">1-3天</option>
+					          <option value="3">3-7天</option>
+					          <option value="7">7-10天</option>
+					          <option value="10">10天以上</option>
+					     </select>
+					</div>
+					<div class="form-group">
+						 <label>顾问</label>
+						<select class="form-control" id="sales_id">
+							<option value="0">全部</option>
+							<volist name="gu" id="vo">
+								<option value="{$vo.id}">{$vo.real_name}</option>
+							</volist>
+						</select>
+					</div>
+					<div class="form-group">
+						 <button type="button" class="subform" id="search">搜索</button>
+					</div>
+					
+				</div>
+				<table class="tab_info">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								当前列表数据为：<span id="show_number_str"></span>条
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">订单编号</td>
+							<td width="8%">订单类型</td>
+							<td width="8%">订单状态</td>
+							<td width="8%">预计上户时间</td>
+							<td width="8%">实际上户时间</td>
+							<td width="8%">客户姓名</td>
+							<td width="8%">顾问</td>
+							<td width="8%">应收</td>
+							<td width="8%">实收</td>
+							<td width="15%">操作</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td>DD-00001</td>-->
+							<!--<td>月嫂</td>-->
+							<!--<td>已签约</td>-->
+							<!--<td>2016-11-22</td>-->
+							<!--<td>2016-11-22</td>-->
+							<!--<td>2天</td>-->
+							<!--<td>李先生</td>-->
+							<!--<td>李先生</td>-->
+							<!--<td>刘燃</td>-->
+							<!--<td><a href="neiqinOrder1.html">查看</a></td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<td>DD-00001</td>-->
+							<!--<td>渠道实习</td>-->
+							<!--<td>已签约</td>-->
+							<!--<td>2016-11-22</td>-->
+							<!--<td>2016-11-22</td>-->
+							<!--<td>2天</td>-->
+							<!--<td>李先生</td>-->
+							<!--<td>李先生</td>-->
+							<!--<td>刘燃</td>-->
+							<!--<td><a href="neiqinOrder2.html">查看</a></td>-->
+						<!--</tr>-->
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+								</div>
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<script src="__PUBLIC__/js/priceComeList.js"></script>
+			<!--main end-->
+			
+</body>
+
+</html>

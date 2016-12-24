@@ -177,6 +177,8 @@ class MateController extends CommonController {
             $add['nurse_name'] = $nurse_info['name'];
             $add['nurse_id'] = $nurse_info['id'];
             $add['order_id'] = $order_info['id'];
+            $add['order_number'] = $order_info['number'];
+            $add['nurse_number'] = $nurse_info['number'];
             $add['order_name'] = $order_info['name'];
             $add['nurse_price'] = $nurse_info['price'];
             $add['add_time'] = time();

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+
+
+</head>
+
+<body>
+			<!--top-->
+			<include file="Nav/header"/>
+			<script type="text/javascript" src="__PUBLIC__/js/toggle.js" ></script>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(8).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<div class="tab_tle1">
+					订单详情<span class="font-red">（{$status_name[$info['status']]} | 内勤）</span>
+					<if condition="$info.is_service eq 1"><span class="font-red">|售后|</span></if>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>订单信息
+					</div>
+					<table class="auntTab">
+						<tbody>
+						<tr>
+							<td width="33%"><label>需求编号：</label>{$info.number}</td>
+							<td width="33%"><label>派发人：</label>{$info.add_employee}</td>
+							<td width="33%"><label>派发对象：</label>{$info.sales_name}</td>
+						</tr>
+						<tr>
+							<td><label>派发时间：</label>{$info.status_1_str}</td>
+							<td><label>接单时间：</label>{$info.status_2_str}</td>
+							<td></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>客户需求
+					</div>
+					<table class="auntTab">
+						<tbody>
+						<tr>
+							<td width="33%"><label>客户称谓：</label>{$info.name}</td>
+							<td width="33%"><label>客户需求：</label>{$info.product}</td>
+							<td width="33%"><label>客户来源：</label>{$info.source}</td>
+						</tr>
+						<tr>
+							<td><label>手机：</label>{$info.phone}</td>
+							<td><label>微信：</label>{$info.wchat}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label>价格：</label>{$info.price_come}</td>
+							<td><label>服务时间：</label>{$info.b_time}</td>
+							<td><label>服务地点：</label>{$info.service_place}</td>
+						</tr>
+						<tr>
+							<td colspan="3"><label>备注：</label>
+								<div class="rtdiv">
+									{$info.remark}
+								</div>
+							</td>
+						</tr>
+						<if condition="$info.price_add eq 1">
+							<tr>
+								<td><label>阿姨加价：</label>{$info.add_nurse_price}</td>
+								<td><label>订单加价：</label>{$info.add_order_price}</td>
+							</tr>
+							<tr>
+								<td><label>加价原因：</label>{$info.add_reason}</td>
+							</tr>
+						</if>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>基本详情
+					</div>
+					<table class="auntTab">
+						<tbody>
+							<tr>
+								<td rowspan="6" width="22%">
+									<div class="aunt_img">
+										<img src="__UPLOADS__{$nurse.title_img}" />
+									</div>
+								</td>
+								<td width="39%"><label>阿姨姓名：</label>{$nurse.name}</td>
+								<td width="39%"><label>联系方式：</label>{$nurse.phone}</td>
+							</tr>
+							<tr>
+								<td><label>阿姨等级：</label>{$nurse.price_name}</td>
+								<td><label>阿姨来源：</label>{$nurse.come}</td>
+							</tr>
+							<tr>
+								<td><label>阿姨工资：</label>{$nurse.price}</td>
+								<td><label>身份证：</label>{$nurse.id_card}</td>
+							</tr>
+							<tr>
+								<td><label>开户银行：</label>{$nurse.bank_name}</td>
+								<td><label>银行卡号：</label>{$nurse.back_card}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div> 
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>收款信息
+					</div>
+					应收：{$info.price_come}<if condition="$info.price_add eq 1">+{$info.add_order_price}</if>  实收：{$info.price_come_true}
+					<table class="tab_info magrintop20 tab860">
+						<tbody>
+							<tr class="info_name">
+								<td width="17%">金额</td>
+								<td width="17%">收款时间</td>
+								<td width="32%">备注</td>
+							</tr>
+
+							<volist name="price_come" id="vo">
+								<tr>
+									<td>{$vo.price}</td>
+									<td>{$vo.time}</td>
+									<td>{$vo.remark}</td>
+								</tr>
+							</volist>
+							<!--<tr>-->
+								<!--<td>2017</td>-->
+								<!--<td>2016-07</td>-->
+								<!--<td>月嫂</td>-->
+							<!--</tr>-->
+							<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<div class="btn_modular">
+									<input type="button" class="btnform" onclick="shoukuan()" value="添加收款"/>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="page">
+					<div class="tab_tle">
+						<span class="int_s"></span>催款记录
+					</div>
+					<table class="tab_info tab860 magrintop20">
+						<tbody>
+							<tr class="info_name">
+								<!--<td width="17%">上户时间</td>-->
+								<!--<td width="17%">下户时间</td>-->
+								<td width="17%">催款时间</td>
+								<td width="32%">备注</td>
+							</tr>
+							<volist name="press" id="vo">
+								<tr>
+									<td>{$vo.time}</td>
+									<td>{$vo.remark}</td>
+								</tr>
+							</volist>
+							<!--<tr>-->
+								<!--<td>2016-07-11</td>-->
+								<!--<td>2016-07-11</td>-->
+								<!--<td>2016-07-11</td>-->
+								<!--<td>月嫂</td>-->
+							<!--</tr>-->
+							<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<div class="btn_modular">
+									<input type="button" class="btnform" onclick="cuikuan()" value="添加催款"/>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="form-group">
+					<if condition="$info.status eq 8 and $info.is_press eq 0">
+						<input type="button" class="default_btn" onclick="javascript:window.location.href='__MODULE__/Money/orderInfoToDone/id/{$info.id}.html'" value="完成订单">
+					</if>
+
+
+					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回">
+				</div>
+			</div> 
+			<!--main end-->
+			<script>
+//					保险购买 弹窗 暂时不用
+					function baoxian(){
+
+						layer.open({
+						  	type: 1,
+						  	title: '保险购买',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+									+   '<form>'
+									+	'<div class="opn_div clear">'
+									+		'<label>阿姨姓名：李博</label>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>身份证号：5456466445454564</label>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>购买建议：111</label>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>购买日期：</label><input type="text" class="form-control"/>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>到期日期：</label><input type="text" class="form-control">'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>保单凭证：</label><input type="file" class="filesbtn">'
+									+	'</div>'
+									+	'<div class="btn_div clear">'
+									+		'<button type="submit" class="default_btn">完成</button>'
+									+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+									+	'</div>'
+									+	'</form>'
+									+'</div>'
+						});
+					}
+
+
+//					添加收款 弹窗
+					function shoukuan(){
+
+						var sub_str = "javascript:return window.confirm('确认新增收款？')";
+						layer.open({
+						  	type: 1,
+						  	title: '添加收款',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+							+   '<form action="__MODULE__/Money/addPrice" method="post" id="form_addPrice" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+									+	'<div class="opn_div clear">'
+									+		'<label>收款金额：</label><input type="text" class="form-control" name="price" id="price"/>'
+									+		'<input type="hidden"  name="order_id" value="{$info.id}">'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>收款时间：</label><input type="text" class="form-control"  name="time" id="time">'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>备<i></i><i></i><i></i><i></i>注：</label><input type="text" class="form-control"  name="remark" id="remark">'
+									+	'</div>'
+									+	'<div class="btn_div clear">'
+									+		'<button type="button" class="default_btn" id="sub_addPrice">完成</button>'
+									+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+									+	'</div>'
+									+	'</form>'
+									+'</div>'
+						});
+					}
+					$('#sub_addPrice').live('click',function(){
+
+						var reg = /^(([0-9]|([1-9][0-9]{0,9}))((\.[0-9]{1,2})?))$/;
+						if(!reg.test($('#price').val())){
+							layer.msg('请输入正确的金额！');
+							return false;
+						}
+						if($('#time').val() == ''){
+							layer.msg('请输入收款时间！');
+							return false;
+						}
+
+						if($('#contact_people').val() == ''){
+							layer.msg('请输入维系人！');
+							return false;
+						}
+						if($('#remark').val() == ''){
+							layer.msg('请输入备注！');
+							return false;
+						}
+
+						$('#form_addPrice').submit();
+					});
+
+
+
+//					添加催款 弹窗
+					function cuikuan(){
+						var sub_str = "javascript:return window.confirm('确认新增催款？')";
+						layer.open({
+						  	type: 1,
+						  	title: '添加催款',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+							+   '<form action="__MODULE__/Money/addPress" method="post" id="form_addPress" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+									+	'<div class="opn_div clear">'
+									+		'<label>催款时间：</label><input type="text" class="form-control" name="time" id="time_c">'
+									+		'<input type="hidden"  name="order_id" value="{$info.id}">'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>备<i></i><i></i><i></i><i></i>注：</label><input type="text" class="form-control" name="remark" id="remark_c">'
+									+	'</div>'
+									+	'<div class="btn_div clear">'
+									+		'<button type="button" class="default_btn" id="sub_addPress">完成</button>'
+									+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+									+	'</div>'
+									+	'</form>'
+									+'</div>'
+						});
+					}
+
+				$('#sub_addPress').live('click',function(){
+
+					var reg = /^(([0-9]|([1-9][0-9]{0,9}))((\.[0-9]{1,2})?))$/;
+					if($('#time_c').val() == ''){
+						layer.msg('请输入催款时间！');
+						return false;
+					}
+					if($('#remark_c').val() == ''){
+						layer.msg('请输入备注！');
+						return false;
+					}
+
+					$('#form_addPress').submit();
+				});
+					function close_lay(){
+						layer.closeAll();
+					}
+			</script>
+</body>
+
+</html>

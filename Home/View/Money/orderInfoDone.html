@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>[田螺阿姨]后台</title>
+
+
+
+</head>
+
+<body>
+<!--top-->
+<include file="Nav/header"/>
+<script type="text/javascript" src="__PUBLIC__/js/toggle.js" ></script>
+<!--left end-->
+<script>
+	$('.left_menu li').eq(8).addClass('called');
+</script>
+<!--main-->
+<div class="col-md-10 main">
+	<div class="tab_tle1">
+		订单详情<span class="font-red">（内勤）</span>
+	</div>
+	<div class="page">
+		<div class="tab_tle">
+			<span class="int_s"></span>订单信息
+		</div>
+		<table class="auntTab">
+			<tbody>
+			<tr>
+				<td width="33%"><label>需求编号：</label>{$info.number}</td>
+				<td width="33%"><label>派发人：</label>{$info.add_employee}</td>
+				<td width="33%"><label>派发对象：</label>{$info.sales_name}</td>
+			</tr>
+			<tr>
+				<td><label>派发时间：</label>{$info.status_1_str}</td>
+				<td><label>接单时间：</label>{$info.status_2_str}</td>
+				<td></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="page">
+		<div class="tab_tle">
+			<span class="int_s"></span>客户需求
+		</div>
+		<table class="auntTab">
+			<tbody>
+			<tr>
+				<td width="33%"><label>客户称谓：</label>{$info.name}</td>
+				<td width="33%"><label>客户需求：</label>{$info.product}</td>
+				<td width="33%"><label>客户来源：</label>{$info.source}</td>
+			</tr>
+			<tr>
+				<td><label>手机：</label>{$info.phone}</td>
+				<td><label>微信：</label>{$info.wchat}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label>价格：</label>{$info.price_come}</td>
+				<td><label>服务时间：</label>{$info.b_time}</td>
+				<td><label>服务地点：</label>{$info.service_place}</td>
+			</tr>
+			<tr>
+				<td colspan="3"><label>备注：</label>
+					<div class="rtdiv">
+						{$info.remark}
+					</div>
+				</td>
+			</tr>
+			<if condition="$info.price_add eq 1">
+				<tr>
+					<td><label>阿姨加价：</label>{$info.add_nurse_price}</td>
+					<td><label>订单加价：</label>{$info.add_order_price}</td>
+				</tr>
+				<tr>
+					<td><label>加价原因：</label>{$info.add_reason}</td>
+				</tr>
+			</if>
+			</tbody>
+		</table>
+	</div>
+	<div class="page">
+		<div class="tab_tle">
+			<span class="int_s"></span>基本详情
+		</div>
+		<table class="auntTab">
+			<tbody>
+			<tr>
+				<td rowspan="6" width="22%">
+					<div class="aunt_img">
+						<img src="__UPLOADS__{$nurse.title_img}" />
+					</div>
+				</td>
+				<td width="39%"><label>阿姨姓名：</label>{$nurse.name}</td>
+				<td width="39%"><label>联系方式：</label>{$nurse.phone}</td>
+			</tr>
+			<tr>
+				<td><label>阿姨等级：</label>{$nurse.price_name}</td>
+				<td><label>阿姨来源：</label>{$nurse.come}</td>
+			</tr>
+			<tr>
+				<td><label>阿姨工资：</label>{$nurse.price}</td>
+				<td><label>身份证：</label>{$nurse.id_card}</td>
+			</tr>
+			<tr>
+				<td><label>开户银行：</label>{$nurse.bank_name}</td>
+				<td><label>银行卡号：</label>{$nurse.back_card}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="page">
+		<div class="tab_tle">
+			<span class="int_s"></span>收款信息
+		</div>
+		应收：{$info.price_come}<if condition="$info.price_add eq 1">+{$info.add_order_price}</if>  实收：{$info.price_come_true}
+		<table class="tab_info magrintop20 tab860">
+			<tbody>
+			<tr class="info_name">
+				<td width="17%">金额</td>
+				<td width="17%">收款时间</td>
+				<td width="32%">备注</td>
+			</tr>
+
+			<volist name="price_come" id="vo">
+				<tr>
+					<td>{$vo.price}</td>
+					<td>{$vo.time}</td>
+					<td>{$vo.remark}</td>
+				</tr>
+			</volist>
+			<!--<tr>-->
+			<!--<td>2017</td>-->
+			<!--<td>2016-07</td>-->
+			<!--<td>月嫂</td>-->
+			<!--</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<div class="page">
+		<div class="tab_tle">
+			<span class="int_s"></span>催款记录
+		</div>
+		<table class="tab_info tab860 magrintop20">
+			<tbody>
+			<tr class="info_name">
+				<!--<td width="17%">上户时间</td>-->
+				<!--<td width="17%">下户时间</td>-->
+				<td width="17%">催款时间</td>
+				<td width="32%">备注</td>
+			</tr>
+			<volist name="press" id="vo">
+				<tr>
+					<td>{$vo.time}</td>
+					<td>{$vo.remark}</td>
+				</tr>
+			</volist>
+			<!--<tr>-->
+			<!--<td>2016-07-11</td>-->
+			<!--<td>2016-07-11</td>-->
+			<!--<td>2016-07-11</td>-->
+			<!--<td>月嫂</td>-->
+			<!--</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<div class="form-group">
+
+
+		<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回">
+	</div>
+</div>
+<!--main end-->
+<script>
+	//					保险购买 弹窗 暂时不用
+
+</script>
+</body>
+
+</html>

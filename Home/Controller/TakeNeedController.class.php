@@ -441,6 +441,20 @@ class TakeNeedController extends CommonController {
         if(!$order_nurse_del){
             M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id !=' . $post['nurse_id'] . '')->delete();
         }
+
+        //非售后签单时生成收款记录
+        if($order_info['is_service']==0) {
+            $add_price_come['price'] = $post['price_come_true'];
+            $add_price_come['order_id'] = $post['order_id'];
+            $add_price_come['time'] = date('Y-m-d');
+            $add_price_come['add_time'] = time();
+            $add_price_come['remark'] = '签单收款';
+            $price_add_mod = M('price_come')->add($add_price_come);
+            if (!$price_add_mod) {
+                M('price_come')->add($add_price_come);
+            }
+        }
+
         echo "<script>alert('签单成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
         exit;
     }
@@ -672,9 +686,10 @@ class TakeNeedController extends CommonController {
             $save_order['status_5'] = '';
             $save_order['status_6'] = '';
             $save_order['status_7'] = '';
+            $save_order['is_press'] = 0;
         }
 
-
+        $save_order_nurse['nurse_price'] = $nurse['price'];
 
         //售后数据处
 
@@ -693,6 +708,24 @@ class TakeNeedController extends CommonController {
             $status_sh['status_sh'] = 1;
         }else{
             $status_sh['status_sh'] = 2;
+        }
+        //判断下户。阿姨的升级操作
+        if($post['status']==8 && $nurse['agreement_type']==1&& $nurse['type']==2){
+            $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
+            $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
+            $level_up_number = $data['service_day']/26 + ($data['service_day']%26>=15?1:0);
+            if( $status_sh['price_level']<=5) {
+                $status_sh['price_level'] = $nurse['price_level'] + $level_up_number;
+                $status_sh['price_level'] = ($status_sh['price_level']>=5?5: $status_sh['price_level']);
+                $status_sh['price'] = $price_arr[$status_sh['price_level']];
+                $status_sh['price_name'] =$level_name[$status_sh['price_level']];
+            }elseif($status_sh['price_level']<=10){
+                $status_sh['price_level'] = $nurse['price_level'] + $level_up_number;
+                $status_sh['price_level'] = ($status_sh['price_level']>=10?10: $status_sh['price_level']);
+            }elseif($status_sh['price_level']<=15){
+                $status_sh['price_level'] = $nurse['price_level'] + $level_up_number;
+                $status_sh['price_level'] = ($status_sh['price_level']>=15?15: $status_sh['price_level']);
+            }
         }
         $save_nurse_mod = M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
         if($save_nurse_mod==false){

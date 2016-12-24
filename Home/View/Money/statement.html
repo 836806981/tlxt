@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[田螺阿姨]后台</title>
+
+</head>
+
+<body>
+			<!--top-->
+
+			<include file="Nav/header"/>
+			<!--left end-->
+			<script>
+				$('.left_menu li').eq(8).addClass('called');
+			</script>
+			<!--main-->
+			<div class="col-md-10 main">
+				<ul class="nav nav-tabs">
+					<li <if condition="ACTION_NAME eq 'pressList'">class="active" </if>>
+					<a href="__MODULE__/Money/pressList.html">催款</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'priceComeList'">class="active" </if>>
+					<a href="__MODULE__/Money/priceComeList.html">收款</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'doneLIst'">class="active" </if>>
+					<a href="__MODULE__/Money/doneLIst.html">已完结</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'statement'">class="active" </if>>
+					<a href="__MODULE__/Money/statement.html">结算</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'financeList'">class="active" </if>>
+					<a href="__MODULE__/Money/financeList.html">财务审核</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'bossList'">class="active" </if>>
+					<a href="__MODULE__/Money/bossList.html">boss审核</a>
+					</li>
+					<li <if condition="ACTION_NAME eq 'giveList'">class="active" </if>>
+					<a href="__MODULE__/Money/giveList.html">工资发放</a>
+					</li>
+				</ul>
+				<div class="form-inline">
+					<div class="form-group">
+						 <label>订单编号</label><input type="text" class="form-control" id="order_number"/>
+						<input type="hidden" value="{$belong}" id="belong"/>
+					</div>
+					<div class="form-group">
+						 <label>阿姨编号</label><input type="text" class="form-control" id="nurse_number"/>
+					</div>
+					<div class="form-group">
+						 <label>阿姨姓名</label><input type="text" class="form-control" id="nurse_name"/>
+					</div>
+					<div class="form-group">
+						<label>薪酬状态</label>
+						<select class="form-control" id="is_statement">
+					        <option value="0">全部</option>
+					        <option value="1">待结算</option>
+					        <option value="2">审核中</option>
+					        <option value="3">已结算</option>
+					    </select>
+					</div>
+					<div class="form-group">
+						 <button type="submit" class="subform" id="search">搜索</button>
+					</div>
+					
+				</div>
+				<table class="tab_info">
+					<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								当前列表数据为：<span id="show_number_str"></span>条
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">订单编号</td>
+							<td width="8%">订单属性</td>
+							<td width="8%">订单价格</td>
+							<td width="8%">订单薪酬</td>
+							<td width="8%">阿姨编号</td>
+							<td width="8%">阿姨姓名</td>
+							<td width="8%">属性</td>
+							<td width="8%">当前等级</td>
+							<td width="15%">操作</td>
+						</tr>
+						<!--<tr>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td><a onclick="wanchengDD()">2单</a></td>-->
+							<!--<td><a onclick="daijiesuan()">待结算</a></td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td><a onclick="wanchengDD()">2单</a></td>-->
+							<!--<td>审核中</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td></td>-->
+							<!--<td><a onclick="wanchengDD()">2单</a></td>-->
+							<!--<td>已结算</td>-->
+						<!--</tr>-->
+						<tr class="last_tr">
+							<td colspan="14" class="clear">
+								<div class="page" id="pagenum" style="margin:0 auto;width: 80%; text-align: left;display: inline-block;">
+
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<script src="__PUBLIC__/js/statement.js"></script>
+
+			<!--main end-->
+			<script>
+//					待结算  弹窗
+				$('.do_statement').live('click',function(){
+
+					var sub_str = "javascript:return window.confirm('确认结算？')";
+						layer.open({
+						  	type: 1,
+						  	title: '结算',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt">'
+									+	'<div class="opn_div clear">你确定'+$(this).attr('nurse_name')+'阿姨进行结算吗？</div>'
+									+	'<table class="auntTab magrin0" style="width:600px;">'
+									+		'<tbody>'
+									+			'<tr>'
+									+				'<td>订单编号：'+$(this).attr('order_number')+'</td>'
+									+				'<td>阿姨姓名：'+$(this).attr('nurse_name')+'</td>'
+									+				'<td>阿姨编号：'+$(this).attr('nurse_number')+'</td>'
+									+			'</tr>'
+									+			'<tr>'
+									+				'<td>订单价格：'+$(this).attr('product_price')+'</td>'
+									+				'<td>订单薪酬：'+$(this).attr('nurse_pay_do')+$(this).attr('price_add')+'</td>'
+									+				'<td>订单周期：'+$(this).attr('service_day')+'</td>'
+									+			'</tr>'
+									+			'<tr>'
+									+				'<td>上户时间：'+$(this).attr('true_b_time')+'</td>'
+									+				'<td>下户时间：'+$(this).attr('true_s_time')+'</td>'
+									+				'<td>状态：'+$(this).attr('status_name')+'</td>'
+									+			'</tr>'
+									+		'</tbody>'
+									+	'</table>'
+									+   '<form action="__MODULE__/Money/do_statement" method="post" id="form_statement" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+									+	'<div class="opn_div clear">'
+									+		'<label>客户评价：</label><input type="text" class="form-control" value="" name="appraise" id="appraise"/>'
+									+       '<input type="hidden"  value="'+$(this).attr('order_nurse_id')+'" name="id" />'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label><input type="button" class="default_btn" name="jiangli" value="给予奖励"/>&nbsp;&nbsp;<span>获得客户锦旗 奖励200元</span></label>'
+									+	'</div>'
+									+	'<div class="opn_div clear">'
+									+		'<label>实际薪资：</label><input type="text" class="form-control" value="'+$(this).attr('nurse_pay_do')+'" name="nurse_pay_do" id="nurse_pay_do"/>'
+									+	'</div>'
+									+	'<div class="btn_div clear">'
+									+		'<button type="button" class="default_btn" id="sub_statement">确定</button>'
+									+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+									+	'</div>'
+									+   '</form>'
+									+'</div>'
+						});
+						var jl ='<div class="jl">'	
+								+	'<div class="opn_div clear">'
+								+		'<label>奖励原因：<input type="checkbox" name="reward_reason1" value="获得客户表扬信"/>获得客户表扬信&nbsp;&nbsp;<input type="checkbox" name="reward_reason2" value="获得客户锦旗"/>获得客户锦旗</label>'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>上传证明文件：</label><input type="file" class="filesbtn" name="img" id="img">'
+								+	'</div>'
+								+	'<div class="opn_div clear">'
+								+		'<label>申请额度：</label><input type="text" class="form-control" value="" name="reward_price" id="reward_price"/>'
+								+	'</div>'
+								+'</div>'
+									
+						$('input[name=jiangli]').toggle(function(){
+							$(this).parents('.opn_div').after(jl);
+							$(this).val('取消奖励');
+						},function(){
+							$(this).val('给予奖励');
+							$('.jl').remove();
+						});
+
+				})
+				$('#sub_statement').live('click',function(){
+					var reg = /^(([0-9]|([1-9][0-9]{0,9}))((\.[0-9]{1,2})?))$/;
+					if(!reg.test($('#nurse_pay_do').val())){
+						layer.msg('请输入正确的薪资！');
+						return false;
+					}
+					if(!reg.test($('#reward_price').val())&&$('#reward_price').val()){
+						layer.msg('请输入正确的奖励额度！');
+						return false;
+					}
+					if($('#img').val() == ''){
+						layer.msg('请上传凭证！');
+						return false;
+					}
+
+					if($('#appraise').val() == ''){
+						layer.msg('请输入客户评价！');
+						return false;
+					}
+
+					$('#form_statement').submit();
+				});
+
+			//财务审核
+			$('.finance').live('click',function(){
+				var order_nurse_id = $(this).attr('order_nurse_id');
+				var nurse_name = $(this).attr('nurse_name');
+				layer.open({
+					type: 1,
+					title: '审核',
+					area: ['auto', 'auto'], //宽高
+					content: '<div class="lay_cnt">确认'+nurse_name+'的工资通过审核？'
+					+	'<div class="btn_div clear">'
+					+		'<a class="default_btn" href="__MODULE__/Money/finance/id/'+order_nurse_id+'.html">确定</a>'
+					+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+					+	'</div>'
+					+'</div>'
+				});
+
+			});
+		//财务再次审核
+		$('.finance_re').live('click',function(){
+			var order_nurse_id = $(this).attr('order_nurse_id');
+			var nurse_name = $(this).attr('nurse_name');
+			layer.open({
+				type: 1,
+				title: '审核',
+				area: ['auto', 'auto'], //宽高
+				content: '<div class="lay_cnt">确认'+nurse_name+'的工资通过审核？'
+				+	'<div class="btn_div clear">'
+				+		'<a class="default_btn" href="__MODULE__/Money/finance_re/id/'+order_nurse_id+'.html">确定</a>'
+				+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+				+	'</div>'
+				+'</div>'
+			});
+
+		});
+			//boss审核通过
+			$('.boss3').live('click',function(){
+				var order_nurse_id = $(this).attr('order_nurse_id');
+				var nurse_name = $(this).attr('nurse_name');
+				layer.open({
+					type: 1,
+					title: '审核',
+					area: ['auto', 'auto'], //宽高
+					content: '<div class="lay_cnt">确认'+nurse_name+'的工资通过审核？'
+					+	'<div class="btn_div clear">'
+					+		'<a class="default_btn" href="__MODULE__/Money/boss3/id/'+order_nurse_id+'.html">确定</a>'
+					+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+					+	'</div>'
+					+'</div>'
+				});
+
+			});
+
+			//boss审核不通过
+			$('.boss2').live('click',function(){
+				var order_nurse_id = $(this).attr('order_nurse_id');
+				var nurse_name = $(this).attr('nurse_name');
+				layer.open({
+					type: 1,
+					title: '审核',
+					area: ['auto', 'auto'], //宽高
+					content: '<div class="lay_cnt">确认'+nurse_name+'的工资不通过审核？'
+					+   '<form action="__MODULE__/Money/boss2" method="post" id="form_boss2"   enctype="multipart/form-data">'
+					+	'<div  class="opn_div clear">'
+					+		'<label>理由：</label><input type="text" name="no_through_reason" id="no_through_reason" class="form-control" value=""/>'
+					+		'<input type="hidden" name="order_nurse_id"  value="'+order_nurse_id+'"/>'
+					+	'</div>'
+					+	'<div class="btn_div clear">'
+					+		'<button type="button" class="default_btn" id="sub_boss2">完成</button>'
+					+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+					+	'</div>'
+					+	'</form>'
+					+'</div>'
+				});
+			});
+			$('#sub_boss2').live('click',function(){
+				if($('#no_through_reason').val() == ''){
+					layer.msg('请输入理由！');
+					return false;
+				}
+				$('#form_boss2').submit();
+			});
+
+			//发工资
+			$('.give').live('click',function(){
+				var order_nurse_id = $(this).attr('order_nurse_id');
+				var nurse_name = $(this).attr('nurse_name');
+				layer.open({
+					type: 1,
+					title: '审核',
+					area: ['auto', 'auto'], //宽高
+					content: '<div class="lay_cnt">'
+					+   '<form action="__MODULE__/Money/give" method="post" id="form_give"   enctype="multipart/form-data">'
+					+	'<div  class="opn_div clear">'
+					+		'<label>应发工资：</label>'+$(this).attr('nurse_pay_do')+$(this).attr('price_add')+$(this).attr('reward_price')+''
+					+	'</div>'
+					+	'<div  class="opn_div clear">'
+					+		'<label>实发工资：</label><input type="text" name="nurse_pay_true" id="nurse_pay_true" class="form-control" value=""/>'
+					+		'<input type="hidden" name="order_nurse_id"  value="'+order_nurse_id+'"/>'
+					+	'</div>'
+					+	'<div class="btn_div clear">'
+					+		'<button type="button" class="default_btn" id="sub_give">完成</button>'
+					+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+					+	'</div>'
+					+	'</form>'
+					+'</div>'
+				});
+			});
+			$('#sub_give').live('click',function(){
+				var reg = /^(([0-9]|([1-9][0-9]{0,9}))((\.[0-9]{1,2})?))$/;
+				if(!reg.test($('#nurse_pay_true').val())){
+					layer.msg('请输入正确的薪资！');
+					return false;
+				}
+				$('#form_give').submit();
+			});
+
+
+
+
+//					完成订单量  弹窗
+					function wanchengDD(){
+						layer.open({
+						  	type: 1,
+						  	title: '完成订单量',
+							area: ['auto', 'auto'], //宽高
+							content: '<div class="lay_cnt lay_cnt_max">'
+									+	'<table class="tab_info tab860">'
+									+	'<tbody>'
+									+		'<tr class="info_name">'
+									+			'<td width="12%">订单编号</td>'
+									+			'<td width="12%">订单性质</td>'
+									+			'<td width="12%">派单人</td>'
+									+			'<td width="12%">订单完成时间</td>'
+									+			'<td width="12%">客户姓名</td>'
+									+			'<td width="12%">操作</td>'
+									+		'</tr>'
+									+		'<tr>'
+									+			'<td>21</td>'
+									+			'<td>实习</td>'
+									+			'<td>xx</td>'
+									+			'<td>xxxx-xx-xx</td>'
+									+			'<td>xx</td>'
+									+			'<td><a href="#">查看详情</a></td>'
+									+		'</tr>'
+									+	'</tbody>'
+									+	'</table>'
+									+'</div>'
+						});
+					}
+					function close_lay(){
+						layer.closeAll();
+					}
+			</script>
+</body>
+
+</html>
