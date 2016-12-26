@@ -93,6 +93,7 @@ $.extend({
                         var status_own_str = '';
                         var status_24 = '';
                         var agreement_type_1 = '';
+                        var is_type1 = '';
                         if(item.status_own==1){
                             status_own_str = '<select class="form-control" nurse_id="'+item.id+'" status_own="status_own" >\
                             <option value="1" selected>暂不接单</option>\
@@ -129,6 +130,12 @@ $.extend({
                         if(item.agreement_type==3 && item.status!=24){
                             agreement_type_1 = '<a href="'+MODULE+'/Nurse/changeNurse/id/'+item.id+'.html">转正</a>';
                         }
+                        if(item.agreement_type==1){
+                            var data_type1 = 'name="'+item.name+'"  price_name="'+item.price_name+'" nurse_id="'+item.id+'" ';
+                            is_type1 = '<a class="level_up"  '+data_type1+'>升级</a><a class="level_up" '+data_type1+'>降级</a>';
+                        }
+
+
                         if(item.status==24){
                             str += '<tr class="data">\
                                 <td>' + item.number + '</td>\
@@ -147,11 +154,11 @@ $.extend({
                                 <td>' + item.name + '</td>\
                                 <td>' + item.is_student_str + '</td>\
                                 <td>' + item.work_time + '年</td>\
-                                <td><a onclick="wanchengDD()">' + 0 + '</a></td>\
-                                <td>' + 0 + '</td>\
-                                <td>' + 0 + '</td>\
-                                <td>' + 0 + '</td>\
-                                <td>' + status_24 + agreement_type_1 + '<a href="' + MODULE + '/Nurse/nurseInfo/id/' + item.id + '.html">查看</a></td>\
+                                <td><a class="search" type="1" nurse_name="'+item.name+'" nurse_id="'+item.id+'" number="'+ item.count1+'">' + item.count1+ '</a></td>\
+                                <td>' + item.b_time + '</td>\
+                                <td><a class="search" type="2" nurse_name="'+item.name+'" nurse_id="'+item.id+'" number="'+ item.count2+'">' + item.count2+ '</a></td>\
+                                <td><a class="search" type="3" nurse_name="'+item.name+'" nurse_id="'+item.id+'" number="'+ item.count3+'">' + item.count3+ '</a></td>\
+                                <td>' +is_type1+ status_24 + agreement_type_1 + '<a href="' + MODULE + '/Nurse/nurseInfo/id/' + item.id + '.html">查看</a></td>\
                         </tr>';
                         }
                     });

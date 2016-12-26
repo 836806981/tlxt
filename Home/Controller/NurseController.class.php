@@ -68,6 +68,12 @@ class NurseController extends CommonController {
             $list[$k]['status_sh_name'] = $status_sh_name[$v['status_sh']];
             $list[$k]['status_own_name'] = $status_own_name[$v['status_own']];
             $list[$k]['is_student_str'] = ($v['is_student']==1?'学员':'外聘');
+            $b_time = M('order_nurse')->field('b_time')->where('status=6')->order('b_time asc')->find();
+            $list[$k]['b_time'] = $b_time['b_time']?$b_time['b_time']:'';
+            $list[$k]['count1'] = M('order_nurse')->where('nurse_id='.$v['id'].'  and  status>=8')->count();//完成订单量
+            $list[$k]['count2'] = M('order_nurse')->where('nurse_id='.$v['id'].'  and  status=5')->count();//完成订单量
+            $list[$k]['count3'] = M('order_nurse')->where('nurse_id='.$v['id'].'  and  status=6')->count();//完成订单量
+
         }
 
         $count = M('nurse')->where($where)->count();
@@ -76,6 +82,34 @@ class NurseController extends CommonController {
         $back['data']['num'] = $count;
         $back['code'] = 1000;
         echo json_encode($back);
+    }
+
+
+    //点击订单数量返回订单列表数据库
+    public function getNurseSearch(){
+        $post = I('post.');
+
+        if($post['type'] == 1 ){
+            $where = 'order_nurse.nurse_id='.$post['nurse_id'].'  and  order_nurse.status>=8';
+        }elseif($post['type'] == 2 ){
+            $where = 'order_nurse.nurse_id='.$post['nurse_id'].'  and  order_nurse.status=5';
+        }elseif($post['type'] == 3 ){
+            $where = 'order_nurse.nurse_id='.$post['nurse_id'].'  and  order_nurse.status=6';
+        }
+
+        $list = M('order_nurse')->where($where)->order('order_nurse.add_time desc')->select();
+        $order_type_name = ['','需求单','渠道实习单','渠道非实习单'];
+        foreach($list as $k=>$v){
+            $add_employee = M('order')->field('add_employee')->where('id='.$v['order_id'].'')->find();
+            $list[$k]['add_employee'] = $add_employee['add_employee'];
+            $list[$k]['status_5_str'] = date('Y-m-d H:i:s',$v['add_time']);
+            $list[$k]['status_6_str'] = date('Y-m-d H:i:s',$v['status_6']);
+            $list[$k]['status_8_str'] = date('Y-m-d H:i:s',$v['status_8']);
+            $list[$k]['order_type_name'] = $order_type_name[$v['order_type']];
+
+        }
+
+        echo json_encode($list);
     }
 
     //淘汰
@@ -699,7 +733,7 @@ class NurseController extends CommonController {
     }
 
     //升级阿姨
-    public function add_nurse_level(){
+    public function change_level(){
         if(!I('post.id')){
             echo "<script>alert('数据异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -709,20 +743,19 @@ class NurseController extends CommonController {
             echo "<script>alert('数据异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-        if($nurse['level']>=16){
-            echo "<script>alert('已经是金牌阿姨了');window.onload=function(){window.history.go(-1);return false;}</script>";
-            exit;
-        }
-        $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺1.1','大田螺1.2','大田螺1.3','大田螺1.4','大田螺1.5','超级田螺1.1','超级田螺1.2','超级田螺1.3','超级田螺1.4','超级田螺1.5','金牌田螺'];
-        $save['level'] = $nurse['level']+1;
-        $save['level_add'] = 0;
-        $save['level_name'] = $level_name[$nurse['level']+1];
-        $save_mod = M('nurse')->where('id='.I('post.id').'')->save($save);
+        $level_name = ['','小田螺1.1','小田螺1.2','小田螺1.3','小田螺1.4','小田螺1.5','大田螺2.1','大田螺2.2','大田螺2.3','大田螺2.4','大田螺2.5','超级田螺3.1','超级田螺3.2','超级田螺3.3','超级田螺3.4','超级田螺3.5','金牌田螺'];
+        $price_arr = ['','3000','3200','3400','3600','4000','5000','5200','5400','5600','6000','7000','7200','7400','7600','8000','9000'];
+
+        $post['price_name'] = I('post.price_name');
+        $price_level = array_keys($level_name,I('post.price_name'));
+        $post['price_level'] = $price_level[0];
+        $post['price'] = $price_arr[$post['price_level']];
+        $save_mod = M('nurse')->where('id='.I('post.id').'')->save($post);
         if($save_mod!==false){
-            echo "<script>alert('升级成功');window.location.href='".__MODULE__."/Nurse/nurseInfo/id/".I('post.id').".html';</script>";
+            echo "<script>alert('成功');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }else{
-            echo "<script>alert('升级失败请重试');window.onload=function(){window.history.go(-1);return false;}</script>";
+            echo "<script>alert('失败请重试');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
     }

@@ -124,7 +124,7 @@ $.extend({
                         <td width="8%">' + item.nurse_pay_do + price_add+reward_price + '</td>\
                         <td width="8%">' + item.nurse_number + '</td>\
                         <td width="8%">' + item.nurse_name + '</td>\
-                        <td width="8%">' + item.come + '</td>\
+                        <td width="8%">' + item.is_defer_name + '</td>\
                         <td width="8%">' + item.level_name + '</td>\
                         <td width="15%">' + do_statement+ '</td>\
                         </tr>';
@@ -144,7 +144,7 @@ $.extend({
                             <td width="8%">' + item.nurse_pay_do + price_add+reward_price + '</td>\
                             <td width="8%">' + item.nurse_number + '</td>\
                             <td width="8%">' + item.nurse_name + '</td>\
-                            <td width="8%">' + item.come + '</td>\
+                            <td width="8%">' + item.is_defer_name + '</td>\
                             <td width="8%">' + item.level_name + '</td>\
                             <td width="15%">'+ finance + '</td>\
                         </tr>';
@@ -158,7 +158,7 @@ $.extend({
                                 <td width="8%">' + item.nurse_pay_do + price_add+reward_price + '</td>\
                                 <td width="8%">' + item.nurse_number + '</td>\
                                 <td width="8%">' + item.nurse_name + '</td>\
-                                <td width="8%">' + item.come + '</td>\
+                                <td width="8%">' + item.is_defer_name + '</td>\
                                 <td width="8%">' + item.level_name + '</td>\
                                 <td width="15%">'+ boss + '</td>\
                             </tr>';
@@ -177,7 +177,7 @@ $.extend({
                                 <td width="8%">' + item.nurse_pay_do + price_add+reward_price + '</td>\
                                 <td width="8%">' + item.nurse_number + '</td>\
                                 <td width="8%">' + item.nurse_name + '</td>\
-                                <td width="8%">' + item.come + '</td>\
+                                <td width="8%">' + item.is_defer_name + '</td>\
                                 <td width="8%">' + item.level_name + '</td>\
                                 <td width="15%">'+ give + '</td>\
                             </tr>';

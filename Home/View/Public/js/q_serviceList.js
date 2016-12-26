@@ -106,7 +106,7 @@ $.extend({
                         <td>'+item.order_type_name+'</td>\
                         <td>'+item.add_employee+'</td>\
                         <td>'+item.status_3_str+'</td>\
-                        <td>'+item.order_type_name+'</td>\
+                        <td>'+item.status_name+'</td>\
                         <td><a href="' + MODULE + '/Qneed/q_needInfo/id/' + item.id + '.html">查看</a>'+dell+del_str+'</td>\
                         </tr>';
                     });

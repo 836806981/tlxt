@@ -112,6 +112,7 @@ class MoneyController extends CommonController {
             $list[$k]['status_7_str'] = $v['status_7']?date('Y-m-d H:i:s',$v['status_7']):'';
             $list[$k]['status_name'] = $status_name[$v['status']];
             $list[$k]['is_service_name'] = ($v['is_service']==1?'售后':'正常');
+            $list[$k]['is_defer_name'] = ($v['is_defer']==1?'暂缓发放':'正常发放');
         }
         $count = M('order_nurse')->where($where)->count();
         $back['data']['list'] = $list;
@@ -241,12 +242,22 @@ class MoneyController extends CommonController {
         }
         $save['pay_status'] = 1;
         $save['is_statement'] = 3;
+        $save['status'] = 9;
+        $save['status_9'] = time();
         $save['nurse_pay_true'] = I('post.nurse_pay_true');
         $save_mod = M('order_nurse')->where('id=' .I('post.order_nurse_id') . '')->save($save);
         if($save_mod==false){
             echo "<script>alert('异常，请重试');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }else{
+            if($info['is_service']!=1){
+                $save_order['status'] = 9;
+                $save_order['status_9'] = time();
+                $save_order_mod = M('order')->where('id='.$info['order_id'].'')->save($save_order);
+                if($save_order_mod==false){
+                    M('order')->where('id='.$info['order_id'].'')->save($save_order);
+                }
+            }
             echo "<script>alert('成功');window.location.href='".__MODULE__."/Money/giveList.html'</script>";
             exit;
         }

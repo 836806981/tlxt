@@ -125,6 +125,60 @@
 
 			<!--main end-->
 			<script>
+
+
+				$('.level_up').live('click',function(){
+
+					var sub_str = "javascript:return window.confirm('确认修改？')";
+					layer.open({
+						type: 1,
+						title: '升级',
+						area: ['auto', 'auto'], //宽高
+						content: '<div class="lay_cnt">'
+						+   '<form action="__MODULE__/Nurse/change_level" method="post" id="form_change_level" onsubmit="'+sub_str+'"  enctype="multipart/form-data">'
+						+	'<div class="opn_div clear">你确定'+$(this).attr('name')+'阿姨升级吗？</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>当前等级：'+$(this).attr('price_name')+'</label>'
+						+		'<input type="hidden" name="id" value="'+$(this).attr('nurse_id')+'"/>'
+						+	'</div>'
+						+	'<div class="opn_div clear">'
+						+		'<label>阿姨等级：</label>'
+						+       '<select class="form-control" name="price_name" id="price_name">'
+						+          	'<option>小田螺1.1</option>'
+						+	        '<option>小田螺1.2</option>'
+						+	        '<option>小田螺1.3</option>'
+						+	        '<option>小田螺1.4</option>'
+						+	        '<option>小田螺1.5</option>'
+						+	        '<option>大田螺2.1</option>'
+						+	        '<option>大田螺2.2</option>'
+						+	        '<option>大田螺2.3</option>'
+						+	        '<option>大田螺2.4</option>'
+						+	        '<option>大田螺2.5</option>'
+						+	        '<option>金牌田螺3.1</option>'
+						+	        '<option>金牌田螺3.2</option>'
+						+	        '<option>金牌田螺3.3</option>'
+						+	        '<option>金牌田螺3.4</option>'
+						+	        '<option>金牌田螺3.5</option>'
+						+	        '<option>超级田螺</option>'
+						+       '</select>'
+						+	'</div>'
+//						+	'<div class="opn_div clear">'
+//						+		'<label>升级原因：</label><input type="text" class="form-control" value=""/>'
+//						+	'</div>'
+						+	'<div class="btn_div clear">'
+						+		'<button type="button" class="default_btn" id="sub_change_level">确定</button>'
+						+		'<button type="button" class="default_btn" onclick="close_lay()">取消</button>'
+						+	'</div>'
+						+	'</form>'
+						+'</div>'
+					});
+					$('#price_name').val($(this).attr('price_name'));
+				});
+
+				$('#sub_change_level').live('click',function(){
+					$('#form_change_level').submit();
+				});
+
 //					淘汰 弹窗
 		$('a[do_type=taotai]').live('click',function(){
 			var sub_str = "javascript:return window.confirm('确定淘汰？')";
@@ -192,35 +246,66 @@
 						});
 					}
 //					完成订单量  弹窗
-					function wanchengDD(){
+					$('.search').live('click',function(){
+						var type = $(this).attr('type');
+						var nurse_id = $(this).attr('nurse_id');
+						var number = $(this).attr('number');
+						if(number==0){
+							return false;
+						}
+						var time_arr = ['','订单完成时间','订单匹配时间','订单签单时间'];
+						var time_arr = ['','完成','匹配','签单'];
 						layer.open({
-						  	type: 1,
-						  	title: '完成订单量',
-							area: ['auto', 'auto'], //宽高
+							type: 1,
+							title: ''+$(this).attr('nurse_name')+time_arr[type]+'订单量',
+							area: ['auto', '500px'], //宽高
 							content: '<div class="lay_cnt lay_cnt_max">'
-									+	'<table class="tab_info tab860">'
-									+	'<tbody>'
-									+		'<tr class="info_name">'
-									+			'<td width="12%">订单编号</td>'
-									+			'<td width="12%">订单性质</td>'
-									+			'<td width="12%">派单人</td>'
-									+			'<td width="12%">订单完成时间</td>'
-									+			'<td width="12%">客户姓名</td>'
-									+			'<td width="12%">操作</td>'
-									+		'</tr>'
-									+		'<tr>'
-									+			'<td>21</td>'
-									+			'<td>实习</td>'
-									+			'<td>xx</td>'
-									+			'<td>xxxx-xx-xx</td>'
-									+			'<td>xx</td>'
-									+			'<td><a href="#">查看详情</a></td>'
-									+		'</tr>'
-									+	'</tbody>'
-									+	'</table>'
-									+'</div>'
+							+	'<table class="tab_info tab860">'
+							+	'<tbody>'
+							+		'<tr class="info_name" id="show_order_list">'
+							+			'<td width="12%">订单编号</td>'
+							+			'<td width="12%">订单性质</td>'
+							+			'<td width="12%">派单人</td>'
+							+			'<td width="12%">'+time_arr[type]+'</td>'
+							+			'<td width="12%">客户姓名</td>'
+							+			'<td width="12%">操作</td>'
+							+		'</tr>'
+							+	'</tbody>'
+							+	'</table>'
+							+'</div>'
 						});
-					}
+
+						var str_search = '';
+						$.ajax({
+							type: "POST",
+							url: "__MODULE__/Nurse/getNurseSearch",
+							data: {type:type, nurse_id:nurse_id},
+							dataType: "json",
+							success: function(data){
+								$.each(data,function(i,item){
+									var time_str = '';
+									if(type == 1){
+										time_str = item.status_8_str;
+									}else if(type == 2){
+										time_str = item.status_5_str;
+									}else if(type == 3){
+										time_str = item.status_6_str;
+									}
+									str_search +='<tr>'
+									+			'<td>'+item.order_number+'</td>'
+									+			'<td>'+item.order_type_name+'</td>'
+									+			'<td>'+item.add_employee+'</td>'
+									+			'<td>'+time_str+'</td>'
+									+			'<td>'+item.order_name+'</td>'
+									+			'<td><a href="__MODULE__/TakeNeed/overOrderInfo/id/'+item.order_id+'.html" target="_blank">查看详情</a></td>'
+									+		'</tr>';
+								});
+
+								$('#show_order_list').after(str_search);
+							}
+						});
+
+					});
 					function close_lay(){
 						layer.closeAll();
 					}

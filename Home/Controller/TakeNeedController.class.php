@@ -443,7 +443,7 @@ class TakeNeedController extends CommonController {
         }
 
         //非售后签单时生成收款记录
-        if($order_info['is_service']==0) {
+        if($order_info['is_service']==0 && $order_info['order_type']==1) {
             $add_price_come['price'] = $post['price_come_true'];
             $add_price_come['order_id'] = $post['order_id'];
             $add_price_come['time'] = date('Y-m-d');
@@ -454,9 +454,13 @@ class TakeNeedController extends CommonController {
                 M('price_come')->add($add_price_come);
             }
         }
-
-        echo "<script>alert('签单成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
-        exit;
+        if($order_info['order_type']==1) {//客户单地址
+            echo "<script>alert('签单成功');window.location.href='" . __MODULE__ . "/TakeNeed/overOrderInfo/id/" . $post['order_id'] . ".html'</script>";
+            exit;
+        }else{//渠道单地址
+            echo "<script>alert('选择成功');window.location.href='" . __MODULE__ . "/Qneed/q_needInfo/id/" . $post['order_id'] . ".html'</script>";
+            exit;
+        }
     }
 
 
@@ -497,11 +501,13 @@ class TakeNeedController extends CommonController {
             M('order_nurse')->where('order_id=' .$post['order_id'] . ' and nurse_id=' . $post['nurse_id'] . '')->save($post);
         }
 
-        //判断需要催款
-        $price_come = $order_info['price_come'];
-        $order_info['price_add']==1?($price_come+=$order_info['add_order_price']):'';
-        if($order_info['price_come_true']<$price_come){
-            $post['is_press'] = 1;
+        if($order_info['order_type'] == 1) {
+            //判断需要催款
+            $price_come = $order_info['price_come'];
+            $order_info['price_add'] == 1 ? ($price_come += $order_info['add_order_price']) : '';
+            if ($order_info['price_come_true'] < $price_come) {
+                $post['is_press'] = 1;
+            }
         }
 
         $order_save = M('order')->where('id=' .$post['order_id'] . '')->save($post);
@@ -532,8 +538,15 @@ class TakeNeedController extends CommonController {
         if($save_nurse==false){
             M('nurse')->where('id='.$post['nurse_id'].'')->save($save_nurse);
         }
-        echo "<script>alert('上户成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
-        exit;
+
+        if($order_info['order_type']==1) {//客户单地址
+            echo "<script>alert('上户成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
+            exit;
+        }else{//渠道单地址
+            echo "<script>alert('上户成功');window.location.href='" . __MODULE__ . "/Qneed/q_needInfo/id/" . $post['order_id'] . ".html'</script>";
+            exit;
+        }
+
     }
 
 
@@ -544,7 +557,7 @@ class TakeNeedController extends CommonController {
             exit;
         }
         $info = M('order')->where('id=' . I('get.id') . '')->find();
-        if (!$info) {
+        if (!$info|| $info['order_type']!=1) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
@@ -722,21 +735,26 @@ class TakeNeedController extends CommonController {
             }elseif($status_sh['price_level']<=10){
                 $status_sh['price_level'] = $nurse['price_level'] + $level_up_number;
                 $status_sh['price_level'] = ($status_sh['price_level']>=10?10: $status_sh['price_level']);
+                $status_sh['price'] = $price_arr[$status_sh['price_level']];
+                $status_sh['price_name'] =$level_name[$status_sh['price_level']];
             }elseif($status_sh['price_level']<=15){
                 $status_sh['price_level'] = $nurse['price_level'] + $level_up_number;
                 $status_sh['price_level'] = ($status_sh['price_level']>=15?15: $status_sh['price_level']);
+                $status_sh['price'] = $price_arr[$status_sh['price_level']];
+                $status_sh['price_name'] =$level_name[$status_sh['price_level']];
             }
         }
         $save_nurse_mod = M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
         if($save_nurse_mod==false){
             M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
         }
-
-
-        echo "<script>alert('成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
-        exit;
-
-
+        if($order['order_type']==1) {//客户单地址
+            echo "<script>alert('成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
+            exit;
+        }else{//渠道单地址
+            echo "<script>alert('上户成功');window.location.href='" . __MODULE__ . "/Qneed/q_needInfo/id/" . $post['order_id'] . ".html'</script>";
+            exit;
+        }
 
     }
 

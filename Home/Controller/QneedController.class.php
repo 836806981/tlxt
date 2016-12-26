@@ -34,6 +34,8 @@ class QneedController extends CommonController {
             }
             $order_type_name = ['','','实习','非实习'];
 
+            $post['s_time'] = date('Y-m-d',strtotime($post['b_time'])+$post['service_day']*86400);
+
             $post['name'] = $post['source'].$order_type_name[$post['order_type']].'单';
             $post['product'] = $post['source'].$order_type_name[$post['order_type']];
             $post['service_place'] = $post['source'];
@@ -99,10 +101,10 @@ class QneedController extends CommonController {
         }
         $list = M('order')->where($where)->limit($start,$pagenum)->order('add_time desc')->select();
 
-        $status_name = ['','待接单','已接单','已完善','已发单','已匹配','已签单','已上户','已下户','已完结'];
+        $status_name = ['','待接单','已接单','已完善','已发单','已匹配','已匹配','已上户','已下户','已完结'];
         $status_name[22] = ['已打回'];
         $status_name[23] = ['回收站'];
-        $order_type_name = ['','','实习','非实习'];
+        $order_type_name = ['','','实习单','非实习单'];
         foreach($list as $k=>$v){
             $list[$k]['status_3_str'] = $v['status_3']?date('Y-m-d H:i:s',$v['status_3']):'';
             $list[$k]['status_name'] = $status_name[$v['status']];
@@ -155,7 +157,7 @@ class QneedController extends CommonController {
             if( $post['price_add']==0){
                 unset($post['add_reason']); unset($post['add_order_price']); unset($post['add_nurse_price']);
             }
-
+            $post['s_time'] = date('Y-m-d',strtotime($post['b_time'])+$post['service_day']*86400);
 
             $save_mod = M('order')->where('id='.$post['order_id'].'')->save($post);
             if($save_mod!==false){
@@ -192,7 +194,14 @@ class QneedController extends CommonController {
         $order_type_name = ['','','实习','非实习'];
         $info['order_type_name'] = $order_type_name[$info['order_type']];
 
+        $order_nurse = M('order_nurse')->field('nurse.id,order_nurse.nurse_name,nurse.title_img,nurse.number as nurse_number')->join('nurse ON nurse.id=order_nurse.nurse_id')->where('order_id='.I('get.id').'  and is_service=0')->select();
+        if($info['status'] == 7){
+            $nurse = M('nurse')->where('id='.$order_nurse[0]['id'].'')->find();
+            $this->assign('nurse',$nurse);
+        }
+        $this->assign('order_nurse', $order_nurse);
         $this->assign('info', $info);
+        $this->assign('now',date('Y-m-d'));
         $this->display();
     }
 
