@@ -5,7 +5,6 @@ class UserController extends CommonController {
 
 
     public function _initialize(){
-        $this->authority(array(24));
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
             exit;

@@ -75,7 +75,7 @@ class SafeController extends CommonController {
 
         $this->assign('nurse_safe',$nurse_safe);
         $this->assign('info',$info);
-        $this->display();
+        $this->display('safeInfo');
     }
 
     //保险凭证上传

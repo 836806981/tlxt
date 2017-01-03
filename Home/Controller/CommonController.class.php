@@ -15,7 +15,8 @@ class CommonController extends Controller{
 
     public function authority($a = array()){
         if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],$a)){
-            echo "<script>alert('无权限！');window.onLoad=function(){window.history.go(-1);return false;}</script>";
+            echo "<script>alert('无权限！');window.onload=function(){window.history.go(-1);return false;}</script>";
+//            echo "<script>alert('无权限！');window.history.go(-1);</script>";
             exit;
         }
     }

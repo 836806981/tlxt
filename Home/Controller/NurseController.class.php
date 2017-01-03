@@ -72,7 +72,7 @@ class NurseController extends CommonController {
             $list[$k]['b_time'] = $b_time['b_time']?$b_time['b_time']:'';
             $list[$k]['count1'] = M('order_nurse')->where('nurse_id='.$v['id'].'  and  status>=8')->count();//完成订单量
             $list[$k]['count2'] = M('order_nurse')->where('nurse_id='.$v['id'].'  and  status=5')->count();//完成订单量
-            $list[$k]['count3'] = M('order_nurse')->where('nurse_id='.$v['id'].'  and  status=6')->count();//完成订单量
+            $list[$k]['count3'] = M('order_nurse')->where('nurse_id='.$v['id'].'  and  status in(6,7)')->count();//完成订单量
 
         }
 
@@ -94,7 +94,7 @@ class NurseController extends CommonController {
         }elseif($post['type'] == 2 ){
             $where = 'order_nurse.nurse_id='.$post['nurse_id'].'  and  order_nurse.status=5';
         }elseif($post['type'] == 3 ){
-            $where = 'order_nurse.nurse_id='.$post['nurse_id'].'  and  order_nurse.status=6';
+            $where = 'order_nurse.nurse_id='.$post['nurse_id'].'  and  order_nurse.status in(6,7)';
         }
 
         $list = M('order_nurse')->where($where)->order('order_nurse.add_time desc')->select();

@@ -62,7 +62,7 @@ class MoneyController extends CommonController {
 
     //工资发放
     public function giveList(){
-        $this->authority(array(24,5));
+        $this->authority(array(24,4));
         $this->assign('belong',4);
         $this->display('statement');
     }

@@ -3,7 +3,6 @@ namespace Home\Controller;
 use Think\Controller;
 class NeedController extends CommonController {
     public function _initialize(){
-        $this->authority(array(24,1));
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
             exit;
@@ -57,6 +56,7 @@ class NeedController extends CommonController {
     ///////////////////////客户派单//////////////////////
 //    添加客服派单
     public function addNeed(){
+        $this->authority(array(24,1));
         if(I('post.')){
             $post = I('post.');
             $post['add_time'] = time();
@@ -90,7 +90,12 @@ class NeedController extends CommonController {
 
     //客服。派单列表。
     public function serviceList(){
+        if($_SESSION[C('USER_AUTH_KEY')]['permission'] == 3){
+            echo "<script>window.location.href='" . __MODULE__ . "/Qneed/q_serviceList.html';</script>";
+            exit;
+        }
 
+        $this->authority(array(24,1));
         $pai = M('employee')->where('permission in(1,24)')->select();
         $gu  = M('employee')->where('permission =2 ')->select();
         $this->assign('pai',$pai);

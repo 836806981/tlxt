@@ -326,18 +326,17 @@ class IndexController extends CommonController {
         if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))) {
             //月嫂
             $data['10_1_1'] = M('order')->where('order_type=1 and is_press=1 and status<23 and product!="育儿嫂"')->count();//人数
-            $sum_ys = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come')->where('order_type=1 and is_press=1 and status<23 and product!="育儿嫂"')->find();//金额
-            $data['10_1_2'] = $sum_ys['come'] - $sum_ys ['come_true'];
-
+            $sum_ys = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come,sum(IF(price_add=1,add_order_price,0)) as add_order_price')->where('order_type=1 and is_press=1 and status<23 and product!="育儿嫂"')->find();//金额
+            $data['10_1_2'] = $sum_ys['come'] + $sum_ys['add_order_price'] - $sum_ys ['come_true'];
             //育儿嫂
             $data['10_2_1'] = M('order')->where('order_type=1 and is_press=1 and status<23 and product="育儿嫂"')->count();//人数
-            $sum_yes = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come')->where('order_type=1 and is_press=1 and status<23 and product="育儿嫂"')->find();//金额
-            $data['10_2_2'] = $sum_yes['come'] - $sum_yes ['come_true'];
+            $sum_yes = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come,sum(IF(price_add=1,add_order_price,0)) as add_order_price')->where('order_type=1 and is_press=1 and status<23 and product="育儿嫂"')->find();//金额
+            $data['10_2_2'] = $sum_yes['come'] + $sum_yes['add_order_price'] - $sum_yes ['come_true'];
 
             //统计
             $data['10_3_1'] = M('order')->where('order_type=1 and is_press=1 and status<23')->count();//人数
-            $sum_all = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come')->where('order_type=1 and is_press=1 and status<23')->find();//金额
-            $data['10_3_2'] = $sum_all['come'] - $sum_all ['come_true'];
+            $sum_all = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come,sum(IF(price_add=1,add_order_price,0)) as add_order_price')->where('order_type=1 and is_press=1 and status<23')->find();//金额
+            $data['10_3_2'] = $sum_all['come'] + $sum_all['add_order_price'] - $sum_all ['come_true'];
 
             $data['10_0'] = $data['10_3_2'];// 今日总共签单
         }
