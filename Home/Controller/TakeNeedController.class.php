@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class TakeNeedController extends CommonController {
     public function _initialize(){
+        $this->authority(array(24,2));
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
             exit;
@@ -736,14 +737,21 @@ class TakeNeedController extends CommonController {
                 $status_sh['price_level'] = $nurse['price_level'] + $level_up_number;
                 $status_sh['price_level'] = ($status_sh['price_level']>=10?10: $status_sh['price_level']);
                 $status_sh['price'] = $price_arr[$status_sh['price_level']];
-                $status_sh['price_name'] =$level_name[$status_sh['price_level']];
+                $status_sh['price_name'] = $level_name[$status_sh['price_level']];
             }elseif($status_sh['price_level']<=15){
                 $status_sh['price_level'] = $nurse['price_level'] + $level_up_number;
                 $status_sh['price_level'] = ($status_sh['price_level']>=15?15: $status_sh['price_level']);
                 $status_sh['price'] = $price_arr[$status_sh['price_level']];
-                $status_sh['price_name'] =$level_name[$status_sh['price_level']];
+                $status_sh['price_name'] = $level_name[$status_sh['price_level']];
             }
         }
+
+        if($post['status']==8 && $nurse['type']==1){
+            $status_sh['type'] = 2;
+            $status_sh['status'] = 1;
+            $status_sh['type_time'] = time();
+        }
+
         $save_nurse_mod = M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
         if($save_nurse_mod==false){
             M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
@@ -752,7 +760,7 @@ class TakeNeedController extends CommonController {
             echo "<script>alert('成功');window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
             exit;
         }else{//渠道单地址
-            echo "<script>alert('上户成功');window.location.href='" . __MODULE__ . "/Qneed/q_needInfo/id/" . $post['order_id'] . ".html'</script>";
+            echo "<script>alert('成功');window.location.href='" . __MODULE__ . "/Qneed/q_needInfo/id/" . $post['order_id'] . ".html'</script>";
             exit;
         }
 

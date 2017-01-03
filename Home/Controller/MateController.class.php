@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class MateController extends CommonController {
     public function _initialize(){
+        $this->authority(array(24,5));
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
             exit;
@@ -12,8 +13,6 @@ class MateController extends CommonController {
 
     //待匹配列表
     public function mateList(){
-
-
         $sales_id = M('employee')->where('permission in(2,3)')->select();
 
         $this->assign('sales_id',$sales_id);
@@ -116,7 +115,7 @@ class MateController extends CommonController {
     public function getNurseList(){
 
         $post = I("post.");
-        $where = 'status =1 ';
+        $where = 'IF(type=1,status =2,status =1)   ';
 
          if($post['name']&&$post['name']!=''){
             $where .= ' and  name LIKE "%'.$post['name'].'%"';

@@ -13,12 +13,12 @@ class HoldController extends CommonController {
 
     //维系列表页
     public function holdList(){
-
-
+        $this->authority(array(24,5));
         $this->display();
     }
 
     public function getHoldList(){
+        $this->authority(array(24,5));
         $currentpage = I("post.currentpage");
         $pagenum = I("post.pagenum");
         $start = ($currentpage - 1) * $pagenum;
@@ -61,6 +61,8 @@ class HoldController extends CommonController {
     }
 
     public function holdInfo(){
+        $this->authority(array(24,5));
+
         if (!I('get.id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -106,6 +108,7 @@ class HoldController extends CommonController {
 
     //新增维系
     public function addHold(){
+        $this->authority(array(24,5));
         $post = I('post.');
         $post['add_time'] = time();
         $add_mod = M('hold')->add($post);

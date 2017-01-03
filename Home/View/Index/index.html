@@ -20,61 +20,565 @@
 			</script>
 			<!--main-->
 			<div class="col-md-10 main">
+<!--1渠道派单统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))">
+				<div class="tab_tle">
+					<span class="int_s"></span>渠道派单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日共派出渠道单<strong>{$data.1_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">类型</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<volist name="data.1_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['1_'.$k.'_1'];?></td>
+							<td><?php echo $data['1_'.$k.'_2'];?></td>
+							<td><?php echo $data['1_'.$k.'_3'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['1_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['1_'.($data['count_1_name']+1).'_2'];?></td>
+						<td><?php echo $data['1_'.($data['count_1_name']+1).'_3'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--2客服派单统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,1))">
+				<div class="tab_tle">
+					<span class="int_s"></span>客服派单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日共派出客服单<strong>{$data.2_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">类型</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<tr>
+						<td>月嫂</td>
+						<td>{$data.2_1_1}</td>
+						<td>{$data.2_1_2}</td>
+						<td>{$data.2_1_3}</td>
+					</tr>
+					<tr>
+						<td>育儿嫂</td>
+						<td>{$data.2_2_1}</td>
+						<td>{$data.2_2_2}</td>
+						<td>{$data.2_2_3}</td>
+					</tr>
+					<tr>
+						<td>3980特价</td>
+						<td>{$data.2_3_1}</td>
+						<td>{$data.2_3_2}</td>
+						<td>{$data.2_3_3}</td>
+					</tr>
+					<tr>
+						<td>总计</td>
+						<td>{$data.2_4_1}</td>
+						<td>{$data.2_4_2}</td>
+						<td>{$data.2_4_3}</td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--3渠道订单匹配-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>渠道订单匹配
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日渠道匹配<strong>{$data.3_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">渠道</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<volist name="data.3_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['3_'.$k.'_1'];?></td>
+							<td><?php echo $data['3_'.$k.'_2'];?></td>
+							<td><?php echo $data['3_'.$k.'_3'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['3_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['3_'.($data['count_1_name']+1).'_2'];?></td>
+						<td><?php echo $data['3_'.($data['count_1_name']+1).'_3'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--4渠道签单量-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))">
+				<div class="tab_tle">
+					<span class="int_s"></span>渠道签单量
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日渠道签<strong>{$data.4_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">渠道</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<volist name="data.4_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['4_'.$k.'_1'];?></td>
+							<td><?php echo $data['4_'.$k.'_2'];?></td>
+							<td><?php echo $data['4_'.$k.'_3'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['4_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['4_'.($data['count_1_name']+1).'_2'];?></td>
+						<td><?php echo $data['4_'.($data['count_1_name']+1).'_3'];?></td>
+					</tr>
+					</tbody>
+				</table>
+					</if>
+<!--5渠道订单状态-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))">
+				<div class="tab_tle">
+					<span class="int_s"></span>渠道订单状态
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日上户<strong>{$data.5_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">渠道</td>
+						<td width="8%">未上户</td>
+						<td width="8%">已上户</td>
+						<td width="8%">已下户</td>
+					</tr>
+					<volist name="data.5_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['5_'.$k.'_1'];?></td>
+							<td><?php echo $data['5_'.$k.'_2'];?></td>
+							<td><?php echo $data['5_'.$k.'_3'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['5_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['5_'.($data['count_1_name']+1).'_2'];?></td>
+						<td><?php echo $data['5_'.($data['count_1_name']+1).'_3'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--6顾问接单统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2))">
+
+				<div class="tab_tle">
+					<span class="int_s"></span>顾问接单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日总共接<strong>{$data.6_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td colspan="4">月嫂</td>
+						<td colspan="3">育儿嫂</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">顾问</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<volist name="data.6_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['6_'.$k.'_1'];?></td>
+							<td><?php echo $data['6_'.$k.'_2'];?></td>
+							<td><?php echo $data['6_'.$k.'_3'];?></td>
+							<td><?php echo $data['6_'.$k.'_4'];?></td>
+							<td><?php echo $data['6_'.$k.'_5'];?></td>
+							<td><?php echo $data['6_'.$k.'_6'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['6_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['6_'.($data['count_1_name']+1).'_2'];?></td>
+						<td><?php echo $data['6_'.($data['count_1_name']+1).'_3'];?></td>
+						<td><?php echo $data['6_'.($data['count_1_name']+1).'_4'];?></td>
+						<td><?php echo $data['6_'.($data['count_1_name']+1).'_5'];?></td>
+						<td><?php echo $data['6_'.($data['count_1_name']+1).'_6'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--7顾问匹配统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>客户订单匹配统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日总共匹配<strong>{$data.7_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td colspan="4">月嫂</td>
+						<td colspan="3">育儿嫂</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">顾问</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<volist name="data.7_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['7_'.$k.'_1'];?></td>
+							<td><?php echo $data['7_'.$k.'_2'];?></td>
+							<td><?php echo $data['7_'.$k.'_3'];?></td>
+							<td><?php echo $data['7_'.$k.'_4'];?></td>
+							<td><?php echo $data['7_'.$k.'_5'];?></td>
+							<td><?php echo $data['7_'.$k.'_6'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['7_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['7_'.($data['count_1_name']+1).'_2'];?></td>
+						<td><?php echo $data['7_'.($data['count_1_name']+1).'_3'];?></td>
+						<td><?php echo $data['7_'.($data['count_1_name']+1).'_4'];?></td>
+						<td><?php echo $data['7_'.($data['count_1_name']+1).'_5'];?></td>
+						<td><?php echo $data['7_'.($data['count_1_name']+1).'_6'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--8顾问签单统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>顾问已签单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							今日总共签<strong>{$data.8_0}</strong>单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td colspan="4">月嫂</td>
+						<td colspan="3">育儿嫂</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">顾问</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<volist name="data.8_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['8_'.$k.'_1'];?></td>
+							<td><?php echo $data['8_'.$k.'_2'];?></td>
+							<td><?php echo $data['8_'.$k.'_3'];?></td>
+							<td><?php echo $data['8_'.$k.'_4'];?></td>
+							<td><?php echo $data['8_'.$k.'_5'];?></td>
+							<td><?php echo $data['8_'.$k.'_6'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['8_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['8_'.($data['count_1_name']+1).'_2'];?></td>
+						<td><?php echo $data['8_'.($data['count_1_name']+1).'_3'];?></td>
+						<td><?php echo $data['8_'.($data['count_1_name']+1).'_4'];?></td>
+						<td><?php echo $data['8_'.($data['count_1_name']+1).'_5'];?></td>
+						<td><?php echo $data['8_'.($data['count_1_name']+1).'_6'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--9需要催款数-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>需要催款统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							总共<strong>{$data.9_0}</strong>个需要催款
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">顾问</td>
+						<td width="8%">月嫂</td>
+						<td width="8%">育儿嫂</td>
+					</tr>
+					<volist name="data.8_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['9_'.$k.'_1'];?></td>
+							<td><?php echo $data['9_'.$k.'_2'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['9_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['9_'.($data['count_1_name']+1).'_2'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--10需要催款金额-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>需要催款金额
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							总共需要催款<strong>￥{$data.10_0}</strong>
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">类型</td>
+						<td width="8%">余款未收</td>
+						<td width="8%">未收金额</td>
+					</tr>
+					<tr>
+						<td>月嫂</td>
+						<td>{$data.10_1_1}人</td>
+						<td>￥{$data.10_1_2}</td>
+					</tr>
+					<tr>
+						<td>育儿嫂</td>
+						<td>{$data.10_2_1}人</td>
+						<td>￥{$data.10_2_2}</td>
+					</tr>
+					<tr>
+						<td>统计</td>
+						<td>{$data.10_3_1}</td>
+						<td>￥{$data.10_3_2}</td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--11学员统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>学员统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							总共有<strong>{$data.11_0}</strong>个学员
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">类型</td>
+						<td width="8%">累计</td>
+						<td width="8%">当月</td>
+						<td width="8%">当日</td>
+					</tr>
+					<tr>
+						<td>收费生</td>
+						<td>{$data.11_1_1}</td>
+						<td>{$data.11_1_2}</td>
+						<td>{$data.11_1_3}</td>
+					</tr>
+					<tr>
+						<td>渠道生</td>
+						<td>{$data.11_2_1}</td>
+						<td>{$data.11_2_2}</td>
+						<td>{$data.11_2_3}</td>
+					</tr>
+					<tr>
+						<td>统计</td>
+						<td>{$data.11_3_1}</td>
+						<td>{$data.11_3_2}</td>
+						<td>{$data.11_3_3}</td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--12学员转阿姨统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
+					<div class="tab_tle">
+						<span class="int_s"></span>学员转阿姨统计
+					</div>
+					<table class="tab_info magrintop20 table_max800">
+						<tbody>
+						<tr class="present_num">
+							<td colspan="14">
+								总共有<strong>{$data.12_0}</strong>个学员转为阿姨
+							</td>
+						</tr>
+						<tr class="info_name">
+							<td width="8%">类型</td>
+							<td width="8%">累计</td>
+							<td width="8%">当月</td>
+							<td width="8%">当日</td>
+						</tr>
+						<tr>
+							<td>收费生</td>
+							<td>{$data.12_1_1}</td>
+							<td>{$data.12_1_2}</td>
+							<td>{$data.12_1_3}</td>
+						</tr>
+						<tr>
+							<td>渠道生</td>
+							<td>{$data.12_2_1}</td>
+							<td>{$data.12_2_2}</td>
+							<td>{$data.12_2_3}</td>
+						</tr>
+						<tr>
+							<td>统计</td>
+							<td>{$data.12_3_1}</td>
+							<td>{$data.12_3_2}</td>
+							<td>{$data.12_3_3}</td>
+						</tr>
+						</tbody>
+					</table>
+				</if>
+<!--13阿姨统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>阿姨统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							总共有<strong>{$data.13_0}</strong>个阿姨
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">三单试用</td>
+						<td width="8%">一年合同</td>
+					</tr>
+					<tr>
+						<td>{$data.13_1_1}</td>
+						<td>{$data.13_1_2}</td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--14顾问单统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
+				<div class="tab_tle">
+					<span class="int_s"></span>顾问单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							总共有<strong>{$data.14_0}</strong>个订单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<td width="8%">顾问</td>
+						<td width="8%">月嫂</td>
+						<td width="8%">育儿嫂</td>
+					</tr>
+					<volist name="data.14_name" id="vo" key="k">
+						<tr>
+							<td>{$vo.real_name}</td>
+							<td><?php echo $data['14_'.$k.'_1'];?></td>
+							<td><?php echo $data['14_'.$k.'_2'];?></td>
+						</tr>
+					</volist>
+					<tr>
+						<td>统计</td>
+						<td><?php echo $data['14_'.($data['count_1_name']+1).'_1'];?></td>
+						<td><?php echo $data['14_'.($data['count_1_name']+1).'_2'];?></td>
+					</tr>
+					</tbody>
+				</table>
+				</if>
+<!--15渠道单统计-->
+				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))">
+				<div class="tab_tle">
+					<span class="int_s"></span>渠道单统计
+				</div>
+				<table class="tab_info magrintop20 table_max800">
+					<tbody>
+					<tr class="present_num">
+						<td colspan="14">
+							总共有<strong>{$data.15_0}</strong>个渠道单
+						</td>
+					</tr>
+					<tr class="info_name">
+						<volist name="data.15_name" id="vo" key="k">
+							<td width="8%">{$vo.real_name}</td>
+						</volist>
+					</tr>
+					<tr>
+						<volist name="data.15_name" id="vo" key="k">
+							<td width="8%"><?php echo $data['15_1_'.$k.''];?></td>
+						</volist>
+					</tr>
+					</tbody>
+				</table>
+
+				</if>
 
 
-				<div class="">
-					<div class="tab_tle">
-						<span class="int_s"></span>客服统计
-					</div>
-					<ul class="statistics">
-						<li>本周派单：5</li>
-						<li>昨日派单：5</li>
-						<li>今日派单：5</li>
-					</ul>
-				</div>
-				<div class="">
-					<div class="tab_tle">
-						<span class="int_s"></span>销售统计
-					</div>
-					<ul class="statistics">
-						<li>新增档案：5</li>
-						<li>新增订单：5</li>
-						<li>上单提醒：5</li>
-						<li>下户提醒：5</li>
-					</ul>
-				</div>
-				<div class="">
-					<div class="tab_tle">
-						<span class="int_s"></span>阿姨统计
-					</div>
-					<ul class="statistics">
-						<li>阿姨数量：5</li>
-						<li>昨日新增：5</li>
-						<li>今日新增：5</li>
-						<li>下户提醒：5</li>
-					</ul>
-				</div>
-				<div class="">
-					<div class="tab_tle">
-						<span class="int_s"></span>保险统计
-					</div>
-					<ul class="statistics">
-						<li>新增保险：5</li>
-						<li>未买保险：5</li>
-						<li>已买保险：5</li>
-					</ul>
-				</div>
-				<div class="">
-					<div class="tab_tle">
-						<span class="int_s"></span>财务统计
-					</div>
-					<ul class="statistics">
-						<li>新增催款：5</li>
-						<li>新增收款：5</li>
-						<li>新增工资：5</li>
-						<li>未发工资：5</li>
-					</ul>
-				</div>
+
 			</div>
 			<!--main end-->
 </body>

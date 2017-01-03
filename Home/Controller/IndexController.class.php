@@ -132,9 +132,290 @@ class IndexController extends CommonController {
     }
 
     public function index(){
+        $this->login_test();
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3,5))) {
+            $data['1_name'] = M('employee')->where('status=1 and permission=3')->select();// 渠道统计
+            $count_1_name = count($data['1_name']);
+            $data['count_1_name'] = $count_1_name;
+        }
 
-        echo "<script>window.location.href='".__MODULE__."/User/userInfo/id/".$_SESSION[C('USER_AUTH_KEY')]['id'].".html'</script>";
-//        $this->display();
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))) {
+            $data['2_name'] = M('employee')->where('status=1 and permission=2')->select();// 顾问统计
+            $count_2_name = count($data['2_name']);
+            $data['count_2_name'] = $count_2_name;
+        }
+//渠道派单统计1
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))) {
+            //根据渠道获取信息
+            foreach( $data['1_name'] as $k=>$v){
+                $data['1_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and status>3 and  status<23')->count();//累积
+                $data['1_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and status>3 and  status<23 and  status_4 >="' . strtotime(date('Y-m')) . '"')->count();//月
+                $data['1_'.($k+1).'_3'] = M('order')->where('sales_id='.$v['id'].' and status>3 and  status<23 and  status_4 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            }
+            //统计
+            $data['1_'.($count_1_name+1).'_1'] = M('order')->where('order_type >1 and status>3 and  status<23')->count();//累积
+            $data['1_'.($count_1_name+1).'_2'] = M('order')->where('order_type >1 and status>3 and  status<23 and  status_4 >="' . strtotime(date('Y-m')) . '"')->count();//月
+            $data['1_'.($count_1_name+1).'_3'] = M('order')->where('order_type >1 and status>3 and  status<23 and  status_4 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['1_0'] = M('order')->where('order_type >1 and  status<23 and  status_4 >="' . strtotime(date('Y-m-d')) . '"')->count();// 今日总共派出
+        }
+
+//客服派单统计2
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,1))) {
+            //月嫂
+            $data['2_1_1'] = M('order')->where('order_type = 1 and status<23 and product!="育儿嫂" and product!="3980特价" ')->count();//累积
+            $data['2_1_2'] = M('order')->where('order_type = 1 and status<23 and product!="育儿嫂" and product!="3980特价"  and  status_1 >="' . strtotime(date('Y-m')) . '"')->count();//月
+            $data['2_1_3'] = M('order')->where('order_type = 1 and status<23 and product!="育儿嫂" and product!="3980特价"  and  status_1 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            //育儿嫂
+            $data['2_2_1'] = M('order')->where('order_type = 1 and status<23 and product="育儿嫂" ')->count();//累积
+            $data['2_2_2'] = M('order')->where('order_type = 1 and status<23 and product="育儿嫂"  and  status_1 >="' . strtotime(date('Y-m')) . '"')->count();//月
+            $data['2_2_3'] = M('order')->where('order_type = 1 and status<23 and product="育儿嫂"  and  status_1 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            //3980
+            $data['2_3_1'] = M('order')->where('order_type = 1 and status<23  and product="3980特价"')->count();//累积
+            $data['2_3_2'] = M('order')->where('order_type = 1 and status<23 and product="3980特价"  and  status_1 >="' . strtotime(date('Y-m')) . '"')->count();//月
+            $data['2_3_3'] = M('order')->where('order_type = 1 and status<23 and product="3980特价"  and  status_1 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            //统计
+            $data['2_4_1'] = M('order')->where('order_type = 1 and status<23')->count();//累积
+            $data['2_4_2'] = M('order')->where('order_type = 1 and status<23 and  status_1 >="' . strtotime(date('Y-m')) . '"')->count();//月
+            $data['2_4_3'] = M('order')->where('order_type = 1 and status<23 and  status_1 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['2_0'] = M('order')->where('order_type = 1 and  status<23 and  status_1 >="' . strtotime(date('Y-m-d')) . '"')->count();//今日派出客户单
+        }
+//渠道订单匹配3
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3,5))) {
+            //根据渠道获取信息
+            $data['3_name'] = $data['1_name'];// 今日总共派出
+            foreach( $data['3_name'] as $k=>$v){
+                $data['3_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23')->count();//累积
+                $data['3_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and  status_5 >="' . strtotime(date('Y-m')) . '"')->count();//月
+                $data['3_'.($k+1).'_3'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and  status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            }
+            //统计
+            $data['3_'.($count_1_name+1).'_1'] = M('order')->where('order_type >1 and status>4 and status<23')->count();//累积
+            $data['3_'.($count_1_name+1).'_2'] = M('order')->where('order_type >1 and status>4 and status<23 and  status_5 >="' . strtotime(date('Y-m')) . '"')->count();//月
+            $data['3_'.($count_1_name+1).'_3'] = M('order')->where('order_type >1 and status>4 and status<23 and  status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['3_0'] = M('order')->where('order_type >1 and  status<23 and  status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();// 今日总共匹配
+        }
+//渠道签单4
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))) {
+            //根据渠道获取信息
+            $data['4_name'] = $data['1_name'];// 今日总共派出
+            foreach( $data['4_name'] as $k=>$v){
+                $data['4_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23')->count();//累积
+                $data['4_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and  status_6 >="' . strtotime(date('Y-m')) . '"')->count();//月
+                $data['4_'.($k+1).'_3'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and  status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            }
+            //统计
+            $data['4_'.($count_1_name+1).'_1'] = M('order')->where('order_type >1 and status>5 and status<23')->count();//累积
+            $data['4_'.($count_1_name+1).'_2'] = M('order')->where('order_type >1 and status>5 and status<23 and  status_6 >="' . strtotime(date('Y-m')) . '"')->count();//月
+            $data['4_'.($count_1_name+1).'_3'] = M('order')->where('order_type >1 and status>5 and status<23 and  status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['4_0'] = M('order')->where('order_type >1 and  status<23 and  status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();// 今日总共签单
+        }
+
+//渠道订单状态5
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))) {
+            //根据渠道获取信息
+            $data['5_name'] = $data['1_name'];// 今日总共派出
+            foreach( $data['5_name'] as $k=>$v){
+                $data['5_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and status=6 and status<23')->count();//未上户
+                $data['5_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and status=7 and status<23')->count();//已上户
+                $data['5_'.($k+1).'_3'] = M('order')->where('sales_id='.$v['id'].' and status>7 and status<23')->count();//已下户
+            }
+            //统计
+            $data['5_'.($count_1_name+1).'_1'] = M('order')->where('order_type >1 and status=6 and status<23')->count();//未上户
+            $data['5_'.($count_1_name+1).'_2'] = M('order')->where('order_type >1 and status=7 and status<23')->count();//已上户
+            $data['5_'.($count_1_name+1).'_3'] = M('order')->where('order_type >1 and status>7 and status<23')->count();//已下户
+
+            $data['5_0'] = M('order')->where('order_type >1 and  status<23 and  status_7 >="' . strtotime(date('Y-m-d')) . '"')->count();// 今日总共上户
+        }
+
+//顾问接单统计6
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2))) {
+            //根据顾问统计
+            $data['6_name'] = $data['2_name'];
+            foreach( $data['6_name'] as $k=>$v){
+                //月嫂 包括3980
+                $data['6_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and status>2 and status<23 and product!="育儿嫂"')->count();//累积
+                $data['6_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and status>2 and status<23 and product!="育儿嫂" and status_2 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+                $data['6_'.($k+1).'_3'] = M('order')->where('sales_id='.$v['id'].' and status>2 and status<23 and product!="育儿嫂" and status_2 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+                //育儿嫂
+                $data['6_'.($k+1).'_4'] = M('order')->where('sales_id='.$v['id'].' and status>2 and status<23 and product="育儿嫂"')->count();//累积
+                $data['6_'.($k+1).'_5'] = M('order')->where('sales_id='.$v['id'].' and status>2 and status<23 and product="育儿嫂" and status_2 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+                $data['6_'.($k+1).'_6'] = M('order')->where('sales_id='.$v['id'].' and status>2 and status<23 and product="育儿嫂" and status_2 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            }
+            //统计月嫂 包括3980
+            $data['6_'.($count_2_name+1).'_1'] = M('order')->where('order_type =1 and status>2 and status<23 and product!="育儿嫂"')->count();//累积
+            $data['6_'.($count_2_name+1).'_2'] = M('order')->where('order_type =1 and status>2 and status<23 and product!="育儿嫂" and status_2 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['6_'.($count_2_name+1).'_3'] = M('order')->where('order_type =1 and status>2 and status<23 and product!="育儿嫂" and status_2 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            //统计育儿嫂
+            $data['6_'.($count_2_name+1).'_4'] = M('order')->where('order_type =1 and status>2 and status<23 and product="育儿嫂"')->count();//累积
+            $data['6_'.($count_2_name+1).'_5'] = M('order')->where('order_type =1 and status>2 and status<23 and product="育儿嫂" and status_2 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['6_'.($count_2_name+1).'_6'] = M('order')->where('order_type =1 and status>2 and status<23 and product="育儿嫂" and status_2 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['6_0'] = M('order')->where('order_type =1 and status>2 and status<23 and status_2 >="' . strtotime(date('Y-m-d')) . '"')->count();// 今日总共接单
+        }
+//顾问匹配订单统计7
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))) {
+            //根据顾问统计
+            $data['7_name'] = $data['2_name'];
+            foreach( $data['7_name'] as $k=>$v){
+                //月嫂 包括3980
+                $data['7_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and product!="育儿嫂"')->count();//累积
+                $data['7_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and product!="育儿嫂" and status_5 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+                $data['7_'.($k+1).'_3'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and product!="育儿嫂" and status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+                //育儿嫂
+                $data['7_'.($k+1).'_4'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and product="育儿嫂"')->count();//累积
+                $data['7_'.($k+1).'_5'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and product="育儿嫂" and status_5 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+                $data['7_'.($k+1).'_6'] = M('order')->where('sales_id='.$v['id'].' and status>4 and status<23 and product="育儿嫂" and status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            }
+            //统计月嫂 包括3980
+            $data['7_'.($count_2_name+1).'_1'] = M('order')->where('order_type =1 and status>4 and status<23 and product!="育儿嫂"')->count();//累积
+            $data['7_'.($count_2_name+1).'_2'] = M('order')->where('order_type =1 and status>4 and status<23 and product!="育儿嫂" and status_5 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['7_'.($count_2_name+1).'_3'] = M('order')->where('order_type =1 and status>4 and status<23 and product!="育儿嫂" and status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            //统计育儿嫂
+            $data['7_'.($count_2_name+1).'_4'] = M('order')->where('order_type =1 and status>4 and status<23 and product="育儿嫂"')->count();//累积
+            $data['7_'.($count_2_name+1).'_5'] = M('order')->where('order_type =1 and status>4 and status<23 and product="育儿嫂" and status_5 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['7_'.($count_2_name+1).'_6'] = M('order')->where('order_type =1 and status>4 and status<23 and product="育儿嫂" and status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['7_0'] = M('order')->where('order_type =1 and status>2 and status<23 and status_5 >="' . strtotime(date('Y-m-d')) . '"')->count();// 今日总共匹配
+        }
+//顾问签单统计8
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2))) {
+            //根据顾问统计
+            $data['8_name'] = $data['2_name'];
+            foreach( $data['8_name'] as $k=>$v){
+                //月嫂 包括3980
+                $data['8_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and product!="育儿嫂"')->count();//累积
+                $data['8_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and product!="育儿嫂" and status_6 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+                $data['8_'.($k+1).'_3'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and product!="育儿嫂" and status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+                //育儿嫂
+                $data['8_'.($k+1).'_4'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and product="育儿嫂"')->count();//累积
+                $data['8_'.($k+1).'_5'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and product="育儿嫂" and status_6 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+                $data['8_'.($k+1).'_6'] = M('order')->where('sales_id='.$v['id'].' and status>5 and status<23 and product="育儿嫂" and status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+            }
+            //统计月嫂 包括3980
+            $data['8_'.($count_2_name+1).'_1'] = M('order')->where('order_type =1 and status>5 and status<23 and product!="育儿嫂"')->count();//累积
+            $data['8_'.($count_2_name+1).'_2'] = M('order')->where('order_type =1 and status>5 and status<23 and product!="育儿嫂" and status_6 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['8_'.($count_2_name+1).'_3'] = M('order')->where('order_type =1 and status>5 and status<23 and product!="育儿嫂" and status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            //统计育儿嫂
+            $data['8_'.($count_2_name+1).'_4'] = M('order')->where('order_type =1 and status>5 and status<23 and product="育儿嫂"')->count();//累积
+            $data['8_'.($count_2_name+1).'_5'] = M('order')->where('order_type =1 and status>5 and status<23 and product="育儿嫂" and status_6 >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['8_'.($count_2_name+1).'_6'] = M('order')->where('order_type =1 and status>5 and status<23 and product="育儿嫂" and status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['8_0'] = M('order')->where('order_type =1 and status>2 and status<23 and status_6 >="' . strtotime(date('Y-m-d')) . '"')->count();// 今日总共签单
+        }
+//需要催款统计9
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))) {
+            //根据顾问统计
+            $data['9_name'] = $data['2_name'];
+            foreach( $data['8_name'] as $k=>$v){
+                $data['9_'.($k+1).'_1'] = M('order')->where('sales_id='.$v['id'].' and is_press=1 and status<23 and product!="育儿嫂"')->count();//月嫂
+                $data['9_'.($k+1).'_2'] = M('order')->where('sales_id='.$v['id'].' and is_press=1 and status<23 and product="育儿嫂"')->count();//育儿嫂
+            }
+            $data['9_'.($count_2_name+1).'_1'] = M('order')->where('order_type =1 and is_press=1 and status<23 and product!="育儿嫂"')->count();//月嫂
+            $data['9_'.($count_2_name+1).'_2'] = M('order')->where('order_type =1 and is_press=1 and status<23 and product="育儿嫂"')->count();//育儿嫂
+
+            $data['9_0'] = M('order')->where('order_type =1 and is_press=1 and status<23')->count();// 今日总共签单
+        }
+//需要催款金额10
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2,5))) {
+            //月嫂
+            $data['10_1_1'] = M('order')->where('order_type=1 and is_press=1 and status<23 and product!="育儿嫂"')->count();//人数
+            $sum_ys = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come')->where('order_type=1 and is_press=1 and status<23 and product!="育儿嫂"')->find();//金额
+            $data['10_1_2'] = $sum_ys['come'] - $sum_ys ['come_true'];
+
+            //育儿嫂
+            $data['10_2_1'] = M('order')->where('order_type=1 and is_press=1 and status<23 and product="育儿嫂"')->count();//人数
+            $sum_yes = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come')->where('order_type=1 and is_press=1 and status<23 and product="育儿嫂"')->find();//金额
+            $data['10_2_2'] = $sum_yes['come'] - $sum_yes ['come_true'];
+
+            //统计
+            $data['10_3_1'] = M('order')->where('order_type=1 and is_press=1 and status<23')->count();//人数
+            $sum_all = M('order')->field('sum(price_come_true) as come_true,sum(price_come) as come')->where('order_type=1 and is_press=1 and status<23')->find();//金额
+            $data['10_3_2'] = $sum_all['come'] - $sum_all ['come_true'];
+
+            $data['10_0'] = $data['10_3_2'];// 今日总共签单
+        }
+//学员统计11
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))) {
+            //渠道
+            $data['11_1_1'] = M('nurse')->where('status!=24 and come="渠道" and is_student=1')->count();//累积
+            $data['11_1_2'] = M('nurse')->where('status!=24 and come="渠道" and is_student=1 and add_time >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['11_1_3'] = M('nurse')->where('status!=24 and come="渠道" and is_student=1 and add_time >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            //自费
+            $data['11_2_1'] = M('nurse')->where('status!=24 and come="自费" and is_student=1')->count();//累积
+            $data['11_2_2'] = M('nurse')->where('status!=24 and come="自费" and is_student=1 and add_time >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['11_2_3'] = M('nurse')->where('status!=24 and come="自费" and is_student=1 and add_time >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+
+            //统计
+            $data['11_3_1'] = M('nurse')->where('status!=24 and is_student=1')->count();//累积
+            $data['11_3_2'] = M('nurse')->where('status!=24 and is_student=1 and add_time >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['11_3_3'] = M('nurse')->where('status!=24 and is_student=1 and add_time >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['11_0'] = M('nurse')->where('status!=24 and is_student=1')->count();// 今日总共签单
+        }
+//学员转阿姨统计12
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))) {
+            //渠道
+            $data['12_1_1'] = M('nurse')->where('type=2 and status!=24 and come="渠道" and is_student=1')->count();//累积
+            $data['12_1_2'] = M('nurse')->where('type=2 and status!=24 and come="渠道" and is_student=1 and add_time >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['12_1_3'] = M('nurse')->where('type=2 and status!=24 and come="渠道" and is_student=1 and add_time >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            //自费
+            $data['12_2_1'] = M('nurse')->where('type=2 and status!=24 and come="自费" and is_student=1')->count();//累积
+            $data['12_2_2'] = M('nurse')->where('type=2 and status!=24 and come="自费" and is_student=1 and add_time >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['12_2_3'] = M('nurse')->where('type=2 and status!=24 and come="自费" and is_student=1 and add_time >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+
+            //统计
+            $data['12_3_1'] = M('nurse')->where('type=2 and status!=24 and is_student=1')->count();//累积
+            $data['12_3_2'] = M('nurse')->where('type=2 and status!=24 and is_student=1 and add_time >="' . strtotime(date('Y-m')) . '"')->count();//当月
+            $data['12_3_3'] = M('nurse')->where('type=2 and status!=24 and is_student=1 and add_time >="' . strtotime(date('Y-m-d')) . '"')->count();//当日
+
+            $data['12_0'] = M('nurse')->where('type=2 and status!=24 and is_student=1')->count();// 今日总共签单
+        }
+//阿姨统计13
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))) {
+            $data['13_1_1'] = M('nurse')->where('type=2 and status!=24 and agreement_type=3')->count();//3单试用
+            $data['13_1_2'] = M('nurse')->where('type=2 and status!=24 and agreement_type=1')->count();//一年合同
+
+            $data['13_0'] = M('nurse')->where('type=2 and status!=24')->count();// 总共阿姨
+        }
+//顾问单统计14
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2))) {
+            //根据顾问统计
+            $data['14_name'] = $data['2_name'];
+            foreach( $data['14_name'] as $k=>$v){
+                $data['14_'.($k+1).'_1'] = M('order')->where('order_type=1 and sales_id='.$v['id'].' and status<23 and product!="育儿嫂"')->count();//月嫂
+                $data['14_'.($k+1).'_2'] = M('order')->where('order_type=1 and sales_id='.$v['id'].' and status<23 and product="育儿嫂"')->count();//月嫂
+            }
+            //统计月嫂 包括3980
+            $data['14_'.($count_2_name+1).'_1'] = M('order')->where('order_type=1 and status<23 and product!="育儿嫂"')->count();//月嫂
+            $data['14_'.($count_2_name+1).'_2'] = M('order')->where('order_type=1 and status<23 and product="育儿嫂"')->count();//月嫂
+
+            $data['14_0'] = M('order')->where('order_type=1 and status<23')->count();//月嫂;// 订单总数
+        }
+
+//渠道单15
+        if(in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,3))) {
+            //根据渠道获取信息
+            $data['15_name'] = $data['1_name'];
+            foreach( $data['15_name'] as $k=>$v){
+                $data['15_1_'.($k+1).''] = M('order')->where('order_type>1 and sales_id='.$v['id'].' and status<23')->count();//每个渠道统计
+            }
+            //统计
+            $data['15_0'] = M('order')->where('order_type>1 and status<23')->count();// 今日总共渠道
+        }
+        $this->assign('data',$data);
+//        echo "<script>window.location.href='".__MODULE__."/User/userInfo/id/".$_SESSION[C('USER_AUTH_KEY')]['id'].".html'</script>";
+        $this->display();
     }
     //退出登录
     public function login_out(){

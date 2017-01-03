@@ -25,15 +25,15 @@
     </div>
     <ul class="left_menu">
         <li><a href="__MODULE__/"><span class="dingdan">首<i></i>页</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,1,2,3))){echo 'display:none;';}?>" ><a href="__MODULE__/Need/serviceList.html"><span class="dingdan">派单</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,1,2,3))){echo 'display:none;';}?>"><a href="__MODULE__/TakeNeed/serviceList.html"><span class="dingdan">接单</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?>"><a href="__MODULE__/Nurse/nurseList_1.html"><span class="dingdan">阿姨</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?>"><a href="__MODULE__/Student/studentList_1.html"><span class="dingdan">学员</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?>"><a href="__MODULE__/Mate/mateList.html"><span class="dingdan">匹配</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?>"><a href="__MODULE__/Hold/holdList.html"><span class="dingdan">维系</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?>"><a href="__MODULE__/Safe/safeList.html"><span class="dingdan">阿姨保险</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?>"><a href="__MODULE__/Money/pressList.html"><span class="dingdan">催收付款</span></a></li>
-        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?>"><a href="__MODULE__/User/userList.html"><span class="dingdan">员工管理</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,1,3))){echo 'display:none;';}?> " ><a href="__MODULE__/Need/serviceList.html"><span class="dingdan">派单</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,2))){echo 'display:none;';}?> "><a href="__MODULE__/TakeNeed/serviceList.html"><span class="dingdan">接单</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))){echo 'display:none;';}?>"><a href="__MODULE__/Nurse/nurseList_1.html"><span class="dingdan">阿姨</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))){echo 'display:none;';}?>"><a href="__MODULE__/Student/studentList_1.html"><span class="dingdan">学员</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))){echo 'display:none;';}?> "><a href="__MODULE__/Mate/mateList.html"><span class="dingdan">匹配</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))){echo 'display:none;';}?> "><a href="__MODULE__/Hold/holdList.html"><span class="dingdan">维系</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))){echo 'display:none;';}?>"><a href="__MODULE__/Safe/safeList.html"><span class="dingdan">阿姨保险</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,4,5))){echo 'display:none;';}?> "><a href="__MODULE__/Money/pressList.html"><span class="dingdan">催收付款</span></a></li>
+        <li style="<?php if(!in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))){echo 'display:none;';}?> "><a href="__MODULE__/User/userList.html"><span class="dingdan">员工管理</span></a></li>
     </ul>
 </div>
 

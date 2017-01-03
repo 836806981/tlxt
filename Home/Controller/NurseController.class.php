@@ -152,6 +152,8 @@ class NurseController extends CommonController {
 
     //添加
     public function addNurse(){
+        set_time_limit(0);
+
         if(I('post.')){
             $post = I('post.');
             if($post['name']==''||$post['phone']==''){
@@ -374,6 +376,7 @@ class NurseController extends CommonController {
 
     //修改
     public function changeNurse(){
+        set_time_limit(0);
         if(I('post.')){
             $post = I('post.');
             if($post['name']==''||$post['phone']==''){

@@ -222,12 +222,12 @@
 						<tr>
 							<td><label>协议类型：</label>
 								<div class="rtdiv">
-									<div>
-										<input type="radio" name="agreement_type" value="3" <if condition="$info.agreement_type eq 3">checked</if>/>三单试用&nbsp;
-										<input type="number" class="form-control"  name="price" id="price" placeholder="请填写定薪工资"  <if condition="$info.agreement_type eq 3">value="{$info.price}"</if>/>
-									</div>
+									<!--<div>-->
+										<!--<input type="radio" name="agreement_type" value="3" <if condition="$info.agreement_type eq 3">checked</if>/>三单试用&nbsp;-->
+										<!--<input type="number" class="form-control"  name="price" id="price" placeholder="请填写定薪工资"  <if condition="$info.agreement_type eq 3">value="{$info.price}"</if>/>-->
+									<!--</div>-->
 									<div class="magrintop10">
-										<input type="radio" name="agreement_type" value="1" <if condition="$info.agreement_type eq 1">checked</if>/>正式员工&nbsp;
+										<input type="radio" name="agreement_type" value="1" checked/>正式员工&nbsp;
 										<select class="form-control" name="price_name">
 									        <option <if condition="$info.price_name eq '小田螺1.1'">selected</if>>小田螺1.1</option>
 									        <option <if condition="$info.price_name eq '小田螺1.2'">selected</if>>小田螺1.2</option>

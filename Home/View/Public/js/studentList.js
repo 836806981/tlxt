@@ -109,7 +109,7 @@ $.extend({
                             status_24 = '<a do_type="taotai" s_id="'+item.id+'" s_name="'+item.name+'">淘汰</a>';
                         }
                         if(item.status==1) {
-                            str += '<tr class="info_name data">\
+                            str += '<tr class=" data">\
                             <td width="8%">' + item.number + '</td>\
                             <td width="8%">' + item.name + '</td>\
                             <td width="8%">' + item.status_name + '</td>\
@@ -127,7 +127,7 @@ $.extend({
                         </tr>';
 
                         }else if(item.status==2) {
-                            str += '<tr class="info_name data">\
+                            str += '<tr class=" data">\
                             <td width="8%">' + item.number + '</td>\
                             <td width="8%">' + item.name + '</td>\
                             <td width="8%">' + item.status_name + '</td>\
@@ -144,7 +144,7 @@ $.extend({
                         </tr>';
 
                         }else if(item.status==3) {
-                            str += '<tr class="info_name data">\
+                            str += '<tr class=" data">\
                             <td width="8%">' + item.number + '</td>\
                             <td width="8%">' + item.name + '</td>\
                             <td width="8%">' + item.status_name + '</td>\
@@ -161,7 +161,7 @@ $.extend({
                         </tr>';
 
                         }else if(item.status==24) {
-                            str += '<tr class="info_name data">\
+                            str += '<tr class=" data">\
                             <td width="8%">' + item.number + '</td>\
                             <td width="8%">' + item.name + '</td>\
                             <td width="8%">' + item.status_name + '</td>\

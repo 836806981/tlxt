@@ -5,6 +5,7 @@ class UserController extends CommonController {
 
 
     public function _initialize(){
+        $this->authority(array(24));
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
             exit;
@@ -27,7 +28,7 @@ class UserController extends CommonController {
         $list = M('employee')->limit($start,$pagenum)->order('status desc ,add_time desc')->select();
         $count = M('employee')->count();
 
-        $permission_name = ['','客服','顾问','内勤管理','财务'];
+        $permission_name = ['','客服','顾问','渠道','财务','内勤'];
         $permission_name[24] = '系统管理员';
         foreach($list as $k=>$v){
             $list[$k]['permission_name'] = $permission_name[$v['permission']];
@@ -94,7 +95,7 @@ class UserController extends CommonController {
             }
             $user_info = M('employee')->where('id='.I('get.id').'')->find();
 
-            $permission_name = ['','客服','顾问','内勤管理','财务'];
+            $permission_name = ['','客服','顾问','渠道','财务','内勤'];
             $permission_name[24] = '系统管理员';
             $user_info['permission_name'] = $permission_name[$user_info['permission']];
 
@@ -138,7 +139,7 @@ class UserController extends CommonController {
 
         $user_info = M('employee')->where('id='.I('get.id').'')->find();
 
-        $permission_name = ['','客服','顾问','内勤管理','财务'];
+        $permission_name = ['','客服','顾问','渠道','财务','内勤'];
         $permission_name[24] = '系统管理员';
         $user_info['permission_name'] = $permission_name[$user_info['permission']];
 

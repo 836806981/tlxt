@@ -6,11 +6,11 @@
 namespace Home\Controller;
 use Think\Controller;
 class StudentController extends CommonController {
-    public function  login_test(){
+    public function _initialize(){
+        $this->authority(array(24,5));
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
-            echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Admin/login.html';</script>";
+            echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
             exit;
-            //str_pad($str,6,0,STR_PAD_LEFT);  6位数不足补0
         }
     }
     //学习中
@@ -94,6 +94,7 @@ class StudentController extends CommonController {
 
     //添加
     public function addStudent(){
+        set_time_limit(0);
         if(I('post.')){
             $post = I('post.');
             if($post['name']==''||$post['phone']==''){
@@ -317,6 +318,7 @@ class StudentController extends CommonController {
 
     //修改
     public function changeStudent(){
+        set_time_limit(0);
         if(I('post.')){
             $post = I('post.');
             if($post['name']==''||$post['phone']==''){

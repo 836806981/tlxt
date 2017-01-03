@@ -27,8 +27,8 @@ class CommonController extends Controller{
             exit;
         }
 
-        $dst_path = 'http://xt2.tlay.com/Uploads'.$dst_path;
-        $src_path = 'http://xt2.tlay.com/Home/View/Public/img/shuiyin.png';
+        $dst_path = $_SERVER['HTTP_ORIGIN'].'/Uploads'.$dst_path;
+        $src_path = $_SERVER['HTTP_ORIGIN'].'/Home/View/Public/img/shuiyin.png';
 
 //imagecopyresized( $dst_path, $src_path,  0,  0,  0,  0, dst_w,  dst_h,  src_w,  src_h );
 //创建图片的实例

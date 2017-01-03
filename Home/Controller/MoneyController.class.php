@@ -5,6 +5,7 @@ class MoneyController extends CommonController {
 
 
     public function _initialize(){
+        $this->authority(array(24,4,5));
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
             echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
             exit;
@@ -13,15 +14,19 @@ class MoneyController extends CommonController {
 
     //催款列表
     public function pressList(){
+        if($_SESSION[C('USER_AUTH_KEY')]['permission'] == 4){
+            echo "<script>window.location.href='" . __MODULE__ . "/Money/financeList.html';</script>";
+            exit;
+        }
 
         $gu  = M('employee')->where('permission =2 ')->select();
         $this->assign('gu',$gu);
         $this->display();
     }
 
-     //催款列表
+     //收款列表
     public function priceComeList(){
-
+        $this->authority(array(24,5));
         $gu  = M('employee')->where('permission =2 ')->select();
         $this->assign('gu',$gu);
         $this->display();
@@ -36,25 +41,28 @@ class MoneyController extends CommonController {
 
     //j结算列表
     public function statement(){
-
+        $this->authority(array(24,5));
         $this->assign('belong',1);
         $this->display();
     }
 
     //财务审核
     public function financeList(){
+        $this->authority(array(24,4));
         $this->assign('belong',2);
         $this->display('statement');
     }
 
     //boss审核
     public function bossList(){
+        $this->authority(array(24));
         $this->assign('belong',3);
         $this->display('statement');
     }
 
     //工资发放
     public function giveList(){
+        $this->authority(array(24,5));
         $this->assign('belong',4);
         $this->display('statement');
     }
@@ -123,6 +131,7 @@ class MoneyController extends CommonController {
     }
     //财务审核阿姨工资
     public function finance(){
+        $this->authority(array(24,4));
         if (!I('get.id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -148,6 +157,7 @@ class MoneyController extends CommonController {
     }
     //财务再次审核阿姨工资
     public function finance_re(){
+        $this->authority(array(24,4));
         if (!I('get.id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -174,6 +184,7 @@ class MoneyController extends CommonController {
 
     //boss通过工资审核
     public function boss3(){
+        $this->authority(array(24));
         if (!I('get.id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -200,6 +211,7 @@ class MoneyController extends CommonController {
 
     //boss不通过工资审核
     public function boss2(){
+        $this->authority(array(24));
         if (!I('post.order_nurse_id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -227,6 +239,7 @@ class MoneyController extends CommonController {
 
     //已发
     public function give(){
+        $this->authority(array(24,4));
         if (!I('post.order_nurse_id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -266,6 +279,7 @@ class MoneyController extends CommonController {
 
     //结算阿姨薪资
     public function do_statement(){
+        $this->authority(array(24,5));
         $post = I('post.');
         $post['reward_reason'] = $post['reward_reason1'].$post['reward_reason2'];
         $post['is_statement'] = 2;
@@ -548,6 +562,7 @@ class MoneyController extends CommonController {
 
     //新增收款
     public function addPrice(){
+        $this->authority(array(24,5));
         $post = I('post.');
         $post['add_time'] = time();
         $add_mod = M('price_come')->add($post);
@@ -573,6 +588,7 @@ class MoneyController extends CommonController {
 
     //新增催款
     public function addPress(){
+        $this->authority(array(24,5));
         $post = I('post.');
         $post['add_time'] = time();
         $add_mod = M('press')->add($post);
@@ -595,6 +611,7 @@ class MoneyController extends CommonController {
 
     //新增维系
     public function addHold(){
+        $this->authority(array(24,5));
         $post = I('post.');
         $post['add_time'] = time();
         $add_mod = M('hold')->add($post);
