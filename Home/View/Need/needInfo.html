@@ -64,6 +64,13 @@
 								</div>
 							</td>
 						</tr>
+						<if condition="$info['status'] eq 22">
+							<tr>
+								<td colspan="2"><label>打回原因：</label>
+									{$info.back_reason}
+								</td>
+							</tr>
+						</if>
 					</tbody>
 				</table>
 				<div class="form-group">

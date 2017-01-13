@@ -284,6 +284,7 @@
 							success: function(data){
 								$.each(data,function(i,item){
 									var time_str = '';
+									var href_str = '';
 									if(type == 1){
 										time_str = item.status_8_str;
 									}else if(type == 2){
@@ -291,13 +292,20 @@
 									}else if(type == 3){
 										time_str = item.status_6_str;
 									}
+
+									if( item.order_type==1 ){
+										href_str = '__MODULE__/TakeNeed/overOrderInfo/id/'+item.order_id+'.html';
+									}else{
+										href_str = '__MODULE__/Qneed/q_needInfo/id/'+item.order_id+'.html';
+									}
+
 									str_search +='<tr>'
 									+			'<td>'+item.order_number+'</td>'
 									+			'<td>'+item.order_type_name+'</td>'
 									+			'<td>'+item.add_employee+'</td>'
 									+			'<td>'+time_str+'</td>'
 									+			'<td>'+item.order_name+'</td>'
-									+			'<td><a href="__MODULE__/TakeNeed/overOrderInfo/id/'+item.order_id+'.html" target="_blank">查看详情</a></td>'
+									+			'<td><a href="'+href_str+'" target="_blank">查看详情</a></td>'
 									+		'</tr>';
 								});
 

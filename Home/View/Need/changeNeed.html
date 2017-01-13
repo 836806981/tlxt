@@ -28,7 +28,7 @@
 							<td width="47%"><label>派发人：</label>
 								{$info.add_employee}
 							</td>
-							<input type="hidden" name="id" value="{$info.id}"/>
+							<input type="hidden" name="id" value="{$info.id}" id="order_id"/>
 							<td width="53%"><label>需求编号：</label>
 								<input type="text" class="form-control" value="{$info.number}" readonly="readonly" />
 							</td>
@@ -76,7 +76,8 @@
 						</tr>
 						<tr>
 							<td><label>手机：</label>
-								<input type="text" class="form-control" value="{$info.phone}" name="phone" id="phone"/>
+								<input type="text" class="form-control" value="{$info.phone}" name="phone" id="phone"/><br/>
+								<span style="color: red;" id="have_order"></span>
 							</td>
 							<td><label>微信：</label>
 								<input type="text" class="form-control" value="{$info.wchat}" name="wchat" id="wchat"/>
@@ -173,6 +174,22 @@
 						price.val(3980).attr('readonly','readonly');
 					}
 				});
+
+				$('#phone').live('change',function(){
+					var phone = $('#phone').val();
+					var order_id = $('#order_id').val();
+
+					$.AjaxPost(MODULE+"/Need/have_order", {phone:phone,id:order_id}, function (backdata) {
+						if(backdata.code==1000){
+							var str_span = '该手机号已派给顾问‘'+backdata.sales_name+'’编号'+backdata.number+' 状态'+backdata.status_name+'';
+							$('#have_order').html(str_span);
+						}else {
+							$('#have_order').html('');
+							return false;
+						}
+					});
+				});
+
 			</script>
 
 			

@@ -61,15 +61,29 @@
 					<div class="form-group">
 						 <label>阿姨姓名</label><input type="text" class="form-control" id="nurse_name"/>
 					</div>
+
+					<if condition="ACTION_NAME eq 'statement'">
+						<div class="form-group">
+							<label>薪酬状态</label>
+							<select class="form-control" id="is_statement">
+								<option value="0">全部</option>
+								<option value="1">待结算</option>
+								<option value="2">审核中</option>
+								<option value="3">已结算</option>
+							</select>
+						</div>
+					</if>
+
 					<div class="form-group">
-						<label>薪酬状态</label>
-						<select class="form-control" id="is_statement">
-					        <option value="0">全部</option>
-					        <option value="1">待结算</option>
-					        <option value="2">审核中</option>
-					        <option value="3">已结算</option>
-					    </select>
+						<label>订单类型</label>
+						<select class="form-control" id="order_type">
+							<option value="0">全部</option>
+							<option value="1">客户单</option>
+							<option value="2">渠道单</option>
+							<!--<option value="3">已结算</option>-->
+						</select>
 					</div>
+
 					<div class="form-group">
 						 <button type="submit" class="subform" id="search">搜索</button>
 					</div>
@@ -91,6 +105,7 @@
 							<td width="8%">阿姨姓名</td>
 							<td width="8%">状态</td>
 							<td width="8%">当前等级</td>
+							<td width="8%">审核人</td>
 							<td width="15%">操作</td>
 						</tr>
 						<!--<tr>-->
@@ -179,7 +194,9 @@
 									+       '<input type="hidden"  value="'+$(this).attr('order_nurse_id')+'" name="id" />'
 									+	'</div>'
 									+	'<div class="opn_div clear">'
-									+		'<label><input type="button" class="default_btn" name="jiangli" value="给予奖励"/>&nbsp;&nbsp;<span>获得客户锦旗 奖励200元</span></label>'
+									+		'<label><input type="button" class="default_btn" name="jiangli" value="给予奖励"/>&nbsp;&nbsp;'
+//									+       '<span>获得客户锦旗 奖励200元</span>'
+									+		'</label>'
 									+	'</div>'
 									+	'<div class="opn_div clear">'
 									+		'<label>实际薪资：</label><input type="text" class="form-control" value="'+$(this).attr('nurse_pay_do')+'" name="nurse_pay_do" id="nurse_pay_do"/>'
@@ -328,7 +345,16 @@
 					content: '<div class="lay_cnt">'
 					+   '<form action="__MODULE__/Money/give" method="post" id="form_give"   enctype="multipart/form-data">'
 					+	'<div  class="opn_div clear">'
-					+		'<label>应发工资：</label>'+$(this).attr('nurse_pay_do')+$(this).attr('price_add')+$(this).attr('reward_price')+''
+					+		'<label>阿姨姓名：'+$(this).attr('nurse_name')+'</label>'
+					+	'</div>'
+					+	'<div  class="opn_div clear">'
+					+		'<label>开户行：'+$(this).attr('bank_name')+'</label>'
+					+	'</div>'
+					+	'<div  class="opn_div clear">'
+					+		'<label>银行账号：'+$(this).attr('back_card')+'</label>'
+					+	'</div>'
+					+	'<div  class="opn_div clear">'
+					+		'<label>应发工资：'+$(this).attr('nurse_pay_do')+'+'+$(this).attr('add_nurse_price')+'+'+$(this).attr('reward_price')+'</label>'
 					+	'</div>'
 					+	'<div  class="opn_div clear">'
 					+		'<label>实发工资：</label><input type="text" name="nurse_pay_true" id="nurse_pay_true" class="form-control" value=""/>'

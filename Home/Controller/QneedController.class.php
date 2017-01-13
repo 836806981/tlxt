@@ -19,11 +19,18 @@ class QneedController extends CommonController {
                 exit;
             }
             $post = I('post.');
+            if($_SESSION[C('USER_AUTH_KEY')]['permission']==24){
+                $employee = M('employee')->where('id='.$post['source'].'')->find();
+                $post['source'] = $employee['real_name'];
+                $post['sales_id'] = $employee['id'];
+                $post['sales_name'] = $employee['real_name'];
+            }else if($_SESSION[C('USER_AUTH_KEY')]['permission']==3){
+                $post['source'] = $_SESSION[C('USER_AUTH_KEY')]['permission'];
+                $post['sales_id'] =  $_SESSION[C('USER_AUTH_KEY')]['id'];
+                $post['sales_name'] =  $_SESSION[C('USER_AUTH_KEY')]['real_name'];
+            }
 
-            $employee = M('employee')->where('id='.$post['source'].'')->find();
-            $post['source'] = $employee['real_name'];
-            $post['sales_id'] = $employee['id'];
-            $post['sales_name'] = $employee['real_name'];
+
 
             $post['add_time'] = time();
             $post['status_1'] = $post['add_time'];

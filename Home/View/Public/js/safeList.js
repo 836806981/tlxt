@@ -82,19 +82,31 @@ $.extend({
 				var str='';
 				var $dom=$(".last_tr");
                 $(".data").remove();
+                var str_do = "javascript:return window.confirm('确认操作？')";
                 var back = '';
                 if(List_zcj!=null){
                     $.each(List_zcj,function(i,item){
                         //未接单或者打回才能放回收站
+                        var Y_m = '';
+                        var buy_safe = '';
+                        if(item.type!='') {
+                            buy_safe = '<a class="nurse_safe" safe_id="' + item.id + '" nurse_name="'+item.nurse_name+'">购买</a> |';
+                        }
+                        if(item.type==''){
+                            Y_m = '<br/> <a href="'+MODULE+'/Safe/nurseBuyType/id/'+item.id+'/type/1.html"  onclick="'+str_do+'">包年</a> | <a href="'+MODULE+'/Safe/nurseBuyType/id/'+item.id+'/type/2.html"  onclick="'+str_do+'">包月</a>';
+                        }
+
                         str +='	<tr class="data">\
                         <td>'+item.order_number+'</td>\
                         <td>'+item.order_name+'</td>\
                         <td>'+item.nurse_number+'</td>\
                         <td>'+item.nurse_name+'</td>\
+                        <td>'+item.id_card+'</td>\
                         <td>'+item.status_6_str+'</td>\
                         <td>'+item.status_name+'</td>\
                         <td>'+item.time+'</td>\
-                        <td><a class="nurse_safe" safe_id="' + item.id + '" nurse_name="'+item.nurse_name+'">购买</a> | <a class="no_safe" safe_id="' + item.id + '">不需要购买</a> | <a href="'+MODULE+'/Safe/nurseBuy/id/'+item.nurse_id+'.html">查看记录</a></td>\
+                        <td>'+item.type+'</td>\
+                        <td>'+buy_safe+' <a class="no_safe" safe_id="' + item.id + '">不需要购买</a> | <a href="'+MODULE+'/Safe/nurseBuy/id/'+item.nurse_id+'.html">查看记录</a> '+Y_m+'</td>\
                         </tr>';
                     });
                     $dom.before(str);

@@ -248,17 +248,29 @@
             $('.black').remove();
         });
         </script>
-        <!--<section>-->
-            <!--<div class="title f-cb"><img src="__PUBLIC__/jianli/img/t7.png"><span>预定客户</span></div>-->
-            <!--<table cellspacing="0" cellpadding="0" border="0" class="yuding">-->
-                <!--<tr class="first">-->
-                    <!--<td>订单编号</td>-->
-                    <!--<td>服务地点</td>-->
-                    <!--<td>客户称呼</td>-->
-                    <!--<td>订单价格</td>-->
-                    <!--<td>预产期</td>-->
-                    <!--<td>当前状态</td>-->
-                <!--</tr>-->
+
+        <if condition="$orders[0]['order_number'] neq ''">
+        <section>
+            <div class="title f-cb"><img src="__PUBLIC__/jianli/img/t7.png"><span>预定客户</span></div>
+            <table cellspacing="0" cellpadding="0" border="0" class="yuding">
+                <tr class="first">
+                    <td>订单编号</td>
+                    <td>服务地点</td>
+                    <td>客户称呼</td>
+                    <td>订单价格</td>
+                    <td>预产期</td>
+                    <td>当前状态</td>
+                </tr>
+                <volist name="orders" id="vo">
+                    <tr>
+                        <td>{$vo.order_number}</td>
+                        <td>{$vo.service_place}</td>
+                        <td>{$vo.order_name}</td>
+                        <td>{$vo.product_price}元</td>
+                        <td>{$vo.b_time}</td>
+                        <td>{$vo.status_name}</td>
+                    </tr>
+                </volist>
                 <!--<tr>-->
                     <!--<td>TLAY-20160500</td>-->
                     <!--<td>成都高新区</td>-->
@@ -267,8 +279,9 @@
                     <!--<td>2016-10-22</td>-->
                     <!--<td>已上户</td>-->
                 <!--</tr>-->
-            <!--</table>-->
-        <!--</section>-->
+            </table>
+        </section>
+            </if>
     </article>
 </body>
 

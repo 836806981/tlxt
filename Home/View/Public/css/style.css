@@ -755,105 +755,61 @@ h5{
 
 
 
-/*
 
-ÃƒÆ’Ã‚Â¥Ãƒâ€¹Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â©Ãƒâ€šÃ‚Â¡Ãƒâ€šÃ‚ÂµÃƒÆ’Ã‚Â¦Ãƒâ€šÃ‚Â Ãƒâ€šÃ‚Â·ÃƒÆ’Ã‚Â¥Ãƒâ€šÃ‚Â¼Ãƒâ€šÃ‚Â
-
-*/
 
 
 
 
 .pagehide{display: none !important;}
 .yahei{
-	font-family:"Microsoft YaHei",\5fae\8f6f\96c5\9ed1,arial,\5b8b\4f53;
+	font-family: "Microsoft Yahei","Helvetica Neue","ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3",Helvetica,Arial,sans-serif;
 	text-decoration: none;
 	color: #666666;
 	text-align: center;
-	border-radius:5px;
-	line-height: 25px;
-	margin-left: 20px;
+	/* border-radius:5px; */
+	line-height: 36px;
+	/* margin-left: 20px; */
+	-webkit-font-smoothing:antialiased;
 }
 .prev_page,.next_page{
-	width: 75px;
-	height: 25px;
-	border: 1px solid #666666;
+	width: 80px;
+	height: 36px;
+	/* border: 1px solid #666666; */
+	background: #097ff9;
+	display: inline-block;
+	color: #ffffff;
+	line-height: 36px;
+	margin-left: 10px;
+	border-radius:  0px 3px 3px 0px;
 }
-
+.prev_page{
+	margin:0;
+	margin-right: 10px;
+	border-radius:  3px 0px 0px 3px;
+}
 .yahei:hover{
-	border: 1px solid #47c8a2;
-	background: #47c8a2;
+	/* border: 1px solid #579fe9; */
+	background: #579fe9;
 	color: white;
 }
 
 .pagenum{
-	width: 30px;
-	height: 25px;
-	border: 1px solid #666666;
+	width: 36px;
+	height: 36px;
+	/* border: 1px solid #666666; */
 	display: inline-block;
-
+	background: #097ff9;
+	color: #ffffff;
+	border-right: 1px #579fe9 solid;
 }
 
 .current{
-	width: 30px;
-	height: 25px;
-	background: #47c8a2;
+	width: 36px;
+	height: 36px;
+	background: #579fe9;
 	color: white;
 	display: inline-block;
 }
-/*ÃƒÂ¦Ã‚Â¡Ã‚Â£ÃƒÂ¦Ã…â€œÃ…Â¸*/
-/*.timer{
-	width: 646px;
-	height: 12px;
-	border: 1px solid #097ff9;
-	margin: 28px 0px 30px 40px;
-	clear: both;
-}
-.blank{
-	background: #097ff9;
-	width: 80px;
-	height: 10px;
-	position: relative;
-	margin-right: 80px;
-	float: left;
-}
-.blank span{
-	background: none;
-	font-size: 12px;
-	color: #666;
-	display: block;
-	width: 80px;
-	position: absolute;
-	text-align: center;
-	top: -24px;
-	height: 20px;
-	line-height: 20px;
-	margin: 0;
-}
-.blank span.afterTime{
-	left: -40px;
-}
-.blank span.beforeTime{
-	left: 40px;
-}
-.blank span.customer_name{
-	left: 0px;
-	top: 12px;
-}
-
-.add_btn{
-	padding: 1px 4px;
-}
-.del_btn{
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: #579fe9;
-}
-.add_dangqi{
-	margin: 0;
-	margin-left: 5px;
-}*/
 
 .lxfs tr td{
 	padding-left: 5px;

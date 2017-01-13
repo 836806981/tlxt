@@ -42,7 +42,7 @@
 							</tr>
 							<tr>
 								<td><label>上户日期：</label><if condition="$info.status lt 7">{$info.b_time}(预)<elseif condition="$info.status egt 7"/>{$info.true_b_time}</if></td>
-								<td><label>下户日期：</label><if condition="in_array($info['status'],array(6,7))">{$info.s_time}(预)<elseif condition="$info.status egt 8"/>{$info.true_s_time}</if></td>
+								<td><label>下户日期：</label><if condition="in_array($info['status'],array(3,4,5,6,7))">{$info.s_time}(预)<elseif condition="$info.status egt 8"/>{$info.true_s_time}</if></td>
 								<td></td>
 							</tr>
 						</tbody>
@@ -389,7 +389,7 @@
 						layer.msg('请选中一个，才能完成订单');
 						return false;
 					}else{
-						layer.confirm('确认使用'+aunt+'上户吗？', {
+						layer.confirm('确认使用'+aunt+'签约吗？', {
 							btn: ['确认','点错了'] //按钮
 						}, function(){
 							layer.closeAll();

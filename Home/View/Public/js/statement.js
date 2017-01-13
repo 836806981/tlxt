@@ -9,6 +9,7 @@ var nurse_number = $('#nurse_number').val();
 var nurse_name = $('#nurse_name').val();
 var is_statement = $('#is_statement').val();
 var belong = $('#belong').val();
+var order_type = $('#order_type').val();
 
 
 $(function () {
@@ -62,6 +63,7 @@ $.extend({
             nurse_name = $('#nurse_name').val();
             is_statement = $('#is_statement').val();
             belong = $('#belong').val();
+            order_type = $('#order_type').val();
             //reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
             //if(!reg.test(status_6) && status_6){
             //    layer.msg('请输入正确的签单时间 格式：2016-01-01！');
@@ -79,7 +81,7 @@ $.extend({
 	//根据所有条件查询新闻列表
     getNewsListByAllTerm: function () {
         //异步提交数据,参数：currentpage,要查询的页码;pagenum，每页的条数
-        $.AjaxPost(MODULE+"/Money/getStatementList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,order_number:order_number,nurse_number:nurse_number,nurse_name:nurse_name,is_statement:is_statement,belong:belong}, function (backdata) {
+        $.AjaxPost(MODULE+"/Money/getStatementList", {currentpage:currentpage_zcj, pagenum:pagenum_zcj,order_number:order_number,nurse_number:nurse_number,nurse_name:nurse_name,order_type:order_type,belong:belong,is_statement:is_statement}, function (backdata) {
             if (backdata.code == 1000) {
                 List_zcj = backdata.data.list;
                 Num_zcj = backdata.data.num;
@@ -93,24 +95,27 @@ $.extend({
                 if(List_zcj!=null){
                     $.each(List_zcj,function(i,item){
                         //未接单或者打回才能放回收站
-                        var price_add = '';
+                        var price_add = '+ 0';
                         if (item.price_add == 1) {
-                            price_add = '+' + item.add_nurse_price;
+                            price_add = '+ <span title="'+item.add_reason+'">' + item.add_nurse_price+'</span>';
                         }
 
-                        var reward_price = '';
+                        var reward_price = '+ 0';
                         if (item.reward_price!=0) {
-                            reward_price = '+' + item.reward_price;
+                            reward_price = '+ <span title="'+item.reward_reason+'">' + item.reward_price+'</span>';
                         }
-                        var do_str = ' nurse_name="' + item.nurse_name + '" order_number="' + item.order_number + '" nurse_number="' + item.nurse_number + '" product_price="' + item.product_price + '" nurse_pay_do="' + item.nurse_pay_do + '" service_day="' + item.service_day + '"' +
-                            ' true_b_time="' + item.true_b_time + '" true_s_time="' + item.true_s_time + '" status_name="' + item.status_name + '" price_add="' + price_add + '" reward_price="'+reward_price+'"  order_nurse_id="' + item.id + '" ';
+                        var do_str = ' nurse_name="' + item.nurse_name + '" order_number="' + item.order_number + '" nurse_number="' + item.nurse_number +
+                            '" product_price="' + item.product_price + '" nurse_pay_do="' + item.nurse_pay_do + '" service_day="' + item.service_day +
+                            '" true_b_time="' + item.true_b_time + '" true_s_time="' + item.true_s_time + '" status_name="' + item.status_name + '" price_add="' + item.price_add +
+                            '" reward_price="'+item.reward_price+'"  order_nurse_id="' + item.id + '"  bank_name="'+item.bank_name+'"  back_card="'+item.back_card+
+                            '" add_nurse_price="'+item.add_nurse_price+'"  ';
 
                         if(belong==1) {
                            var do_statement = '';
 
 
                             if (item.is_statement == 1) {
-                                do_statement = '<a class="do_statement" ' + do_str + '>待结算</a>';
+                                do_statement = '<a class="do_statement"  ' + do_str + '>待结算</a>';
                             } else if (item.is_statement == 2) {
                                 do_statement = '待审核';
                             } else if (item.is_statement == 3) {
@@ -126,16 +131,17 @@ $.extend({
                         <td width="8%">' + item.nurse_name + '</td>\
                         <td width="8%">' + item.is_defer_name + '</td>\
                         <td width="8%">' + item.level_name + '</td>\
+                        <td width="8%">' + item.through_employee + '</td>\
                         <td width="15%">' + do_statement+ '</td>\
                         </tr>';
                         }else if(belong==2){
                             var finance = '';
                             if(item.is_through==0){
-                                finance = '<a class="finance" '+do_str+'>审核通过</a>'
+                                finance = '<a class="finance"  '+do_str+'>审核通过</a>'
                             }else  if(item.is_through==1){
                                 finance = '待复核';
                             }else if(item.is_through==2){
-                                finance = '<a class="finance_re" '+do_str+' title="'+item.no_through_reason+'">重新审核</a>'
+                                finance = '<a class="finance_re"  '+do_str+' title="'+item.no_through_reason+'">重新审核</a>'
                             }
                             str += '<tr class="data">\
                             <td width="8%">' + item.order_number + '</td>\
@@ -146,6 +152,7 @@ $.extend({
                             <td width="8%">' + item.nurse_name + '</td>\
                             <td width="8%">' + item.is_defer_name + '</td>\
                             <td width="8%">' + item.level_name + '</td>\
+                            <td width="8%">' + item.through_employee + '</td>\
                             <td width="15%">'+ finance + '</td>\
                         </tr>';
 
@@ -160,6 +167,7 @@ $.extend({
                                 <td width="8%">' + item.nurse_name + '</td>\
                                 <td width="8%">' + item.is_defer_name + '</td>\
                                 <td width="8%">' + item.level_name + '</td>\
+                                <td width="8%">' + item.through_employee + '</td>\
                                 <td width="15%">'+ boss + '</td>\
                             </tr>';
 
@@ -179,6 +187,7 @@ $.extend({
                                 <td width="8%">' + item.nurse_name + '</td>\
                                 <td width="8%">' + item.is_defer_name + '</td>\
                                 <td width="8%">' + item.level_name + '</td>\
+                                <td width="8%">' + item.through_employee + '</td>\
                                 <td width="15%">'+ give + '</td>\
                             </tr>';
 

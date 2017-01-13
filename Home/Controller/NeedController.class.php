@@ -103,6 +103,25 @@ class NeedController extends CommonController {
         $this->display();
     }
 
+    public function have_order(){
+        $where = '';
+        if(I('post.id')){
+            $where = ' and id!='.I('post.id').'';
+        }
+        $sales_name = M('order')->field('sales_name,number,status')->where('order_type=1 and phone="'.I('post.phone').'"   '.$where.'')->find();
+        $status_name = ['','待接单','已接单','已完善','待匹配','已匹配','已签单','已上户','已下户','已完结'];
+        $status_name[22] = ['已打回'];
+        $status_name[23] = ['回收站'];
+        if($sales_name){
+            $back = $sales_name;
+            $back['status_name'] = $status_name[$sales_name['status']];
+            $back['code']=1000;
+        }else{
+            $back['code']=1001;
+        }
+        echo json_encode($back);
+    }
+
     //客服派单。获取派单列表数据
     public function getServiceList(){
         $currentpage = I("post.currentpage");
@@ -233,7 +252,7 @@ class NeedController extends CommonController {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }
-        if (!($info['status']==1||$info['status']==23)) {
+        if (!($info['status']==1||$info['status']==22)) {
             echo "<script>alert('已接单，不能放入回收站');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
         }

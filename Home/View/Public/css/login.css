@@ -1,9 +1,9 @@
-*{margin:0;padding:0;font-family: "Microsoft Yahei","Helvetica Neue","ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+﻿*{margin:0;padding:0;font-family: "Microsoft Yahei","Helvetica Neue","ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
 body,html{
 	background: #579fe9;
 }
 .page{
-	background: url(../img/login.png) no-repeat center;
+	background: url(../img/loginbg.png) no-repeat center;
 	height: 648px;
 	width: 100%;
 	margin-top: 80px;

@@ -16,38 +16,38 @@
 			</script>
 			<!--main-->
 			<div class="col-md-10 main">
-				<ul class="nav nav-tabs"
-				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
-					<li <if condition="ACTION_NAME eq 'pressList'">class="active" </if>>
-					<a href="__MODULE__/Money/pressList.html">催款</a>
-					</li>
-					<li <if condition="ACTION_NAME eq 'priceComeList'">class="active" </if>>
-					<a href="__MODULE__/Money/priceComeList.html">收款</a>
-					</li>
-				</if>
-					<li <if condition="ACTION_NAME eq 'doneLIst'">class="active" </if>>
-					<a href="__MODULE__/Money/doneLIst.html">已完结</a>
-					</li>
-				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
-					<li <if condition="ACTION_NAME eq 'statement'">class="active" </if>>
-					<a href="__MODULE__/Money/statement.html">结算</a>
-					</li>
-				</if>
-				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,4))">
-					<li <if condition="ACTION_NAME eq 'financeList'">class="active" </if>>
-					<a href="__MODULE__/Money/financeList.html">财务审核</a>
-					</li>
-				</if>
-				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))">
-					<li <if condition="ACTION_NAME eq 'bossList'">class="active" </if>>
-					<a href="__MODULE__/Money/bossList.html">boss审核</a>
-					</li>
-				</if>
-				<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,4))">
-					<li <if condition="ACTION_NAME eq 'giveList'">class="active" </if>>
-					<a href="__MODULE__/Money/giveList.html">工资发放</a>
-					</li>
-				</if>
+				<ul class="nav nav-tabs">
+					<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
+						<li <if condition="ACTION_NAME eq 'pressList'">class="active" </if>>
+						<a href="__MODULE__/Money/pressList.html">催款</a>
+						</li>
+						<li <if condition="ACTION_NAME eq 'priceComeList'">class="active" </if>>
+						<a href="__MODULE__/Money/priceComeList.html">收款</a>
+						</li>
+					</if>
+						<li <if condition="ACTION_NAME eq 'doneLIst'">class="active" </if>>
+						<a href="__MODULE__/Money/doneLIst.html">已完结</a>
+						</li>
+					<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,5))">
+						<li <if condition="ACTION_NAME eq 'statement'">class="active" </if>>
+						<a href="__MODULE__/Money/statement.html">结算</a>
+						</li>
+					</if>
+					<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,4))">
+						<li <if condition="ACTION_NAME eq 'financeList'">class="active" </if>>
+						<a href="__MODULE__/Money/financeList.html">财务审核</a>
+						</li>
+					</if>
+					<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24))">
+						<li <if condition="ACTION_NAME eq 'bossList'">class="active" </if>>
+						<a href="__MODULE__/Money/bossList.html">boss审核</a>
+						</li>
+					</if>
+					<if condition="in_array($_SESSION[C('USER_AUTH_KEY')]['permission'],array(24,4))">
+						<li <if condition="ACTION_NAME eq 'giveList'">class="active" </if>>
+						<a href="__MODULE__/Money/giveList.html">工资发放</a>
+						</li>
+					</if>
 				</ul>
 				<div class="form-inline">
 					<div class="form-group">

@@ -19,6 +19,34 @@ class SafeController extends CommonController {
         $this->display();
     }
 
+
+
+    //详情
+    public function safeInfo(){
+
+        if(!I('get.id')){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('nurse')->where('id='.I('get.id').'')->find();
+        if(!$info){
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+
+        $nurse_safe = M('nurse_safe')->where('nurse_id='.I('get.id').'')->order('add_time desc')->select();
+
+        $status_sh_name = ['','未上户','已上户'];
+        $info['status_sh_name'] = $status_sh_name[$info['status_sh']];
+
+        $this->assign('nurse_safe',$nurse_safe);
+        $this->assign('info',$info);
+        $this->display();
+    }
+
+
+
+
     public function getSafeList(){
         $currentpage = I("post.currentpage");
         $pagenum = I("post.pagenum");
@@ -48,7 +76,9 @@ class SafeController extends CommonController {
         $status_name[23] = ['回收站'];
         foreach($list as $k=>$v){
            $order = M('order')->where('id='.$v['order_id'].'')->find();
+           $id_card = M('nurse')->field('id_card')->where('id='.$v['nurse_id'].'')->find();
 
+            $list[$k]['id_card'] = $id_card['id_card'];
             $list[$k]['status_name'] = $status_name[$order['status']];
             $list[$k]['status_6_str'] = date('Y-m-d',$order['status_6']);;
         }
@@ -60,6 +90,34 @@ class SafeController extends CommonController {
         echo json_encode($back);
     }
 
+
+    //包年还是包月
+    public function nurseBuyType(){
+        if (!I('get.id')) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        if (!I('get.type')) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+        $info = M('nurse_safe')->where('id=' . I('get.id') . '')->find();
+        if (!$info) {
+            echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+
+        $save['type'] = (I('get.type')==1?'包年':'包月');
+        $save_mod = M('nurse_safe')->where('id=' . I('get.id') . '')->save($save);
+        if($save_mod!=false) {
+            echo "<script>alert('成功'); window.location.href='".__MODULE__."/Safe/SafeList.html'</script>";
+            exit;
+        }else{
+            echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
+            exit;
+        }
+
+    }
     public function nurseBuy(){
         if (!I('get.id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";

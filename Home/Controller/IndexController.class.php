@@ -4,7 +4,7 @@ use Think\Controller;
 class IndexController extends CommonController {
     public function  login_test(){
         if(!$_SESSION[C('USER_AUTH_KEY')]['id']){
-            echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Admin/login.html';</script>";
+            echo "<script>alert('请登录！');window.location.href='" . __MODULE__ . "/Index/login.html';</script>";
         }
     }
 
@@ -70,8 +70,13 @@ class IndexController extends CommonController {
 
         $status_7 = M('order_nurse')->where('nurse_id='.$info['id'].' and status=7')->find();
 
+        $orders = M('order_nurse')->where('nurse_id='.$info['id'].' and status<8')->select();
 
-
+        $status_name = ['','待接单','已接单','已完善','待匹配','已匹配','已签单','已上户','已下户','已完结'];
+        foreach($orders as $k=>$v){
+            $orders[$k]['status_name'] = $status_name[$v['status']];
+        }
+        $this->assign('orders',$orders);
         $this->assign('status_7',$status_7);
         $this->assign('info',$info);
         $this->display();

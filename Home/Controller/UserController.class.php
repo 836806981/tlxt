@@ -24,7 +24,7 @@ class UserController extends CommonController {
         $pagenum = I("post.pagenum");
         $start = ($currentpage - 1) * $pagenum;
 
-        $list = M('employee')->limit($start,$pagenum)->order('status desc ,add_time desc')->select();
+        $list = M('employee')->limit($start,$pagenum)->order('permission asc , status desc,add_time desc')->select();
         $count = M('employee')->count();
 
         $permission_name = ['','客服','顾问','渠道','财务','内勤'];

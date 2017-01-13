@@ -96,6 +96,11 @@ class MoneyController extends CommonController {
         if($post['is_statement']&&$post['is_statement']!=0){
             $where .= ' and is_statement = '.$post['is_statement'].'';
         }
+        if($post['order_type']==1){
+            $where .= ' and order_type = 1';
+        }else   if($post['order_type']==2){
+            $where .= ' and order_type > 1';
+        }
 
 
         $list = M('order_nurse')->where($where)->limit($start,$pagenum)->order('is_statement asc')->select();
@@ -110,8 +115,10 @@ class MoneyController extends CommonController {
         foreach($list as $k=>$v){
             $level = array_search($v['nurse_price'],$price_arr);
             $list[$k]['level_name'] = $level_name[$level];
-            $nurse = M('nurse')->field('come')->where('id='.$v['nurse_id'].'')->find();
+            $nurse = M('nurse')->field('come,bank_name,back_card')->where('id='.$v['nurse_id'].'')->find();
             $list[$k]['come'] = $nurse['come'];
+            $list[$k]['bank_name'] = $nurse['bank_name'];
+            $list[$k]['back_card'] = $nurse['back_card'];
 
             if(in_array($v['product'],array('小田螺','大田螺','金牌田螺','超级田螺'))){
                 $list[$k]['product'] = '月嫂-'.$v['product'];
@@ -146,6 +153,7 @@ class MoneyController extends CommonController {
             exit;
         }
         $save['is_through'] = 1;
+        $save['through_employee'] = $_SESSION[C('USER_AUTH_KEY')]['real_name'];
         $save_mod = M('order_nurse')->where('id=' . I('get.id') . '')->save($save);
         if($save_mod==false){
             echo "<script>alert('异常，请重试');window.onload=function(){window.history.go(-1);return false;}</script>";

@@ -13,12 +13,12 @@ class HoldController extends CommonController {
 
     //维系列表页
     public function holdList(){
-        $this->authority(array(24,5));
+        $this->authority(array(24,2,5));
         $this->display();
     }
 
     public function getHoldList(){
-        $this->authority(array(24,5));
+        $this->authority(array(24,2,5));
         $currentpage = I("post.currentpage");
         $pagenum = I("post.pagenum");
         $start = ($currentpage - 1) * $pagenum;
@@ -34,7 +34,7 @@ class HoldController extends CommonController {
             $where .= ' and status_6 <='.(strtotime($post['status_6'])+86400) .' and status_6 >='.strtotime($post['status_6']) .'';
         }
         if($post['status']==0){
-            $where .= ' and status in(6,7)';
+            $where .= ' and status in(6,7,8,9)';
         }else{
             $where .= ' and status = '.$post['status'].'';
         }
@@ -61,7 +61,7 @@ class HoldController extends CommonController {
     }
 
     public function holdInfo(){
-        $this->authority(array(24,5));
+        $this->authority(array(24,2,5));
 
         if (!I('get.id')) {
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
@@ -108,7 +108,7 @@ class HoldController extends CommonController {
 
     //新增维系
     public function addHold(){
-        $this->authority(array(24,5));
+        $this->authority(array(24,2,5));
         $post = I('post.');
         $post['add_time'] = time();
         $add_mod = M('hold')->add($post);
