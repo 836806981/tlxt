@@ -390,7 +390,7 @@ class NurseController extends CommonController {
             }
             $nurse_info = M('nurse')->where('id='.$post['id'].'')->find();
 
-            if($_FILES['title_img']['tmp_name']) {
+            if($_FILES['title_img']['name']) {
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize = 2145728;// 设置附件上传大小
                 $upload->exts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
@@ -661,6 +661,110 @@ class NurseController extends CommonController {
         }
     }
 
+
+
+
+    //手动签单，
+    public function overOrder(){
+        if (I('post.')) {
+            $post = I('post.');
+            $post['status'] = 6;
+            $post['status_1'] = time();
+            $post['add_time'] = $post['status_1'];
+            $post['status_2'] = $post['status_1'];
+            $post['status_3'] = $post['status_1'];
+            $post['status_4'] = $post['status_1'];
+            $post['status_5'] = $post['status_1'];
+            $post['status_6'] = $post['status_1'];
+            $post['order_type'] = 1;
+            $post['employee_id'] = $_SESSION[C('USER_AUTH_KEY')]['id'];
+            $post['add_employee'] = $_SESSION[C('USER_AUTH_KEY')]['real_name'];
+            $post['sales_id'] = $_SESSION[C('USER_AUTH_KEY')]['id'];
+            $post['sales_name'] = $_SESSION[C('USER_AUTH_KEY')]['real_name'];
+
+
+
+
+            if($post['price_add'] == 0){
+                $post['add_reason'] = '';
+                $post['add_order_price'] = 0;
+                $post['add_nurse_price'] = 0;
+            }
+            //判断需要催款
+            $post['is_press'] = 1;
+            for($i = 1;$i < 19;$i++){
+                $post['skills'] .= $post['skills'.$i].',';
+            }
+
+            $save_mod = M('order')->add($post);
+            $post['number'] = 'DD-' . str_pad($save_mod, 6, 0, STR_PAD_LEFT);  //6位数不足补0
+            M('order')->where('id='.$save_mod.'')->save($post);
+
+            $post['order_id'] = $save_mod;
+            M('order_info')->add($post);
+
+            //生成匹配
+            $order_info = M('order')->where('id='.$post['order_id'].'')->find();
+            $nurse_info = M('nurse')->where('id='.$post['nurse_id'].'')->find();
+            $add = $order_info;
+            $add['nurse_name'] = $nurse_info['name'];
+            $add['nurse_id'] = $nurse_info['id'];
+            $add['order_id'] = $order_info['id'];
+            $add['order_number'] = $order_info['number'];
+            $add['nurse_number'] = $nurse_info['number'];
+            $add['order_name'] = $order_info['name'];
+            $add['nurse_price'] = $nurse_info['price'];
+            $add['add_time'] = time();
+            $add['status'] = 6;
+            $add['is_service'] = 0;
+
+            $add_mod =  M('order_nurse')->add($add);
+            if($add_mod){
+                //判断 阿姨是否还有匹配
+                $nurse = M('nurse')->field('status_sh')->where('id='.$post['nurse_id'].'')->find();
+                if($nurse['status_sh'] == 1){
+                    $status_sh['status_sh'] = 2;
+                    M('nurse')->where('id='.$post['nurse_id'].'')->save($status_sh);
+                }
+            }
+            //修改订单然后去修改匹配里面的订单信息
+//            $order_info = M('order')->where('id='.$post['order_id'].'')->find();
+//            $add = $order_info;
+//            $add['order_id'] = $order_info['id'];
+//            $add['order_name'] = $order_info['name'];
+//
+//            unset($add['id']);
+//            unset($add['number']);
+//            unset($add['remark']);
+//            $add_mod =  M('order_nurse')->where('order_id='.$post['order_id'].'')->save($add);
+//            if($add_mod==false){
+//                M('order_nurse')->where('order_id='.$post['order_id'].'')->save($add);
+//            }
+
+            if($add_mod!==false){
+                echo "<script>alert('成功'); window.location.href='".__MODULE__."/TakeNeed/overOrderInfo/id/".$post['order_id'].".html'</script>";
+                exit;
+            }else{
+                echo "<script>alert('失败');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
+            }
+        } else {
+            if (!I('get.id')) {
+                echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
+            }
+            $nurse_info = M('nurse')->where('id=' . I('get.id') . '')->find();
+            if (!$nurse_info) {
+                echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
+            }
+
+            $this->assign('nurse_info', $nurse_info);
+            $this->display();
+        }
+    }
+
+
     public function pdf(){
         $id = I('get.id');
         $test_img = M('nurse')->field('test_img')->where('id='.$id.'')->find();
@@ -698,7 +802,7 @@ class NurseController extends CommonController {
         $info['experience_own2_a'] = explode('||',$info['experience_own2']);
         $info['experience_own3_a'] = explode('||',$info['experience_own3']);
 
-        $status_sh_name = ['','未上户','已上户'];
+        $status_sh_name = ['','未上户','待上户','已上户'];
         $info['status_sh_name'] = $status_sh_name[$info['status_sh']];
 
         $info['level_name'] = $info['level'].'育婴师'.'、';
@@ -766,7 +870,7 @@ class NurseController extends CommonController {
     //删除
     public function deleteNurse(){
 
-        $this->authority(array(11,3));
+        $this->authority(array(11,2,3));
         if(!I('get.id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;}</script>";
             exit;
@@ -794,7 +898,7 @@ class NurseController extends CommonController {
     //恢复
     public function backNurse(){
 
-        $this->authority(array(11,3));
+        $this->authority(array(11,2,3));
         if(!I('get.id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;};</script>";
             exit;
@@ -816,7 +920,7 @@ class NurseController extends CommonController {
 
     //动态添加上单
     public function add_order_nurse(){
-        $this->authority(array(11,3));
+        $this->authority(array(11,2,3));
         if(!I('post.nurse_id')){
             echo "<script>alert('地址异常');window.onload=function(){window.history.go(-1);return false;};</script>";
             exit;

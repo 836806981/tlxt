@@ -284,7 +284,7 @@ class Upload {
 
         /* 检查文件大小 */
         if (!$this->checkSize($file['size'])) {
-            $this->error = '上传文件大小不符！图片最大1M';
+            $this->error = '上传文件大小不符！图片最大2M';
             return false;
         }
 

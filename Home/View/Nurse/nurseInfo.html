@@ -346,6 +346,9 @@
 				</table>
 				<div class="form-group">
 					<input type="button" class="default_btn m_left_20" onclick="window.open('__MODULE__/Index/jianli/number/{$info.number}.html','_blank')" value="查看简历"/>
+				<if condition="$info.status_sh neq 3">
+					<input type="button" class="default_btn m_left_20" onclick="location.href='__MODULE__/Nurse/OverOrder/id/{$info.id}.html'" value="上户"/>
+					</if>
 					<input type="button" class="default_btn m_left_20" onclick="location.href='__MODULE__/Nurse/changeNurse/id/{$info.id}.html'" value="修改"/>
 					<input type="button" class="default_btn" onclick="javascript:history.go(-1);" value="返回"/>
 				</div>

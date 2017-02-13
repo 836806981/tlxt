@@ -103,12 +103,13 @@ class NeedController extends CommonController {
         $this->display();
     }
 
+    //添加或修改的时候判断手机号是否存在。
     public function have_order(){
         $where = '';
         if(I('post.id')){
             $where = ' and id!='.I('post.id').'';
         }
-        $sales_name = M('order')->field('sales_name,number,status')->where('order_type=1 and phone="'.I('post.phone').'"   '.$where.'')->find();
+        $sales_name = M('order')->field('sales_name,number,status')->where('order_type=1 and phone="'.I('post.phone').'"  and phone!="无"  '.$where.'')->find();
         $status_name = ['','待接单','已接单','已完善','待匹配','已匹配','已签单','已上户','已下户','已完结'];
         $status_name[22] = ['已打回'];
         $status_name[23] = ['回收站'];

@@ -517,9 +517,9 @@
 								+	'<div class="opn_div clear">'
 								+		'<label>阿姨姓名：</label><input type="text" class="form-control" value="'+aunt+'" readonly="readonly"/>'
 								+	'</div>'
-								+	'<div class="opn_div clear">'
-								+		'<label>保险购买：</label><input type="text" name="time" class="form-control" id="time" placeholder="2016-01-01"/>'
-								+	'</div>'
+//								+	'<div class="opn_div clear">'
+//								+		'<label>保险购买：</label><input type="text" name="time" class="form-control" id="time" placeholder="2016-01-01"/>'
+//								+	'</div>'
 								+	'<div class="opn_div clear">'
 								+		'<label>是否加价：</label><input type="radio" name="price_add" value="1" <if condition="$info.price_add eq 1">checked</if>/>有&nbsp;&nbsp;'
 								+		'<input type="radio" name="price_add" value="0"  <if condition="$info.price_add eq 0">checked</if>/>无&nbsp;&nbsp;'
@@ -566,10 +566,10 @@
 						layer.msg('请输入正确的上户时间！');
 						return false;
 					}
-					if(!reg.test($('#time').val())){
-						layer.msg('请输入正确的保险日期！');
-						return false;
-					}
+//					if(!reg.test($('#time').val())){
+//						layer.msg('请输入正确的保险日期！');
+//						return false;
+//					}
 					$('#form_status_7').submit();
 				});
 

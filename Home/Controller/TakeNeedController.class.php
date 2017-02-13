@@ -518,21 +518,21 @@ class TakeNeedController extends CommonController {
 
         $nurse = M('nurse')->field('name,number')->where('id='.$post['nurse_id'].'')->find();
         //保险提醒添加
-        $add['order_id'] = $post['order_id'];
-        $add['nurse_id'] = $post['nurse_id'];
-
-        $add['order_name'] = $order_info['name'];
-        $add['order_number'] = $order_info['number'];
-        $add['nurse_name'] = $nurse['name'];
-        $add['nurse_number'] = $nurse['number'];
-
-        $add['time'] = $post['time'];
-        $add['add_time'] = time();
-        $add['status'] = 1;
-        $safe_add = M('nurse_safe')->add($add);
-        if(!$safe_add){
-            M('nurse_safe')->add($add);
-        }
+//        $add['order_id'] = $post['order_id'];
+//        $add['nurse_id'] = $post['nurse_id'];
+//
+//        $add['order_name'] = $order_info['name'];
+//        $add['order_number'] = $order_info['number'];
+//        $add['nurse_name'] = $nurse['name'];
+//        $add['nurse_number'] = $nurse['number'];
+//
+//        $add['time'] = $post['time'];
+//        $add['add_time'] = time();
+//        $add['status'] = 1;
+//        $safe_add = M('nurse_safe')->add($add);
+//        if(!$safe_add){
+//            M('nurse_safe')->add($add);
+//        }
 
         $save_nurse['status_sh'] = 3;
         $save_nurse = M('nurse')->where('id='.$post['nurse_id'].'')->save($save_nurse);
@@ -693,14 +693,9 @@ class TakeNeedController extends CommonController {
         }else{
             $save_order_nurse['is_service'] = 1;
             $save_order['is_service'] = 1;
-            $save_order['true_b_time'] = '';
-            $save_order['true_s_time'] = '';
             $save_order['service_day'] = $order['service_day'] - $day;
-            $save_order['status_4'] = time();
-            $save_order['status_5'] = '';
-            $save_order['status_6'] = '';
-            $save_order['status_7'] = '';
             $save_order['is_press'] = 0;
+            $save_order['status'] = 9;
         }
 
         $save_order_nurse['nurse_price'] = $nurse['price'];
