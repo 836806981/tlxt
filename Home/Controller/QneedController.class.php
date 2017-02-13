@@ -25,9 +25,12 @@ class QneedController extends CommonController {
                 $post['sales_id'] = $employee['id'];
                 $post['sales_name'] = $employee['real_name'];
             }else if($_SESSION[C('USER_AUTH_KEY')]['permission']==3){
-                $post['source'] = $_SESSION[C('USER_AUTH_KEY')]['permission'];
+                $post['source'] = $_SESSION[C('USER_AUTH_KEY')]['real_name'];
                 $post['sales_id'] =  $_SESSION[C('USER_AUTH_KEY')]['id'];
                 $post['sales_name'] =  $_SESSION[C('USER_AUTH_KEY')]['real_name'];
+            }else{
+                echo "<script>alert('无权限');window.onload=function(){window.history.go(-1);return false;}</script>";
+                exit;
             }
 
 
